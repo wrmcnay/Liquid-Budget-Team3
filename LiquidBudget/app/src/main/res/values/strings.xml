@@ -7,5 +7,4 @@
     <string name="textview">TextView</string>
     <string name="SpendingPageTitle">Name</string>
     <string name="liquid_budget">Liquid Budget</string>
-    <string name="title_activity_t_e_s_t">TEST</string>
 </resources>
