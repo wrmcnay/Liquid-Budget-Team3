@@ -2,6 +2,9 @@
     <string name="app_name">LiquidBudget</string>
     <string name="tab_text_1">Tab 1</string>
     <string name="tab_text_2">Tab 2</string>
+    <string name="homepage_hello">Hello!</string>
+    <string name="homepage_week_so_far">Your Week So Far:</string>
+    <string name="homepage_rec_funds">Recommended Funds Left Today:</string>
     <string name="title_activity_spending_saving_page">SpendingSavingPage</string>
     <string name="spending_vs_saving">Spending vs. Saving</string>
     <string name="textview">TextView</string>
