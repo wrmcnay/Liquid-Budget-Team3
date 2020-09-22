@@ -24,8 +24,26 @@
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tabs"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="1dp"
             android:background="?attr/colorPrimary" />
+
+        <Button
+            android:id="@+id/goToSpending"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Spending / Savings" />
+
+        <Button
+            android:id="@+id/goToCategory"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Categories" />
+
+        <Button
+            android:id="@+id/goToSettings"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="settings" />
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.viewpager.widget.ViewPager
