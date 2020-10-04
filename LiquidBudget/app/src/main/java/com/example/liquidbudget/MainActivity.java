@@ -1,19 +1,17 @@
 package com.example.liquidbudget;
 
+import android.content.Intent;
 import android.os.Bundle;
-
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-import com.google.android.material.tabs.TabLayout;
-
-import androidx.viewpager.widget.ViewPager;
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.viewpager.widget.ViewPager;
+
+import com.example.liquidbudget.settings.SettingsActivity;
 import com.example.liquidbudget.ui.main.SectionsPagerAdapter;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.tabs.TabLayout;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -28,12 +26,32 @@ public class MainActivity extends AppCompatActivity {
         tabs.setupWithViewPager(viewPager);
         FloatingActionButton fab = findViewById(R.id.fab);
 
-        fab.setOnClickListener(new View.OnClickListener() {
+        Button goToSpending = (Button)findViewById(R.id.goToSpending);
+        goToSpending.setOnClickListener(new View.OnClickListener(){
             @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+            public void onClick(View view){
+                Intent startIntent = new Intent(getApplicationContext(), SpendingSavingPage.class);
+                startActivity(startIntent);
             }
         });
+
+        Button goToCategory = (Button)findViewById(R.id.goToCategory);
+        goToCategory.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                Intent startIntent = new Intent(getApplicationContext(), CategoryActivity.class);
+                startActivity(startIntent);
+            }
+        });
+
+        Button goToSettings = (Button)findViewById(R.id.goToSettings);
+        goToSettings.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                Intent startIntent = new Intent(getApplicationContext(), SettingsActivity.class);
+                startActivity(startIntent);
+            }
+        });
+
     }
 }
