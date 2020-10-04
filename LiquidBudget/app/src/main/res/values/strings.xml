@@ -10,4 +10,18 @@
     <string name="textview">TextView</string>
     <string name="SpendingPageTitle">Name</string>
     <string name="liquid_budget">Liquid Budget</string>
+    <string name="prompt_email">Enter your email</string>
+    <string name="prompt_password">Enter your password</string>
+    <string name="action_sign_in_short">Log In</string>
+    <string name="action_sign_in">Log In</string>
+    <string name="info_request">SIGN UP</string>
+    <string name="name_input_hint">Enter your name</string>
+    <string name="email_input_hint">Enter your email</string>
+    <string name="login_button">LOG IN</string>
+    <string name="signup_button">SIGN UP</string>
+    <string name="welcome">Welcome!</string>
+    <string name="login_failed">Invalid Credentials</string>
+    <string name="invalid_username">Invalid Username</string>
+    <string name="invalid_password">Invalid Password</string>
+    <string name="prompt_DOB">Enter your birthday</string>
 </resources>
