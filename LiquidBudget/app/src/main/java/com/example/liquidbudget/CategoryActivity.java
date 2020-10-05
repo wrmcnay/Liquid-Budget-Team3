@@ -7,6 +7,8 @@ import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class CategoryActivity extends AppCompatActivity{
+    public static final String CATEGORY_NAME = "com.example.liquidbudget.CATEGORY_NAME";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,6 +23,24 @@ public class CategoryActivity extends AppCompatActivity{
             }
         });
 
+        /**
+         * TODO: How can we dynamically assign buttons their own IDs?
+         */
+        Button category_test = (Button)findViewById(R.id.category_test);
+        category_test.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                openCategoryView();
+            }
+        });
 
     }
+    public void openCategoryView() {
+        String testCategory = "Test Category";
+
+        Intent startIntent = new Intent(getApplicationContext(), ViewCategoryActivity.class);
+        startIntent.putExtra(CATEGORY_NAME, testCategory);
+        startActivity(startIntent);
+    }
+
 }

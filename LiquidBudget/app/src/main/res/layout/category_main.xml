@@ -29,11 +29,11 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <Button
-            android:id="@+id/category_bills"
+            android:id="@+id/category_test"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="#D34D4D"
-            android:text="Bills" />
+            android:text="Test" />
 
         <Button
             android:id="@+id/category_Groceries"
