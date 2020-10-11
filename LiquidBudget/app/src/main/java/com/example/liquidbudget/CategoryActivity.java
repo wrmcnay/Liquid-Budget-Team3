@@ -83,7 +83,7 @@ public class CategoryActivity extends AppCompatActivity{
                                        public void accept(Object o) throws Exception {
                                            Toast.makeText(CategoryActivity.this, "Category Added!", Toast.LENGTH_SHORT).show();
                                        }
-                                   }, new Consumer<Throwable>() {
+                                    }, new Consumer<Throwable>() {
                                        @Override
                                        public void accept(Throwable throwable) throws Exception {
                                            Toast.makeText(CategoryActivity.this, "" + throwable.getMessage(), Toast.LENGTH_SHORT).show();
