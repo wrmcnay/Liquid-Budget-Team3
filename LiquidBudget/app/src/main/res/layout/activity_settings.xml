@@ -65,195 +65,76 @@
                 android:layout_height="1dp"
                 android:background="#939393"/>
 
-            <LinearLayout
+            <Button
                 android:layout_width="match_parent"
-                android:padding="15sp"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:layout_marginTop="10dp"
+                android:textAllCaps="false"
+                android:background="@android:color/transparent"
+                android:text="@string/Account"
+                android:textSize="18sp"
+                android:gravity="left|center_vertical"
+                android:drawableLeft="@drawable/ic_baseline_lock_24"
+                android:drawableTint="@color/colorPrimary"
+                android:drawablePadding="10dp"
+                android:onClick="goToAccount"
+            />
 
-                <ImageView
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
-                    android:layout_marginStart="0dp"
-                    android:layout_marginTop="4dp"
-                    app:tint="@color/colorPrimary"
-                    android:src="@drawable/ic_baseline_lock_24">
-                </ImageView>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:layout_marginStart="8dp"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="16sp"
-                        android:textColor="@android:color/black"
-                        android:text="Account"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="14sp"
-                        android:text="Privacy, security, edit profile"/>
-
-                </LinearLayout>
-
-            </LinearLayout>
-
-            <LinearLayout
+            <Button
                 android:layout_width="match_parent"
-                android:padding="15sp"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:layout_marginTop="10dp"
+                android:textAllCaps="false"
+                android:background="@android:color/transparent"
+                android:text="@string/Notifications"
+                android:textSize="18sp"
+                android:gravity="left|center_vertical"
+                android:drawableLeft="@drawable/ic_baseline_notifications_24"
+                android:drawableTint="@color/colorPrimary"
+                android:drawablePadding="10dp"
+                />
 
-                <ImageView
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
-                    android:layout_marginStart="0dp"
-                    android:layout_marginTop="4dp"
-                    app:tint="@color/colorPrimary"
-                    android:src="@drawable/ic_baseline_notifications_24">
-                </ImageView>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:layout_marginStart="8dp"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="16sp"
-                        android:textColor="@android:color/black"
-                        android:text="Notifications"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="14sp"
-                        android:text="Customize and configure push notifications"/>
-
-                </LinearLayout>
-
-            </LinearLayout>
-
-            <LinearLayout
+            <Button
                 android:layout_width="match_parent"
-                android:padding="15sp"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:layout_marginTop="10dp"
+                android:textAllCaps="false"
+                android:background="@android:color/transparent"
+                android:text="@string/Banking"
+                android:textSize="18sp"
+                android:gravity="left|center_vertical"
+                android:drawableLeft="@drawable/ic_baseline_account_balance_24"
+                android:drawableTint="@color/colorPrimary"
+                android:drawablePadding="10dp"
+                />
 
-                <ImageView
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
-                    android:layout_marginStart="0dp"
-                    android:layout_marginTop="4dp"
-                    app:tint="@color/colorPrimary"
-                    android:src="@drawable/ic_baseline_account_balance_24">
-                </ImageView>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:layout_marginStart="8dp"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="16sp"
-                        android:textColor="@android:color/black"
-                        android:text="Banking Information"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="14sp"
-                        android:text="Add a card, link a bank account"/>
-
-                </LinearLayout>
-
-            </LinearLayout>
-
-            <LinearLayout
+            <Button
                 android:layout_width="match_parent"
-                android:padding="15sp"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:layout_marginTop="10dp"
+                android:textAllCaps="false"
+                android:background="@android:color/transparent"
+                android:text="@string/Help"
+                android:textSize="18sp"
+                android:gravity="left|center_vertical"
+                android:drawableLeft="@drawable/ic_baseline_help_24"
+                android:drawableTint="@color/colorPrimary"
+                android:drawablePadding="10dp"
+                />
 
-                <ImageView
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
-                    android:layout_marginStart="0dp"
-                    android:layout_marginTop="4dp"
-                    app:tint="@color/colorPrimary"
-                    android:src="@drawable/ic_baseline_help_24">
-                </ImageView>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:layout_marginStart="8dp"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="16sp"
-                        android:textColor="@android:color/black"
-                        android:text="Help"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="14sp"
-                        android:text="FAQ, contact us, send feedback"/>
-
-                </LinearLayout>
-
-            </LinearLayout>
-
-            <LinearLayout
+            <Button
                 android:layout_width="match_parent"
-                android:padding="15sp"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
-                    android:layout_marginStart="0dp"
-                    android:layout_marginTop="4dp"
-                    app:tint="@color/colorPrimary"
-                    android:src="@drawable/ic_baseline_group_add_24">
-                </ImageView>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:layout_marginStart="8dp"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="16sp"
-                        android:textColor="@android:color/black"
-                        android:text="Invite a Friend"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="14sp"
-                        android:text="Invite others to set up an account"/>
-
-                </LinearLayout>
-
-            </LinearLayout>
+                android:layout_marginTop="10dp"
+                android:textAllCaps="false"
+                android:background="@android:color/transparent"
+                android:text="@string/Invite"
+                android:textSize="18sp"
+                android:gravity="left|center_vertical"
+                android:drawableLeft="@drawable/ic_baseline_group_add_24"
+                android:drawableTint="@color/colorPrimary"
+                android:drawablePadding="10dp"
+                />
 
         </LinearLayout>
     </ScrollView>
