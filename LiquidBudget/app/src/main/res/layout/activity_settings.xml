@@ -66,6 +66,7 @@
                 android:background="#939393"/>
 
             <Button
+                android:id="@+id/goToAccount"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -77,10 +78,10 @@
                 android:drawableLeft="@drawable/ic_baseline_lock_24"
                 android:drawableTint="@color/colorPrimary"
                 android:drawablePadding="10dp"
-                android:onClick="goToAccount"
             />
 
             <Button
+                android:id="@+id/goToNotifications"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -95,6 +96,7 @@
                 />
 
             <Button
+                android:id="@+id/goToBanking"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -109,6 +111,7 @@
                 />
 
             <Button
+                android:id="@+id/goToHelp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -123,6 +126,7 @@
                 />
 
             <Button
+                android:id="@+id/goToInvite"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
