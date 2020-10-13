@@ -29,4 +29,5 @@
     <string name="Banking">Banking Information:\nAdd a card, link a bank account</string>
     <string name="Help">Help:\nFAQ, contact us, send feedback</string>
     <string name="Invite">Invite a Friend:\nInvite others to setup an account</string>
+    <string name="TestingString">Testing things out</string>
 </resources>
