@@ -1,4 +1,4 @@
-package com.example.liquidbudget.data.model;
+package com.example.liquidbudget.data.Entities;
 
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
@@ -24,10 +24,7 @@ public class UserAccount {
     @ColumnInfo(name = "email")
     private String email;
 
-    public UserAccount() {}
-
-    public UserAccount(int userID, String userName, String password, String name, String email) {
-        this.userID = userID;
+    public UserAccount(String userName, String password, String name, String email) {
         this.userName = userName;
         this.password = password;
         this.name = name;

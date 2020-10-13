@@ -1,4 +1,4 @@
-package com.example.liquidbudget.data.Local;
+package com.example.liquidbudget.data.Databases;
 
 import android.content.Context;
 
@@ -6,9 +6,10 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
-import com.example.liquidbudget.data.model.Category;
+import com.example.liquidbudget.data.DAO.CategoryDAO;
+import com.example.liquidbudget.data.Entities.Category;
 
-import static com.example.liquidbudget.data.Local.CategoryDatabase.DATABASE_VERSION;
+import static com.example.liquidbudget.data.Databases.CategoryDatabase.DATABASE_VERSION;
 
 @Database(entities = Category.class,version = DATABASE_VERSION)
 public abstract class CategoryDatabase extends RoomDatabase {

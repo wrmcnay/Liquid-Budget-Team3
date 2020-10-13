@@ -1,4 +1,4 @@
-package com.example.liquidbudget.data.model;
+package com.example.liquidbudget.data.Entities;
 
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;

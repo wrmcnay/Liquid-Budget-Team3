@@ -1,6 +1,6 @@
-package com.example.liquidbudget.data.Database;
+package com.example.liquidbudget.data.Repositories;
 
-import com.example.liquidbudget.data.model.UserAccount;
+import com.example.liquidbudget.data.Entities.UserAccount;
 
 import java.util.List;
 

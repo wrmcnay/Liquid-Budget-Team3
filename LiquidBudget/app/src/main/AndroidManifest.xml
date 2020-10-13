@@ -9,7 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".settings.InviteActivity"></activity>
+        <activity android:name=".AddUserActivity"
+            android:parentActivityName=".UserDisplayActivity"></activity>
+        <activity android:name=".UserDisplayActivity"
+            android:launchMode="singleTop"/>
+        <activity android:name=".settings.InviteActivity" />
         <activity android:name=".settings.HelpActivity" />
         <activity android:name=".settings.BankingActivity" />
         <activity android:name=".settings.NotificationsActivity" />

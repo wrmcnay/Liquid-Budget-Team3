@@ -1,7 +1,7 @@
-package com.example.liquidbudget.data.Local;
+package com.example.liquidbudget.data.DAO;
 
-import com.example.liquidbudget.data.Database.CategoryDataSourceInterface;
-import com.example.liquidbudget.data.model.Category;
+import com.example.liquidbudget.data.Repositories.CategoryDataSourceInterface;
+import com.example.liquidbudget.data.Entities.Category;
 
 import java.util.List;
 

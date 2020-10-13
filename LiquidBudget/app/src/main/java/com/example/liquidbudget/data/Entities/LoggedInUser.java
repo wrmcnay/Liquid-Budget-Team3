@@ -1,4 +1,4 @@
-package com.example.liquidbudget.data.model;
+package com.example.liquidbudget.data.Entities;
 
 /**
  * Data class that captures user information for logged in users retrieved from LoginRepository

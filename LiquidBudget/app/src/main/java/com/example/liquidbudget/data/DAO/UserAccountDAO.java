@@ -1,12 +1,13 @@
-package com.example.liquidbudget.data.Local;
+package com.example.liquidbudget.data.DAO;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
 
-import com.example.liquidbudget.data.model.UserAccount;
+import com.example.liquidbudget.data.Entities.UserAccount;
 
 import java.util.List;
 
@@ -16,10 +17,10 @@ import io.reactivex.Flowable;
 public interface UserAccountDAO {
 
     @Query("SELECT * FROM accountInfo WHERE userID=:uid")
-    Flowable<UserAccount> getUserByID(int uid);
+    LiveData<UserAccount> getUserByID(int uid);
 
     @Query("SELECT * FROM accountInfo")
-    Flowable<List<UserAccount>> getAllUsers();
+    LiveData<List<UserAccount>> getAllUsers();
 
     @Insert
     void insertUser(UserAccount... accountInfo);

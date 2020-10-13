@@ -1,22 +1,22 @@
-package com.example.liquidbudget.data.Database;
+package com.example.liquidbudget.data.Repositories;
 
-import com.example.liquidbudget.data.model.UserAccount;
+import com.example.liquidbudget.data.Entities.UserAccount;
 
 import java.util.List;
 
 import io.reactivex.Flowable;
 
-public class UserAccountRepository implements UserAccountDataSourceInterface{
+public class UserAccountRepositoryOld implements UserAccountDataSourceInterface{
     private UserAccountDataSourceInterface mLocalDataSource;
-    private static UserAccountRepository mInstance;
+    private static UserAccountRepositoryOld mInstance;
 
-    public UserAccountRepository(UserAccountDataSourceInterface mLocalDataSource) {
+    public UserAccountRepositoryOld(UserAccountDataSourceInterface mLocalDataSource) {
         this.mLocalDataSource = mLocalDataSource;
     }
 
-    public static UserAccountRepository getInstance(UserAccountDataSourceInterface mLocalDataSource) {
+    public static UserAccountRepositoryOld getInstance(UserAccountDataSourceInterface mLocalDataSource) {
         if (mInstance == null) {
-            mInstance = new UserAccountRepository(mLocalDataSource);
+            mInstance = new UserAccountRepositoryOld(mLocalDataSource);
         }
         return mInstance;
     }

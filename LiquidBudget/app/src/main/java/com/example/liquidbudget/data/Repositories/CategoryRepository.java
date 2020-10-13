@@ -1,6 +1,6 @@
-package com.example.liquidbudget.data.Database;
+package com.example.liquidbudget.data.Repositories;
 
-import com.example.liquidbudget.data.model.Category;
+import com.example.liquidbudget.data.Entities.Category;
 
 import java.util.List;
 
