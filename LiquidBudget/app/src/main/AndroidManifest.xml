@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".settings.InviteActivity"></activity>
+        <activity android:name=".AddIncomeExpenseActivity"></activity>
+        <activity android:name=".settings.InviteActivity" />
         <activity android:name=".settings.HelpActivity" />
         <activity android:name=".settings.BankingActivity" />
         <activity android:name=".settings.NotificationsActivity" />
