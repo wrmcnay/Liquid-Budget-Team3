@@ -3,6 +3,7 @@ package com.example.liquidbudget.data.model;
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "categories")
@@ -18,6 +19,12 @@ public class Category {
     @ColumnInfo(name="categoryColor")
     private String categoryColor;
 
+    public Category(String categoryName, String categoryColor){
+        this.categoryName = categoryName;
+        this.categoryColor = categoryColor;
+    }
+
+    @Ignore
     public Category(int categoryID, String categoryName, String categoryColor){
         this.categoryID = categoryID;
         this.categoryName = categoryName;
