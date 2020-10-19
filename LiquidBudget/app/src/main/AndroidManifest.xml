@@ -23,8 +23,7 @@
             android:name=".SpendingSavingPage"
             android:label="@string/app_name">
             <intent-filter>
-                <action android:name=".CategoryActivity" />
-
+                <action android:name=".SpendingSavingPage" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
