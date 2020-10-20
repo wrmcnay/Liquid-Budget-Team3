@@ -53,5 +53,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        Button goToAddIncExp = (Button)findViewById(R.id.goToAddIncExp);
+        goToAddIncExp.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                Intent startIntent = new Intent(getApplicationContext(), AddIncomeExpenseActivity.class);
+                startActivity(startIntent);
+            }
+        });
+
     }
 }

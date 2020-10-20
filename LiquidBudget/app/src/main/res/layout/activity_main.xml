@@ -44,6 +44,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="settings" />
+
+        <Button
+            android:id="@+id/goToAddIncExp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Add Income/Expense" />
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.viewpager.widget.ViewPager
