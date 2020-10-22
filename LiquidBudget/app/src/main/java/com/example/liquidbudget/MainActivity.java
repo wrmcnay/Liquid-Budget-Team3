@@ -11,6 +11,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import com.example.liquidbudget.data.JacobDBWork.UserDisplayActivity;
 import com.example.liquidbudget.settings.SettingsActivity;
 import com.google.android.material.navigation.NavigationView;
 
@@ -64,6 +65,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.nav_settings:
                 Intent settingIntent = new Intent(MainActivity.this, SettingsActivity.class);
                 startActivity(settingIntent);
+                break;
+            case R.id.nav_users:
+                Intent usersIntent = new Intent(MainActivity.this, UserDisplayActivity.class);
+                startActivity(usersIntent);
                 break;
         }
         drawer.closeDrawer(GravityCompat.START);
