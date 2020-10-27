@@ -14,4 +14,28 @@
         app:titleTextColor="@android:color/white"
         android:background="@color/colorPrimary">
     </androidx.appcompat.widget.Toolbar>
+
+    <Button
+        android:id="@+id/addBank"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:textAllCaps="false"
+        android:background="@android:color/transparent"
+        android:text="@string/Link_Bank"
+        android:textSize="18sp"
+        android:gravity="left|center_vertical"
+        />
+
+    <Button
+        android:id="@+id/addRemoveCard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:textAllCaps="false"
+        android:background="@android:color/transparent"
+        android:text="@string/AddRemove_Card"
+        android:textSize="18sp"
+        android:gravity="left|center_vertical"
+        />
 </LinearLayout>

@@ -29,4 +29,10 @@
     <string name="Banking">Banking Information:\nAdd a card, link a bank account</string>
     <string name="Help">Help:\nFAQ, contact us, send feedback</string>
     <string name="Invite">Invite a Friend:\nInvite others to setup an account</string>
+    <string name="Change_pwd">Change Password</string>
+    <string name="Change_email">Change Email</string>
+    <string name="Change_uid">Change Username</string>
+    <string name="Enable_2FA">Enable Two-Factor Authentication</string>
+    <string name="Link_Bank">Link a Bank Account</string>
+    <string name="AddRemove_Card">Add or Remove a Credit/Debit Card</string>
 </resources>

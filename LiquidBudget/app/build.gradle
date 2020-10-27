@@ -1,6 +1,25 @@
+plugins {
+    id "org.sonarqube" version "3.0"
+}
+
 apply plugin: 'com.android.application'
 
+sonarqube {
+    properties {
+        property "sonar.projectKey", "wrmcnay_Liquid-Budget-Team3"
+        property "sonar.organization", "wrmcnay"
+        property "sonar.host.url", "https://sonarcloud.io"
+    }
+}
+
 android {
+    lintOptions {
+        checkReleaseBuilds false
+        // Or, if you prefer, you can continue to check for errors in release builds,
+        // but continue the build even when errors are found:
+        abortOnError true
+    }
+
     compileSdkVersion 30
     buildToolsVersion "30.0.2"
 
