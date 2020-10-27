@@ -1,4 +1,4 @@
-package com.example.liquidbudget;
+package com.example.liquidbudget.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,21 +11,19 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
-import com.example.liquidbudget.data.JacobDBWork.UserDisplayActivity;
-import com.example.liquidbudget.settings.SettingsActivity;
+import com.example.liquidbudget.CategoryActivity;
+import com.example.liquidbudget.R;
+import com.example.liquidbudget.SpendingSavingPage;
 import com.google.android.material.navigation.NavigationView;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
-
+public class NavigationActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
     DrawerLayout drawer;
     NavigationView navigationView;
     ActionBarDrawerToggle toggle;
     Toolbar toolbar;
 
-    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -50,29 +48,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
         switch (id) {
-            case R.id.nav_home:
-//                Intent homeIntent = new Intent(MainActivity.this, MainActivity.class);
-//                startActivity(homeIntent);
-                break;
             case R.id.nav_budget:
-                Intent budgetIntent = new Intent(MainActivity.this, SpendingSavingPage.class);
+                Intent budgetIntent = new Intent(this, SpendingSavingPage.class);
                 startActivity(budgetIntent);
                 break;
             case R.id.nav_category:
-                Intent catIntent = new Intent(MainActivity.this, CategoryActivity.class);
+                Intent catIntent = new Intent(this, CategoryActivity.class);
                 startActivity(catIntent);
-                break;
-            case R.id.nav_settings:
-                Intent settingIntent = new Intent(MainActivity.this, SettingsActivity.class);
-                startActivity(settingIntent);
-                break;
-            case R.id.nav_users:
-                Intent usersIntent = new Intent(MainActivity.this, UserDisplayActivity.class);
-                startActivity(usersIntent);
-                break;
-            case R.id.nav_incExp:
-                Intent addIncExpIntent = new Intent(MainActivity.this, AddIncomeExpenseActivity.class);
-                startActivity(addIncExpIntent);
                 break;
         }
         drawer.closeDrawer(GravityCompat.START);
