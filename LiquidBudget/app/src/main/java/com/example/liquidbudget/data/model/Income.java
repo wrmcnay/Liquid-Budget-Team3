@@ -60,6 +60,10 @@ public class Income {
 
     public void setCategoryID(int categoryID) { this.categoryID = categoryID; }
 
+    public String getIncomeName() {
+        return incomeName;
+    }
+
     public String getName() { return incomeName; }
 
     public void setName(String name) { this.incomeName = name; }
