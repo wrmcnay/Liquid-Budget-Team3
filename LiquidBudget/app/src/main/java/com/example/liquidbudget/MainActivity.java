@@ -74,6 +74,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 Intent addIncExpIntent = new Intent(MainActivity.this, AddIncomeExpenseActivity.class);
                 startActivity(addIncExpIntent);
                 break;
+            case R.id.nav_incomes:
+                Intent incomesIntent = new Intent(MainActivity.this, IncomeDisplayActivity.class);
+                startActivity(incomesIntent);
+                break;
         }
         drawer.closeDrawer(GravityCompat.START);
         return true;

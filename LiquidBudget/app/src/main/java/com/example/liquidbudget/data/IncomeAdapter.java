@@ -1,4 +1,4 @@
-package com.example.liquidbudget;
+package com.example.liquidbudget.data;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,7 +22,7 @@ public class IncomeAdapter  extends RecyclerView.Adapter<IncomeAdapter.IncomeHol
     @Override
     public IncomeHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.incomes_list, parent, false);
+                .inflate(R.layout.incomes, parent, false);
         return new IncomeHolder(itemView);
     }
 
@@ -34,7 +34,6 @@ public class IncomeAdapter  extends RecyclerView.Adapter<IncomeAdapter.IncomeHol
         holder.textViewCatName.setText(String.valueOf(currentIncome.getCategoryName()));
         holder.textViewAmount.setText(String.valueOf(currentIncome.getAmount()));
     }
-
 
     @Override
     public int getItemCount() {
