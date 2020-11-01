@@ -18,6 +18,9 @@ public class Income {
     @ColumnInfo(name = "incomeName")
     private String incomeName;
 
+    @ColumnInfo(name = "categoryName")
+    private String categoryName;
+
     @ColumnInfo(name = "amount")
     private double amount;
 
@@ -39,10 +42,11 @@ public class Income {
     @ColumnInfo(name = "userID")
     private int userID;
 
-    public Income(int incomeID, int categoryID, String incomeName, double amount, boolean recurring, int numberOf, int period, boolean stable, String date, int userID) {
+    public Income(int incomeID, int categoryID, String incomeName, String categoryName, double amount, boolean recurring, int numberOf, int period, boolean stable, String date, int userID) {
         this.incomeID = incomeID;
         this.categoryID = categoryID;
         this.incomeName = incomeName;
+        this.categoryName = categoryName;
         this.amount = amount;
         this.recurring = recurring;
         this.numberOf = numberOf;
@@ -60,13 +64,13 @@ public class Income {
 
     public void setCategoryID(int categoryID) { this.categoryID = categoryID; }
 
-    public String getIncomeName() {
-        return incomeName;
-    }
+    public String getIncomeName() { return incomeName; }
 
-    public String getName() { return incomeName; }
+    public void setIncomeName(String incName) { this.incomeName = incName; }
 
-    public void setName(String name) { this.incomeName = name; }
+    public String getCategoryName() { return categoryName; }
+
+    public void setCategoryName(String catName) { this.categoryName = catName; }
 
     public double getAmount() { return amount; }
 
