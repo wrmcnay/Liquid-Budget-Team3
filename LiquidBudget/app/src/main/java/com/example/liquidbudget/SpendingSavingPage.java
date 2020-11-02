@@ -1,6 +1,7 @@
 package com.example.liquidbudget;
 
 import android.os.Bundle;
+
 import com.anychart.AnyChart;
 import com.anychart.AnyChartView;
 import com.anychart.chart.common.dataentry.DataEntry;
@@ -8,12 +9,12 @@ import com.anychart.chart.common.dataentry.ValueDataEntry;
 import com.anychart.charts.Pie;
 import com.anychart.enums.Align;
 import com.anychart.enums.LegendLayout;
+import com.example.liquidbudget.ui.main.AppBaseActivity;
 
-import androidx.appcompat.app.AppCompatActivity;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SpendingSavingPage extends AppCompatActivity {
+public class SpendingSavingPage extends AppBaseActivity {
 
     AnyChartView anyChartView;
 

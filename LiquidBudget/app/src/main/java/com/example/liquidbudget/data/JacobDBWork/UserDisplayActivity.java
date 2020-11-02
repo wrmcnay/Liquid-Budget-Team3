@@ -1,26 +1,23 @@
 package com.example.liquidbudget.data.JacobDBWork;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelProviders;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.liquidbudget.R;
-import com.example.liquidbudget.data.JacobDBWork.UserAccount;
-import com.example.liquidbudget.data.JacobDBWork.UserAccountViewModel;
+import com.example.liquidbudget.ui.main.AppBaseActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
 
-public class UserDisplayActivity extends AppCompatActivity {
+public class UserDisplayActivity extends AppBaseActivity {
 
     public static final int ADD_NOTE_REQUEST = 1;
     private UserAccountViewModel userAccountViewModel;

@@ -10,12 +10,12 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.liquidbudget.data.Database.CategoryRepository;
 import com.example.liquidbudget.data.Local.CategoryDataSource;
 import com.example.liquidbudget.data.Local.CategoryDatabase;
 import com.example.liquidbudget.data.model.Category;
+import com.example.liquidbudget.ui.main.AppBaseActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +29,7 @@ import io.reactivex.functions.Action;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
-public class CategoryActivity extends AppCompatActivity{
+public class CategoryActivity extends AppBaseActivity {
     public static final String CATEGORY_NAME = "com.example.liquidbudget.CATEGORY_NAME";
     private ListView lstCategory;
 
