@@ -61,13 +61,13 @@ public class IncomeDisplayActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK && requestCode == MY_REQUEST_CODE) {
-            int incID = data.getIntExtra(AddIncomeActivity.EXTRA_INC_NAME, 1);
+            int incID = data.getIntExtra(AddIncomeActivity.EXTRA_INC_ID, 1);
             String incomeName = data.getStringExtra(AddIncomeActivity.EXTRA_INC_NAME);
             String categoryName = data.getStringExtra(AddIncomeActivity.EXTRA_CAT_NAME);
             double amount = data.getDoubleExtra(AddIncomeActivity.EXTRA_AMOUNT, 0);
 
             Income income = new Income(incomeName, categoryName, amount);
-            //income.setIncomeID(incID);
+            income.setIncomeID(incID);
             incomeViewModel.insert(income);
             Toast.makeText(this, "Income Added!", Toast.LENGTH_SHORT).show();
            }
