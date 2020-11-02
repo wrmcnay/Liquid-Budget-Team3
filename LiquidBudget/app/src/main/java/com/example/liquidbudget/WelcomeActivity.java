@@ -7,10 +7,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
-
-import com.example.liquidbudget.ui.login.LoginActivity;
-import com.example.liquidbudget.ui.login.SignUpActivity;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -23,7 +19,7 @@ public class WelcomeActivity extends AppCompatActivity {
 
     SignInButton signInButton;
     GoogleSignInClient mGoogleSignInClient;
-    private int RC_SIGN_IN = 1;
+    private static final int RC_SIGN_IN = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,12 +49,7 @@ public class WelcomeActivity extends AppCompatActivity {
     private void updateUI(GoogleSignInAccount account){
         if (account == null) {
             signInButton.setSize(SignInButton.SIZE_STANDARD);
-            findViewById(R.id.sign_in_button).setOnClickListener(new View.OnClickListener(){
-                @Override
-                public void onClick(View v) {
-                    launchSignIn(v);
-                }
-            });
+            findViewById(R.id.sign_in_button).setOnClickListener(this::launchSignIn);
         } else {
             signInButton.setVisibility(View.INVISIBLE);
             Intent intent = new Intent(this, MainActivity.class);
