@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
+import com.example.liquidbudget.data.Database.IncomeRepository;
 import com.example.liquidbudget.data.model.Income;
 import com.example.liquidbudget.data.IncomeViewModel;
 import com.example.liquidbudget.data.IncomeAdapter;
@@ -23,6 +24,7 @@ public class IncomeDisplayActivity extends AppCompatActivity {
 
     private static final int MY_REQUEST_CODE = 1;
     private IncomeViewModel incomeViewModel;
+    private IncomeRepository incomeRepository;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +43,7 @@ public class IncomeDisplayActivity extends AppCompatActivity {
 
         RecyclerView recyclerView = findViewById(R.id.Income_Recycler_View);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setHasFixedSize(true);
+        recyclerView.setHasFixedSize(false);
 
         IncomeAdapter adapter = new IncomeAdapter();
         recyclerView.setAdapter(adapter);
@@ -65,7 +67,7 @@ public class IncomeDisplayActivity extends AppCompatActivity {
             double amount = data.getDoubleExtra(AddIncomeActivity.EXTRA_AMOUNT, 0);
 
             Income income = new Income(incomeName, categoryName, amount);
-            income.setIncomeID(incID);
+            //income.setIncomeID(incID);
             incomeViewModel.insert(income);
             Toast.makeText(this, "Income Added!", Toast.LENGTH_SHORT).show();
            }
