@@ -26,12 +26,12 @@ public abstract class IncomeDatabase extends RoomDatabase {
 
     public static final ExecutorService databaseWriteExecutor = Executors.newFixedThreadPool(NUMBER_OF_THREADS);
 
-    public static IncomeDatabase getInstance(Context context) {
+    public static IncomeDatabase getInstance(final Context context) {
         if (mInstance == null) {
             synchronized (IncomeDatabase.class) {
                 if (mInstance == null) {
-                    mInstance = Room.databaseBuilder(context, IncomeDatabase.class, DATABASE_NAME)
-                            .fallbackToDestructiveMigration()
+                    mInstance = Room.databaseBuilder(context.getApplicationContext(),
+                            IncomeDatabase.class, "Income-Database")
                             .build();
                 }
             }
