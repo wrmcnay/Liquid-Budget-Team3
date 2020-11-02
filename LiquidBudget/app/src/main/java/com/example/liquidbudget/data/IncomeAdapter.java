@@ -30,8 +30,8 @@ public class IncomeAdapter  extends RecyclerView.Adapter<IncomeAdapter.IncomeHol
     public void onBindViewHolder(@NonNull IncomeHolder holder, int position) {
         Income currentIncome = incomes.get(position);
         holder.textViewIncID.setText(String.valueOf(currentIncome.getIncomeID()));
-        holder.textViewIncName.setText(String.valueOf(currentIncome.getIncomeName()));
-        holder.textViewCatName.setText(String.valueOf(currentIncome.getCategoryName()));
+        holder.textViewIncName.setText(currentIncome.getIncomeName());
+        holder.textViewCatName.setText(currentIncome.getCategoryName());
         holder.textViewAmount.setText(String.valueOf(currentIncome.getAmount()));
     }
 
