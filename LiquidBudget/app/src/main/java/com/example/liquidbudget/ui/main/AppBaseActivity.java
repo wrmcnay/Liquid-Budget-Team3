@@ -19,7 +19,7 @@ import com.example.liquidbudget.CategoryActivity;
 import com.example.liquidbudget.MainActivity;
 import com.example.liquidbudget.R;
 import com.example.liquidbudget.SpendingSavingPage;
-import com.example.liquidbudget.data.JacobDBWork.UserDisplayActivity;
+import com.example.liquidbudget.UserDisplayActivity;
 import com.example.liquidbudget.settings.SettingsActivity;
 import com.google.android.material.navigation.NavigationView;
 
