@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 startActivity(usersIntent);
                 break;
             case R.id.nav_incExp:
-                Intent addIncExpIntent = new Intent(MainActivity.this, AddIncomeExpenseActivity.class);
+                Intent addIncExpIntent = new Intent(MainActivity.this, ExpenseDisplayActivity.class);
                 startActivity(addIncExpIntent);
                 break;
             case R.id.nav_incomes:

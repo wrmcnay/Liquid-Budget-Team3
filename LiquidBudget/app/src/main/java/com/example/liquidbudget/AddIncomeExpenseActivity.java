@@ -15,7 +15,7 @@ public class AddIncomeExpenseActivity extends AppBaseActivity {
         createIncExp.setOnClickListener(new View.OnClickListener(){
         @Override
         public void onClick(View view){
-            setContentView(R.layout.activity_main);
+            setContentView(R.layout.activity_expense_display);
             finish();
             return;
         }
