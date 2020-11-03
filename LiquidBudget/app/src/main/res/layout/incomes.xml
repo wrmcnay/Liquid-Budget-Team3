@@ -12,37 +12,37 @@
         android:padding="8dp">
 
         <TextView
-            android:id="@+id/text_view_incid"
+            android:id="@+id/text_view_amount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            android:text="0"
+            android:inputType="numberDecimal"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"/>
 
         <TextView
             android:id="@+id/text_view_incname"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Income"
+            android:text="Name"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:maxLines="1"
-            android:layout_toStartOf="@+id/text_view_incid"
+            android:layout_toStartOf="@+id/text_view_amount"
             android:layout_alignParentStart="true"
             android:ellipsize="end"/>
+
+        <TextView
+            android:id="@+id/text_view_incid"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:layout_below="@+id/text_view_incname"
+            android:text="ID"/>
 
         <TextView
             android:id="@+id/text_view_catname"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/text_view_incname"
+            android:layout_below="@+id/text_view_incid"
             android:text="Category"/>
-
-        <TextView
-            android:id="@+id/text_view_amount"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/text_view_catname"
-            android:text="Amount"/>
 
     </RelativeLayout>
 

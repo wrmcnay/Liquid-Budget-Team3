@@ -2,6 +2,7 @@ package com.example.liquidbudget.data.model;
 
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 import androidx.room.ColumnInfo;
 
@@ -42,6 +43,13 @@ public class Income {
     @ColumnInfo(name = "userID")
     private int userID;
 
+    public Income(String incomeName, String categoryName, double amount) {
+        this.incomeName = incomeName;
+        this.categoryName = categoryName;
+        this.amount = amount;
+    }
+
+    @Ignore
     public Income(int incomeID, int categoryID, String incomeName, String categoryName, double amount, boolean recurring, int numberOf, int period, boolean stable, String date, int userID) {
         this.incomeID = incomeID;
         this.categoryID = categoryID;
@@ -102,7 +110,7 @@ public class Income {
 
     @Override
     public String toString() {
-        return new StringBuilder(incomeID).append("\n").append(incomeName).toString();
+        return new StringBuilder(incomeName).append("\n").append(categoryName).append("\n").append(amount).toString();
     }
 }
 

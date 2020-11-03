@@ -9,13 +9,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".AddIncomeExpenseActivity"></activity>
         <activity android:name=".settings.InviteActivity" />
         <activity android:name=".settings.HelpActivity" />
         <activity android:name=".settings.BankingActivity" />
         <activity android:name=".settings.NotificationsActivity" />
         <activity android:name=".settings.AccountActivity" />
         <activity android:name=".settings.SettingsActivity" />
+        <activity android:name=".AddIncomeExpenseActivity"/>
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
@@ -73,6 +73,11 @@
             android:parentActivityName=".data.JacobDBWork.AddUserActivity"/>
         <activity android:name=".data.JacobDBWork.UserDisplayActivity"
             android:launchMode="singleTop"/>
+        <activity android:name=".AddIncomeActivity"
+            android:parentActivityName=".AddIncomeActivity"/>
+        <activity android:name=".IncomeDisplayActivity"
+            android:launchMode="singleTop"/>
+
     </application>
 
 </manifest>

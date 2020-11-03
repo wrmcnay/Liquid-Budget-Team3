@@ -1,0 +1,40 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    tools:context=".AddIncomeActivity">
+
+    <EditText
+        android:id="@+id/inc_name_edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Income Name"
+        android:inputType="text"/>
+
+    <EditText
+        android:id="@+id/inc_id_edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Income ID"
+        android:inputType="text"/>
+
+    <EditText
+        android:id="@+id/cat_name_edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Category"
+        android:inputType="text"/>
+
+
+    <EditText
+        android:id="@+id/amount_text_edit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Amount"
+        android:inputType="numberDecimal"/>
+
+
+</LinearLayout>
