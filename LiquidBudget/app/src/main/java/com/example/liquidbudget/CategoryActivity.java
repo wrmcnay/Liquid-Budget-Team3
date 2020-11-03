@@ -11,10 +11,10 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
-import com.example.liquidbudget.data.Database.CategoryRepository;
-import com.example.liquidbudget.data.Local.CategoryDataSource;
-import com.example.liquidbudget.data.Local.CategoryDatabase;
-import com.example.liquidbudget.data.model.Category;
+import com.example.liquidbudget.data.repositories.CategoryRepository;
+import com.example.liquidbudget.data.datasource.CategoryDataSource;
+import com.example.liquidbudget.data.database.CategoryDatabase;
+import com.example.liquidbudget.data.entities.Category;
 import com.example.liquidbudget.ui.main.AppBaseActivity;
 
 import java.util.ArrayList;
