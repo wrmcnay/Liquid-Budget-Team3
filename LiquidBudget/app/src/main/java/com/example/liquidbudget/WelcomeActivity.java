@@ -7,6 +7,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -20,6 +22,7 @@ public class WelcomeActivity extends AppCompatActivity {
     SignInButton signInButton;
     GoogleSignInClient mGoogleSignInClient;
     private static final int RC_SIGN_IN = 1;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +46,8 @@ public class WelcomeActivity extends AppCompatActivity {
         // the GoogleSignInAccount will be non-null.
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
         signInButton = findViewById(R.id.sign_in_button);
+        Button skipSignInButton = findViewById(R.id.skip_login);
+        skipSignInButton.setOnClickListener(this::skipLogIn);
         updateUI(account);
     }
 
@@ -60,6 +65,11 @@ public class WelcomeActivity extends AppCompatActivity {
     public void launchSignIn(View view){
         Intent intent = mGoogleSignInClient.getSignInIntent();
         startActivityForResult(intent, RC_SIGN_IN);
+    }
+
+    public void skipLogIn(View view) {
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
     }
 
     @Override
