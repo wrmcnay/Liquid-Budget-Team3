@@ -23,7 +23,7 @@
         <activity android:name=".settings.NotificationsActivity" />
         <activity android:name=".settings.AccountActivity" />
         <activity android:name=".settings.SettingsActivity" />
-        <activity android:name=".AddIncomeExpenseActivity" />
+        <activity android:name=".AddExpenseActivity" />
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"

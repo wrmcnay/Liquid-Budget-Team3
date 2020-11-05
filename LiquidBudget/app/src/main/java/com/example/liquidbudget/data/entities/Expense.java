@@ -6,7 +6,7 @@ import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 import androidx.room.ColumnInfo;
 
-@Entity(tableName = "incomes")
+@Entity(tableName = "expenses")
 public class Expense {
     @NonNull
     @PrimaryKey(autoGenerate = true)

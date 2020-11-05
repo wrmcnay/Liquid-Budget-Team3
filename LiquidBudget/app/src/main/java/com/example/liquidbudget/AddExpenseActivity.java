@@ -7,7 +7,7 @@ import android.widget.Button;
 
 import com.example.liquidbudget.ui.main.AppBaseActivity;
 
-public class AddIncomeExpenseActivity extends AppBaseActivity {
+public class AddExpenseActivity extends AppBaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.expense_income_add);
@@ -16,7 +16,7 @@ public class AddIncomeExpenseActivity extends AppBaseActivity {
         createIncExp.setOnClickListener(new View.OnClickListener(){
         @Override
         public void onClick(View view){
-            Intent expDisplayIntent = new Intent(AddIncomeExpenseActivity.this, ExpenseDisplayActivity.class);
+            Intent expDisplayIntent = new Intent(AddExpenseActivity.this, ExpenseDisplayActivity.class);
             startActivity(expDisplayIntent);
             finish();
             return;
