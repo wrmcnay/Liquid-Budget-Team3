@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "799991287307",
+    "firebase_url": "https://liquidbudget-aeb9d.firebaseio.com",
+    "project_id": "liquidbudget-aeb9d",
+    "storage_bucket": "liquidbudget-aeb9d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:799991287307:android:6f4dacbe8b69426fcec10e",
+        "android_client_info": {
+          "package_name": "com.example.liquidbudget"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "799991287307-9cfjh4s4fu5vbgfaepeu4npdus9i4a9l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCex4I5DdXvjdCLNK8yC0l7HNIbi9hUlUY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "799991287307-9cfjh4s4fu5vbgfaepeu4npdus9i4a9l.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
