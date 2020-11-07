@@ -111,26 +111,32 @@ public abstract class AppBaseActivity extends AppCompatActivity implements MenuI
         switch (id) {
             case R.id.nav_home:
                 Intent homeIntent = new Intent(this, MainActivity.class);
+                finish();
                 startActivity(homeIntent);
                 break;
             case R.id.nav_budget:
                 Intent budgetIntent = new Intent(this, SpendingSavingPage.class);
+                finish();
                 startActivity(budgetIntent);
                 break;
             case R.id.nav_category:
                 Intent catIntent = new Intent(this, CategoryActivity.class);
+                finish();
                 startActivity(catIntent);
                 break;
             case R.id.nav_settings:
                 Intent settingIntent = new Intent(this, SettingsActivity.class);
+                finish();
                 startActivity(settingIntent);
                 break;
             case R.id.nav_users:
                 Intent usersIntent = new Intent(this, UserDisplayActivity.class);
+                finish();
                 startActivity(usersIntent);
                 break;
             case R.id.nav_incExp:
                 Intent addIncExpIntent = new Intent(this, AddIncomeExpenseActivity.class);
+                finish();
                 startActivity(addIncExpIntent);
                 break;
         }
