@@ -15,8 +15,10 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
+import com.example.liquidbudget.ui.main.AppBaseActivity;
 
-public class AddIncomeActivity extends AppCompatActivity {
+
+public class AddIncomeActivity extends AppBaseActivity {
 
     public static final String EXTRA_INC_ID = "com.example.liquidbudget.EXTRA_INC_ID";
     public static final String EXTRA_INC_NAME = "com.example.liquidbudget.EXTRA_INC_NAME";
