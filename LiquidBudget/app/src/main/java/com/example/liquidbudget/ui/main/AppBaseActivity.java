@@ -16,6 +16,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.example.liquidbudget.AddIncomeExpenseActivity;
 import com.example.liquidbudget.CategoryActivity;
+import com.example.liquidbudget.IncomeDisplayActivity;
 import com.example.liquidbudget.MainActivity;
 import com.example.liquidbudget.R;
 import com.example.liquidbudget.SpendingSavingPage;
@@ -132,6 +133,10 @@ public abstract class AppBaseActivity extends AppCompatActivity implements MenuI
             case R.id.nav_incExp:
                 Intent addIncExpIntent = new Intent(this, AddIncomeExpenseActivity.class);
                 startActivity(addIncExpIntent);
+                break;
+            case R.id.nav_incomes:
+                Intent incomesIntent = new Intent(this, IncomeDisplayActivity.class);
+                startActivity(incomesIntent);
                 break;
         }
         return false;
