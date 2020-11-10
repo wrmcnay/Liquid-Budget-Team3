@@ -14,7 +14,7 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 
-import com.example.liquidbudget.AddIncomeExpenseActivity;
+import com.example.liquidbudget.AddExpenseActivity;
 import com.example.liquidbudget.CategoryActivity;
 import com.example.liquidbudget.IncomeDisplayActivity;
 import com.example.liquidbudget.MainActivity;
@@ -139,7 +139,7 @@ public abstract class AppBaseActivity extends AppCompatActivity implements MenuI
                     finish();
                 break;
             case R.id.nav_incExp:
-                Intent addIncExpIntent = new Intent(this, AddIncomeExpenseActivity.class);
+                Intent addIncExpIntent = new Intent(this, AddExpenseActivity.class);
                 startActivity(addIncExpIntent);
                 if(!this.getClass().getSimpleName().equals("MainActivity"))
                     finish();

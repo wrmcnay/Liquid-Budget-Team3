@@ -26,5 +26,4 @@ public class MainActivity extends AppBaseActivity {
             homepagehello.setText(getString(R.string.homepage_hello, userName));
         }
     }
-
 }
