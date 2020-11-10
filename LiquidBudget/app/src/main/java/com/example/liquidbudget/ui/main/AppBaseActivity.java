@@ -106,39 +106,52 @@ public abstract class AppBaseActivity extends AppCompatActivity implements MenuI
     }
 
     @Override
-    // TODO change intents so they branch off of parent and not each other to prevent chains of activities
     public boolean onMenuItemClick(MenuItem item) {
         int id = item.getItemId();
         switch (id) {
             case R.id.nav_home:
                 Intent homeIntent = new Intent(this, MainActivity.class);
                 startActivity(homeIntent);
+                finish();
                 break;
             case R.id.nav_budget:
                 Intent budgetIntent = new Intent(this, SpendingSavingPage.class);
                 startActivity(budgetIntent);
+                if(!this.getClass().getSimpleName().equals("MainActivity"))
+                    finish();
                 break;
             case R.id.nav_category:
                 Intent catIntent = new Intent(this, CategoryActivity.class);
                 startActivity(catIntent);
+                if(!this.getClass().getSimpleName().equals("MainActivity"))
+                    finish();
                 break;
             case R.id.nav_settings:
                 Intent settingIntent = new Intent(this, SettingsActivity.class);
                 startActivity(settingIntent);
+                if(!this.getClass().getSimpleName().equals("MainActivity"))
+                    finish();
                 break;
             case R.id.nav_users:
                 Intent usersIntent = new Intent(this, UserDisplayActivity.class);
                 startActivity(usersIntent);
+                if(!this.getClass().getSimpleName().equals("MainActivity"))
+                    finish();
                 break;
             case R.id.nav_incExp:
                 Intent addIncExpIntent = new Intent(this, AddIncomeExpenseActivity.class);
                 startActivity(addIncExpIntent);
+                if(!this.getClass().getSimpleName().equals("MainActivity"))
+                    finish();
                 break;
             case R.id.nav_incomes:
                 Intent incomesIntent = new Intent(this, IncomeDisplayActivity.class);
                 startActivity(incomesIntent);
+                if(!this.getClass().getSimpleName().equals("MainActivity"))
+                    finish();
                 break;
         }
+        mDrawerLayout.closeDrawers();
         return false;
     }
 }
