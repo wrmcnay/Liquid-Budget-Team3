@@ -56,7 +56,8 @@ public class WelcomeActivity extends AppCompatActivity {
             findViewById(R.id.sign_in_button).setOnClickListener(this::launchSignIn);
         } else {
             signInButton.setVisibility(View.INVISIBLE);
-            Intent intent = new Intent(this, MainActivity.class);
+          //  Intent intent = new Intent(this, MainActivity.class);
+            Intent intent = new Intent(this, SpendingSavingPage.class);
             startActivity(intent);
         }
 }
