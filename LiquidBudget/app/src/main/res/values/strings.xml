@@ -54,4 +54,5 @@
     <string name="Link_Bank">Link a Bank Account</string>
     <string name="AddRemove_Card">Add or Remove a Credit/Debit Card</string>
     <string name="SignOut">Sign Out</string>
+    <string name="dash">-</string>
 </resources>
