@@ -45,16 +45,11 @@
                     android:orientation="vertical">
 
                     <TextView
+                        android:id="@+id/emailEditText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="20sp"
-                        android:textColor="@android:color/black"
-                        android:text="Username:"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="14dp"
-                        android:text="E-mail:"/>
+                        android:textColor="@android:color/black"/>
 
                 </LinearLayout>
                 
@@ -139,6 +134,18 @@
                 android:drawableTint="@color/colorPrimary"
                 android:drawablePadding="10dp"
                 />
+
+            <Button
+                android:id="@+id/signOut"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:textAllCaps="false"
+                android:background="@android:color/transparent"
+                android:text="@string/SignOut"
+                android:textSize="18sp"
+                android:gravity="left|center_vertical"
+                android:textColor="@android:color/holo_red_dark"/>
 
         </LinearLayout>
     </ScrollView>

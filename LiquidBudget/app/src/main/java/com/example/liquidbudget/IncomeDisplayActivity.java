@@ -1,7 +1,6 @@
 package com.example.liquidbudget;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -12,19 +11,18 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
-import com.example.liquidbudget.data.repositories.IncomeRepository;
 import com.example.liquidbudget.data.entities.Income;
 import com.example.liquidbudget.data.viewmodels.IncomeViewModel;
 import com.example.liquidbudget.ui.DataAdapters.IncomeAdapter;
+import com.example.liquidbudget.ui.main.AppBaseActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
 
-public class IncomeDisplayActivity extends AppCompatActivity {
+public class IncomeDisplayActivity extends AppBaseActivity {
 
     private static final int MY_REQUEST_CODE = 1;
     private IncomeViewModel incomeViewModel;
-    private IncomeRepository incomeRepository;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

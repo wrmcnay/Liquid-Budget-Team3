@@ -14,10 +14,10 @@ import java.util.List;
 @Dao
 public interface UserAccountDAO {
 
-    @Query("SELECT * FROM accountInfo WHERE userID=:uid")
+    @Query("SELECT * FROM users WHERE userID=:uid")
     LiveData<UserAccount> getUserByID(int uid);
 
-    @Query("SELECT * FROM accountInfo")
+    @Query("SELECT * FROM users")
     LiveData<List<UserAccount>> getAllUsers();
 
     @Insert
@@ -29,6 +29,6 @@ public interface UserAccountDAO {
     @Delete
     void deleteUser(UserAccount accountInfo);
 
-    @Query("DELETE FROM accountInfo")
+    @Query("DELETE FROM users")
     void deleteAllUsers();
 }

@@ -26,8 +26,12 @@
         <activity android:name=".AddExpenseActivity" />
         <activity
             android:name=".MainActivity"
-            android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:label="@string/app_name">
+            <intent-filter>
+                <action android:name=".SpendingSavingPage" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".SpendingSavingPage"
             android:label="@string/app_name">

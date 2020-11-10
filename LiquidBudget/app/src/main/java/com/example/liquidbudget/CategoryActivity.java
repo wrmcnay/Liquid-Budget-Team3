@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -103,6 +104,21 @@ public class CategoryActivity extends AppBaseActivity {
 
         //Load all data from Database
         loadData();
+
+        lstCategory.setClickable(true);
+        lstCategory.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
+                Intent viewActivity = new Intent(CategoryActivity.this, ViewCategoryActivity.class);
+                startActivity(viewActivity);
+                /* write you handling code like...
+                String st = "sdcard/";
+                File f = new File(st+o.toString());
+                // do whatever u want to do with 'f' File object
+                */
+            }
+        });
+
 
         goToAddCategory.setOnClickListener(new View.OnClickListener(){
             private final static String REQUEST_COLOR = "";
