@@ -37,6 +37,8 @@ import com.github.mikephil.charting.interfaces.datasets.IDataSet;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 import com.github.mikephil.charting.utils.ColorTemplate;
 import com.github.mikephil.charting.utils.MPPointF;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -48,6 +50,13 @@ public class SpendingSavingPage extends AppBaseActivity implements OnChartValueS
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_spending_saving_page);
+
+        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
+        if (account != null) {
+            String userName = account.getDisplayName();
+            TextView homepagehello = findViewById(R.id.usersbudget);
+            homepagehello.setText(getString(R.string.users_budget, userName));
+        }
 
         setTitle("Spending Vs Savings");
 
