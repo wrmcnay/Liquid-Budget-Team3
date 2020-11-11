@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <item
+        android:id="@+id/nav_home"
+        android:icon="@drawable/ic_menu_home"
+        android:title="@string/home"/>
+
+    <item
+        android:id="@+id/nav_budget"
+        android:icon="@drawable/ic_menu_spending"
+        android:title="@string/budget"/>
+
+    <item
+        android:id="@+id/nav_category"
+        android:icon="@drawable/ic_menu_category"
+        android:title="@string/categories"/>
+
+    <item
+        android:id="@+id/nav_incExp"
+        android:icon="@drawable/ic_menu_addincexp"
+        android:title="View Expenses"/>
+
+    <item
+        android:id="@+id/nav_incomes"
+        android:icon="@drawable/ic_menu_income"
+        android:title="View Incomes"/>
+
+    <item
+        android:id="@+id/nav_settings"
+        android:icon="@drawable/ic_menu_settings"
+        android:title="@string/settings"/>
+
+    <item
+        android:id="@+id/nav_users"
+        android:icon="@drawable/ic_add"
+        android:title="Users"/>
+
+</menu>

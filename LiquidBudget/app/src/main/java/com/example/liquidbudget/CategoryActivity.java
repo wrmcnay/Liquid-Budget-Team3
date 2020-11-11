@@ -1,18 +1,22 @@
 package com.example.liquidbudget;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.annotation.Nullable;
 
-import com.example.liquidbudget.data.Database.CategoryRepository;
-import com.example.liquidbudget.data.Local.CategoryDataSource;
-import com.example.liquidbudget.data.Local.CategoryDatabase;
-import com.example.liquidbudget.data.model.Category;
+import com.example.liquidbudget.data.repositories.CategoryRepository;
+import com.example.liquidbudget.data.datasource.CategoryDataSource;
+import com.example.liquidbudget.data.database.CategoryDatabase;
+import com.example.liquidbudget.data.entities.Category;
+import com.example.liquidbudget.ui.main.AppBaseActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +30,7 @@ import io.reactivex.functions.Action;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
-public class CategoryActivity extends AppCompatActivity{
+public class CategoryActivity extends AppBaseActivity {
     public static final String CATEGORY_NAME = "com.example.liquidbudget.CATEGORY_NAME";
     private ListView lstCategory;
 
@@ -39,6 +43,45 @@ public class CategoryActivity extends AppCompatActivity{
     private CompositeDisposable compositeDisposable;
     private CategoryRepository categoryRepository;
 
+    private final static int MY_REQUEST_CODE= 1;
+    private String newCatName = "";
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data){
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode == Activity.RESULT_OK){
+            if(requestCode==MY_REQUEST_CODE){
+                if(data != null)
+                    newCatName = data.getStringExtra("Name");
+            }
+            Disposable disposable = io.reactivex.Observable.create(new ObservableOnSubscribe<Object>() {
+                @Override
+                public void subscribe(ObservableEmitter<Object> e) throws Exception {
+                    Category category = new Category(newCatName, "red");
+                    categoryRepository.insertCategory(category);
+                    e.onComplete();
+                }
+            })
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribeOn(Schedulers.io())
+                    .subscribe(new Consumer() {
+                        @Override
+                        public void accept(Object o) throws Exception {
+                            Toast.makeText(CategoryActivity.this, "Category Added!", Toast.LENGTH_SHORT).show();
+                        }
+                    }, new Consumer<Throwable>() {
+                        @Override
+                        public void accept(Throwable throwable) throws Exception {
+                            Toast.makeText(CategoryActivity.this, "" + throwable.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    }, new Action() {
+                        @Override
+                        public void run() throws Exception {
+                            loadData();
+                        }
+                    });
+
+        }
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,63 +105,30 @@ public class CategoryActivity extends AppCompatActivity{
         //Load all data from Database
         loadData();
 
-        goToAddCategory.setOnClickListener(new View.OnClickListener(){
+        lstCategory.setClickable(true);
+        lstCategory.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onClick(View view){
-//                Intent startIntent = new Intent(getApplicationContext(), AddCategoryActivity.class);
-//                startActivity(startIntent);
-                Disposable disposable = io.reactivex.Observable.create(new ObservableOnSubscribe<Object>() {
-                    @Override
-                    public void subscribe(ObservableEmitter<Object> e) throws Exception {
-                        Category category = new Category(123,
-                                "MainIncome", "red");
-                        categoryRepository.insertCategory(category);
-                        e.onComplete();
-                    }
-                })
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribeOn(Schedulers.io())
-                        .subscribe(new Consumer() {
-                                       @Override
-                                       public void accept(Object o) throws Exception {
-                                           Toast.makeText(CategoryActivity.this, "Category Added!", Toast.LENGTH_SHORT).show();
-                                       }
-                                    }, new Consumer<Throwable>() {
-                                       @Override
-                                       public void accept(Throwable throwable) throws Exception {
-                                           Toast.makeText(CategoryActivity.this, "" + throwable.getMessage(), Toast.LENGTH_SHORT).show();
-                                       }
-                                   }, new Action() {
-                                       @Override
-                                       public void run() throws Exception {
-                                           loadData();
-                                       }
-                                   });
-
+            public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
+                Intent viewActivity = new Intent(CategoryActivity.this, ViewCategoryActivity.class);
+                startActivity(viewActivity);
+                /* write you handling code like...
+                String st = "sdcard/";
+                File f = new File(st+o.toString());
+                // do whatever u want to do with 'f' File object
+                */
             }
         });
 
 
-//
-//        /**
-//         * TODO: How can we dynamically assign buttons their own IDs?
-//         */
-//        Button category_test = (Button)findViewById(R.id.category_test);
-//        category_test.setOnClickListener(new View.OnClickListener(){
-//            @Override
-//            public void onClick(View view){
-//                openCategoryView();
-//            }
-//        });
-
+        goToAddCategory.setOnClickListener(new View.OnClickListener(){
+            private final static String REQUEST_COLOR = "";
+            @Override
+            public void onClick(View view){
+                Intent startIntent = new Intent(getApplicationContext(), AddCategoryActivity.class);
+                startActivityForResult(startIntent, MY_REQUEST_CODE);
+            }
+        });
     }
-//    public void openCategoryView() {
-//        String testCategory = "Test Category";
-//
-//        Intent startIntent = new Intent(getApplicationContext(), ViewCategoryActivity.class);
-//        startIntent.putExtra(CATEGORY_NAME, testCategory);
-//        startActivity(startIntent);
-//    }
 
     private void loadData(){
         //Use RxJava
@@ -146,3 +156,24 @@ public class CategoryActivity extends AppCompatActivity{
     }
 
 }
+
+
+//
+//        /**
+//         * TODO: How can we dynamically assign buttons their own IDs?
+//         */
+//        Button category_test = (Button)findViewById(R.id.category_test);
+//        category_test.setOnClickListener(new View.OnClickListener(){
+//            @Override
+//            public void onClick(View view){
+//                openCategoryView();
+//            }
+//        });
+
+//    public void openCategoryView() {
+//        String testCategory = "Test Category";
+//
+//        Intent startIntent = new Intent(getApplicationContext(), ViewCategoryActivity.class);
+//        startIntent.putExtra(CATEGORY_NAME, testCategory);
+//        startActivity(startIntent);
+//    }

@@ -1,57 +1,29 @@
 package com.example.liquidbudget;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
+import android.widget.TextView;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.viewpager.widget.ViewPager;
+import androidx.appcompat.widget.Toolbar;
 
-import com.example.liquidbudget.settings.SettingsActivity;
-import com.example.liquidbudget.ui.main.SectionsPagerAdapter;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.tabs.TabLayout;
+import com.example.liquidbudget.ui.main.AppBaseActivity;
 
-public class MainActivity extends AppCompatActivity {
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+
+public class MainActivity extends AppBaseActivity {
+
+    Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(this, getSupportFragmentManager());
-        ViewPager viewPager = findViewById(R.id.view_pager);
-        viewPager.setAdapter(sectionsPagerAdapter);
-        TabLayout tabs = findViewById(R.id.tabs);
-        tabs.setupWithViewPager(viewPager);
-        FloatingActionButton fab = findViewById(R.id.fab);
+        setContentView(R.layout.activity_homepage);
 
-        Button goToSpending = (Button)findViewById(R.id.goToSpending);
-        goToSpending.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view){
-                Intent startIntent = new Intent(getApplicationContext(), SpendingSavingPage.class);
-                startActivity(startIntent);
-            }
-        });
-
-        Button goToCategory = (Button)findViewById(R.id.goToCategory);
-        goToCategory.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view){
-                Intent startIntent = new Intent(getApplicationContext(), CategoryActivity.class);
-                startActivity(startIntent);
-            }
-        });
-
-        Button goToSettings = (Button)findViewById(R.id.goToSettings);
-        goToSettings.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view){
-                Intent startIntent = new Intent(getApplicationContext(), SettingsActivity.class);
-                startActivity(startIntent);
-            }
-        });
-
+        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
+        if (account != null) {
+            String userName = account.getDisplayName();
+            TextView homepagehello = findViewById(R.id.homepagehello);
+            homepagehello.setText(getString(R.string.homepage_hello, userName));
+        }
     }
 }
