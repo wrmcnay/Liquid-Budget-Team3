@@ -58,7 +58,7 @@ public class SpendingSavingPage extends AppBaseActivity implements OnChartValueS
             homepagehello.setText(getString(R.string.users_budget, userName));
         }
 
-        setTitle("Spending Vs Savings");
+        //setTitle("Spending Vs Savings");
 
         PieChart chart = findViewById(R.id.pie_chart);
 
