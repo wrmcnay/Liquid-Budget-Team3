@@ -116,8 +116,8 @@ public abstract class AppBaseActivity extends AppCompatActivity implements MenuI
                 finish();
                 break;
             case R.id.nav_budget:
-                Intent budgetIntent = new Intent(this, SpendingSavingPage.class);
-                //Intent budgetIntent = new Intent(this, Budget.class);
+                //Intent budgetIntent = new Intent(this, SpendingSavingPage.class);
+                Intent budgetIntent = new Intent(this, Budget.class);
                 startActivity(budgetIntent);
                 if(!this.getClass().getSimpleName().equals("MainActivity"))
                     finish();
