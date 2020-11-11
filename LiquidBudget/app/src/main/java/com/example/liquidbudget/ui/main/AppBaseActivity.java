@@ -111,7 +111,7 @@ public abstract class AppBaseActivity extends AppCompatActivity implements MenuI
         int id = item.getItemId();
         switch (id) {
             case R.id.nav_home:
-                Intent homeIntent = new Intent(this, MainActivity.class);
+                Intent homeIntent = new Intent(this, SpendingSavingPage.class);
                 startActivity(homeIntent);
                 finish();
                 break;
