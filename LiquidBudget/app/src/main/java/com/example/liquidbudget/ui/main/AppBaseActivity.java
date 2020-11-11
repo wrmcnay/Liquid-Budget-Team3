@@ -21,6 +21,7 @@ import com.example.liquidbudget.MainActivity;
 import com.example.liquidbudget.R;
 import com.example.liquidbudget.SpendingSavingPage;
 import com.example.liquidbudget.UserDisplayActivity;
+import com.example.liquidbudget.budget.Budget;
 import com.example.liquidbudget.settings.SettingsActivity;
 import com.google.android.material.navigation.NavigationView;
 
@@ -116,6 +117,7 @@ public abstract class AppBaseActivity extends AppCompatActivity implements MenuI
                 break;
             case R.id.nav_budget:
                 Intent budgetIntent = new Intent(this, SpendingSavingPage.class);
+                //Intent budgetIntent = new Intent(this, Budget.class);
                 startActivity(budgetIntent);
                 if(!this.getClass().getSimpleName().equals("MainActivity"))
                     finish();

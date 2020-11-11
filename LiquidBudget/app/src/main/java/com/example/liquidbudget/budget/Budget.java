@@ -6,14 +6,22 @@ import android.widget.Spinner;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.liquidbudget.R;
+import com.example.liquidbudget.ui.main.AppBaseActivity;
 
 import java.util.ArrayList;
 
-public class Budget extends AppCompatActivity {
-    private ArrayList<BudgetCategory> mCatList;
-    private CategoryAdapter mAdapter;
-
+public class Budget extends AppBaseActivity {
     @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.budget_main);
+
+
+
+    //private ArrayList<BudgetCategory> mCatList;
+    //private CategoryAdapter mAdapter;
+
+   /* @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
