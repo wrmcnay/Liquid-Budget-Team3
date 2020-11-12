@@ -24,6 +24,7 @@
         <activity android:name=".settings.AccountActivity" />
         <activity android:name=".settings.SettingsActivity" />
         <activity android:name=".AddExpenseActivity" />
+        <activity android:name=".budget.Budget" />
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name">

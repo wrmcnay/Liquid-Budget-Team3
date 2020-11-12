@@ -22,9 +22,6 @@ public class Budget extends AppBaseActivity {
     //private CategoryAdapter mAdapter;
 
    /* @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
         initList();
         Spinner spinnerCategories = findViewById(R.id.spinner_category);
         mAdapter = new CategoryAdapter(this, mCatList);
