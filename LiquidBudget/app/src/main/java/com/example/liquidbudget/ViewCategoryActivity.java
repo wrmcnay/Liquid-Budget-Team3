@@ -1,6 +1,5 @@
 package com.example.liquidbudget;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
 
@@ -12,9 +11,9 @@ public class ViewCategoryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.category_view);
 
-        Intent intent = getIntent();
-        String categoryName = intent.getStringExtra(CategoryActivity.CATEGORY_NAME);
+        String categoryName = getIntent().getStringExtra("CategoryName");
         TextView displayName = (TextView) findViewById(R.id.category_display);
+        displayName.setText(categoryName);
 
         displayName.setText(categoryName);
     }

@@ -7,21 +7,6 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/textView4"
-        style="@style/Base.Widget.MaterialComponents.TextView"
-        android:layout_width="286dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="36dp"
-        android:text="Color"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        app:layout_constraintBottom_toTopOf="@+id/createCategory"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.128"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/radioGroup"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <TextView
         android:id="@+id/textView3"
         style="@style/Base.Widget.MaterialComponents.TextView"
         android:layout_width="286dp"
@@ -40,9 +25,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
         android:ems="10"
-        android:hint="Category Name"
+        android:hint="Name"
         android:inputType="textPersonName"
-        android:text="Name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.079"
         app:layout_constraintStart_toStartOf="parent"

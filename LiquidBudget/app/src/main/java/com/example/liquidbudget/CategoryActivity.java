@@ -12,10 +12,10 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
-import com.example.liquidbudget.data.repositories.CategoryRepository;
-import com.example.liquidbudget.data.datasource.CategoryDataSource;
 import com.example.liquidbudget.data.database.CategoryDatabase;
+import com.example.liquidbudget.data.datasource.CategoryDataSource;
 import com.example.liquidbudget.data.entities.Category;
+import com.example.liquidbudget.data.repositories.CategoryRepository;
 import com.example.liquidbudget.ui.main.AppBaseActivity;
 
 import java.util.ArrayList;
@@ -56,7 +56,7 @@ public class CategoryActivity extends AppBaseActivity {
             Disposable disposable = io.reactivex.Observable.create(new ObservableOnSubscribe<Object>() {
                 @Override
                 public void subscribe(ObservableEmitter<Object> e) throws Exception {
-                    Category category = new Category(newCatName, "red");
+                    Category category = new Category(newCatName, " ");
                     categoryRepository.insertCategory(category);
                     e.onComplete();
                 }
@@ -110,6 +110,8 @@ public class CategoryActivity extends AppBaseActivity {
             @Override
             public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
                 Intent viewActivity = new Intent(CategoryActivity.this, ViewCategoryActivity.class);
+                String catName = arg0.getItemAtPosition(position).toString();
+                viewActivity.putExtra("CategoryName", catName);
                 startActivity(viewActivity);
                 /* write you handling code like...
                 String st = "sdcard/";
@@ -156,24 +158,3 @@ public class CategoryActivity extends AppBaseActivity {
     }
 
 }
-
-
-//
-//        /**
-//         * TODO: How can we dynamically assign buttons their own IDs?
-//         */
-//        Button category_test = (Button)findViewById(R.id.category_test);
-//        category_test.setOnClickListener(new View.OnClickListener(){
-//            @Override
-//            public void onClick(View view){
-//                openCategoryView();
-//            }
-//        });
-
-//    public void openCategoryView() {
-//        String testCategory = "Test Category";
-//
-//        Intent startIntent = new Intent(getApplicationContext(), ViewCategoryActivity.class);
-//        startIntent.putExtra(CATEGORY_NAME, testCategory);
-//        startActivity(startIntent);
-//    }
