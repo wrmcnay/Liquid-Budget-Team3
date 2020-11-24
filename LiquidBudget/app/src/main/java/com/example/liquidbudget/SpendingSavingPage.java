@@ -1,6 +1,8 @@
 package com.example.liquidbudget;
 
 import com.anychart.chart.common.dataentry.ValueDataEntry;
+import com.example.liquidbudget.data.entities.Income;
+import com.example.liquidbudget.data.viewmodels.IncomeViewModel;
 import com.example.liquidbudget.ui.main.AppBaseActivity;
 
 import android.graphics.Color;
@@ -21,6 +23,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.core.content.ContextCompat;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
+
 import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Description;
@@ -46,6 +51,8 @@ import java.util.List;
 
 public class SpendingSavingPage extends AppBaseActivity implements OnChartValueSelectedListener {
 
+    private IncomeViewModel incomeViewModel;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,11 +72,15 @@ public class SpendingSavingPage extends AppBaseActivity implements OnChartValueS
         // setting the data values
         ArrayList<PieEntry> entries = new ArrayList<>();
 
-        entries.add(new PieEntry((float) 389.82, "Amount Saved"));
+        populateData(entries);
+
+        /*entries.add(new PieEntry((float) 389.82, "Amount Saved"));
         entries.add(new PieEntry((float) 168.54, "Groceries"));
         entries.add(new PieEntry((float) 112.92, "Utilities"));
         entries.add(new PieEntry((float) 204.35, "Food & Drink"));
         entries.add(new PieEntry((float) 156.23, "Other"));
+        */
+
 
         PieDataSet dataSet = new PieDataSet(entries, "");
 
@@ -83,7 +94,7 @@ public class SpendingSavingPage extends AppBaseActivity implements OnChartValueS
 
         ArrayList<Integer> colors = new ArrayList<>();
 
-        for (int c : ColorTemplate.VORDIPLOM_COLORS)
+        /*for (int c : ColorTemplate.VORDIPLOM_COLORS)
             colors.add(c);
 
         for (int c : ColorTemplate.LIBERTY_COLORS)
@@ -100,6 +111,8 @@ public class SpendingSavingPage extends AppBaseActivity implements OnChartValueS
 
         colors.add(ColorTemplate.getHoloBlue());
         dataSet.setColors(colors);
+        */
+
 
         PieData pieData = new PieData(dataSet);
         pieData.setValueFormatter(new DefaultAxisValueFormatter(2));
@@ -187,5 +200,24 @@ public class SpendingSavingPage extends AppBaseActivity implements OnChartValueS
 
     }
 
+    private void populateData(ArrayList<PieEntry> entries) {
 
+        incomeViewModel = new ViewModelProvider(this).get(IncomeViewModel.class);
+        incomeViewModel.getAllIncomes().observe(this, new Observer<List<Income>>() {
+            @Override
+            public void onChanged(List<Income> incomesList) {
+                entries.clear();
+                double am;
+                String name;
+                for(Income inc: incomesList) {
+                    am = inc.getAmount();
+                    name = inc.getIncomeName();
+                    entries.add(new PieEntry((float) am, name));
+                }
+            }
+        });
+    }
 }
+
+
+

@@ -15,11 +15,13 @@ public class IncomeRepository {
 
     private IncomeDAO incomeDAO;
     private LiveData<List<Income>> allIncomes;
+    private LiveData<List<Double>> amountByIncID;
 
     public IncomeRepository(Application application) {
         IncomeDatabase database = IncomeDatabase.getInstance(application);
         incomeDAO = database.incomeDAO();
         allIncomes = incomeDAO.getAllIncomes();
+
     }
 
     public void insert(final Income income) {
@@ -48,5 +50,12 @@ public class IncomeRepository {
 
     public LiveData<List<Income>> getAllIncomes() {
         return allIncomes;
+    }
+
+    public LiveData<List<Double>> getAmountByIncID(int incID) {
+        IncomeDatabase.databaseWriteExecutor.execute(() -> {
+            amountByIncID = incomeDAO.getAmountByIncID(incID);
+        });
+        return amountByIncID;
     }
 }
