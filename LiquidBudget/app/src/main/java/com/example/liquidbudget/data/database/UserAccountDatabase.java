@@ -22,7 +22,7 @@ public abstract class UserAccountDatabase extends RoomDatabase {
 
     public abstract UserAccountDAO userAccountDAO();
 
-    public static volatile UserAccountDatabase mInstance;
+    public static UserAccountDatabase mInstance;
     private static final int NUMBER_OF_THREADS = 4;
     public static final ExecutorService databaseWriteExecutor = Executors.newFixedThreadPool(NUMBER_OF_THREADS);
 

@@ -1,4 +1,4 @@
-package com.example.liquidbudget.data.Database;
+package com.example.liquidbudget.data.database;
 
 import android.content.Context;
 
@@ -29,7 +29,7 @@ public abstract class ExpenseDatabase extends RoomDatabase {
 
     public static final ExecutorService databaseWriteExecutor = Executors.newFixedThreadPool(NUMBER_OF_THREADS);
 
-    public static ExpenseDatabase getInstance(Context context) {
+    public static synchronized ExpenseDatabase getInstance(Context context) {
         if (eInstance == null) {
             synchronized (ExpenseDatabase.class) {
                 if (eInstance == null) {
