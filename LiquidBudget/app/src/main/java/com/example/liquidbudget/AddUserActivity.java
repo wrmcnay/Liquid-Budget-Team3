@@ -17,7 +17,6 @@ public class AddUserActivity extends AppCompatActivity {
 
     public static final String EXTRA_USERNAME = "com.example.liquidbudget.EXTRA_USERNAME";
     public static final String EXTRA_EMAIL = "com.example.liquidbudget.EXTRA_EMAIL";
-    public static final String EXTRA_UID = "com.example.liquidbudget.EXTRA_UID";
     public static final String EXTRA_NAME = "com.example.liquidbudget.EXTRA_NAME";
 
     private EditText UsernameEditText;
@@ -33,7 +32,6 @@ public class AddUserActivity extends AppCompatActivity {
 
         UsernameEditText = findViewById(R.id.username_edit_text);
         EmailEditText = findViewById(R.id.email_edit_text);
-        UIDEditText = findViewById(R.id.UID_edit_text);
         NameEditText = findViewById(R.id.name_edit_text);
 
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close);
@@ -44,16 +42,14 @@ public class AddUserActivity extends AppCompatActivity {
         String username = UsernameEditText.getText().toString();
         String email = EmailEditText.getText().toString();
         String name = NameEditText.getText().toString();
-        int UID = Integer.parseInt(UIDEditText.getText().toString());
 
-        if(username.trim().isEmpty() || email.trim().isEmpty() || UID == 0){
-            Toast.makeText(this, "Please insert a username, email, and userID", Toast.LENGTH_SHORT).show();
+        if(username.trim().isEmpty() || email.trim().isEmpty() || name.trim().isEmpty()){
+            Toast.makeText(this, "Please insert a username, email, and name", Toast.LENGTH_SHORT).show();
             return;
         }
         Intent data = new Intent();
         data.putExtra(EXTRA_USERNAME, username);
         data.putExtra(EXTRA_EMAIL, email);
-        data.putExtra(EXTRA_UID, UID);
         data.putExtra(EXTRA_NAME, name);
 
         setResult(RESULT_OK, data);

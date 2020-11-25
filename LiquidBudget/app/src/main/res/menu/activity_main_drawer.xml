@@ -34,9 +34,4 @@
         android:icon="@drawable/ic_menu_settings"
         android:title="@string/settings"/>
 
-    <item
-        android:id="@+id/nav_users"
-        android:icon="@drawable/ic_add"
-        android:title="Users"/>
-
 </menu>

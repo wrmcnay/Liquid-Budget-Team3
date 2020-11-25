@@ -63,10 +63,8 @@ public class UserDisplayActivity extends AppBaseActivity {
             String username = data.getStringExtra(AddUserActivity.EXTRA_USERNAME);
             String email = data.getStringExtra(AddUserActivity.EXTRA_EMAIL);
             String name = data.getStringExtra(AddUserActivity.EXTRA_NAME);
-            int UID = data.getIntExtra(AddUserActivity.EXTRA_UID, 1);
 
             UserAccount user = new UserAccount(username, name, email);
-            user.setUserID(UID);
             userAccountViewModel.insert(user);
             Toast.makeText(this,"User Added!", Toast.LENGTH_SHORT).show();
         } else {

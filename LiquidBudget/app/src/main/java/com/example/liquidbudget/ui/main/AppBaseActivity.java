@@ -134,12 +134,6 @@ public abstract class AppBaseActivity extends AppCompatActivity implements MenuI
                 if(!this.getClass().getSimpleName().equals("MainActivity"))
                     finish();
                 break;
-            case R.id.nav_users:
-                Intent usersIntent = new Intent(this, UserDisplayActivity.class);
-                startActivity(usersIntent);
-                if(!this.getClass().getSimpleName().equals("MainActivity"))
-                    finish();
-                break;
             case R.id.nav_incExp:
                 Intent addIncExpIntent = new Intent(this, AddExpenseActivity.class);
                 startActivity(addIncExpIntent);
