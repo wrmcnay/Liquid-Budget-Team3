@@ -5,7 +5,7 @@ import android.app.Application;
 import androidx.lifecycle.LiveData;
 
 import com.example.liquidbudget.data.dao.ExpenseDAO;
-import com.example.liquidbudget.data.Database.ExpenseDatabase;
+import com.example.liquidbudget.data.database.ExpenseDatabase;
 import com.example.liquidbudget.data.entities.Expense;
 
 import java.util.List;
