@@ -35,7 +35,7 @@ public class AddIncomeActivity extends AppBaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_income);
 
-        editIncID = findViewById(R.id.inc_id_edit_text);
+        //editIncID = findViewById(R.id.inc_id_edit_text);
         editIncName = findViewById(R.id.inc_name_edit_text);
         editCatName = findViewById(R.id.cat_name_edit_text);
         editDoubleAmount = findViewById(R.id.amount_text_edit);
@@ -45,18 +45,19 @@ public class AddIncomeActivity extends AppBaseActivity {
     }
 
     private void saveInc() {
-        int IncID = Integer.parseInt(editIncID.getText().toString());
+        //int IncID = Integer.parseInt(editIncID.getText().toString());
         String name = editIncName.getText().toString();
         String categoryName = editCatName.getText().toString();
         double amount = Double.parseDouble(editDoubleAmount.getText().toString());
 
-        if(IncID==0 || name.trim().isEmpty() || categoryName.trim().isEmpty() || amount==0.0) {
+        //if(IncID==0 || name.trim().isEmpty() || categoryName.trim().isEmpty() || amount==0.0) {
+        if(name.trim().isEmpty() || categoryName.trim().isEmpty() || amount==0.0) {
             Toast.makeText(this, "PLease insert an Income Id, name, category name, and amount", Toast.LENGTH_SHORT).show();
             return;
         }
 
         Intent d = new Intent();
-        d.putExtra(EXTRA_INC_ID, IncID);
+        //d.putExtra(EXTRA_INC_ID, IncID);
         d.putExtra(EXTRA_INC_NAME, name);
         d.putExtra(EXTRA_CAT_NAME, categoryName);
         d.putExtra(EXTRA_AMOUNT, amount);
