@@ -36,7 +36,7 @@ public class IncomeRepository {
         });
     }
 
-    public void delete(Income income) {
+    public void deleteIncome(Income income) {
         IncomeDatabase.databaseWriteExecutor.execute(() -> {
             incomeDAO.deleteIncome(income);
         });

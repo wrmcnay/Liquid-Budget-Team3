@@ -45,6 +45,10 @@ public class IncomeAdapter  extends RecyclerView.Adapter<IncomeAdapter.IncomeHol
         notifyDataSetChanged();
     }
 
+    public Income getIncomeAtPosition(int position) {
+        return incomes.get(position);
+    }
+
     class IncomeHolder extends RecyclerView.ViewHolder {
         //private TextView textViewIncID;
         private TextView textViewIncName;
