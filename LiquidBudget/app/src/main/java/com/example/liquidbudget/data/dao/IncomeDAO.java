@@ -20,6 +20,9 @@ public interface IncomeDAO {
     @Query("SELECT * FROM incomes")
     LiveData<List<Income>> getAllIncomes();
 
+    @Query("SELECT amount FROM incomes WHERE incomeID=:incID")
+    LiveData<List<Double>> getAmountByIncID(int incID);
+
     @Insert
     void insertIncome(Income... incomes);
 
