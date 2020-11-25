@@ -32,6 +32,10 @@ public class IncomeViewModel extends AndroidViewModel {
     public void deleteIncome(Income income) {
         mRepository.deleteIncome(income);
     }
+
+    public void updateIncome(Income income) {
+        mRepository.update(income);
+    }
 }
 
 

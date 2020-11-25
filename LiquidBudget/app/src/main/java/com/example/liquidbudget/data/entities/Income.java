@@ -50,6 +50,14 @@ public class Income {
     }
 
     @Ignore
+    public Income(int incomeID, String incomeName, String categoryName, double amount) {
+        this.incomeID = incomeID;
+        this.incomeName = incomeName;
+        this.categoryName = categoryName;
+        this.amount = amount;
+    }
+
+    @Ignore
     public Income(int incomeID, int categoryID, String incomeName, String categoryName, double amount, boolean recurring, int numberOf, int period, boolean stable, String date, int userID) {
         this.incomeID = incomeID;
         this.categoryID = categoryID;

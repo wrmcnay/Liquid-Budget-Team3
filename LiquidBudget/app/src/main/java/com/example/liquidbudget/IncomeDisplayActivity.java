@@ -23,7 +23,13 @@ import java.util.List;
 public class IncomeDisplayActivity extends AppBaseActivity {
 
     private static final int MY_REQUEST_CODE = 1;
+    private static final int UPDATE_INCOME_ACTIVITY_REQUEST_CODE = 2;
     private IncomeViewModel incomeViewModel;
+
+    public static final String EXTRA_DATA_UPDATE_NAME = "extra_income_name_to_update";
+    public static final String EXTRA_DATA_UPDATE_CATEGORY = "extra_income_category_to_update";
+    public static final String EXTRA_DATA_UPDATE_AMOUNT = "extra_income_amount_to_update";
+    public static final String EXTRA_DATA_UPDATE_ID = "extra_data_id";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,25 +85,53 @@ public class IncomeDisplayActivity extends AppBaseActivity {
                 });
 
         helper.attachToRecyclerView(recyclerView);
+
+        adapter.setOnItemClickListener(new IncomeAdapter.ClickListener() {
+            @Override
+            public void onItemClick(View v, int position) {
+                Income income = adapter.getIncomeAtPosition(position);
+                launchUpdateIncomeActivity(income);
+            }
+        });
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK && requestCode == MY_REQUEST_CODE) {
-            //int incID = data.getIntExtra(AddIncomeActivity.EXTRA_INC_ID, 1);
             String incomeName = data.getStringExtra(AddIncomeActivity.EXTRA_INC_NAME);
             String categoryName = data.getStringExtra(AddIncomeActivity.EXTRA_CAT_NAME);
             double amount = data.getDoubleExtra(AddIncomeActivity.EXTRA_AMOUNT, 0);
 
             Income income = new Income(incomeName, categoryName, amount);
-            //income.setIncomeID(incID);
             incomeViewModel.insert(income);
             Toast.makeText(this, "Income Added!", Toast.LENGTH_SHORT).show();
            }
+        else if(resultCode == RESULT_OK && requestCode == UPDATE_INCOME_ACTIVITY_REQUEST_CODE) {
+            String updateName = data.getStringExtra(AddIncomeActivity.EXTRA_INC_NAME);
+            String updateCategory = data.getStringExtra(AddIncomeActivity.EXTRA_CAT_NAME);
+            double updateAmount = data.getDoubleExtra(AddIncomeActivity.EXTRA_AMOUNT, 0);
+            int id = data.getIntExtra(AddIncomeActivity.EXTRA_UPDATE_ID, -1);
+
+            if(id != -1) {
+                incomeViewModel.updateIncome(new Income(id, updateName, updateCategory, updateAmount));
+            }
+            else {
+                Toast.makeText(this, "Income not able to update", Toast.LENGTH_SHORT).show();
+            }
+        }
         else {
             Toast.makeText(this, "Income not saved", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    public void launchUpdateIncomeActivity(Income income) {
+        Intent intent = new Intent(this, AddIncomeActivity.class);
+        intent.putExtra(EXTRA_DATA_UPDATE_NAME, income.getIncomeName());
+        intent.putExtra(EXTRA_DATA_UPDATE_CATEGORY, income.getCategoryName());
+        intent.putExtra(EXTRA_DATA_UPDATE_AMOUNT, income.getAmount());
+        intent.putExtra(EXTRA_DATA_UPDATE_ID, income.getIncomeID());
+        startActivityForResult(intent, UPDATE_INCOME_ACTIVITY_REQUEST_CODE);
     }
 }
 

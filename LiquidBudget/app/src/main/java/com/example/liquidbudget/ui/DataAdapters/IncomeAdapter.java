@@ -17,6 +17,7 @@ import java.util.List;
 public class IncomeAdapter  extends RecyclerView.Adapter<IncomeAdapter.IncomeHolder> {
 
     private List<Income> incomes = new ArrayList<>();
+    private static ClickListener clickListener;
 
     @NonNull
     @Override
@@ -29,7 +30,6 @@ public class IncomeAdapter  extends RecyclerView.Adapter<IncomeAdapter.IncomeHol
     @Override
     public void onBindViewHolder(@NonNull IncomeHolder holder, int position) {
         Income currentIncome = incomes.get(position);
-        //holder.textViewIncID.setText(String.valueOf(currentIncome.getIncomeID()));
         holder.textViewIncName.setText(currentIncome.getIncomeName());
         holder.textViewCatName.setText(currentIncome.getCategoryName());
         holder.textViewAmount.setText(String.valueOf(currentIncome.getAmount()));
@@ -50,17 +50,30 @@ public class IncomeAdapter  extends RecyclerView.Adapter<IncomeAdapter.IncomeHol
     }
 
     class IncomeHolder extends RecyclerView.ViewHolder {
-        //private TextView textViewIncID;
         private TextView textViewIncName;
         private TextView textViewCatName;
         private TextView textViewAmount;
 
         public IncomeHolder(View itemView) {
             super(itemView);
-            //textViewIncID = itemView.findViewById(R.id.text_view_incid);
             textViewIncName = itemView.findViewById(R.id.text_view_incname);
             textViewCatName = itemView.findViewById(R.id.text_view_catname);
             textViewAmount = itemView.findViewById(R.id.text_view_amount);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    clickListener.onItemClick(view, getAdapterPosition());
+                }
+            });
         }
+    }
+
+    public void setOnItemClickListener(ClickListener clickListener) {
+        IncomeAdapter.clickListener = clickListener;
+    }
+
+    public interface ClickListener {
+        void onItemClick(View v, int position);
     }
 }

@@ -14,13 +14,6 @@
         android:hint="Income Name"
         android:inputType="text"/>
 
-    <!--<EditText
-        android:id="@+id/inc_id_edit_text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Income ID"
-        android:inputType="text"/>-->
-
     <EditText
         android:id="@+id/cat_name_edit_text"
         android:layout_width="match_parent"
@@ -28,13 +21,18 @@
         android:hint="Category"
         android:inputType="text"/>
 
-
     <EditText
         android:id="@+id/amount_text_edit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Amount"
         android:inputType="numberDecimal"/>
+
+    <Button
+        android:id="@+id/button_save"
+        android:layout_width="wrap_content"
+        android:layout_height="36dp"
+        android:text="Update" />
 
 
 </LinearLayout>
