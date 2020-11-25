@@ -9,6 +9,7 @@ import com.example.liquidbudget.data.entities.UserAccount;
 import com.example.liquidbudget.data.repositories.UserAccountRepository;
 
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 public class UserAccountViewModel extends AndroidViewModel {
 
@@ -25,5 +26,9 @@ public class UserAccountViewModel extends AndroidViewModel {
 
     public void insert(UserAccount userAccount){
         mRepository.insert(userAccount);
+    }
+
+    public Boolean getUserByGoogleId(String gid) throws ExecutionException, InterruptedException {
+        return mRepository.getUserByGoogleId(gid);
     }
 }

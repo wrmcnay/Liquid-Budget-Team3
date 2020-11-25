@@ -10,10 +10,7 @@ public class UserAccount {
     @NonNull
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "userID")
-    private int userID;
-
-    @ColumnInfo(name = "userName")
-    private String userName;
+    private long userID;
 
     @ColumnInfo(name = "name")
     private String name;
@@ -21,26 +18,21 @@ public class UserAccount {
     @ColumnInfo(name = "email")
     private String email;
 
-    public UserAccount(String userName, String name, String email) {
-        this.userName = userName;
+    @ColumnInfo(name="googleId")
+    public String googleId;
+
+    public UserAccount(String name, String email, String googleId) {
         this.name = name;
         this.email = email;
+        this.googleId = googleId;
     }
 
-    public int getUserID() {
+    public long getUserID() {
         return userID;
     }
 
-    public void setUserID(int userID) {
+    public void setUserID(long userID) {
         this.userID = userID;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
     }
 
     public String getName() {
@@ -58,6 +50,10 @@ public class UserAccount {
     public void setEmail(String email) {
         this.email = email;
     }
+
+    public String getGoogleId() { return googleId; }
+
+    public void setGoogleId(String gId) { this.googleId = gId; }
 
     @Override
     public String toString() {

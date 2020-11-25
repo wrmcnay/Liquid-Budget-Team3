@@ -14,8 +14,11 @@ import java.util.List;
 @Dao
 public interface UserAccountDAO {
 
-    @Query("SELECT * FROM users WHERE userID=:uid")
-    LiveData<UserAccount> getUserByID(int uid);
+    @Query("SELECT * FROM users WHERE googleId == :gid")
+    LiveData<UserAccount> getUserByGoogleId(String gid);
+
+    @Query("SELECT EXISTS (SELECT 1 FROM users WHERE googleId = :gid)")
+    Boolean userExistsByGId(String gid);
 
     @Query("SELECT * FROM users")
     LiveData<List<UserAccount>> getAllUsers();

@@ -31,7 +31,6 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserHolder> {
         UserAccount currentUser = users.get(position);
         holder.textViewUID.setText(String.valueOf(currentUser.getUserID()));
         holder.textViewEmail.setText(currentUser.getEmail());
-        holder.textViewUsername.setText(currentUser.getUserName());
     }
 
     @Override

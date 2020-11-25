@@ -9,6 +9,11 @@ import com.example.liquidbudget.data.dao.UserAccountDAO;
 import com.example.liquidbudget.data.database.UserAccountDatabase;
 
 import java.util.List;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 public class UserAccountRepository {
     private UserAccountDAO userAccountDAO;
@@ -46,5 +51,16 @@ public class UserAccountRepository {
 
     public LiveData<List<UserAccount>> getAllUsers(){
         return allUsers;
+    }
+
+    public Boolean getUserByGoogleId(String gid) throws ExecutionException, InterruptedException {
+        Callable<Boolean> callable = new Callable<Boolean>(){
+            @Override
+            public Boolean call() throws Exception {
+                return userAccountDAO.userExistsByGId(gid);
+            }
+        };
+        Future<Boolean> future = Executors.newSingleThreadExecutor().submit(callable);
+        return future.get();
     }
 }

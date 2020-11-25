@@ -6,9 +6,17 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 
+import com.example.liquidbudget.budget.Budget;
+import com.example.liquidbudget.data.entities.UserAccount;
+import com.example.liquidbudget.data.viewmodels.UserAccountViewModel;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -22,6 +30,7 @@ public class WelcomeActivity extends AppCompatActivity {
     SignInButton signInButton;
     GoogleSignInClient mGoogleSignInClient;
     private static final int RC_SIGN_IN = 1;
+    Boolean newUserTest;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,9 +65,20 @@ public class WelcomeActivity extends AppCompatActivity {
             findViewById(R.id.sign_in_button).setOnClickListener(this::launchSignIn);
         } else {
             signInButton.setVisibility(View.INVISIBLE);
-          //  Intent intent = new Intent(this, MainActivity.class);
-            Intent intent = new Intent(this, SpendingSavingPage.class);
-            startActivity(intent);
+            UserAccountViewModel userAccountViewModel = new ViewModelProvider(this).get(UserAccountViewModel.class);
+            try {
+                if (!userAccountViewModel.getUserByGoogleId(account.getId())){
+                    UserAccount newUser = new UserAccount(account.getDisplayName(), account.getEmail(), account.getId());
+                    userAccountViewModel.insert(newUser);
+                    Intent intent = new Intent(this, Budget.class);
+                    startActivity(intent);
+                } else {
+                    Intent intent = new Intent(this, SpendingSavingPage.class);
+                    startActivity(intent);
+                }
+            } catch (Exception e) {
+                Log.e("ERROR", e.getMessage());
+            }
         }
 }
 
@@ -91,4 +111,6 @@ public class WelcomeActivity extends AppCompatActivity {
             updateUI(null);
         }
     }
+
+
 }
