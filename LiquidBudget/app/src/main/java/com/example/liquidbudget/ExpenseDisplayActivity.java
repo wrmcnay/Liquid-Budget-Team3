@@ -66,15 +66,21 @@ public class ExpenseDisplayActivity extends AppBaseActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK && requestCode == MY_REQUEST_CODE) {
-            int expID = data.getIntExtra(AddExpenseActivity.EXTRA_EXP_ID, 1);
-            String expenseName = data.getStringExtra(AddExpenseActivity.EXTRA_EXP_NAME);
-            String categoryName = data.getStringExtra(AddExpenseActivity.EXTRA_CAT_NAME);
-            double amount = data.getDoubleExtra(AddExpenseActivity.EXTRA_AMOUNT, 0);
-
-            Expense expense = new Expense(expenseName, categoryName, amount);
-            expense.setExpenseID(expID);
-            expenseViewModel.insert(expense);
-            Toast.makeText(this, "Expense Added!", Toast.LENGTH_SHORT).show();
+            int expID;
+            String expenseName, categoryName;
+            double amount;
+            if(data != null) {
+                expID = data.getIntExtra(AddExpenseActivity.EXTRA_EXP_ID, 1);
+                expenseName = data.getStringExtra(AddExpenseActivity.EXTRA_EXP_NAME);
+                categoryName = data.getStringExtra(AddExpenseActivity.EXTRA_CAT_NAME);
+                amount = data.getDoubleExtra(AddExpenseActivity.EXTRA_AMOUNT, 0);
+                Expense expense = new Expense(expenseName, categoryName, amount);
+                expense.setExpenseID(expID);
+                expenseViewModel.insert(expense);
+                Toast.makeText(this, "Expense Added!", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(this, "Error. Expense not saved", Toast.LENGTH_SHORT).show();
+            }
         }
         else {
             Toast.makeText(this, "Expense not saved", Toast.LENGTH_SHORT).show();
