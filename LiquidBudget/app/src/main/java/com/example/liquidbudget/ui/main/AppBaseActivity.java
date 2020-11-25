@@ -119,31 +119,31 @@ public abstract class AppBaseActivity extends AppCompatActivity implements MenuI
                 //Intent budgetIntent = new Intent(this, SpendingSavingPage.class);
                 Intent budgetIntent = new Intent(this, Budget.class);
                 startActivity(budgetIntent);
-                if(!this.getClass().getSimpleName().equals("MainActivity"))
+                if(!(this instanceof MainActivity))
                     finish();
                 break;
             case R.id.nav_category:
                 Intent catIntent = new Intent(this, CategoryActivity.class);
                 startActivity(catIntent);
-                if(!this.getClass().getSimpleName().equals("MainActivity"))
+                if(!(this instanceof MainActivity))
                     finish();
                 break;
             case R.id.nav_settings:
                 Intent settingIntent = new Intent(this, SettingsActivity.class);
                 startActivity(settingIntent);
-                if(!this.getClass().getSimpleName().equals("MainActivity"))
+                if(!(this instanceof MainActivity))
                     finish();
                 break;
             case R.id.nav_incExp:
                 Intent addIncExpIntent = new Intent(this, AddExpenseActivity.class);
                 startActivity(addIncExpIntent);
-                if(!this.getClass().getSimpleName().equals("MainActivity"))
+                if(!(this instanceof MainActivity))
                     finish();
                 break;
             case R.id.nav_incomes:
                 Intent incomesIntent = new Intent(this, IncomeDisplayActivity.class);
                 startActivity(incomesIntent);
-                if(!this.getClass().getSimpleName().equals("MainActivity"))
+                if(!(this instanceof MainActivity))
                     finish();
                 break;
         }
