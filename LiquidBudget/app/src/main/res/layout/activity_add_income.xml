@@ -21,6 +21,11 @@
         android:hint="Category"
         android:inputType="text"/>
 
+    <Spinner
+        android:id="@+id/category_spinner"
+        android:layout_width="match_parent"
+        android:layout_height="45dp" />
+
     <EditText
         android:id="@+id/amount_text_edit"
         android:layout_width="match_parent"

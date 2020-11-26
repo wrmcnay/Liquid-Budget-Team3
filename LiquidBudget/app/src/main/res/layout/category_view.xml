@@ -24,7 +24,7 @@
         android:layout_height="25dp"
         android:layout_marginTop="32dp"
         android:text="Amount this Month"
-        app:layout_constraintEnd_toStartOf="@+id/button"
+        app:layout_constraintEnd_toStartOf="@+id/deleteCategory"
         app:layout_constraintHorizontal_bias="0.206"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/category_display" />
@@ -49,13 +49,16 @@
         app:layout_constraintTop_toBottomOf="@+id/progressBar" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/deleteCategory"
         android:layout_width="112dp"
         android:layout_height="41dp"
-        android:layout_marginEnd="32dp"
-        android:text="Set Limit"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:text="delete"
         app:layout_constraintEnd_toEndOf="parent"
-        tools:layout_editor_absoluteY="73dp" />
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/category_display"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/imageView2"

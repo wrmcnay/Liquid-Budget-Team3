@@ -6,18 +6,25 @@ import android.text.InputFilter;
 import android.text.Spanned;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 
+import com.example.liquidbudget.data.database.CategoryDatabase;
+import com.example.liquidbudget.data.datasource.CategoryDataSource;
+import com.example.liquidbudget.data.repositories.CategoryRepository;
 import com.example.liquidbudget.ui.main.AppBaseActivity;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static com.example.liquidbudget.IncomeDisplayActivity.EXTRA_DATA_UPDATE_NAME;
-import static com.example.liquidbudget.IncomeDisplayActivity.EXTRA_DATA_UPDATE_CATEGORY;
 import static com.example.liquidbudget.IncomeDisplayActivity.EXTRA_DATA_UPDATE_AMOUNT;
+import static com.example.liquidbudget.IncomeDisplayActivity.EXTRA_DATA_UPDATE_CATEGORY;
 import static com.example.liquidbudget.IncomeDisplayActivity.EXTRA_DATA_UPDATE_ID;
+import static com.example.liquidbudget.IncomeDisplayActivity.EXTRA_DATA_UPDATE_NAME;
 
 
 public class AddIncomeActivity extends AppBaseActivity {
@@ -31,6 +38,13 @@ public class AddIncomeActivity extends AppBaseActivity {
     private EditText editIncName;
     private EditText editCatName;
     private EditText editDoubleAmount;
+
+    private CategoryRepository categoryRepository;
+    private Spinner category_spinner;
+
+    private Iterable<List<String>> categoryIterable;
+    private ArrayList<String> categoryTemp;
+    private String[] categories = {"Test1","Test2"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,9 +113,21 @@ public class AddIncomeActivity extends AppBaseActivity {
             }
         });
 
+        CategoryDatabase categoryDatabase = CategoryDatabase.getInstance(this);
+        categoryRepository = CategoryRepository.getInstance(CategoryDataSource.getInstance(categoryDatabase.categoryDAO()));
+
+        categoryIterable = categoryRepository.getAllCategoryNames().blockingIterable();
+
+        Spinner categorySpinner = (Spinner) findViewById(R.id.category_spinner);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(AddIncomeActivity.this,
+                android.R.layout.simple_spinner_item, categories);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        categorySpinner.setAdapter(adapter);
+
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close);
         setTitle("Add Income");
     }
+
 }
 
 class DecimalDigitsInputFilter implements InputFilter {

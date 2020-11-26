@@ -28,6 +28,10 @@ public class CategoryDataSource implements CategoryDataSourceInterface{
         return categoryDAO.getCategoryById(catID);
     }
 
+    public Flowable<Category> getCategoryByName(String catName) {
+        return categoryDAO.getCategoryByName(catName);
+    }
+
     @Override
     public Flowable<List<Category>> getAllCategories() {
         return categoryDAO.getAllCategories();
@@ -56,5 +60,10 @@ public class CategoryDataSource implements CategoryDataSourceInterface{
     @Override
     public void deleteAllCategories() {
         categoryDAO.deleteAllCategories();
+    }
+
+    @Override
+    public void deleteCategoryByName(String catName) {
+        categoryDAO.deleteCategoryByName(catName);
     }
 }

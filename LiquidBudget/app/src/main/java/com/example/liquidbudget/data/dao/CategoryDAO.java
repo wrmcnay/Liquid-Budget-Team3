@@ -18,6 +18,9 @@ public interface CategoryDAO {
     @Query("SELECT * FROM categories WHERE categoryID=:catID")
     Flowable<Category> getCategoryById(int catID);
 
+    @Query("SELECT * FROM categories WHERE categoryName=:catName LIMIT 1")
+    Flowable<Category> getCategoryByName(String catName);
+
     @Query("SELECT * FROM categories")
     Flowable<List<Category>> getAllCategories();
 
@@ -35,4 +38,7 @@ public interface CategoryDAO {
 
     @Query("DELETE FROM categories")
     void deleteAllCategories();
+
+    @Query("DELETE FROM categories WHERE categoryName=:catName")
+    void deleteCategoryByName(String catName);
 }

@@ -29,6 +29,10 @@ public class CategoryRepository implements CategoryDataSourceInterface {
         return mLocalDataSource.getCategoryById(catID);
     }
 
+    public Flowable<Category> getCategoryByName(String catName) {
+        return mLocalDataSource.getCategoryByName(catName);
+    }
+
     @Override
     public Flowable<List<Category>> getAllCategories() {
         return mLocalDataSource.getAllCategories();
@@ -57,5 +61,10 @@ public class CategoryRepository implements CategoryDataSourceInterface {
     @Override
     public void deleteAllCategories() {
         mLocalDataSource.deleteAllCategories();
+    }
+
+    @Override
+    public void deleteCategoryByName(String catName) {
+        mLocalDataSource.deleteCategoryByName(catName);
     }
 }

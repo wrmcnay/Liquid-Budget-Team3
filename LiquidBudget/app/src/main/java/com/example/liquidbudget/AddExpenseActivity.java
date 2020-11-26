@@ -5,14 +5,19 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
+import com.example.liquidbudget.data.database.CategoryDatabase;
+import com.example.liquidbudget.data.datasource.CategoryDataSource;
+import com.example.liquidbudget.data.repositories.CategoryRepository;
 import com.example.liquidbudget.ui.main.AppBaseActivity;
+
+import java.util.List;
 
 public class AddExpenseActivity extends AppBaseActivity {
 
@@ -27,6 +32,12 @@ public class AddExpenseActivity extends AppBaseActivity {
     private EditText editCatName;
     private EditText editDoubleAmount;
 
+    private CategoryRepository categoryRepository;
+    private Spinner category_spinner;
+
+    private Iterable<List<String>> categoryIterable;
+    private String[] categories = {"Test1","Test2"};
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.expense_income_add);
@@ -39,17 +50,15 @@ public class AddExpenseActivity extends AppBaseActivity {
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close);
         setTitle("Add Expense");
 
+        CategoryDatabase categoryDatabase = CategoryDatabase.getInstance(this);
+        categoryRepository = CategoryRepository.getInstance(CategoryDataSource.getInstance(categoryDatabase.categoryDAO()));
 
-//        Button createIncExp = (Button)findViewById(R.id.buttonSubmit);
-//        createIncExp.setOnClickListener(new View.OnClickListener(){
-//        @Override
-//        public void onClick(View view){
-//            Intent expDisplayIntent = new Intent(AddExpenseActivity.this, ExpenseDisplayActivity.class);
-//            startActivity(expDisplayIntent);
-//            finish();
-//            return;
-//        }
-//    });
+        categoryIterable = categoryRepository.getAllCategoryNames().blockingIterable();
+
+
+        Spinner categorySpinner = (Spinner) findViewById(R.id.category_spinner);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(AddExpenseActivity.this,
+                android.R.layout.simple_spinner_item, categories);
 
     }
 
