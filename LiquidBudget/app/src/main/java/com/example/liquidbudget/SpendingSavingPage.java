@@ -42,7 +42,6 @@ public class SpendingSavingPage extends AppBaseActivity implements OnChartValueS
     PieDataSet dataSet;
     ArrayList<Integer> colors;
     PieData pieData;
-    long sum;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,19 +58,18 @@ public class SpendingSavingPage extends AppBaseActivity implements OnChartValueS
         chart = findViewById(R.id.pie_chart);
 
         populateData();
-
         formatChart();
 
-        chart.setOnChartValueSelectedListener((OnChartValueSelectedListener) this);
+        chart.setOnChartValueSelectedListener(this);
         chart.invalidate();
 
-        generateCenterSpannableText();
+        chart.setCenterText(generateCenterSpannableText());
     }
 
     private SpannableString generateCenterSpannableText() {
-        SpannableString s = new SpannableString("TOTAL SPENT\n" + sum);
-        s.setSpan(new RelativeSizeSpan(2f), 11, s.length(), 0);
-        s.setSpan(new StyleSpan(Typeface.BOLD), 11, s.length(), 0);
+        SpannableString s = new SpannableString("INCOMES");
+        s.setSpan(new RelativeSizeSpan(1.75f), 0, s.length(), 0);
+        s.setSpan(new StyleSpan(Typeface.BOLD), 0, s.length(), 0);
         return s;
     }
 
@@ -90,7 +88,6 @@ public class SpendingSavingPage extends AppBaseActivity implements OnChartValueS
     }
 
     private void populateData() {
-        sum=0;
         entries = new ArrayList<>();
         incomeViewModel = new ViewModelProvider(this).get(IncomeViewModel.class);
         incomeViewModel.getAllIncomes().observe(this, new Observer<List<Income>>() {
@@ -102,7 +99,6 @@ public class SpendingSavingPage extends AppBaseActivity implements OnChartValueS
                 for (Income inc : incomesList) {
                     am = inc.getAmount();
                     name = inc.getIncomeName();
-                    sum = sum + (long)inc.getAmount();
                     entries.add(new PieEntry((float) am, name));
                 }
 
