@@ -34,6 +34,11 @@ public class CategoryDataSource implements CategoryDataSourceInterface{
     }
 
     @Override
+    public Flowable<List<String>> getAllCategoryNames() {
+        return categoryDAO.getAllCategoryNames();
+    }
+
+    @Override
     public void insertCategory(Category... categories) {
         categoryDAO.insertCategory(categories);
     }

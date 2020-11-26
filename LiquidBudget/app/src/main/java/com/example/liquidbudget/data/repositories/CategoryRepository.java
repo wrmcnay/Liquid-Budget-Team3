@@ -35,6 +35,11 @@ public class CategoryRepository implements CategoryDataSourceInterface {
     }
 
     @Override
+    public Flowable<List<String>> getAllCategoryNames() {
+        return mLocalDataSource.getAllCategoryNames();
+    }
+
+    @Override
     public void insertCategory(Category... categories) {
         mLocalDataSource.insertCategory(categories);
     }

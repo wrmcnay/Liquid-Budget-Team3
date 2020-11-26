@@ -8,7 +8,6 @@ import com.example.liquidbudget.data.dao.IncomeDAO;
 import com.example.liquidbudget.data.database.IncomeDatabase;
 import com.example.liquidbudget.data.entities.Income;
 
-
 import java.util.List;
 
 public class IncomeRepository {
@@ -58,4 +57,9 @@ public class IncomeRepository {
         });
         return amountByIncID;
     }
+
+    public LiveData<List<Income>> getIncomesByCategory(String catName) {
+        return incomeDAO.getIncomesByCategory(catName);
+    }
+
 }

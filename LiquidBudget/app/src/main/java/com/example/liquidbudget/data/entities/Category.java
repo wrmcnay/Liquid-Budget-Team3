@@ -57,6 +57,6 @@ public class Category {
 
     @Override
     public String toString() {
-        return new StringBuilder(categoryName).append("\n").append(categoryColor).toString();
+        return categoryName;
     }
 }

@@ -21,6 +21,9 @@ public interface CategoryDAO {
     @Query("SELECT * FROM categories")
     Flowable<List<Category>> getAllCategories();
 
+    @Query("SELECT categoryName FROM categories")
+    Flowable<List<String>> getAllCategoryNames();
+
     @Insert
     void insertCategory(Category... categories);
 

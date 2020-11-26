@@ -17,6 +17,7 @@ import com.example.liquidbudget.data.datasource.CategoryDataSource;
 import com.example.liquidbudget.data.entities.Category;
 import com.example.liquidbudget.data.repositories.CategoryRepository;
 import com.example.liquidbudget.ui.main.AppBaseActivity;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -92,7 +93,7 @@ public class CategoryActivity extends AppBaseActivity {
 
         // init view
         lstCategory = (ListView)findViewById(R.id.lstCategories);
-        goToAddCategory = (Button)findViewById(R.id.goToAddCategory);
+        FloatingActionButton goToAddCategory = findViewById(R.id.goToAddCategory);
 
         adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, categoryList);
         registerForContextMenu(lstCategory);

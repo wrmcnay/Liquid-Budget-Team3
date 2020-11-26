@@ -31,4 +31,7 @@ public interface ExpenseDAO {
 
     @Query("DELETE FROM expenses")
     void deleteAllExpenses();
+
+    @Query("SELECT * FROM expenses WHERE categoryName=:catName")
+    LiveData<List<Expense>> getExpensesByCategory(String catName);
 }

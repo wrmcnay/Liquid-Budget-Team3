@@ -23,6 +23,9 @@ public interface IncomeDAO {
     @Query("SELECT amount FROM incomes WHERE incomeID=:incID")
     LiveData<List<Double>> getAmountByIncID(int incID);
 
+    @Query("SELECT * from incomes WHERE categoryName=:catName")
+    LiveData<List<Income>> getIncomesByCategory(String catName);
+
     @Insert
     void insertIncome(Income... incomes);
 

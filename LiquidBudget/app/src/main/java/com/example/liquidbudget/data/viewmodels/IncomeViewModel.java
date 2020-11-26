@@ -25,6 +25,10 @@ public class IncomeViewModel extends AndroidViewModel {
         return mAllIncomes;
     }
 
+    public LiveData<List<Income>> getIncomesByCategory(String catName) {
+        return mRepository.getIncomesByCategory(catName);
+    }
+
     public void insert(Income income) {
         mRepository.insert(income);
     }

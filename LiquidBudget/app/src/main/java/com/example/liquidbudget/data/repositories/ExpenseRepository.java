@@ -45,6 +45,10 @@ public class ExpenseRepository {
         });
     }
 
+    public LiveData<List<Expense>> getExpensesByCategory(String catName) {
+            return expenseDAO.getExpensesByCategory(catName);
+    }
+
     public LiveData<List<Expense>> getAllExpenses() {
         return allExpenses;
     }
