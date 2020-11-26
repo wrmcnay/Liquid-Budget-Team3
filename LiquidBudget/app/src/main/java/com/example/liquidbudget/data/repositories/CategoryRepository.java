@@ -1,70 +1,59 @@
 package com.example.liquidbudget.data.repositories;
 
-import com.example.liquidbudget.data.datasource.CategoryDataSourceInterface;
+import android.app.Application;
+
+import androidx.lifecycle.LiveData;
+
+import com.example.liquidbudget.data.dao.CategoryDAO;
+import com.example.liquidbudget.data.database.CategoryDatabase;
 import com.example.liquidbudget.data.entities.Category;
 
 import java.util.List;
 
-import io.reactivex.Flowable;
+public class CategoryRepository{
 
-public class CategoryRepository implements CategoryDataSourceInterface {
+    private CategoryDAO categoryDAO;
+    private LiveData<List<Category>> allCategories;
 
-    private CategoryDataSourceInterface mLocalDataSource;
-
-    private static CategoryRepository mInstance;
-
-    public CategoryRepository(CategoryDataSourceInterface mLocalDataSource){
-        this.mLocalDataSource = mLocalDataSource;
+    public CategoryRepository(Application application) {
+        CategoryDatabase database = CategoryDatabase.getInstance(application);
+        categoryDAO = database.categoryDAO();
+        allCategories = categoryDAO.getAllCategories();
     }
 
-    public static CategoryRepository getInstance(CategoryDataSourceInterface mLocalDataSource){
-        if(mInstance == null){
-            mInstance = new CategoryRepository(mLocalDataSource);
-        }
-        return mInstance;
+    public LiveData<Category> getCategoryById(int catID) {
+        return categoryDAO.getCategoryById(catID);
     }
 
-    @Override
-    public Flowable<Category> getCategoryById(int catID) {
-        return mLocalDataSource.getCategoryById(catID);
+    public LiveData<List<Category>> getAllCategories() {
+        return categoryDAO.getAllCategories();
     }
 
-    public Flowable<Category> getCategoryByName(String catName) {
-        return mLocalDataSource.getCategoryByName(catName);
+    public LiveData<List<String>> getAllCategoryNames() {
+        return categoryDAO.getAllCategoryNames();
     }
 
-    @Override
-    public Flowable<List<Category>> getAllCategories() {
-        return mLocalDataSource.getAllCategories();
-    }
-
-    @Override
-    public Flowable<List<String>> getAllCategoryNames() {
-        return mLocalDataSource.getAllCategoryNames();
-    }
-
-    @Override
     public void insertCategory(Category... categories) {
-        mLocalDataSource.insertCategory(categories);
+        CategoryDatabase.databaseWriteExecutor.execute(() -> {
+            categoryDAO.insertCategory(categories);
+        });
     }
 
-    @Override
-    public void updateCategory(Category... categories) {
-        mLocalDataSource.updateCategory(categories);
+    public void updateCategory(Category category) {
+        CategoryDatabase.databaseWriteExecutor.execute(() -> {
+            categoryDAO.updateCategory(category);
+        });
     }
 
-    @Override
     public void deleteCategory(Category categories) {
-        mLocalDataSource.deleteCategory(categories);
+        CategoryDatabase.databaseWriteExecutor.execute(() -> {
+            categoryDAO.deleteCategory(categories);
+        });
     }
 
-    @Override
     public void deleteAllCategories() {
-        mLocalDataSource.deleteAllCategories();
-    }
-
-    @Override
-    public void deleteCategoryByName(String catName) {
-        mLocalDataSource.deleteCategoryByName(catName);
+        CategoryDatabase.databaseWriteExecutor.execute(() -> {
+            categoryDAO.deleteAllCategories();
+        });
     }
 }
