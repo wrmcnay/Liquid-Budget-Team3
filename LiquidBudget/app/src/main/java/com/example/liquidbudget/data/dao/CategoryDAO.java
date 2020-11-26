@@ -1,5 +1,6 @@
 package com.example.liquidbudget.data.dao;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
@@ -10,19 +11,17 @@ import com.example.liquidbudget.data.entities.Category;
 
 import java.util.List;
 
-import io.reactivex.Flowable;
-
 @Dao
 public interface CategoryDAO {
 
     @Query("SELECT * FROM categories WHERE categoryID=:catID")
-    Flowable<Category> getCategoryById(int catID);
+    LiveData<Category> getCategoryById(int catID);
 
     @Query("SELECT * FROM categories")
-    Flowable<List<Category>> getAllCategories();
+    LiveData<List<Category>> getAllCategories();
 
     @Query("SELECT categoryName FROM categories")
-    Flowable<List<String>> getAllCategoryNames();
+    LiveData<List<String>> getAllCategoryNames();
 
     @Insert
     void insertCategory(Category... categories);
