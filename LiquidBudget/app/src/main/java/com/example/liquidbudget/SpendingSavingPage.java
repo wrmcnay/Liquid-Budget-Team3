@@ -62,8 +62,6 @@ public class SpendingSavingPage extends AppBaseActivity implements OnChartValueS
 
         chart.setOnChartValueSelectedListener(this);
         chart.invalidate();
-
-        chart.setCenterText(generateCenterSpannableText());
     }
 
     private SpannableString generateCenterSpannableText() {
@@ -161,10 +159,10 @@ public class SpendingSavingPage extends AppBaseActivity implements OnChartValueS
         chart.setDrawHoleEnabled(true);
         chart.setHoleColor(Color.WHITE);
 
-        chart.setTransparentCircleColor(Color.WHITE);
+        chart.setTransparentCircleColor(Color.LTGRAY);
         chart.setTransparentCircleAlpha(110);
 
-        chart.setHoleRadius(38f);
+        chart.setHoleRadius(35f);
         chart.setTransparentCircleRadius(44f);
 
         chart.setDrawCenterText(true);
