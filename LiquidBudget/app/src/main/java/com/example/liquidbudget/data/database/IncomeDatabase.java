@@ -26,7 +26,7 @@ public abstract class IncomeDatabase extends RoomDatabase {
 
     public static final ExecutorService databaseWriteExecutor = Executors.newFixedThreadPool(NUMBER_OF_THREADS);
 
-    public static IncomeDatabase getInstance(Context context) {
+    public static synchronized IncomeDatabase getInstance(Context context) {
         if (mInstance == null) {
             synchronized (IncomeDatabase.class) {
                 if (mInstance == null) {
