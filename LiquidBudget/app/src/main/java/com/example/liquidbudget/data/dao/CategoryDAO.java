@@ -18,13 +18,13 @@ public interface CategoryDAO {
     LiveData<Category> getCategoryById(int catID);
 
     @Query("SELECT * FROM categories WHERE categoryName=:catName LIMIT 1")
-    Flowable<Category> getCategoryByName(String catName);
+    LiveData<Category> getCategoryByName(String catName);
 
     @Query("SELECT * FROM categories")
     LiveData<List<Category>> getAllCategories();
 
     @Query("SELECT categoryName FROM categories")
-    LiveData<List<String>> getAllCategoryNames();
+    List<String> getAllCategoryNames();
 
     @Insert
     void insertCategory(Category... categories);

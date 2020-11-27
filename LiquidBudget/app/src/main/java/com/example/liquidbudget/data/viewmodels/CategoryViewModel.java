@@ -9,6 +9,7 @@ import com.example.liquidbudget.data.entities.Category;
 import com.example.liquidbudget.data.repositories.CategoryRepository;
 
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 public class CategoryViewModel extends AndroidViewModel {
 
@@ -23,6 +24,10 @@ public class CategoryViewModel extends AndroidViewModel {
 
     public LiveData<List<Category>> getAllCategories() {
         return cAllCategories;
+    }
+
+    public List<String> getAllCategoryNames() throws ExecutionException, InterruptedException{
+        return cRepository.getAllCategoryNames();
     }
 
     public void insertCategory(Category category) {

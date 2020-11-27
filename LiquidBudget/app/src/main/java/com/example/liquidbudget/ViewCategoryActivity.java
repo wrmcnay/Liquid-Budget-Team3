@@ -9,8 +9,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.liquidbudget.data.database.CategoryDatabase;
-import com.example.liquidbudget.data.datasource.CategoryDataSource;
 import com.example.liquidbudget.data.entities.Expense;
 import com.example.liquidbudget.data.entities.Income;
 import com.example.liquidbudget.data.repositories.CategoryRepository;
@@ -42,10 +40,6 @@ public class ViewCategoryActivity extends AppCompatActivity {
         expenseList = expenseViewModel.getExpensesByCategorycatNam(categoryName);
         incomeList = incomeViewModel.getIncomesByCategory(categoryName);
 
-        CategoryDatabase categoryDatabase = CategoryDatabase.getInstance(this); // Create Database
-        categoryRepository = CategoryRepository.getInstance(CategoryDataSource.getInstance(categoryDatabase.categoryDAO()));
-
-
         deleteCategory.setOnClickListener(new View.OnClickListener(){
             private final static String REQUEST_COLOR = "";
             @Override
@@ -56,7 +50,6 @@ public class ViewCategoryActivity extends AppCompatActivity {
 //                while(categoryIterator.hasNext()){
 //                    categoryRepository.deleteCategory(categoryIterator.next());
 //                }
-                categoryRepository.deleteCategoryByName(categoryName);
                 finish();
             }
         });

@@ -2,6 +2,7 @@ package com.example.liquidbudget;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -11,10 +12,9 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.lifecycle.ViewModelProvider;
 
-import com.example.liquidbudget.data.database.CategoryDatabase;
-import com.example.liquidbudget.data.datasource.CategoryDataSource;
-import com.example.liquidbudget.data.repositories.CategoryRepository;
+import com.example.liquidbudget.data.viewmodels.CategoryViewModel;
 import com.example.liquidbudget.ui.main.AppBaseActivity;
 
 import java.util.List;
@@ -32,11 +32,10 @@ public class AddExpenseActivity extends AppBaseActivity {
     private EditText editCatName;
     private EditText editDoubleAmount;
 
-    private CategoryRepository categoryRepository;
-    private Spinner category_spinner;
+    private CategoryViewModel categoryViewModel;
 
     private Iterable<List<String>> categoryIterable;
-    private String[] categories = {"Test1","Test2"};
+    private String[] categories = {"default"};
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,15 +49,23 @@ public class AddExpenseActivity extends AppBaseActivity {
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close);
         setTitle("Add Expense");
 
-        CategoryDatabase categoryDatabase = CategoryDatabase.getInstance(this);
-        categoryRepository = CategoryRepository.getInstance(CategoryDataSource.getInstance(categoryDatabase.categoryDAO()));
+        categoryViewModel = new ViewModelProvider(this).get(CategoryViewModel.class);
+        try {
+            List<String> catList = categoryViewModel.getAllCategoryNames();
+            if (catList.size() > 0) {
+                categories = new String[catList.size()];
+                categories = catList.toArray(categories);
+            }
+        } catch(Exception e){
+            Log.e("ERROR", e.getMessage());
+        }
 
-        categoryIterable = categoryRepository.getAllCategoryNames().blockingIterable();
-
-
-        Spinner categorySpinner = (Spinner) findViewById(R.id.category_spinner);
+        Spinner categorySpinner = (Spinner) findViewById(R.id.category_spinner_expense);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(AddExpenseActivity.this,
                 android.R.layout.simple_spinner_item, categories);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        categorySpinner.setAdapter(adapter);
+
 
     }
 

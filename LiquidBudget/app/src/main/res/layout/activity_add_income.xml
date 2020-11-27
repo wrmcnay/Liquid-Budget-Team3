@@ -22,8 +22,8 @@
         android:inputType="text"/>
 
     <Spinner
-        android:id="@+id/category_spinner"
-        android:layout_width="match_parent"
+        android:id="@+id/category_spinner_income"
+        android:layout_width="208dp"
         android:layout_height="45dp" />
 
     <EditText

@@ -5,18 +5,18 @@ import android.os.Bundle;
 import android.text.InputFilter;
 import android.text.Spanned;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
-import com.example.liquidbudget.data.database.CategoryDatabase;
-import com.example.liquidbudget.data.datasource.CategoryDataSource;
-import com.example.liquidbudget.data.repositories.CategoryRepository;
+import androidx.lifecycle.ViewModelProvider;
+
+import com.example.liquidbudget.data.viewmodels.CategoryViewModel;
 import com.example.liquidbudget.ui.main.AppBaseActivity;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -39,12 +39,9 @@ public class AddIncomeActivity extends AppBaseActivity {
     private EditText editCatName;
     private EditText editDoubleAmount;
 
-    private CategoryRepository categoryRepository;
     private Spinner category_spinner;
-
-    private Iterable<List<String>> categoryIterable;
-    private ArrayList<String> categoryTemp;
-    private String[] categories = {"Test1","Test2"};
+    private CategoryViewModel categoryViewModel;
+    private String[] categories = {"default"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,6 +78,24 @@ public class AddIncomeActivity extends AppBaseActivity {
             }
         }
 
+        categoryViewModel = new ViewModelProvider(this).get(CategoryViewModel.class);
+        try {
+            List<String> catList = categoryViewModel.getAllCategoryNames();
+            if (catList.size() > 0) {
+                categories = new String[catList.size()];
+                categories = catList.toArray(categories);
+            }
+        } catch(Exception e){
+            Log.e("ERROR", e.getMessage());
+        }
+
+        Spinner categorySpinner = (Spinner) findViewById(R.id.category_spinner_income);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(AddIncomeActivity.this,
+                android.R.layout.simple_spinner_item, categories);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        categorySpinner.setAdapter(adapter);
+
+
         final Button button = findViewById(R.id.button_save);
 
         button.setOnClickListener(new View.OnClickListener() {
@@ -112,17 +127,6 @@ public class AddIncomeActivity extends AppBaseActivity {
                 finish();
             }
         });
-
-        CategoryDatabase categoryDatabase = CategoryDatabase.getInstance(this);
-        categoryRepository = CategoryRepository.getInstance(CategoryDataSource.getInstance(categoryDatabase.categoryDAO()));
-
-        categoryIterable = categoryRepository.getAllCategoryNames().blockingIterable();
-
-        Spinner categorySpinner = (Spinner) findViewById(R.id.category_spinner);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(AddIncomeActivity.this,
-                android.R.layout.simple_spinner_item, categories);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        categorySpinner.setAdapter(adapter);
 
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close);
         setTitle("Add Income");

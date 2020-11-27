@@ -9,6 +9,10 @@ import com.example.liquidbudget.data.database.CategoryDatabase;
 import com.example.liquidbudget.data.entities.Category;
 
 import java.util.List;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 public class CategoryRepository{
 
@@ -29,8 +33,17 @@ public class CategoryRepository{
         return categoryDAO.getAllCategories();
     }
 
-    public LiveData<List<String>> getAllCategoryNames() {
-        return categoryDAO.getAllCategoryNames();
+    public List<String> getAllCategoryNames() throws ExecutionException, InterruptedException{
+//        return categoryDAO.getAllCategoryNames();
+
+        Callable<List<String>> callable = new Callable<List<String>>(){
+            @Override
+            public List<String> call() throws Exception {
+                return categoryDAO.getAllCategoryNames();
+            }
+        };
+        Future<List<String>> future = Executors.newSingleThreadExecutor().submit(callable);
+        return future.get();
     }
 
     public void insertCategory(Category... categories) {
