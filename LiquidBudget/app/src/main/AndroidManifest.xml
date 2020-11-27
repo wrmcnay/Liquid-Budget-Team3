@@ -13,10 +13,7 @@
         android:theme="@style/AppTheme">
 
 
-        <activity
-            android:name=".ExpenseDisplayActivity"
-            android:label="@string/title_activity_expense_display">
-        </activity>
+        <activity android:name=".ExpenseDisplayActivity" />
         <activity android:name=".settings.InviteActivity" />
         <activity android:name=".settings.HelpActivity" />
         <activity android:name=".settings.BankingActivity" />

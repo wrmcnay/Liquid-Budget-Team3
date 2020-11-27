@@ -1,0 +1,6 @@
+
+\	java:S1078"BConstructor has 10 parameters, which is greater than 7 authorized.(ÔÄŠğûÿÿÿÿ
+z
+java:S26371"_"expenseID" is marked "androidx.annotation.NonNull" but is not initialized in this constructor.(¾µö¤ûÿÿÿÿ
+
+java:S26378"_"expenseID" is marked "androidx.annotation.NonNull" but is not initialized in this constructor.(ÔÄŠğûÿÿÿÿ8¨üõ‘à.

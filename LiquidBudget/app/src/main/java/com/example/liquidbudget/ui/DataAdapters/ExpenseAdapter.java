@@ -29,7 +29,6 @@ public class ExpenseAdapter extends RecyclerView.Adapter<ExpenseAdapter.ExpenseH
     @Override
     public void onBindViewHolder(@NonNull ExpenseAdapter.ExpenseHolder holder, int position) {
         Expense currentExpense = expenses.get(position);
-        holder.textViewExpID.setText(String.valueOf(currentExpense.getExpenseID()));
         holder.textViewExpName.setText(currentExpense.getExpenseName());
         holder.textViewCatName.setText(currentExpense.getCategoryName());
         holder.textViewAmount.setText(String.valueOf(currentExpense.getAmount()));
@@ -46,14 +45,12 @@ public class ExpenseAdapter extends RecyclerView.Adapter<ExpenseAdapter.ExpenseH
     }
 
     class ExpenseHolder extends RecyclerView.ViewHolder {
-        private TextView textViewExpID;
         private TextView textViewExpName;
         private TextView textViewCatName;
         private TextView textViewAmount;
 
         public ExpenseHolder(View itemView) {
             super(itemView);
-            textViewExpID = itemView.findViewById(R.id.text_view_expid);
             textViewExpName = itemView.findViewById(R.id.text_view_expname);
             textViewCatName = itemView.findViewById(R.id.text_view_catname);
             textViewAmount = itemView.findViewById(R.id.text_view_amount);

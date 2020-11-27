@@ -53,8 +53,7 @@ public class Expense {
     }
 
     @Ignore
-    public Expense(int expenseID, int categoryID, String expenseName, String categoryName, double amount, boolean recurringBool, int numberOf, int period, boolean stable, String date, int userID) {
-        this.expenseID = expenseID;
+    public Expense(int categoryID, String expenseName, String categoryName, double amount, boolean recurringBool, int numberOf, int period, boolean stable, String date, int userID) {
         this.categoryID = categoryID;
         this.expenseName = expenseName;
         this.categoryName = categoryName;

@@ -21,7 +21,7 @@ public abstract class IncomeDatabase extends RoomDatabase {
 
     public abstract IncomeDAO incomeDAO();
 
-    private static volatile IncomeDatabase mInstance;
+    private static IncomeDatabase mInstance;
     private static final int NUMBER_OF_THREADS = 4;
 
     public static final ExecutorService databaseWriteExecutor = Executors.newFixedThreadPool(NUMBER_OF_THREADS);

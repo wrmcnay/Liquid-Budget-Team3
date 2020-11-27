@@ -41,7 +41,6 @@ public class AddExpenseActivity extends AppBaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.expense_income_add);
 
-        editExpID = findViewById(R.id.expID);
         editExpName = findViewById(R.id.expName);
         editCatName = findViewById(R.id.category);
         editDoubleAmount = findViewById(R.id.doubleAmount);
@@ -70,18 +69,16 @@ public class AddExpenseActivity extends AppBaseActivity {
     }
 
     private void saveExp() {
-        int ExpID = Integer.parseInt(editExpID.getText().toString());
         String name = editExpName.getText().toString();
         String categoryName = editCatName.getText().toString();
         double amount = Double.parseDouble(editDoubleAmount.getText().toString());
 
-        if(ExpID==0 || name.trim().isEmpty() || categoryName.trim().isEmpty() || amount==0.0) {
+        if(name.trim().isEmpty() || categoryName.trim().isEmpty() || amount==0.0) {
             Toast.makeText(this, "PLease insert an Exp Id, name, category name, and amount", Toast.LENGTH_SHORT).show();
             return;
         }
 
         Intent d = new Intent();
-        d.putExtra(EXTRA_EXP_ID, ExpID);
         d.putExtra(EXTRA_EXP_NAME, name);
         d.putExtra(EXTRA_CAT_NAME, categoryName);
         d.putExtra(EXTRA_AMOUNT, amount);

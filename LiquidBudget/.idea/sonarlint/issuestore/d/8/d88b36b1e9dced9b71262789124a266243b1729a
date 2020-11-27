@@ -1,0 +1,14 @@
+
+Q	java:S110"=This class has 10 parents which is greater than 5 authorized.(¨ŒÜN
+`
+java:S1128"JRemove this unused import 'com.example.liquidbudget.data.entities.Income'.(… 
+C
+java:S1604&"(Make this anonymous inner class a lambda(Äáìºüÿÿÿÿ
+?
+java:S1659F"*Declare "categoryName" on a separate line.(í³Ïm
+P
+java:S1068"5Remove this unused "expenseRepository" private field.(èÛ³úüÿÿÿÿ
+>
+java:S16047"(Make this anonymous inner class a lambda(«é³™
+L
+java:S1481E"*Remove this unused "expID" local variable.(¤Óã©ûÿÿÿÿ8Ýºô‘à.

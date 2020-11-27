@@ -1,0 +1,6 @@
+
+R	java:S110"=This class has 10 parents which is greater than 5 authorized.(â¶‡Î
+[
+java:S1128"ERemove this unused import 'androidx.appcompat.app.AppCompatActivity'.(€¶£î
+V	java:S125"<This block of commented-out lines of code should be removed.(Ô¨ûúÿÿÿÿ
+Q	java:S125"<This block of commented-out lines of code should be removed.(§µ„ú

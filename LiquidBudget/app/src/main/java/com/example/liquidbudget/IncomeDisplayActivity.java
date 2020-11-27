@@ -98,16 +98,15 @@ public class IncomeDisplayActivity extends AppBaseActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == RESULT_OK && requestCode == MY_REQUEST_CODE) {
+        if (resultCode == RESULT_OK && requestCode == MY_REQUEST_CODE && data != null) {
             String incomeName = data.getStringExtra(AddIncomeActivity.EXTRA_INC_NAME);
             String categoryName = data.getStringExtra(AddIncomeActivity.EXTRA_CAT_NAME);
             double amount = data.getDoubleExtra(AddIncomeActivity.EXTRA_AMOUNT, 0);
-
             Income income = new Income(incomeName, categoryName, amount);
             incomeViewModel.insert(income);
             Toast.makeText(this, "Income Added!", Toast.LENGTH_SHORT).show();
            }
-        else if(resultCode == RESULT_OK && requestCode == UPDATE_INCOME_ACTIVITY_REQUEST_CODE) {
+        else if(resultCode == RESULT_OK && requestCode == UPDATE_INCOME_ACTIVITY_REQUEST_CODE && data != null) {
             String updateName = data.getStringExtra(AddIncomeActivity.EXTRA_INC_NAME);
             String updateCategory = data.getStringExtra(AddIncomeActivity.EXTRA_CAT_NAME);
             double updateAmount = data.getDoubleExtra(AddIncomeActivity.EXTRA_AMOUNT, 0);

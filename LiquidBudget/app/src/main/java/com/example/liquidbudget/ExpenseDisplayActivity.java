@@ -70,12 +70,10 @@ public class ExpenseDisplayActivity extends AppBaseActivity {
             String expenseName, categoryName;
             double amount;
             if(data != null) {
-                expID = data.getIntExtra(AddExpenseActivity.EXTRA_EXP_ID, 1);
                 expenseName = data.getStringExtra(AddExpenseActivity.EXTRA_EXP_NAME);
                 categoryName = data.getStringExtra(AddExpenseActivity.EXTRA_CAT_NAME);
                 amount = data.getDoubleExtra(AddExpenseActivity.EXTRA_AMOUNT, 0);
                 Expense expense = new Expense(expenseName, categoryName, amount);
-                expense.setExpenseID(expID);
                 expenseViewModel.insert(expense);
                 Toast.makeText(this, "Expense Added!", Toast.LENGTH_SHORT).show();
             } else {

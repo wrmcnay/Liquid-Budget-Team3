@@ -30,18 +30,10 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
         <TextView
-            android:id="@+id/text_view_expid"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/text_view_expname"
-            android:inputType="number"
-            android:text="ID" />
-
-        <TextView
             android:id="@+id/text_view_catname"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/text_view_expid"
+            android:layout_below="@+id/text_view_expname"
             android:text="Category" />
 
     </RelativeLayout>

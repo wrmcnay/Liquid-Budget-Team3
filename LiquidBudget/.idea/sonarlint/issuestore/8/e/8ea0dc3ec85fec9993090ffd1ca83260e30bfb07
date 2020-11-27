@@ -1,0 +1,9 @@
+
+Q	java:S125*"<This block of commented-out lines of code should be removed.(çƒù
+O
+java:S1068"-Remove this unused "editExpID" private field.(¦áíğûÿÿÿÿ8“²ñ‘à.
+U
+java:S1161":Add the "@Override" annotation above this method signature(¨Œşÿÿÿÿ
+f
+java:S1301S"KReplace this "switch" statement by "if" statements to increase readability.(øå´¡ÿÿÿÿÿ
+R	java:S110"=This class has 10 parents which is greater than 5 authorized.(È§
