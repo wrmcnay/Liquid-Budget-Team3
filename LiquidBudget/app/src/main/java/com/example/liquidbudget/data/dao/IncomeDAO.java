@@ -26,6 +26,9 @@ public interface IncomeDAO {
     @Query("SELECT * from incomes WHERE categoryName=:catName")
     LiveData<List<Income>> getIncomesByCategory(String catName);
 
+    @Query("SELECT CAST(SUM(amount) as DOUBLE) FROM incomes WHERE categoryName=:catName")
+    Double getSumByCategory(String catName);
+
     @Insert
     void insertIncome(Income... incomes);
 

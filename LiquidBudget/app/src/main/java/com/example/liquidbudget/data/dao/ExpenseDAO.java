@@ -34,4 +34,7 @@ public interface ExpenseDAO {
 
     @Query("SELECT * FROM expenses WHERE categoryName=:catName")
     LiveData<List<Expense>> getExpensesByCategory(String catName);
+
+    @Query("SELECT CAST(SUM(amount) as DOUBLE) FROM expenses WHERE categoryName=:catName")
+    Double getSumByCategory(String catName);
 }

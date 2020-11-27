@@ -34,8 +34,6 @@ public class CategoryRepository{
     }
 
     public List<String> getAllCategoryNames() throws ExecutionException, InterruptedException{
-//        return categoryDAO.getAllCategoryNames();
-
         Callable<List<String>> callable = new Callable<List<String>>(){
             @Override
             public List<String> call() throws Exception {

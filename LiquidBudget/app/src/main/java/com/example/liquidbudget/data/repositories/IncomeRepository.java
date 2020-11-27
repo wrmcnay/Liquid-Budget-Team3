@@ -15,6 +15,7 @@ public class IncomeRepository {
     private IncomeDAO incomeDAO;
     private LiveData<List<Income>> allIncomes;
     private LiveData<List<Double>> amountByIncID;
+    private Double sumByCategory;
 
     public IncomeRepository(Application application) {
         IncomeDatabase database = IncomeDatabase.getInstance(application);
@@ -56,6 +57,13 @@ public class IncomeRepository {
             amountByIncID = incomeDAO.getAmountByIncID(incID);
         });
         return amountByIncID;
+    }
+
+    public Double getSumByCategory(String catName) {
+        IncomeDatabase.databaseWriteExecutor.execute(() -> {
+            sumByCategory = incomeDAO.getSumByCategory(catName);
+        });
+        return sumByCategory;
     }
 
     public LiveData<List<Income>> getIncomesByCategory(String catName) {

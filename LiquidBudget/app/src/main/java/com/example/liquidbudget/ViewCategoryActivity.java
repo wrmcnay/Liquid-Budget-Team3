@@ -1,7 +1,6 @@
 package com.example.liquidbudget;
 
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -11,7 +10,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.liquidbudget.data.entities.Expense;
 import com.example.liquidbudget.data.entities.Income;
-import com.example.liquidbudget.data.repositories.CategoryRepository;
+import com.example.liquidbudget.data.viewmodels.CategoryViewModel;
 import com.example.liquidbudget.data.viewmodels.ExpenseViewModel;
 import com.example.liquidbudget.data.viewmodels.IncomeViewModel;
 
@@ -21,9 +20,10 @@ public class ViewCategoryActivity extends AppCompatActivity {
 
     private ExpenseViewModel expenseViewModel;
     private IncomeViewModel incomeViewModel;
+    private CategoryViewModel categoryViewModel;
+
     private LiveData<List<Expense>> expenseList;
     private LiveData<List<Income>> incomeList;
-    private CategoryRepository categoryRepository;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,23 +36,32 @@ public class ViewCategoryActivity extends AppCompatActivity {
 
         expenseViewModel = new ViewModelProvider(this).get(ExpenseViewModel.class);
         incomeViewModel = new ViewModelProvider(this).get(IncomeViewModel.class);
+        categoryViewModel = new ViewModelProvider(this).get(CategoryViewModel.class);
 
-        expenseList = expenseViewModel.getExpensesByCategorycatNam(categoryName);
-        incomeList = incomeViewModel.getIncomesByCategory(categoryName);
+//        expenseList = expenseViewModel.getExpensesByCategory(categoryName);
+//        incomeList = incomeViewModel.getIncomesByCategory(categoryName);
 
-        deleteCategory.setOnClickListener(new View.OnClickListener(){
-            private final static String REQUEST_COLOR = "";
-            @Override
-            public void onClick(View view){
+        Double incomeDouble = incomeViewModel.getSumByCategory(categoryName);
+        TextView incomeTotal = (TextView) findViewById(R.id.income_total);
+        incomeTotal.setText(""+incomeDouble);
+
+        Double expenseDouble = expenseViewModel.getSumByCategory(categoryName);
+        TextView expenseTotal = (TextView) findViewById(R.id.expense_total);
+        expenseTotal.setText(""+expenseDouble);
+
+//        deleteCategory.setOnClickListener(new View.OnClickListener(){
+//            private final static String REQUEST_COLOR = "";
+//            @Override
+//            public void onClick(View view){
 //                Flowable<Category> categoryFlowable = categoryRepository.getCategoryByName(categoryName);
 //                Iterable<Category> categoryIteratable = categoryFlowable.blockingIterable();
 //                Iterator<Category> categoryIterator = categoryIteratable.iterator();
 //                while(categoryIterator.hasNext()){
 //                    categoryRepository.deleteCategory(categoryIterator.next());
 //                }
-                finish();
-            }
-        });
+//                finish();
+//            }
+//        });
 
     }
 }

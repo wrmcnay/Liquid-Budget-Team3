@@ -29,8 +29,12 @@ public class ExpenseViewModel extends AndroidViewModel {
         eRepository.insert(expense);
     }
 
-    public LiveData<List<Expense>> getExpensesByCategorycatNam(String catName) {
+    public LiveData<List<Expense>> getExpensesByCategory(String catName) {
         return eRepository.getExpensesByCategory(catName);
+    }
+
+    public Double getSumByCategory(String catName){
+        return eRepository.getSumByCategory(catName);
     }
 
 }

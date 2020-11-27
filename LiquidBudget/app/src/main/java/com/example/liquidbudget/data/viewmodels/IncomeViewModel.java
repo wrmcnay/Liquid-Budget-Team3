@@ -29,6 +29,10 @@ public class IncomeViewModel extends AndroidViewModel {
         return mRepository.getIncomesByCategory(catName);
     }
 
+    public Double getSumByCategory(String catName){
+        return mRepository.getSumByCategory(catName);
+    }
+
     public void insert(Income income) {
         mRepository.insert(income);
     }

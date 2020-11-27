@@ -14,6 +14,7 @@ public class ExpenseRepository {
 
     private ExpenseDAO expenseDAO;
     private LiveData<List<Expense>> allExpenses;
+    private Double sumByCategory;
 
     public ExpenseRepository(Application application) {
         ExpenseDatabase database = ExpenseDatabase.getInstance(application);
@@ -51,5 +52,12 @@ public class ExpenseRepository {
 
     public LiveData<List<Expense>> getAllExpenses() {
         return allExpenses;
+    }
+
+    public Double getSumByCategory(String catName){
+        ExpenseDatabase.databaseWriteExecutor.execute(() -> {
+            sumByCategory = expenseDAO.getSumByCategory(catName);
+        });
+        return sumByCategory;
     }
 }
