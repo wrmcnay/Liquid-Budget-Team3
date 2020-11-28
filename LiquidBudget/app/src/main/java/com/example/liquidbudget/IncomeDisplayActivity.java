@@ -26,10 +26,10 @@ public class IncomeDisplayActivity extends AppBaseActivity {
     private static final int UPDATE_INCOME_ACTIVITY_REQUEST_CODE = 2;
     private IncomeViewModel incomeViewModel;
 
-    public static final String EXTRA_DATA_UPDATE_NAME = "extra_income_name_to_update";
-    public static final String EXTRA_DATA_UPDATE_CATEGORY = "extra_income_category_to_update";
-    public static final String EXTRA_DATA_UPDATE_AMOUNT = "extra_income_amount_to_update";
-    public static final String EXTRA_DATA_UPDATE_ID = "extra_data_id";
+    public static final String EXTRA_DATA_UPDATE_INCOME_NAME = "extra_income_name_to_update";
+    public static final String EXTRA_DATA_UPDATE_INCOME_CATEGORY = "extra_income_category_to_update";
+    public static final String EXTRA_DATA_UPDATE_INCOME_AMOUNT = "extra_income_amount_to_update";
+    public static final String EXTRA_DATA_UPDATE_INCOME_ID = "extra_data_id";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -110,7 +110,7 @@ public class IncomeDisplayActivity extends AppBaseActivity {
             String updateName = data.getStringExtra(AddIncomeActivity.EXTRA_INC_NAME);
             String updateCategory = data.getStringExtra(AddIncomeActivity.EXTRA_CAT_NAME);
             double updateAmount = data.getDoubleExtra(AddIncomeActivity.EXTRA_AMOUNT, 0);
-            int id = data.getIntExtra(AddIncomeActivity.EXTRA_UPDATE_ID, -1);
+            int id = data.getIntExtra(AddIncomeActivity.EXTRA_UPDATE_INCOME_ID, -1);
 
             if(id != -1) {
                 incomeViewModel.updateIncome(new Income(id, updateName, updateCategory, updateAmount));
@@ -126,10 +126,10 @@ public class IncomeDisplayActivity extends AppBaseActivity {
 
     public void launchUpdateIncomeActivity(Income income) {
         Intent intent = new Intent(this, AddIncomeActivity.class);
-        intent.putExtra(EXTRA_DATA_UPDATE_NAME, income.getIncomeName());
-        intent.putExtra(EXTRA_DATA_UPDATE_CATEGORY, income.getCategoryName());
-        intent.putExtra(EXTRA_DATA_UPDATE_AMOUNT, income.getAmount());
-        intent.putExtra(EXTRA_DATA_UPDATE_ID, income.getIncomeID());
+        intent.putExtra(EXTRA_DATA_UPDATE_INCOME_NAME, income.getIncomeName());
+        intent.putExtra(EXTRA_DATA_UPDATE_INCOME_CATEGORY, income.getCategoryName());
+        intent.putExtra(EXTRA_DATA_UPDATE_INCOME_AMOUNT, income.getAmount());
+        intent.putExtra(EXTRA_DATA_UPDATE_INCOME_ID, income.getIncomeID());
         startActivityForResult(intent, UPDATE_INCOME_ACTIVITY_REQUEST_CODE);
     }
 }
