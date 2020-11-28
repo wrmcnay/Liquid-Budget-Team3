@@ -1,25 +1,40 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorAccentLight"
     android:orientation="vertical"
     android:padding="16dp"
+    android:gravity="center"
     tools:context=".AddExpenseActivity">
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/assistant_semibold"
+        android:text="@string/addingExpense"
+        android:textColor="@color/colorAccentDark"
+        android:textSize="24sp" />
+
+    <TextView
+        android:id="@+id/textView12"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
     <EditText
         android:id="@+id/expName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Expense Name"
+        android:hint="@string/ExpenseName"
         android:inputType="text" />
 
     <EditText
         android:id="@+id/category"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Category"
-        android:inputType="textPersonName"/>
+        android:hint="@string/category"
+        android:inputType="textPersonName" />
 
     <Spinner
         android:id="@+id/category_spinner_expense"
@@ -31,14 +46,17 @@
         android:id="@+id/doubleAmount"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Amount of Transaction"
+        android:hint="@string/amount"
         android:inputType="numberDecimal" />
 
     <Button
         android:id="@+id/button_save"
         android:layout_width="wrap_content"
         android:layout_height="36dp"
-        android:text="Update" />
+        android:backgroundTint="@color/colorAccentDark"
+        android:fontFamily="@font/assistant_semibold"
+        android:text="@string/finish"
+        android:textColor="@color/white" />
 
 
 </LinearLayout>

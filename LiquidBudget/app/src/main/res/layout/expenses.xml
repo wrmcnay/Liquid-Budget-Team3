@@ -11,11 +11,12 @@
         android:layout_height="match_parent"
         android:padding="8dp">
 
-        <TextView
+        <EditText
             android:id="@+id/text_view_amount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
+            android:fontFamily="@font/assistant"
             android:inputType="numberDecimal"
             android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
@@ -26,6 +27,7 @@
             android:layout_alignParentStart="true"
             android:layout_toStartOf="@+id/text_view_amount"
             android:ellipsize="end"
+            android:fontFamily="@font/assistant_semibold"
             android:text="Name"
             android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
@@ -34,6 +36,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/text_view_expname"
+            android:fontFamily="@font/assistant"
             android:text="Category" />
 
     </RelativeLayout>
