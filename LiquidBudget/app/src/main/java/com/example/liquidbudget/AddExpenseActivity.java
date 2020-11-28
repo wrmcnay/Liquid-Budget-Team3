@@ -79,6 +79,7 @@ public class AddExpenseActivity extends AppBaseActivity {
         categoryViewModel = new ViewModelProvider(this).get(CategoryViewModel.class);
         try {
             List<String> catList = categoryViewModel.getAllCategoryNames();
+            catList.add(0, "");
             if (catList.size() > 0) {
                 categories = new String[catList.size()];
                 categories = catList.toArray(categories);
@@ -92,6 +93,7 @@ public class AddExpenseActivity extends AppBaseActivity {
                 android.R.layout.simple_spinner_item, categories);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         categorySpinner.setAdapter(adapter);
+        categorySpinner.setSelection(adapter.getPosition(editCatName.getText().toString()));
 
         categorySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
