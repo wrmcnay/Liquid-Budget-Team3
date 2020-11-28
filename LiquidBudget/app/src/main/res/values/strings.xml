@@ -27,7 +27,7 @@
     <string name="Account">Account:\nPrivacy, security, edit profile</string>
     <string name="Notifications">Notifications:\nCustomize and configure push notifications</string>
     <string name="Banking">Banking Information:\nAdd a card, link a bank account</string>
-    <string name="Help">Help:\nFAQ, contact us, send feedback</string>
+    <string name="Help">Help:\nFAQ, contact us</string>
     <string name="Invite">Invite a Friend:\nInvite others to setup an account</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -47,8 +47,8 @@
     <string name="categories">Categories</string>
     <string name="settings">Settings</string>
     <string name="home">Home</string>
-    <string name="Change_pwd">Change Password</string>
-    <string name="Change_email">Change Email</string>
+    <string name="Change_pwd">Configure Account Privacy</string>
+    <string name="Change_accountInfo">Edit Google Profile</string>
     <string name="Change_uid">Change Username</string>
     <string name="Enable_2FA">Enable Two-Factor Authentication</string>
     <string name="Link_Bank">Link a Bank Account</string>

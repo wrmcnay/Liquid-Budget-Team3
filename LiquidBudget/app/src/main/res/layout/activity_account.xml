@@ -16,25 +16,13 @@
     </androidx.appcompat.widget.Toolbar>
 
     <Button
-        android:id="@+id/changeUsername"
+        android:id="@+id/changeAccountInfo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:textAllCaps="false"
         android:background="@android:color/transparent"
-        android:text="@string/Change_uid"
-        android:textSize="18sp"
-        android:gravity="left|center_vertical"
-        />
-
-    <Button
-        android:id="@+id/changeEmail"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:textAllCaps="false"
-        android:background="@android:color/transparent"
-        android:text="@string/Change_email"
+        android:text="@string/Change_accountInfo"
         android:textSize="18sp"
         android:gravity="left|center_vertical"
         />
@@ -47,18 +35,6 @@
         android:textAllCaps="false"
         android:background="@android:color/transparent"
         android:text="@string/Change_pwd"
-        android:textSize="18sp"
-        android:gravity="left|center_vertical"
-        />
-
-    <Button
-        android:id="@+id/enable2FA"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:textAllCaps="false"
-        android:background="@android:color/transparent"
-        android:text="@string/Enable_2FA"
         android:textSize="18sp"
         android:gravity="left|center_vertical"
         />

@@ -77,15 +77,6 @@ public class SettingsActivity extends AppBaseActivity {
             }
         });
 
-        Button goToInvite = (Button) findViewById(R.id.goToInvite);
-        goToInvite.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view){
-                Intent startIntent = new Intent(getApplicationContext(), InviteActivity.class);
-                startActivity(startIntent);
-            }
-        });
-
         Button signOutUser = (Button) findViewById(R.id.signOut);
         signOutUser.setOnClickListener(new View.OnClickListener(){
             @Override

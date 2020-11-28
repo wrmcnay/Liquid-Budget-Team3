@@ -121,21 +121,6 @@
                 />
 
             <Button
-                android:id="@+id/goToInvite"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:textAllCaps="false"
-                android:background="@android:color/transparent"
-                android:text="@string/Invite"
-                android:textSize="18sp"
-                android:gravity="left|center_vertical"
-                android:drawableLeft="@drawable/ic_baseline_group_add_24"
-                android:drawableTint="@color/colorPrimary"
-                android:drawablePadding="10dp"
-                />
-
-            <Button
                 android:id="@+id/signOut"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
