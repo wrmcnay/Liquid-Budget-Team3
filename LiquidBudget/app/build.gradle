@@ -9,6 +9,8 @@ sonarqube {
         property "sonar.projectKey", "wrmcnay_Liquid-Budget-Team3"
         property "sonar.organization", "wrmcnay"
         property "sonar.host.url", "https://sonarcloud.io"
+        property "sonar.projectName", "LiquidBudget"
+        property "sonar.projectVersion", "0.0.4"
     }
 }
 
