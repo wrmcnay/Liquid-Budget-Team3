@@ -51,7 +51,7 @@ public class AddExpenseActivity extends AppBaseActivity {
         editCatName = findViewById(R.id.category);
         editDoubleAmount = findViewById(R.id.doubleAmount);
 
-        editDoubleAmount.setFilters(new InputFilter[]{ new ExpenseDecimalDigitsInputFilter(9, 2)});
+        editDoubleAmount.setFilters(new InputFilter[]{ new DecimalDigitsInputFilter(9, 2)});
 
         final Bundle extras = getIntent().getExtras();
 
@@ -141,20 +141,6 @@ public class AddExpenseActivity extends AppBaseActivity {
 
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close);
         setTitle("Add Expense");
-    }
-}
-
-class ExpenseDecimalDigitsInputFilter implements InputFilter {
-    private Pattern mPattern;
-    ExpenseDecimalDigitsInputFilter(int digitsBeforeZero, int digitsAfterZero) {
-        mPattern = Pattern.compile("[0-9]{0," + (digitsBeforeZero - 1) + "}+((\\.[0-9]{0," + (digitsAfterZero - 1) + "})?)||(\\.)?");
-    }
-    @Override
-    public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {
-        Matcher matcher = mPattern.matcher(dest);
-        if (!matcher.matches())
-            return "";
-        return null;
     }
 }
 
