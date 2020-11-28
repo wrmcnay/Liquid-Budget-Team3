@@ -38,7 +38,7 @@ public class ExpenseRepository {
         });
     }
 
-    public void delete(Expense expense) {
+    public void deleteExpense(Expense expense) {
         ExpenseDatabase.databaseWriteExecutor.execute(() -> {
             expenseDAO.deleteExpense(expense);
         });

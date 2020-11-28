@@ -6,6 +6,7 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
 import com.example.liquidbudget.data.entities.Expense;
+import com.example.liquidbudget.data.entities.Income;
 import com.example.liquidbudget.data.repositories.ExpenseRepository;
 
 import java.util.List;
@@ -26,16 +27,22 @@ public class ExpenseViewModel extends AndroidViewModel {
         return eAllExpenses;
     }
 
-    public void insert(Expense expense) {
-        eRepository.insert(expense);
-    }
-
     public LiveData<List<Expense>> getExpensesByCategory(String catName) throws ExecutionException, InterruptedException{
         return eRepository.getExpensesByCategory(catName);
     }
 
     public Double getSumByCategory(String catName) throws ExecutionException, InterruptedException{
         return eRepository.getSumByCategory(catName);
+    }
+
+    public void insert(Expense expense) {
+        eRepository.insert(expense);
+    }
+
+    public void deleteExpense(Expense expense) { eRepository.deleteExpense(expense); }
+
+    public void updateExpense(Expense expense) {
+        eRepository.update(expense);
     }
 
 }

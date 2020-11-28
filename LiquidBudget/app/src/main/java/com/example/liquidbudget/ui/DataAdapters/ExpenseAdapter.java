@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.liquidbudget.R;
 import com.example.liquidbudget.data.entities.Expense;
+import com.example.liquidbudget.data.entities.Income;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +18,7 @@ import java.util.List;
 public class ExpenseAdapter extends RecyclerView.Adapter<ExpenseAdapter.ExpenseHolder>{
 
     private List<Expense> expenses = new ArrayList<>();
+    private static ClickListener clickListener;
 
     @NonNull
     @Override
@@ -44,6 +46,10 @@ public class ExpenseAdapter extends RecyclerView.Adapter<ExpenseAdapter.ExpenseH
         notifyDataSetChanged();
     }
 
+    public Expense getExpenseAtPosition(int position) {
+        return expenses.get(position);
+    }
+
     class ExpenseHolder extends RecyclerView.ViewHolder {
         private TextView textViewExpName;
         private TextView textViewCatName;
@@ -54,6 +60,21 @@ public class ExpenseAdapter extends RecyclerView.Adapter<ExpenseAdapter.ExpenseH
             textViewExpName = itemView.findViewById(R.id.text_view_expname);
             textViewCatName = itemView.findViewById(R.id.text_view_catname);
             textViewAmount = itemView.findViewById(R.id.text_view_amount);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    clickListener.onItemClick(view, getAdapterPosition());
+                }
+            });
         }
+    }
+
+    public void setOnItemClickListener(ExpenseAdapter.ClickListener clickListener) {
+        ExpenseAdapter.clickListener = clickListener;
+    }
+
+    public interface ClickListener {
+        void onItemClick(View v, int position);
     }
 }
