@@ -9,6 +9,7 @@ import com.example.liquidbudget.data.entities.Expense;
 import com.example.liquidbudget.data.repositories.ExpenseRepository;
 
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 public class ExpenseViewModel extends AndroidViewModel {
 
@@ -29,11 +30,11 @@ public class ExpenseViewModel extends AndroidViewModel {
         eRepository.insert(expense);
     }
 
-    public LiveData<List<Expense>> getExpensesByCategory(String catName) {
+    public LiveData<List<Expense>> getExpensesByCategory(String catName) throws ExecutionException, InterruptedException{
         return eRepository.getExpensesByCategory(catName);
     }
 
-    public Double getSumByCategory(String catName){
+    public Double getSumByCategory(String catName) throws ExecutionException, InterruptedException{
         return eRepository.getSumByCategory(catName);
     }
 

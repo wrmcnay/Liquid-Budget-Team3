@@ -9,6 +9,10 @@ import com.example.liquidbudget.data.database.IncomeDatabase;
 import com.example.liquidbudget.data.entities.Income;
 
 import java.util.List;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 public class IncomeRepository {
 
@@ -59,15 +63,26 @@ public class IncomeRepository {
         return amountByIncID;
     }
 
-    public Double getSumByCategory(String catName) {
-        IncomeDatabase.databaseWriteExecutor.execute(() -> {
-            sumByCategory = incomeDAO.getSumByCategory(catName);
-        });
-        return sumByCategory;
+    public Double getSumByCategory(String catName) throws ExecutionException, InterruptedException{
+        Callable<Double> callable = new Callable<Double>(){
+            @Override
+            public Double call() throws Exception{
+                return incomeDAO.getSumByCategory(catName);
+            }
+        };
+        Future<Double> future = Executors.newSingleThreadExecutor().submit(callable);
+        return future.get();
     }
 
-    public LiveData<List<Income>> getIncomesByCategory(String catName) {
-        return incomeDAO.getIncomesByCategory(catName);
+    public LiveData<List<Income>> getIncomesByCategory(String catName) throws ExecutionException, InterruptedException{
+        Callable<LiveData<List<Income>>> callable = new Callable<LiveData<List<Income>>>(){
+            @Override
+            public LiveData<List<Income>> call() throws Exception{
+                return incomeDAO.getIncomesByCategory(catName);
+            }
+        };
+        Future<LiveData<List<Income>>> future = Executors.newSingleThreadExecutor().submit(callable);
+        return future.get();
     }
 
 }

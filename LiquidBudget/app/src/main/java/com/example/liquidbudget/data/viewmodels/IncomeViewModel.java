@@ -9,6 +9,7 @@ import com.example.liquidbudget.data.entities.Income;
 import com.example.liquidbudget.data.repositories.IncomeRepository;
 
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 public class IncomeViewModel extends AndroidViewModel {
 
@@ -25,11 +26,11 @@ public class IncomeViewModel extends AndroidViewModel {
         return mAllIncomes;
     }
 
-    public LiveData<List<Income>> getIncomesByCategory(String catName) {
+    public LiveData<List<Income>> getIncomesByCategory(String catName) throws ExecutionException, InterruptedException{
         return mRepository.getIncomesByCategory(catName);
     }
 
-    public Double getSumByCategory(String catName){
+    public Double getSumByCategory(String catName) throws ExecutionException, InterruptedException{
         return mRepository.getSumByCategory(catName);
     }
 

@@ -9,6 +9,10 @@ import com.example.liquidbudget.data.database.ExpenseDatabase;
 import com.example.liquidbudget.data.entities.Expense;
 
 import java.util.List;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 public class ExpenseRepository {
 
@@ -46,18 +50,29 @@ public class ExpenseRepository {
         });
     }
 
-    public LiveData<List<Expense>> getExpensesByCategory(String catName) {
-            return expenseDAO.getExpensesByCategory(catName);
+    public LiveData<List<Expense>> getExpensesByCategory(String catName) throws ExecutionException, InterruptedException{
+        Callable<LiveData<List<Expense>>> callable = new Callable<LiveData<List<Expense>>>(){
+            @Override
+            public LiveData<List<Expense>> call() throws Exception{
+                return expenseDAO.getExpensesByCategory(catName);
+            }
+        };
+        Future<LiveData<List<Expense>>> future = Executors.newSingleThreadExecutor().submit(callable);
+        return future.get();
     }
 
     public LiveData<List<Expense>> getAllExpenses() {
         return allExpenses;
     }
 
-    public Double getSumByCategory(String catName){
-        ExpenseDatabase.databaseWriteExecutor.execute(() -> {
-            sumByCategory = expenseDAO.getSumByCategory(catName);
-        });
-        return sumByCategory;
+    public Double getSumByCategory(String catName) throws ExecutionException, InterruptedException{
+        Callable<Double> callable = new Callable<Double>(){
+            @Override
+            public Double call() throws Exception{
+                return expenseDAO.getSumByCategory(catName);
+            }
+        };
+        Future<Double> future = Executors.newSingleThreadExecutor().submit(callable);
+        return future.get();
     }
 }
