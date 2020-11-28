@@ -41,8 +41,13 @@
     <string name="share">Share</string>
     <string name="send">Send</string>
     <string name="hello">Hello world!</string>
-    <string name="menu">Menu</string>
-
+    <string name="addingIncome">"Let's add a new income:"</string>
+    <string name="addingExpense">"Let's add a new expense:"</string>
+    <string name="ExpenseName">Expense Name</string>
+    <string name="IncomeName">Income Name</string>
+    <string name="category">Category</string>
+    <string name="amount">Amount</string>
+    <string name="finish">Finish</string>
     <string name="budget">Budget</string>
     <string name="categories">Categories</string>
     <string name="settings">Settings</string>

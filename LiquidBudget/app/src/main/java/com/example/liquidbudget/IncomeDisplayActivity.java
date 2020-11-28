@@ -93,6 +93,9 @@ public class IncomeDisplayActivity extends AppBaseActivity {
                 launchUpdateIncomeActivity(income);
             }
         });
+
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close);
+        setTitle("Incomes");
     }
 
     @Override

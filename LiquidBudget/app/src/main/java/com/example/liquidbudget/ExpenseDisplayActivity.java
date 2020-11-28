@@ -93,6 +93,9 @@ public class ExpenseDisplayActivity extends AppBaseActivity {
                 launchUpdateIncomeActivity(expense);
             }
         });
+
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close);
+        setTitle("Expenses");
     }
 
     @Override

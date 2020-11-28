@@ -86,6 +86,10 @@
         <activity android:name=".IncomeDisplayActivity"
             android:launchMode="singleTop"/>
 
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
+
     </application>
 
 </manifest>

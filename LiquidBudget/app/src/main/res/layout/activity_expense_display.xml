@@ -4,20 +4,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimaryLight"
     tools:context=".ExpenseDisplayActivity">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/Expense_Recycler_View"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:listitem="@layout/user_account"/>
+        tools:listitem="@layout/user_account" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/addExpenseButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
+        android:layout_margin="32dp"
         android:src="@drawable/ic_add"
-        android:layout_margin="32dp"/>
+        app:backgroundTint="@color/colorAccent"
+        android:contentDescription="add" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
