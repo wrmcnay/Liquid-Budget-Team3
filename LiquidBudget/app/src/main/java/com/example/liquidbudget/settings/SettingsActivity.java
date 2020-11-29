@@ -18,6 +18,12 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 
+import zendesk.core.AnonymousIdentity;
+import zendesk.core.Identity;
+import zendesk.core.Zendesk;
+import zendesk.support.Support;
+import zendesk.support.guide.HelpCenterActivity;
+
 public class SettingsActivity extends AppBaseActivity {
     GoogleSignInClient mGoogleSignInClient;
 
@@ -40,6 +46,15 @@ public class SettingsActivity extends AppBaseActivity {
                 .requestEmail()
                 .build();
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+
+        Zendesk.INSTANCE.init(this, "https://liquidbudge.zendesk.com",
+                "50ab7f8eda98e07ab9e83c06d976bcd470ea5ab2128fcec6",
+                "mobile_sdk_client_91f28b51f26c0aac5e49");
+
+        Identity identity = new AnonymousIdentity();
+        Zendesk.INSTANCE.setIdentity(identity);
+
+        Support.INSTANCE.init(Zendesk.INSTANCE);
 
         Button goToAccount = (Button) findViewById(R.id.goToAccount);
         goToAccount.setOnClickListener(new View.OnClickListener(){
@@ -72,8 +87,8 @@ public class SettingsActivity extends AppBaseActivity {
         goToHelp.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-                Intent startIntent = new Intent(getApplicationContext(), HelpActivity.class);
-                startActivity(startIntent);
+                HelpCenterActivity.builder()
+                        .show(SettingsActivity.this);
             }
         });
 

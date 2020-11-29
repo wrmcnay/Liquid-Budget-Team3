@@ -27,7 +27,7 @@
     <string name="Account">Account:\nPrivacy, security, edit profile</string>
     <string name="Notifications">Notifications:\nCustomize and configure push notifications</string>
     <string name="Banking">Banking Information:\nAdd a card, link a bank account</string>
-    <string name="Help">Help:\nFAQ, contact us</string>
+    <string name="Help">Support:\nFAQ, contact us</string>
     <string name="Invite">Invite a Friend:\nInvite others to setup an account</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
