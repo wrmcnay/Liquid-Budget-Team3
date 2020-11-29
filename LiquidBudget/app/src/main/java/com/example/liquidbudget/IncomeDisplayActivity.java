@@ -18,6 +18,7 @@ import com.example.liquidbudget.ui.DataAdapters.IncomeAdapter;
 import com.example.liquidbudget.ui.main.AppBaseActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.util.Date;
 import java.util.List;
 
 public class IncomeDisplayActivity extends AppBaseActivity {
@@ -29,6 +30,7 @@ public class IncomeDisplayActivity extends AppBaseActivity {
     public static final String EXTRA_DATA_UPDATE_INCOME_NAME = "extra_income_name_to_update";
     public static final String EXTRA_DATA_UPDATE_INCOME_CATEGORY = "extra_income_category_to_update";
     public static final String EXTRA_DATA_UPDATE_INCOME_AMOUNT = "extra_income_amount_to_update";
+    public static final String EXTRA_DATA_UPDATE_INCOME_DATE = "extra_data_date";
     public static final String EXTRA_DATA_UPDATE_INCOME_ID = "extra_data_id";
 
     @Override
@@ -105,7 +107,9 @@ public class IncomeDisplayActivity extends AppBaseActivity {
             String incomeName = data.getStringExtra(AddIncomeActivity.EXTRA_INC_NAME);
             String categoryName = data.getStringExtra(AddIncomeActivity.EXTRA_CAT_NAME);
             double amount = data.getDoubleExtra(AddIncomeActivity.EXTRA_AMOUNT, 0);
-            Income income = new Income(incomeName, categoryName, amount);
+            long date = data.getLongExtra(AddIncomeActivity.EXTRA_DATE, 0);
+
+            Income income = new Income(incomeName, categoryName, amount, date);
             incomeViewModel.insert(income);
             Toast.makeText(this, "Income Added!", Toast.LENGTH_SHORT).show();
            }
@@ -113,10 +117,12 @@ public class IncomeDisplayActivity extends AppBaseActivity {
             String updateName = data.getStringExtra(AddIncomeActivity.EXTRA_INC_NAME);
             String updateCategory = data.getStringExtra(AddIncomeActivity.EXTRA_CAT_NAME);
             double updateAmount = data.getDoubleExtra(AddIncomeActivity.EXTRA_AMOUNT, 0);
+            long updateDate = data.getLongExtra(AddIncomeActivity.EXTRA_DATE, 0);
+
             int id = data.getIntExtra(AddIncomeActivity.EXTRA_UPDATE_INCOME_ID, -1);
 
             if(id != -1) {
-                incomeViewModel.updateIncome(new Income(id, updateName, updateCategory, updateAmount));
+                incomeViewModel.updateIncome(new Income(id, updateName, updateCategory, updateAmount, updateDate));
             }
             else {
                 Toast.makeText(this, "Income not able to update", Toast.LENGTH_SHORT).show();
@@ -132,6 +138,7 @@ public class IncomeDisplayActivity extends AppBaseActivity {
         intent.putExtra(EXTRA_DATA_UPDATE_INCOME_NAME, income.getIncomeName());
         intent.putExtra(EXTRA_DATA_UPDATE_INCOME_CATEGORY, income.getCategoryName());
         intent.putExtra(EXTRA_DATA_UPDATE_INCOME_AMOUNT, income.getAmount());
+        intent.putExtra(EXTRA_DATA_UPDATE_INCOME_DATE, income.getDate());
         intent.putExtra(EXTRA_DATA_UPDATE_INCOME_ID, income.getIncomeID());
         startActivityForResult(intent, UPDATE_INCOME_ACTIVITY_REQUEST_CODE);
     }

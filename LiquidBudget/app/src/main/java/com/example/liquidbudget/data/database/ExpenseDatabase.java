@@ -5,6 +5,7 @@ import android.content.Context;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
+import androidx.room.TypeConverters;
 
 import com.example.liquidbudget.data.dao.ExpenseDAO;
 import com.example.liquidbudget.data.database.IncomeDatabase;
@@ -15,7 +16,8 @@ import java.util.concurrent.Executors;
 
 import static com.example.liquidbudget.data.database.CategoryDatabase.DATABASE_VERSION;
 
-@Database(entities = Expense.class, version = DATABASE_VERSION, exportSchema = false)
+@Database(entities = Expense.class, version = 2, exportSchema = false)
+@TypeConverters({Converters.class})
 public abstract class ExpenseDatabase extends RoomDatabase {
 
     public static final int DATABASE_VERSION = 1;

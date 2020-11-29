@@ -6,6 +6,8 @@ import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 import androidx.room.ColumnInfo;
 
+import java.util.Date;
+
 @Entity(tableName = "expenses")
 public class Expense {
     @NonNull
@@ -40,7 +42,7 @@ public class Expense {
     private boolean stable;
 
     @ColumnInfo(name = "date")
-    private String date;
+    private Date date;
 
     @NonNull
     @ColumnInfo(name = "userID")
@@ -61,7 +63,7 @@ public class Expense {
     }
 
     @Ignore
-    public Expense(int categoryID, String expenseName, String categoryName, double amount, boolean recurringBool, int numberOf, int period, boolean stable, String date, int userID) {
+    public Expense(int categoryID, String expenseName, String categoryName, double amount, boolean recurringBool, int numberOf, int period, boolean stable, Date date, int userID) {
         this.categoryID = categoryID;
         this.expenseName = expenseName;
         this.categoryName = categoryName;
@@ -146,11 +148,11 @@ public class Expense {
         this.stable = stable;
     }
 
-    public String getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 

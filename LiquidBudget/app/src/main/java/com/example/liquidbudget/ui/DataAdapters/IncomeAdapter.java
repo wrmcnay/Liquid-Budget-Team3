@@ -1,8 +1,10 @@
 package com.example.liquidbudget.ui.DataAdapters;
 
+import android.app.DatePickerDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.DatePicker;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -12,6 +14,7 @@ import com.example.liquidbudget.R;
 import com.example.liquidbudget.data.entities.Income;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class IncomeAdapter  extends RecyclerView.Adapter<IncomeAdapter.IncomeHolder> {
@@ -33,6 +36,7 @@ public class IncomeAdapter  extends RecyclerView.Adapter<IncomeAdapter.IncomeHol
         holder.textViewIncName.setText(currentIncome.getIncomeName());
         holder.textViewCatName.setText(currentIncome.getCategoryName());
         holder.textViewAmount.setText(String.valueOf(currentIncome.getAmount()));
+        holder.textViewDate.setText(String.valueOf(currentIncome.getDate()));
     }
 
     @Override
@@ -53,12 +57,16 @@ public class IncomeAdapter  extends RecyclerView.Adapter<IncomeAdapter.IncomeHol
         private TextView textViewIncName;
         private TextView textViewCatName;
         private TextView textViewAmount;
+        private TextView textViewDate;
+
+        private DatePickerDialog.OnDateSetListener onDateSetListener;
 
         public IncomeHolder(View itemView) {
             super(itemView);
             textViewIncName = itemView.findViewById(R.id.text_view_incname);
             textViewCatName = itemView.findViewById(R.id.text_view_catname);
             textViewAmount = itemView.findViewById(R.id.text_view_amount);
+            textViewDate = itemView.findViewById(R.id.text_view_date);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

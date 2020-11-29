@@ -45,6 +45,13 @@
             android:layout_below="@+id/text_view_incname"
             android:text="Category" />
 
+        <TextView
+            android:id="@+id/text_view_date"
+            android:layout_width="96dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/text_view_catname"
+            android:text="Date" />
+
     </RelativeLayout>
 
 </androidx.cardview.widget.CardView>

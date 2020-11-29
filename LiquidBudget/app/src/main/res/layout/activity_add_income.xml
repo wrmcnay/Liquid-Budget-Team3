@@ -44,11 +44,19 @@
         android:layout_height="45dp" />
 
     <EditText
-        android:id="@+id/amount_text_edit"
+        android:id="@+id/amount_edit_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/amount"
         android:inputType="numberDecimal" />
+
+    <EditText
+        android:id="@+id/inc_date_edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:focusable="false"
+        android:hint="@string/date"/>
 
     <Button
         android:id="@+id/button_save"

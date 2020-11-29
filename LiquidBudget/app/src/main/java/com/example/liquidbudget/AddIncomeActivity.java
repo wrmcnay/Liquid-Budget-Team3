@@ -1,5 +1,7 @@
 package com.example.liquidbudget;
 
+import android.app.DatePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputFilter;
@@ -10,6 +12,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 
@@ -18,7 +21,11 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.liquidbudget.data.viewmodels.CategoryViewModel;
 import com.example.liquidbudget.ui.main.AppBaseActivity;
 
+import java.sql.Date;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -26,21 +33,26 @@ import static com.example.liquidbudget.IncomeDisplayActivity.EXTRA_DATA_UPDATE_I
 import static com.example.liquidbudget.IncomeDisplayActivity.EXTRA_DATA_UPDATE_INCOME_CATEGORY;
 import static com.example.liquidbudget.IncomeDisplayActivity.EXTRA_DATA_UPDATE_INCOME_ID;
 import static com.example.liquidbudget.IncomeDisplayActivity.EXTRA_DATA_UPDATE_INCOME_NAME;
+import static com.example.liquidbudget.IncomeDisplayActivity.EXTRA_DATA_UPDATE_INCOME_DATE;
 
 public class AddIncomeActivity extends AppBaseActivity {
 
     public static final String EXTRA_INC_NAME = "com.example.liquidbudget.EXTRA_INC_NAME";
     public static final String EXTRA_CAT_NAME = "com.example.liquidbudget.EXTRA_CAT_NAME";
     public static final String EXTRA_AMOUNT = "com.example.liquidbudget.EXTRA_AMOUNT";
+    public static final String EXTRA_DATE = "com.example.liquidbudget.EXTRA_DATE";
 
     public static final String EXTRA_UPDATE_INCOME_ID = "com.example.liquidbudget.EXTRA_UPDATE_ID";
 
     private EditText editIncName;
     private EditText editCatName;
     private EditText editDoubleAmount;
+    private EditText editDate;
 
     private CategoryViewModel categoryViewModel;
     private String[] categories = {"default"};
+
+    final Calendar myCalendar = Calendar.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +61,25 @@ public class AddIncomeActivity extends AppBaseActivity {
 
         editIncName = findViewById(R.id.inc_name_edit_text);
         editCatName = findViewById(R.id.cat_name_edit_text);
-        editDoubleAmount = findViewById(R.id.amount_text_edit);
+        editDoubleAmount = findViewById(R.id.amount_edit_text);
+        editDate = findViewById(R.id.inc_date_edit_text);
+
+        DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                myCalendar.set(Calendar.YEAR, year);
+                myCalendar.set(Calendar.MONTH, month);
+                myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                updateLabel();
+            }
+        };
+
+        editDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new DatePickerDialog(AddIncomeActivity.this, date, myCalendar.get(Calendar.YEAR), myCalendar.get(Calendar.MONTH), myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+            }
+        });
 
         editDoubleAmount.setFilters(new InputFilter[]{ new DecimalDigitsInputFilter(9, 2)});
 
@@ -59,6 +89,7 @@ public class AddIncomeActivity extends AppBaseActivity {
             String incomeName = extras.getString(EXTRA_DATA_UPDATE_INCOME_NAME, "");
             String categoryName = extras.getString(EXTRA_DATA_UPDATE_INCOME_CATEGORY, "");
             double amount = extras.getDouble(EXTRA_DATA_UPDATE_INCOME_AMOUNT, 0);
+            long dateLong = extras.getLong(EXTRA_DATA_UPDATE_INCOME_DATE);
             if (!incomeName.isEmpty()) {
                 editIncName.setText(incomeName);
                 editIncName.setSelection(incomeName.length());
@@ -73,6 +104,11 @@ public class AddIncomeActivity extends AppBaseActivity {
                 editDoubleAmount.setText(String.valueOf(amount));
                 editDoubleAmount.setSelection(String.valueOf(amount).length());
                 editDoubleAmount.requestFocus();
+            }
+            if (dateLong != 0.0) {
+                editDate.setText(String.valueOf(dateLong));
+                editDate.setSelection(String.valueOf(dateLong).length());
+                editDate.requestFocus();
             }
         }
 
@@ -120,13 +156,18 @@ public class AddIncomeActivity extends AppBaseActivity {
                 }
                 if (TextUtils.isEmpty(editDoubleAmount.getText())) {
                     setResult(RESULT_CANCELED, updateIntent);
+                }
+                if (TextUtils.isEmpty(editDate.getText())) {
+                    setResult(RESULT_CANCELED, updateIntent);
                 } else {
                     String incName = editIncName.getText().toString();
                     String catName = editCatName.getText().toString();
                     double amount = Double.parseDouble(editDoubleAmount.getText().toString());
+                    long date = Date.parse(editDate.getText().toString());
                     updateIntent.putExtra(EXTRA_INC_NAME, incName);
                     updateIntent.putExtra(EXTRA_CAT_NAME, catName);
                     updateIntent.putExtra(EXTRA_AMOUNT, amount);
+                    updateIntent.putExtra(EXTRA_DATE, date);
                     if (extras != null && extras.containsKey(EXTRA_DATA_UPDATE_INCOME_ID)) {
                         int id = extras.getInt(EXTRA_DATA_UPDATE_INCOME_ID, -1);
                         if (id != -1) {
@@ -142,7 +183,16 @@ public class AddIncomeActivity extends AppBaseActivity {
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close);
         setTitle("Add Income");
     }
+
+    private void updateLabel() {
+        String myFormat = "MM/dd/yy";
+        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+
+        editDate.setText(sdf.format(myCalendar.getTime()));
+
+    }
 }
+
 
     /*private void saveInc() {
         //int IncID = Integer.parseInt(editIncID.getText().toString());

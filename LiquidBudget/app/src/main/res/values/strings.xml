@@ -47,6 +47,7 @@
     <string name="IncomeName">Income Name</string>
     <string name="category">Category</string>
     <string name="amount">Amount</string>
+    <string name="date">Date</string>
     <string name="finish">Finish</string>
     <string name="budget">Budget</string>
     <string name="categories">Categories</string>
