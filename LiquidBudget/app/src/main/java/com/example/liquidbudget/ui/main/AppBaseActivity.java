@@ -14,14 +14,13 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 
-import com.example.liquidbudget.AddExpenseActivity;
 import com.example.liquidbudget.CategoryActivity;
 import com.example.liquidbudget.ExpenseDisplayActivity;
 import com.example.liquidbudget.IncomeDisplayActivity;
 import com.example.liquidbudget.MainActivity;
 import com.example.liquidbudget.R;
 import com.example.liquidbudget.SpendingSavingPage;
-import com.example.liquidbudget.UserDisplayActivity;
+import com.example.liquidbudget.SwipingGraphsTesting.GraphActivity;
 import com.example.liquidbudget.budget.Budget;
 import com.example.liquidbudget.settings.SettingsActivity;
 import com.google.android.material.navigation.NavigationView;
@@ -144,6 +143,12 @@ public abstract class AppBaseActivity extends AppCompatActivity implements MenuI
             case R.id.nav_incomes:
                 Intent incomesIntent = new Intent(this, IncomeDisplayActivity.class);
                 startActivity(incomesIntent);
+                if(!(this instanceof MainActivity))
+                    finish();
+                break;
+            case R.id.nav_graphs:
+                Intent graphsIntent = new Intent(this, GraphActivity.class);
+                startActivity(graphsIntent);
                 if(!(this instanceof MainActivity))
                     finish();
                 break;

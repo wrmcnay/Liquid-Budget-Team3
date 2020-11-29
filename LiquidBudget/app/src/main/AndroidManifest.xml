@@ -85,6 +85,7 @@
             android:parentActivityName=".AddIncomeActivity"/>
         <activity android:name=".IncomeDisplayActivity"
             android:launchMode="singleTop"/>
+        <activity android:name=".SwipingGraphsTesting.GraphActivity"/>
 
     </application>
 
