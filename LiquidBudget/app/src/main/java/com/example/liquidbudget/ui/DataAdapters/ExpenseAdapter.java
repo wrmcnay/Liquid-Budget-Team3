@@ -24,15 +24,16 @@ public class ExpenseAdapter extends RecyclerView.Adapter<ExpenseAdapter.ExpenseH
     public ExpenseHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.expenses, parent, false);
-        return new ExpenseAdapter.ExpenseHolder(itemView);
+        return new ExpenseHolder(itemView);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ExpenseAdapter.ExpenseHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ExpenseHolder holder, int position) {
         Expense currentExpense = expenses.get(position);
         holder.textViewExpName.setText(currentExpense.getExpenseName());
         holder.textViewCatName.setText(currentExpense.getCategoryName());
         holder.textViewAmount.setText(String.valueOf(currentExpense.getAmount()));
+        holder.textViewDate.setText(currentExpense.getDate());
     }
 
     @Override
@@ -53,12 +54,14 @@ public class ExpenseAdapter extends RecyclerView.Adapter<ExpenseAdapter.ExpenseH
         private TextView textViewExpName;
         private TextView textViewCatName;
         private TextView textViewAmount;
+        private TextView textViewDate;
 
         public ExpenseHolder(View itemView) {
             super(itemView);
             textViewExpName = itemView.findViewById(R.id.text_view_expname);
             textViewCatName = itemView.findViewById(R.id.text_view_catname);
-            textViewAmount = itemView.findViewById(R.id.text_view_amount);
+            textViewAmount = itemView.findViewById(R.id.text_view_exp_amount);
+            textViewDate = itemView.findViewById(R.id.text_view_date);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

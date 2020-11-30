@@ -40,7 +40,7 @@ public class Income {
     private boolean stable;
 
     @ColumnInfo(name = "date")
-    private long date;
+    private String date;
 
     @ColumnInfo(name = "userID")
     private int userID;
@@ -52,7 +52,7 @@ public class Income {
     }
 
     @Ignore
-    public Income(String incomeName, String categoryName, double amount, long date) {
+    public Income(String incomeName, String categoryName, double amount, String date) {
         this.incomeID = incomeID;
         this.incomeName = incomeName;
         this.categoryName = categoryName;
@@ -61,7 +61,7 @@ public class Income {
     }
 
     @Ignore
-    public Income(int incomeID, String incomeName, String categoryName, double amount, long date) {
+    public Income(int incomeID, String incomeName, String categoryName, double amount, String date) {
         this.incomeID = incomeID;
         this.incomeName = incomeName;
         this.categoryName = categoryName;
@@ -78,7 +78,7 @@ public class Income {
     }
 
     @Ignore
-    public Income(int incomeID, int categoryID, String incomeName, String categoryName, double amount, boolean recurring, int numberOf, int period, boolean stable, long date, int userID) {
+    public Income(int incomeID, int categoryID, String incomeName, String categoryName, double amount, boolean recurring, int numberOf, int period, boolean stable, String date, int userID) {
         this.incomeID = incomeID;
         this.categoryID = categoryID;
         this.incomeName = incomeName;
@@ -128,9 +128,9 @@ public class Income {
 
     public void setStable(boolean stable) { this.stable = stable; }
 
-    public long getDate() { return date; }
+    public String getDate() { return date; }
 
-    public void setDate(Long date) { this.date = date; }
+    public void setDate(String date) { this.date = date; }
 
     public int getUserID() { return userID; }
 

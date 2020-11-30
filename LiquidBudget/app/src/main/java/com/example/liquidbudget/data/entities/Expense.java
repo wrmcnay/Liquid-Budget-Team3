@@ -42,7 +42,7 @@ public class Expense {
     private boolean stable;
 
     @ColumnInfo(name = "date")
-    private Date date;
+    private String date;
 
     @NonNull
     @ColumnInfo(name = "userID")
@@ -55,6 +55,23 @@ public class Expense {
     }
 
     @Ignore
+    public Expense(String expenseName, String categoryName, double amount, String date) {
+        this.expenseName = expenseName;
+        this.categoryName = categoryName;
+        this.amount = amount;
+        this.date = date;
+    }
+
+    @Ignore
+    public Expense(int expenseID, String expenseName, String categoryName, double amount, String date) {
+        this.expenseID = expenseID;
+        this.expenseName = expenseName;
+        this.categoryName = categoryName;
+        this.amount = amount;
+        this.date = date;
+    }
+
+    @Ignore
     public Expense(int expenseID, String expenseName, String categoryName, double amount) {
         this.expenseID = expenseID;
         this.expenseName = expenseName;
@@ -63,7 +80,7 @@ public class Expense {
     }
 
     @Ignore
-    public Expense(int categoryID, String expenseName, String categoryName, double amount, boolean recurringBool, int numberOf, int period, boolean stable, Date date, int userID) {
+    public Expense(int categoryID, String expenseName, String categoryName, double amount, boolean recurringBool, int numberOf, int period, boolean stable, String date, int userID) {
         this.categoryID = categoryID;
         this.expenseName = expenseName;
         this.categoryName = categoryName;
@@ -148,11 +165,11 @@ public class Expense {
         this.stable = stable;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 

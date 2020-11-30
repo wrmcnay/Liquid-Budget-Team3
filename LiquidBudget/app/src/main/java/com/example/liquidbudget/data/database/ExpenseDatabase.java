@@ -8,7 +8,6 @@ import androidx.room.RoomDatabase;
 import androidx.room.TypeConverters;
 
 import com.example.liquidbudget.data.dao.ExpenseDAO;
-import com.example.liquidbudget.data.database.IncomeDatabase;
 import com.example.liquidbudget.data.entities.Expense;
 
 import java.util.concurrent.ExecutorService;
@@ -23,10 +22,9 @@ public abstract class ExpenseDatabase extends RoomDatabase {
     public static final int DATABASE_VERSION = 1;
     public static final String DATABASE_NAME = "Expense-Database";
 
-    private static ExpenseDatabase eInstance;
-
     public abstract ExpenseDAO expenseDAO();
 
+    private static ExpenseDatabase eInstance;
     private static final int NUMBER_OF_THREADS = 4;
 
     public static final ExecutorService databaseWriteExecutor = Executors.newFixedThreadPool(NUMBER_OF_THREADS);

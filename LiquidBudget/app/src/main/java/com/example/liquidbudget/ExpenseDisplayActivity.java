@@ -29,14 +29,15 @@ public class ExpenseDisplayActivity extends AppBaseActivity {
     public static final String EXTRA_DATA_UPDATE_EXPENSE_NAME = "extra_expense_name_to_update";
     public static final String EXTRA_DATA_UPDATE_EXPENSE_CATEGORY = "extra_expense_category_to_update";
     public static final String EXTRA_DATA_UPDATE_EXPENSE_AMOUNT = "extra_expense_amount_to_update";
-    public static final String EXTRA_DATA_UPDATE_EXPENSE_ID = "extra_data_id";
+    public static final String EXTRA_DATA_UPDATE_EXPENSE_DATE = "extra_expense_date_to_update";
+    public static final String EXTRA_DATA_UPDATE_EXPENSE_ID = "extra_data_exp_id";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_expense_display);
 
-        FloatingActionButton addExpenseBtn = (FloatingActionButton) findViewById(R.id.addExpenseButton);
+        FloatingActionButton addExpenseBtn = (FloatingActionButton) findViewById(R.id.add_expense_button);
         addExpenseBtn.setOnClickListener(new View.OnClickListener(){
 
             @Override
@@ -90,7 +91,7 @@ public class ExpenseDisplayActivity extends AppBaseActivity {
             @Override
             public void onItemClick(View v, int position) {
                 Expense expense = adapter.getExpenseAtPosition(position);
-                launchUpdateIncomeActivity(expense);
+                launchUpdateExpenseActivity(expense);
             }
         });
 
@@ -103,20 +104,24 @@ public class ExpenseDisplayActivity extends AppBaseActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK && requestCode == MY_REQUEST_CODE && data != null) {
             String expenseName = data.getStringExtra(AddExpenseActivity.EXTRA_EXP_NAME);
-            String categoryName = data.getStringExtra(AddExpenseActivity.EXTRA_CAT_NAME);
-            double amount = data.getDoubleExtra(AddExpenseActivity.EXTRA_AMOUNT, 0);
-            Expense expense = new Expense(expenseName, categoryName, amount);
+            String categoryName = data.getStringExtra(AddExpenseActivity.EXTRA_EXP_CAT_NAME);
+            double amount = data.getDoubleExtra(AddExpenseActivity.EXTRA_EXP_AMOUNT, 0);
+            String date = data.getStringExtra(AddExpenseActivity.EXTRA_EXP_DATE);
+
+            Expense expense = new Expense(expenseName, categoryName, amount, date);
             expenseViewModel.insert(expense);
             Toast.makeText(this, "Expense Added!", Toast.LENGTH_SHORT).show();
             }
         else if(resultCode == RESULT_OK && requestCode == UPDATE_EXPENSE_ACTIVITY_REQUEST_CODE && data != null) {
-            String updateName = data.getStringExtra(AddExpenseActivity.EXTRA_CAT_NAME);
-            String updateCategory = data.getStringExtra(AddExpenseActivity.EXTRA_CAT_NAME);
-            double updateAmount = data.getDoubleExtra(AddExpenseActivity.EXTRA_AMOUNT, 0);
+            String updateName = data.getStringExtra(AddExpenseActivity.EXTRA_EXP_CAT_NAME);
+            String updateCategory = data.getStringExtra(AddExpenseActivity.EXTRA_EXP_CAT_NAME);
+            double updateAmount = data.getDoubleExtra(AddExpenseActivity.EXTRA_EXP_AMOUNT, 0);
+            String updateDate = data.getStringExtra(AddExpenseActivity.EXTRA_EXP_DATE);
+
             int id = data.getIntExtra(AddExpenseActivity.EXTRA_UPDATE_EXPENSE_ID, -1);
 
             if(id != -1) {
-                expenseViewModel.updateExpense(new Expense(id, updateName, updateCategory, updateAmount));
+                expenseViewModel.updateExpense(new Expense(id, updateName, updateCategory, updateAmount, updateDate));
             }
             else {
                 Toast.makeText(this, "Expense not able to update", Toast.LENGTH_SHORT).show();
@@ -127,11 +132,12 @@ public class ExpenseDisplayActivity extends AppBaseActivity {
         }
     }
 
-    public void launchUpdateIncomeActivity(Expense expense) {
+    public void launchUpdateExpenseActivity(Expense expense) {
         Intent intent = new Intent(this, AddExpenseActivity.class);
         intent.putExtra(EXTRA_DATA_UPDATE_EXPENSE_NAME, expense.getExpenseName());
         intent.putExtra(EXTRA_DATA_UPDATE_EXPENSE_CATEGORY, expense.getCategoryName());
         intent.putExtra(EXTRA_DATA_UPDATE_EXPENSE_AMOUNT, expense.getAmount());
+        intent.putExtra(EXTRA_DATA_UPDATE_EXPENSE_DATE, expense.getDate());
         intent.putExtra(EXTRA_DATA_UPDATE_EXPENSE_ID, expense.getExpenseID());
         startActivityForResult(intent, UPDATE_EXPENSE_ACTIVITY_REQUEST_CODE);
     }

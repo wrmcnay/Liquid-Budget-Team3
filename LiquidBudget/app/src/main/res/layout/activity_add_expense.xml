@@ -23,14 +23,14 @@
         android:layout_height="wrap_content" />
 
     <EditText
-        android:id="@+id/expName"
+        android:id="@+id/exp_name_edit_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/ExpenseName"
         android:inputType="text" />
 
     <EditText
-        android:id="@+id/category"
+        android:id="@+id/exp_cat_edit_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/category"
@@ -41,16 +41,23 @@
         android:layout_width="208dp"
         android:layout_height="45dp" />
 
-
     <EditText
-        android:id="@+id/doubleAmount"
+        android:id="@+id/exp_amount_edit_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/amount"
         android:inputType="numberDecimal" />
 
+    <EditText
+        android:id="@+id/exp_date_edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:focusable="false"
+        android:hint="@string/date"/>
+
     <Button
-        android:id="@+id/button_save"
+        android:id="@+id/exp_button_save"
         android:layout_width="wrap_content"
         android:layout_height="36dp"
         android:backgroundTint="@color/colorAccentDark"
