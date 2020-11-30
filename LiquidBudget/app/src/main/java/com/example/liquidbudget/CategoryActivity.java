@@ -27,6 +27,9 @@ public class CategoryActivity extends AppBaseActivity {
     private CategoryViewModel categoryViewModel;
     private final static int MY_REQUEST_CODE= 1;
     private String newCatName = "";
+    private String newCatType = "";
+    private Double newCatAmount = 0.0;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,7 +86,12 @@ public class CategoryActivity extends AppBaseActivity {
 
                 Intent viewActivity = new Intent(CategoryActivity.this, ViewCategoryActivity.class);
                 String catName = category.getCategoryName();
+                String catType = category.getCategoryType();
+                Double catAmount = category.getCategoryAmount();
+
                 viewActivity.putExtra("CategoryName", catName);
+                viewActivity.putExtra("CategoryType", catType);
+                viewActivity.putExtra("CategoryAmount", catAmount);
                 startActivity(viewActivity);
             }
         });
@@ -115,7 +123,10 @@ public class CategoryActivity extends AppBaseActivity {
         if(resultCode == Activity.RESULT_OK && requestCode==MY_REQUEST_CODE){
             if(data != null){
                 newCatName = data.getStringExtra("Name");
-                Category category = new Category(newCatName, " ");
+                newCatType = data.getStringExtra("Type");
+                newCatAmount = data.getDoubleExtra("Amount", 0.0);
+
+                Category category = new Category(newCatName, newCatAmount, newCatType, " ");
                 categoryViewModel.insertCategory(category);
                 Toast.makeText(CategoryActivity.this, "Category Created", Toast.LENGTH_SHORT).show();
             } else {

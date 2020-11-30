@@ -16,18 +16,30 @@ public class Category {
     @ColumnInfo(name="categoryName")
     private String categoryName;
 
+    // 'Expense' for Expense, 'Income' for Income
+    @ColumnInfo(name="categoryType")
+    private String categoryType;
+
+    @ColumnInfo(name="categoryAmount")
+    private Double categoryAmount;
+
     @ColumnInfo(name="categoryColor")
     private String categoryColor;
 
-    public Category(String categoryName, String categoryColor){
+
+    public Category(String categoryName, Double categoryAmount, String categoryType, String categoryColor){
         this.categoryName = categoryName;
+        this.categoryType = categoryType;
+        this.categoryAmount = categoryAmount;
         this.categoryColor = categoryColor;
     }
 
     @Ignore
-    public Category(int categoryID, String categoryName, String categoryColor){
+    public Category(int categoryID, String categoryName,  Double categoryAmount, String categoryType, String categoryColor){
         this.categoryID = categoryID;
         this.categoryName = categoryName;
+        this.categoryType = categoryType;
+        this.categoryAmount = categoryAmount;
         this.categoryColor = categoryColor;
     }
 
@@ -54,6 +66,14 @@ public class Category {
     public void setCategoryColor(String categoryColor) {
         this.categoryColor = categoryColor;
     }
+
+    public String getCategoryType(){ return categoryType; }
+
+    public void setCategoryType(String categoryType){ this.categoryType = categoryType; }
+
+    public Double getCategoryAmount(){return categoryAmount; }
+
+    public void setCategoryAmount(Double categoryAmount){ this.categoryAmount = categoryAmount;}
 
     @Override
     public String toString() {

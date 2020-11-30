@@ -17,54 +17,54 @@
         app:layout_constraintTop_toBottomOf="@+id/incomeView" />
 
     <TextView
-        android:id="@+id/expense_total"
+        android:id="@+id/amount_planned_for_category"
         android:layout_width="125dp"
         android:layout_height="27dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="84dp"
         android:text="0"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView10" />
+        app:layout_constraintTop_toBottomOf="@+id/amountPlanned" />
 
     <TextView
-        android:id="@+id/textView10"
+        android:id="@+id/amountPlanned"
         android:layout_width="125dp"
         android:layout_height="27dp"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="84dp"
-        android:text="Expenses"
+        android:text="Amount Planned"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/category_display" />
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/amountType"
         android:layout_width="125dp"
         android:layout_height="27dp"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="52dp"
-        android:text="Income"
-        app:layout_constraintEnd_toStartOf="@+id/textView10"
+        android:text="Amount"
+        app:layout_constraintEnd_toStartOf="@+id/amountPlanned"
         app:layout_constraintHorizontal_bias="0.896"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/category_display" />
 
     <TextView
-        android:id="@+id/income_total"
+        android:id="@+id/total_amount_for_category"
         android:layout_width="125dp"
         android:layout_height="27dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="52dp"
         android:text="0"
-        app:layout_constraintEnd_toStartOf="@+id/textView10"
+        app:layout_constraintEnd_toStartOf="@+id/amountPlanned"
         app:layout_constraintHorizontal_bias="0.896"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+        app:layout_constraintTop_toBottomOf="@+id/amountType" />
 
     <TextView
         android:id="@+id/category_display"
         android:layout_width="235dp"
         android:layout_height="42dp"
-        android:text="TextView"
+        android:text="CategoryName"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -74,12 +74,12 @@
         app:layout_constraintVertical_bias="0.028" />
 
     <Button
-        android:id="@+id/deleteCategory"
+        android:id="@+id/editCategory"
         android:layout_width="112dp"
         android:layout_height="41dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-        android:text="delete"
+        android:text="edit"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/category_display"
@@ -94,7 +94,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.085"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/income_total" />
+        app:layout_constraintTop_toBottomOf="@+id/total_amount_for_category" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/incomeView"

@@ -36,9 +36,30 @@ public class ViewCategoryActivity extends AppCompatActivity {
         setContentView(R.layout.category_view);
 
         String categoryName = getIntent().getStringExtra("CategoryName");
+        String categoryType = getIntent().getStringExtra("CategoryType");
+        Double categoryAmount = getIntent().getDoubleExtra("CategoryAmount", 0.0);
+
+        String amountText = "None";
+        if (categoryType != null && !categoryType.isEmpty()) {
+            if (categoryType.equals("Income")) {
+                amountText = "Amount Saved";
+            } else if (categoryType.equals("Expense")) {
+                amountText = "Amount Spent";
+            }
+        } else {
+            amountText = "No Type";
+        }
+
         TextView displayName = (TextView) findViewById(R.id.category_display);
-        Button deleteCategory = (Button) findViewById(R.id.deleteCategory);
         displayName.setText(categoryName);
+
+        TextView amountType = (TextView) findViewById(R.id.amountType);
+        amountType.setText(amountText);
+
+        TextView amountPlanned = (TextView) findViewById(R.id.amount_planned_for_category);
+        amountPlanned.setText("" + categoryAmount);
+
+        Button editCategory = (Button) findViewById(R.id.editCategory);
 
         expenseViewModel = new ViewModelProvider(this).get(ExpenseViewModel.class);
         incomeViewModel = new ViewModelProvider(this).get(IncomeViewModel.class);
@@ -48,13 +69,20 @@ public class ViewCategoryActivity extends AppCompatActivity {
 //        incomeList = incomeViewModel.getIncomesByCategory(categoryName);
 
         try{
-            Double incomeDouble = incomeViewModel.getSumByCategory(categoryName);
-            TextView incomeTotal = (TextView) findViewById(R.id.income_total);
-            incomeTotal.setText(""+incomeDouble);
-
-            Double expenseDouble = expenseViewModel.getSumByCategory(categoryName);
-            TextView expenseTotal = (TextView) findViewById(R.id.expense_total);
-            expenseTotal.setText("" + expenseDouble);
+            Double amount;
+            if (categoryType.equals("Income")){
+                amount = incomeViewModel.getSumByCategory(categoryName);
+            } else if (categoryType.equals("Expense")){
+                amount = expenseViewModel.getSumByCategory(categoryName);
+            } else {
+                amount = 0.0;
+            }
+            TextView totalAmount = (TextView) findViewById(R.id.total_amount_for_category);
+            if(amount == 0.0) {
+                totalAmount.setText("0");
+            } else {
+                totalAmount.setText("" + amount);
+            }
         } catch(Exception e){
             Log.e("ERROR", e.getMessage());
         }
