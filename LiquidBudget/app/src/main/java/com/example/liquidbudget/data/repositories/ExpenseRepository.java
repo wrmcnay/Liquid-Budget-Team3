@@ -75,4 +75,15 @@ public class ExpenseRepository {
         Future<Double> future = Executors.newSingleThreadExecutor().submit(callable);
         return future.get();
     }
+
+    public Double getSumTotal() throws ExecutionException, InterruptedException{
+        Callable<Double> callable = new Callable<Double>(){
+            @Override
+            public Double call() throws Exception{
+                return expenseDAO.getSumTotal();
+            }
+        };
+        Future<Double> future = Executors.newSingleThreadExecutor().submit(callable);
+        return future.get();
+    }
 }

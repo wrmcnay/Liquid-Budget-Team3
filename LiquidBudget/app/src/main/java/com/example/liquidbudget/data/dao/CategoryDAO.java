@@ -26,6 +26,9 @@ public interface CategoryDAO {
     @Query("SELECT categoryName FROM categories")
     List<String> getAllCategoryNames();
 
+    @Query("SELECT CAST(SUM(categoryAmount) as DOUBLE) FROM categories WHERE categoryType=:catType")
+    Double getPlannedTotalByType(String catType);
+
     @Insert
     void insertCategory(Category... categories);
 
@@ -40,4 +43,5 @@ public interface CategoryDAO {
 
     @Query("DELETE FROM categories WHERE categoryName=:catName")
     void deleteCategoryByName(String catName);
+
 }

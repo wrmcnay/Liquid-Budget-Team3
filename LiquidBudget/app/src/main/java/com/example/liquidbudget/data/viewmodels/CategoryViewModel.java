@@ -30,6 +30,10 @@ public class CategoryViewModel extends AndroidViewModel {
         return cRepository.getAllCategoryNames();
     }
 
+    public Double getPlannedTotalByType(String catType) throws ExecutionException, InterruptedException{
+        return cRepository.getPlannedTotalByType(catType);
+    }
+
     public void insertCategory(Category category) {
         cRepository.insertCategory(category);
     }

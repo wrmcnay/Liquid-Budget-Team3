@@ -6,7 +6,6 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -27,9 +26,6 @@ public class ViewCategoryActivity extends AppCompatActivity {
     private ExpenseViewModel expenseViewModel;
     private IncomeViewModel incomeViewModel;
     private CategoryViewModel categoryViewModel;
-
-    private LiveData<List<Expense>> expenseList;
-    private LiveData<List<Income>> incomeList;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

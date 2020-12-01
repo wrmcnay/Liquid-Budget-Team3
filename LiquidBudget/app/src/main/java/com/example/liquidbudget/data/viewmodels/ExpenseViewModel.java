@@ -34,6 +34,10 @@ public class ExpenseViewModel extends AndroidViewModel {
         return eRepository.getSumByCategory(catName);
     }
 
+    public Double getSumTotal() throws ExecutionException, InterruptedException{
+        return eRepository.getSumTotal();
+    }
+
     public void insert(Expense expense) {
         eRepository.insert(expense);
     }

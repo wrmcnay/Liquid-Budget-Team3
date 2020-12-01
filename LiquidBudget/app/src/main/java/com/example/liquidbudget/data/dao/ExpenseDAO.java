@@ -37,4 +37,7 @@ public interface ExpenseDAO {
 
     @Query("SELECT CAST(SUM(amount) as DOUBLE) FROM expenses WHERE categoryName=:catName")
     Double getSumByCategory(String catName);
+
+    @Query("SELECT CAST(SUM(amount) as DOUBLE) FROM expenses")
+    Double getSumTotal();
 }
