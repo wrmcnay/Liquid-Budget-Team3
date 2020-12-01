@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.liquidbudget.data.entities.Category;
+import com.example.liquidbudget.data.entities.Income;
 import com.example.liquidbudget.data.viewmodels.CategoryViewModel;
 import com.example.liquidbudget.ui.DataAdapters.CategoryAdapter;
 import com.example.liquidbudget.ui.main.AppBaseActivity;
@@ -24,8 +25,14 @@ import java.util.List;
 public class CategoryActivity extends AppBaseActivity {
     public static final String CATEGORY_NAME = "com.example.liquidbudget.CATEGORY_NAME";
 
+    public static final String EXTRA_DATA_UPDATE_CATEGORY_NAME = "extra_category_name_to_update";
+    public static final String EXTRA_DATA_UPDATE_CATEGORY_TYPE = "extra_category_type_to_update";
+    public static final String EXTRA_DATA_UPDATE_CATEGORY_AMOUNT = "extra_category_amount_to_update";
+    public static final String EXTRA_DATA_UPDATE_CATEGORY_ID = "extra_data_cat_id";
+
     private CategoryViewModel categoryViewModel;
     private final static int MY_REQUEST_CODE= 1;
+    private final static int UPDATE_CATEGORY_ACTIVITY_REQUEST_CODE = 2;
     private String newCatName = "";
     private String newCatType = "";
     private Double newCatAmount = 0.0;
@@ -82,7 +89,6 @@ public class CategoryActivity extends AppBaseActivity {
             @Override
             public void onItemClick(View v, int position) {
                 Category category = adapter.getCategoryAtPosition(position);
-//                launchUpdateCategoryActivity(category);
 
                 Intent viewActivity = new Intent(CategoryActivity.this, ViewCategoryActivity.class);
                 String catName = category.getCategoryName();
@@ -125,17 +131,44 @@ public class CategoryActivity extends AppBaseActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if(resultCode == Activity.RESULT_OK && requestCode==MY_REQUEST_CODE){
             if(data != null){
-                newCatName = data.getStringExtra("Name");
-                newCatType = data.getStringExtra("Type");
-                newCatAmount = data.getDoubleExtra("Amount", 0.0);
+                newCatName = data.getStringExtra(AddCategoryActivity.EXTRA_CAT_NAME);
+                newCatType = data.getStringExtra(AddCategoryActivity.EXTRA_CAT_TYPE);
+                newCatAmount = data.getDoubleExtra(AddCategoryActivity.EXTRA_CAT_AMOUNT, 0.0);
 
                 Category category = new Category(newCatName, newCatAmount, newCatType, " ");
                 categoryViewModel.insertCategory(category);
                 Toast.makeText(CategoryActivity.this, "Category Created", Toast.LENGTH_SHORT).show();
-            } else {
+            }
+            else if(resultCode == Activity.RESULT_OK && requestCode==UPDATE_CATEGORY_ACTIVITY_REQUEST_CODE) {
+                if (data != null) {
+                    newCatName = data.getStringExtra(AddCategoryActivity.EXTRA_CAT_NAME);
+                    newCatType = data.getStringExtra(AddCategoryActivity.EXTRA_CAT_TYPE);
+                    newCatAmount = data.getDoubleExtra(AddCategoryActivity.EXTRA_CAT_AMOUNT, 0.0);
+
+                    int id = data.getIntExtra(AddCategoryActivity.EXTRA_UPDATE_CATEGORY_ID, -1);
+
+                    if (id != -1) {
+                        Category category = new Category(id, newCatName, newCatAmount, newCatType, " ");
+                        categoryViewModel.updateCategory(category);
+                        Toast.makeText(CategoryActivity.this, "Category Created", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(this, "Category not able to update", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+            else {
                 Toast.makeText(CategoryActivity.this, "Category could not be created", Toast.LENGTH_SHORT).show();
             }
         }
+    }
+
+    public void launchUpdateCategoryActivity(Category category) {
+        Intent intent = new Intent(this, AddCategoryActivity.class);
+        intent.putExtra(EXTRA_DATA_UPDATE_CATEGORY_NAME, category.getCategoryName());
+        intent.putExtra(EXTRA_DATA_UPDATE_CATEGORY_AMOUNT, category.getCategoryAmount());
+        intent.putExtra(EXTRA_DATA_UPDATE_CATEGORY_TYPE, category.getCategoryType());
+        intent.putExtra(EXTRA_DATA_UPDATE_CATEGORY_ID, category.getCategoryID());
+        startActivityForResult(intent, UPDATE_CATEGORY_ACTIVITY_REQUEST_CODE);
     }
 
 }

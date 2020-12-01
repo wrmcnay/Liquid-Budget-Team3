@@ -38,6 +38,10 @@ public class CategoryViewModel extends AndroidViewModel {
         return cRepository.getAllExpenseCategoryNames();
     }
 
+    public Category getCategoryByName(String name) throws ExecutionException, InterruptedException{
+        return cRepository.getCategoryByName(name);
+    }
+
     public void insertCategory(Category category) {
         cRepository.insertCategory(category);
     }
@@ -45,5 +49,7 @@ public class CategoryViewModel extends AndroidViewModel {
     public void deleteCategory(Category category){
         cRepository.deleteCategory(category);
     }
+
+    public void updateCategory(Category category) { cRepository.updateCategory(category); }
 
 }

@@ -1,17 +1,21 @@
 package com.example.liquidbudget;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.liquidbudget.data.entities.Category;
 import com.example.liquidbudget.data.entities.Expense;
 import com.example.liquidbudget.data.entities.Income;
 import com.example.liquidbudget.data.viewmodels.CategoryViewModel;
@@ -19,10 +23,19 @@ import com.example.liquidbudget.data.viewmodels.ExpenseViewModel;
 import com.example.liquidbudget.data.viewmodels.IncomeViewModel;
 import com.example.liquidbudget.ui.DataAdapters.ExpenseAdapter;
 import com.example.liquidbudget.ui.DataAdapters.IncomeAdapter;
+import com.example.liquidbudget.ui.DataAdapters.CategoryAdapter;
 
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 public class ViewCategoryActivity extends AppCompatActivity {
+
+    public static final String EXTRA_DATA_UPDATE_CATEGORY_NAME = "extra_category_name_to_update";
+    public static final String EXTRA_DATA_UPDATE_CATEGORY_TYPE = "extra_category_type_to_update";
+    public static final String EXTRA_DATA_UPDATE_CATEGORY_AMOUNT = "extra_category_amount_to_update";
+    public static final String EXTRA_DATA_UPDATE_CATEGORY_ID = "extra_data_cat_id";
+
+    private final static int UPDATE_CATEGORY_ACTIVITY_REQUEST_CODE = 2;
 
     private ExpenseViewModel expenseViewModel;
     private IncomeViewModel incomeViewModel;
@@ -59,11 +72,24 @@ public class ViewCategoryActivity extends AppCompatActivity {
         TextView amountPlanned = (TextView) findViewById(R.id.amount_planned_for_category);
         amountPlanned.setText("" + categoryAmount);
 
-        Button editCategory = (Button) findViewById(R.id.editCategory);
-
         expenseViewModel = new ViewModelProvider(this).get(ExpenseViewModel.class);
         incomeViewModel = new ViewModelProvider(this).get(IncomeViewModel.class);
         categoryViewModel = new ViewModelProvider(this).get(CategoryViewModel.class);
+
+        Button editCategory = (Button) findViewById(R.id.editCategory);
+
+        editCategory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    Category category = categoryViewModel.getCategoryByName(categoryName);
+                    launchUpdateCategoryActivity(category);
+                }
+                catch (InterruptedException | ExecutionException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
 
 //        expenseList = expenseViewModel.getExpensesByCategory(categoryName);
 //        incomeList = incomeViewModel.getIncomesByCategory(categoryName);
@@ -140,5 +166,16 @@ public class ViewCategoryActivity extends AppCompatActivity {
 //            }
 //        });
 
+
+
+    }
+
+    public void launchUpdateCategoryActivity(Category category) {
+        Intent intent = new Intent(this, AddCategoryActivity.class);
+        intent.putExtra(EXTRA_DATA_UPDATE_CATEGORY_NAME, category.getCategoryName());
+        intent.putExtra(EXTRA_DATA_UPDATE_CATEGORY_AMOUNT, category.getCategoryAmount());
+        intent.putExtra(EXTRA_DATA_UPDATE_CATEGORY_TYPE, category.getCategoryType());
+        intent.putExtra(EXTRA_DATA_UPDATE_CATEGORY_ID, category.getCategoryID());
+        startActivityForResult(intent, UPDATE_CATEGORY_ACTIVITY_REQUEST_CODE);
     }
 }

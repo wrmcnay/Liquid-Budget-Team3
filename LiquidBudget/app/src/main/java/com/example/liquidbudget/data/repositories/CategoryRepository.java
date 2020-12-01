@@ -7,6 +7,7 @@ import androidx.lifecycle.LiveData;
 import com.example.liquidbudget.data.dao.CategoryDAO;
 import com.example.liquidbudget.data.database.CategoryDatabase;
 import com.example.liquidbudget.data.entities.Category;
+import com.example.liquidbudget.data.entities.Income;
 
 import java.util.List;
 import java.util.concurrent.Callable;
@@ -27,6 +28,17 @@ public class CategoryRepository{
 
     public LiveData<Category> getCategoryById(int catID) {
         return categoryDAO.getCategoryById(catID);
+    }
+
+    public Category getCategoryByName(String name) throws ExecutionException, InterruptedException{
+        Callable<Category> callable = new Callable<Category>(){
+            @Override
+            public Category call() throws Exception{
+                return categoryDAO.getCategoryByName(name);
+            }
+        };
+        Future<Category> future = Executors.newSingleThreadExecutor().submit(callable);
+        return future.get();
     }
 
     public LiveData<List<Category>> getAllCategories() {

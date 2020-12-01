@@ -1,6 +1,9 @@
 package com.example.liquidbudget.data.entities;
 
+import android.view.View;
+
 import androidx.annotation.NonNull;
+import androidx.lifecycle.Observer;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.Ignore;
@@ -79,4 +82,5 @@ public class Category {
     public String toString() {
         return categoryName;
     }
+
 }
