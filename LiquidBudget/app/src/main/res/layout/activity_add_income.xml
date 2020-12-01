@@ -6,7 +6,7 @@
     android:foregroundTint="#FFFFFF"
     android:orientation="vertical"
     android:padding="16dp"
-    android:gravity="center"
+    android:gravity="center_horizontal"
     tools:context=".AddIncomeActivity">
 
     <TextView
