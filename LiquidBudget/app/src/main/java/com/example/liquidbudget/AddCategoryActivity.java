@@ -73,6 +73,8 @@ public class AddCategoryActivity extends AppCompatActivity {
         }
     });
 
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close);
+        setTitle("Add Category");
     }
 
     public void addListenerOnButton(){

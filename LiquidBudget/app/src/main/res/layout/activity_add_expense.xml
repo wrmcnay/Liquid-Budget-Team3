@@ -5,7 +5,7 @@
     android:background="@color/colorAccentLight"
     android:orientation="vertical"
     android:padding="16dp"
-    android:gravity="center"
+    android:gravity="center_horizontal"
     tools:context=".AddExpenseActivity">
 
     <TextView

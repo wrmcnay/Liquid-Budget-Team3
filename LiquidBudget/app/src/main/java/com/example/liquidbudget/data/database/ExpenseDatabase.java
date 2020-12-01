@@ -19,7 +19,7 @@ import static com.example.liquidbudget.data.database.CategoryDatabase.DATABASE_V
 @TypeConverters({Converters.class})
 public abstract class ExpenseDatabase extends RoomDatabase {
 
-    public static final int DATABASE_VERSION = 1;
+    public static final int DATABASE_VERSION = 5;
     public static final String DATABASE_NAME = "Expense-Database";
 
     public abstract ExpenseDAO expenseDAO();

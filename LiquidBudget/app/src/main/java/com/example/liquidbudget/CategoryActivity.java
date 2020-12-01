@@ -115,6 +115,9 @@ public class CategoryActivity extends AppBaseActivity {
                 startActivityForResult(startIntent, MY_REQUEST_CODE);
             }
         });
+
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close);
+        setTitle("Categories");
     }
 
     @Override

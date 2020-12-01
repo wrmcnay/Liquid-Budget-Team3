@@ -41,8 +41,8 @@
     <string name="share">Share</string>
     <string name="send">Send</string>
     <string name="hello">Hello world!</string>
-    <string name="addingIncome">"Let's add a new income:"</string>
-    <string name="addingExpense">"Let's add a new expense:"</string>
+    <string name="addingIncome">Let\'s log a new income:</string>
+    <string name="addingExpense">Let\'s log a new expense:</string>
     <string name="ExpenseName">Expense Name</string>
     <string name="IncomeName">Income Name</string>
     <string name="category">Category</string>
@@ -52,6 +52,12 @@
     <string name="budget">Budget</string>
     <string name="analysis">Analysis</string>
     <string name="categories">Categories</string>
+    <string name="addingCategory">Let\'s create a new category:</string>
+    <string name="catName">Category Name</string>
+    <string name="type">Type</string>
+    <string name="expAmount">Expected amount per month:</string>
+    <string name="income">Income</string>
+    <string name="expense">Expense</string>
     <string name="settings">Settings</string>
     <string name="home">Home</string>
     <string name="Change_pwd">Configure Account Privacy</string>

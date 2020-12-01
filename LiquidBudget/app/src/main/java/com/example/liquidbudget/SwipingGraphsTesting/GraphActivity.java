@@ -39,13 +39,13 @@ public class GraphActivity extends AppBaseActivity {
 
             switch (pos) {
                 case 0:
-                    f = PieChartIncomes.newInstance();
+                    f = PieChartCategories.newInstance();
                     break;
                 case 1:
                     f = PieChartExpenses.newInstance();
                     break;
                 case 2:
-                    f = PieChartCategories.newInstance();
+                    f = PieChartIncomes.newInstance();
                     break;
             }
 

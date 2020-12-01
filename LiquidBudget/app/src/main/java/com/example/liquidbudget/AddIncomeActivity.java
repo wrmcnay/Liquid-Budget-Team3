@@ -109,7 +109,7 @@ public class AddIncomeActivity extends AppBaseActivity {
 
         categoryViewModel = new ViewModelProvider(this).get(CategoryViewModel.class);
         try {
-            List<String> catList = categoryViewModel.getAllCategoryNames();
+            List<String> catList = categoryViewModel.getAllIncomeCategoryNames();
             catList.add(0, "");
             if (catList.size() > 0) {
                 categories = new String[catList.size()];
