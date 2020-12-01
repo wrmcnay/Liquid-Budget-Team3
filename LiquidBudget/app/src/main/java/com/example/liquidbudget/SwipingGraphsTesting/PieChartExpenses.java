@@ -76,7 +76,7 @@ public class PieChartExpenses extends SimpleFragment {
     private void populateData() {
         entries = new ArrayList<>();
         expenseViewModel = new ViewModelProvider(this).get(ExpenseViewModel.class);
-        expenseViewModel.getAllExpenses().observe(this, new Observer<List<Expense>>() {
+        expenseViewModel.getAllExpenses().observe(getViewLifecycleOwner(), new Observer<List<Expense>>() {
             @Override
             public void onChanged(List<Expense> expenseList) {
                 entries.clear();
@@ -93,24 +93,24 @@ public class PieChartExpenses extends SimpleFragment {
 
                 dataSet.setSliceSpace(3f);
                 dataSet.setIconsOffset(new MPPointF(0, 40));
-                dataSet.setSelectionShift(5f);
+                dataSet.setSelectionShift(50f);
 
                 setColors();
                 dataSet.setColors(colors);
 
                 pieData = new PieData(dataSet);
                 pieData.setValueFormatter(new DefaultAxisValueFormatter(2));
-                pieData.setValueTextSize(11f);
+                pieData.setValueTextSize(22f);
                 pieData.setDrawValues(true);
                 pieData.setValueTextColor(Color.BLACK);
 
                 chart.setData(pieData);
 
-                dataSet.setDrawIcons(true);
+                dataSet.setDrawIcons(false);
 
                 dataSet.setSliceSpace(5f);
-                dataSet.setIconsOffset(new MPPointF(0, 40));
-                dataSet.setSelectionShift(5f);
+                dataSet.setIconsOffset(new MPPointF(0, 0));
+                dataSet.setSelectionShift(0f);
 
                 chart.invalidate();
 
@@ -120,6 +120,13 @@ public class PieChartExpenses extends SimpleFragment {
 
     private void setColors() {
         colors = new ArrayList<>();
+
+        colors.add(Color.rgb(135, 190, 177));
+        colors.add(Color.rgb(116, 159, 214));
+        colors.add(Color.rgb(185, 225, 213));
+        colors.add(Color.rgb(206, 139, 134));
+        colors.add(Color.rgb(235, 140, 157));
+        colors.add(Color.rgb(110, 150, 125));
 
         for (int c : ColorTemplate.VORDIPLOM_COLORS)
             colors.add(c);
@@ -140,12 +147,14 @@ public class PieChartExpenses extends SimpleFragment {
 
         chart.setUsePercentValues(false);
         chart.getDescription().setEnabled(false);
-        chart.setExtraOffsets(5, 10, 5, 5);
+        chart.setExtraOffsets(5, 0, 5, 10);
 
-        chart.setDragDecelerationFrictionCoef(0.95f);
+        chart.setDragDecelerationFrictionCoef(0.1f);
 
         chart.setDrawHoleEnabled(true);
-        chart.setHoleColor(Color.WHITE);
+        chart.setHoleColor(0xE9E0F8);
+
+        chart.setClickable(true);
 
         chart.setTransparentCircleColor(Color.LTGRAY);
         chart.setTransparentCircleAlpha(110);
@@ -153,33 +162,34 @@ public class PieChartExpenses extends SimpleFragment {
         chart.setHoleRadius(35f);
         chart.setTransparentCircleRadius(44f);
 
+        chart.setCenterTextColor(Color.GRAY);
+
         chart.setDrawCenterText(true);
 
-        /*chart.setRotationAngle(0);
+        chart.setRotationAngle(0);
         // enable rotation of the chart by touch
         chart.setRotationEnabled(true);
         chart.setHighlightPerTapEnabled(true);
 
-         */
-
-        //chart.animateY(1800, Easing.EaseInOutQuad);
+        chart.animateY(1800, Easing.EaseInOutQuad);
 
         Legend l = chart.getLegend();
         l.setVerticalAlignment(Legend.LegendVerticalAlignment.TOP);
-        l.setHorizontalAlignment(Legend.LegendHorizontalAlignment.LEFT);
-        l.setOrientation(Legend.LegendOrientation.VERTICAL);
-        l.setDrawInside(false);
-        l.setFormSize(20);
+        l.setHorizontalAlignment(Legend.LegendHorizontalAlignment.CENTER);
+        l.setOrientation(Legend.LegendOrientation.HORIZONTAL);
+        l.setForm(Legend.LegendForm.CIRCLE);
+        l.setDrawInside(true);
+        l.setFormSize(15);
         l.setFormToTextSpace(5);
-        l.setTextSize(12);
-        l.setXEntrySpace(10f);
-        l.setYEntrySpace(4f);
-        l.setYOffset(0f);
+        l.setTextSize(20);
+        l.setXEntrySpace(28f);
+        l.setYEntrySpace(0f);
+        l.setYOffset(40f);
         l.setWordWrapEnabled(true);
 
         // entry label styling
         chart.setEntryLabelColor(Color.BLACK);
-        chart.setEntryLabelTextSize(16f);
+        chart.setEntryLabelTextSize(14f);
         chart.setDrawEntryLabels(true);
     }
 }
