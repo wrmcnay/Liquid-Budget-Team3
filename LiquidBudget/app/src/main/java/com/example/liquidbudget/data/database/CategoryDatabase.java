@@ -17,7 +17,7 @@ import static com.example.liquidbudget.data.database.CategoryDatabase.DATABASE_V
 @Database(entities = Category.class,version = DATABASE_VERSION)
 public abstract class CategoryDatabase extends RoomDatabase {
 
-    public static final int DATABASE_VERSION = 2;
+    public static final int DATABASE_VERSION = 5;
     public static final String DATABASE_NAME = "Category-Database";
 
     private static CategoryDatabase cInstance;
