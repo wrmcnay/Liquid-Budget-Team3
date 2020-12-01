@@ -44,6 +44,28 @@ public class CategoryRepository{
         return future.get();
     }
 
+    public List<String> getAllIncomeCategoryNames() throws ExecutionException, InterruptedException{
+        Callable<List<String>> callable = new Callable<List<String>>(){
+            @Override
+            public List<String> call() throws Exception {
+                return categoryDAO.getAllIncomeCategoryNames();
+            }
+        };
+        Future<List<String>> future = Executors.newSingleThreadExecutor().submit(callable);
+        return future.get();
+    }
+
+    public List<String> getAllExpenseCategoryNames() throws ExecutionException, InterruptedException{
+        Callable<List<String>> callable = new Callable<List<String>>(){
+            @Override
+            public List<String> call() throws Exception {
+                return categoryDAO.getAllExpenseCategoryNames();
+            }
+        };
+        Future<List<String>> future = Executors.newSingleThreadExecutor().submit(callable);
+        return future.get();
+    }
+
     public void insertCategory(Category... categories) {
         CategoryDatabase.databaseWriteExecutor.execute(() -> {
             categoryDAO.insertCategory(categories);

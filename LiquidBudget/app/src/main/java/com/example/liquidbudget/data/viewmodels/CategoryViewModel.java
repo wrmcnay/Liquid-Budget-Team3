@@ -30,6 +30,14 @@ public class CategoryViewModel extends AndroidViewModel {
         return cRepository.getAllCategoryNames();
     }
 
+    public List<String> getAllIncomeCategoryNames() throws ExecutionException, InterruptedException{
+        return cRepository.getAllIncomeCategoryNames();
+    }
+
+    public List<String> getAllExpenseCategoryNames() throws ExecutionException, InterruptedException{
+        return cRepository.getAllExpenseCategoryNames();
+    }
+
     public void insertCategory(Category category) {
         cRepository.insertCategory(category);
     }

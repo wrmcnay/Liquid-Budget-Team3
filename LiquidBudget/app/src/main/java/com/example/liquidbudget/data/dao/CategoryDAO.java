@@ -26,6 +26,12 @@ public interface CategoryDAO {
     @Query("SELECT categoryName FROM categories")
     List<String> getAllCategoryNames();
 
+    @Query("SELECT categoryName FROM categories WHERE categoryType='Income'")
+    List<String> getAllIncomeCategoryNames();
+
+    @Query("SELECT categoryName FROM categories WHERE categoryType='Expense'")
+    List<String> getAllExpenseCategoryNames();
+
     @Insert
     void insertCategory(Category... categories);
 
