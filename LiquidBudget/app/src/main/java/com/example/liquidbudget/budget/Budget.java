@@ -103,7 +103,7 @@ public class Budget extends AppBaseActivity implements OnChartValueSelectedListe
                     double am = incomeViewModel.getSumTotal();
                     String name;
                     //for (Income inc : incomesList) { // each income on list
-                    name = "incomes";
+                    name = "Total Monthly Incomes";
                     entries.add(new PieEntry((float) am, name)); //create an new entry on the pie chart
                 } catch (ExecutionException e) {
                     e.printStackTrace();
@@ -147,7 +147,7 @@ public class Budget extends AppBaseActivity implements OnChartValueSelectedListe
                     double am = expenseViewModel.getSumTotal();
                     String name;
 
-                    name = "expenses";
+                    name = "Total Monthy Expenses";
                     entries.add(new PieEntry((float) am, name)); //create an new entry on the pie chart
                 } catch (ExecutionException e) {
                     e.printStackTrace();
