@@ -35,7 +35,7 @@ public class ExpenseViewModel extends AndroidViewModel {
     }
 
     public Double getSumTotal() throws ExecutionException, InterruptedException{
-        return eRepository.getSumTotal();
+        return eRepository.getSumTotal();// is this the sum of all expenses?
     }
 
     public void insert(Expense expense) {
