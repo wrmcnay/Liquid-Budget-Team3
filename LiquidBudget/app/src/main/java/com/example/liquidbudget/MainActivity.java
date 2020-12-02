@@ -1,6 +1,7 @@
 package com.example.liquidbudget;
 
 import android.os.Bundle;
+import android.text.InputFilter;
 import android.util.Log;
 import android.widget.TextView;
 
@@ -44,9 +45,12 @@ public class MainActivity extends AppBaseActivity {
         Double totalExpense;
         Double runningIncome;
         Double runningExpense;
+
         try{
             totalIncomeTextView.setText("0");
             totalIncome = categoryViewModel.getPlannedTotalByType("Income");
+            totalIncome = round(totalIncome, 2);
+
             if(totalIncome != 0){
                 totalIncomeTextView.setText(""+totalIncome);
             }
@@ -57,6 +61,7 @@ public class MainActivity extends AppBaseActivity {
         try{
             totalExpenseTextView.setText("0");
             totalExpense = categoryViewModel.getPlannedTotalByType("Expense");
+            totalExpense  = round(totalExpense, 2);
             if(totalExpense != 0){
                 totalExpenseTextView.setText(""+totalExpense);
             }
@@ -67,6 +72,7 @@ public class MainActivity extends AppBaseActivity {
         try{
             runningIncomeTextView.setText("0");
             runningIncome = incomeViewModel.getSumTotal();
+            runningIncome = round(runningIncome, 2);
             if(runningIncome != 0){
                 runningIncomeTextView.setText(""+runningIncome);
             }
@@ -77,6 +83,7 @@ public class MainActivity extends AppBaseActivity {
         try{
             runningExpenseTextView.setText("0");
             runningExpense = expenseViewModel.getSumTotal();
+            runningExpense = round(runningExpense, 2);
             if(runningExpense != 0){
                 runningExpenseTextView.setText(""+runningExpense);
             }
@@ -84,5 +91,14 @@ public class MainActivity extends AppBaseActivity {
             Log.e("ERROR", e.getMessage());
         }
 
+    }
+
+    public static double round(double value, int places) {
+        if (places < 0) throw new IllegalArgumentException();
+
+        long factor = (long) Math.pow(10, places);
+        value = value * factor;
+        long tmp = Math.round(value);
+        return (double) tmp / factor;
     }
 }
