@@ -2,7 +2,6 @@ package com.example.liquidbudget;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -11,18 +10,7 @@ import android.widget.RadioGroup;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import static com.example.liquidbudget.ViewCategoryActivity.EXTRA_DATA_UPDATE_CATEGORY_AMOUNT;
-import static com.example.liquidbudget.ViewCategoryActivity.EXTRA_DATA_UPDATE_CATEGORY_NAME;
-import static com.example.liquidbudget.ViewCategoryActivity.EXTRA_DATA_UPDATE_CATEGORY_TYPE;
-import static com.example.liquidbudget.ViewCategoryActivity.EXTRA_DATA_UPDATE_CATEGORY_ID;
-
 public class AddCategoryActivity extends AppCompatActivity {
-
-    public static final String EXTRA_CAT_NAME = "com.example.liquidbudget.EXTRA_CAT_NAME";
-    public static final String EXTRA_CAT_TYPE = "com.example.liquidbudget.EXTRA_CAT_TYPE";
-    public static final String EXTRA_CAT_AMOUNT = "com.example.liquidbudget.EXTRA_CAT_AMOUNT";
-
-    public static final String EXTRA_UPDATE_CATEGORY_ID = "com.example.liquidbudget.EXTRA_UPDATE_CAT_ID";
 
     private EditText editCategoryName;
     private EditText editCategoryAmount;
@@ -69,32 +57,6 @@ public class AddCategoryActivity extends AppCompatActivity {
 //            }
 //        });
 
-        final Bundle extras = getIntent().getExtras();
-
-        if(extras != null) {
-            String categoryName = extras.getString(EXTRA_DATA_UPDATE_CATEGORY_NAME, "");
-            double amount = extras.getDouble(EXTRA_DATA_UPDATE_CATEGORY_AMOUNT, 0);
-            String categoryType = extras.getString(EXTRA_DATA_UPDATE_CATEGORY_TYPE, "");
-            if (!categoryName.isEmpty()) {
-                editCategoryName.setText(categoryName);
-                editCategoryName.setSelection(categoryName.length());
-                editCategoryName.requestFocus();
-            }
-            if (amount != 0.0) {
-                editCategoryAmount.setText(String.valueOf(amount));
-                editCategoryAmount.setSelection(String.valueOf(amount).length());
-                editCategoryAmount.requestFocus();
-            }
-            if (!categoryType.isEmpty()) {
-                this.categoryType = categoryType;
-                if(categoryType.equals("Income"))
-                    editCategoryType.check(R.id.incomeRadio);
-                else
-                    editCategoryType.check(R.id.expenseRadio);
-                editCategoryType.requestFocus();
-            }
-        }
-
         createCategory.setOnClickListener(new View.OnClickListener(){
         @Override
         public void onClick(View view){
@@ -102,21 +64,12 @@ public class AddCategoryActivity extends AppCompatActivity {
             amount = Double.parseDouble(editCategoryAmount.getText().toString());
             type = categoryType;
             Intent intent = new Intent();
-            //intent.putExtra("Name", name);
-            //intent.putExtra("Amount", amount);
-            //intent.putExtra("Type", type);
-            intent.putExtra(EXTRA_CAT_NAME, name);
-            intent.putExtra(EXTRA_CAT_AMOUNT, amount);
-            intent.putExtra(EXTRA_CAT_TYPE, type);
-            if(extras != null && extras.containsKey(EXTRA_DATA_UPDATE_CATEGORY_ID)) {
-                int id = extras.getInt(EXTRA_DATA_UPDATE_CATEGORY_ID, -1);
-                if(id != -1) {
-                    intent.putExtra(EXTRA_UPDATE_CATEGORY_ID, id);
-                }
-            }
-
+            intent.putExtra("Name", name);
+            intent.putExtra("Amount", amount);
+            intent.putExtra("Type", type);
             setResult(RESULT_OK, intent);
             finish();
+            return;
         }
     });
 

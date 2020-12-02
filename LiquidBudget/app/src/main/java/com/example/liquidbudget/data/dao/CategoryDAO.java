@@ -18,7 +18,7 @@ public interface CategoryDAO {
     LiveData<Category> getCategoryById(int catID);
 
     @Query("SELECT * FROM categories WHERE categoryName=:catName LIMIT 1")
-    Category getCategoryByName(String catName);
+    LiveData<Category> getCategoryByName(String catName);
 
     @Query("SELECT * FROM categories")
     LiveData<List<Category>> getAllCategories();
