@@ -111,7 +111,8 @@ public abstract class AppBaseActivity extends AppCompatActivity implements MenuI
         int id = item.getItemId();
         switch (id) {
             case R.id.nav_home:
-                Intent homeIntent = new Intent(this, SpendingSavingPage.class);
+//                Intent homeIntent = new Intent(this, SpendingSavingPage.class);
+                Intent homeIntent = new Intent(this, MainActivity.class);
                 startActivity(homeIntent);
                 finish();
                 break;
@@ -119,6 +120,12 @@ public abstract class AppBaseActivity extends AppCompatActivity implements MenuI
                 //Intent budgetIntent = new Intent(this, SpendingSavingPage.class);
                 Intent budgetIntent = new Intent(this, Budget.class);
                 startActivity(budgetIntent);
+                if(!(this instanceof MainActivity))
+                    finish();
+                break;
+            case R.id.nav_analysis:
+                Intent analysisIntent = new Intent(this, SpendingSavingPage.class);
+                startActivity(analysisIntent);
                 if(!(this instanceof MainActivity))
                     finish();
                 break;

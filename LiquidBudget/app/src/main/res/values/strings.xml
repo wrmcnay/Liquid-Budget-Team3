@@ -50,6 +50,7 @@
     <string name="date">Date</string>
     <string name="finish">Finish</string>
     <string name="budget">Budget</string>
+    <string name="analysis">Analysis</string>
     <string name="categories">Categories</string>
     <string name="addingCategory">Let\'s create a new category:</string>
     <string name="catName">Category Name</string>

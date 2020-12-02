@@ -29,6 +29,9 @@ public interface IncomeDAO {
     @Query("SELECT CAST(SUM(amount) as DOUBLE) FROM incomes WHERE categoryName=:catName")
     Double getSumByCategory(String catName);
 
+    @Query("SELECT CAST(SUM(amount) as DOUBLE) FROM incomes")
+    Double getSumTotal();
+
     @Insert
     void insertIncome(Income... incomes);
 

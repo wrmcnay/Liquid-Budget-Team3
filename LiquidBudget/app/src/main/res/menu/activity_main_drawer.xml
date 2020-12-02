@@ -15,6 +15,11 @@
         android:title="@string/budget"/>
 
     <item
+        android:id="@+id/nav_analysis"
+        android:icon="@drawable/nav_pie_chart"
+        android:title="@string/analysis"/>
+
+    <item
         android:id="@+id/nav_category"
         android:icon="@drawable/ic_menu_category"
         android:title="@string/categories"/>

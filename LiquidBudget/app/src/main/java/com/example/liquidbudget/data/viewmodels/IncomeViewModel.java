@@ -34,6 +34,10 @@ public class IncomeViewModel extends AndroidViewModel {
         return mRepository.getSumByCategory(catName);
     }
 
+    public Double getSumTotal() throws ExecutionException, InterruptedException{
+        return mRepository.getSumTotal();
+    }
+
     public void insert(Income income) {
         mRepository.insert(income);
     }

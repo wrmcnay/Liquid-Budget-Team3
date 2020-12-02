@@ -44,6 +44,18 @@ public class CategoryRepository{
         return future.get();
     }
 
+
+    public Double getPlannedTotalByType(String catType) throws ExecutionException, InterruptedException {
+        Callable<Double> callable = new Callable<Double>() {
+            @Override
+            public Double call() throws Exception {
+                return categoryDAO.getPlannedTotalByType(catType);
+            }
+        };
+        Future<Double> future = Executors.newSingleThreadExecutor().submit(callable);
+        return future.get();
+    }
+
     public List<String> getAllIncomeCategoryNames() throws ExecutionException, InterruptedException{
         Callable<List<String>> callable = new Callable<List<String>>(){
             @Override

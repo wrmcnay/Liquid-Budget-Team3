@@ -26,6 +26,10 @@ public interface CategoryDAO {
     @Query("SELECT categoryName FROM categories")
     List<String> getAllCategoryNames();
 
+
+    @Query("SELECT CAST(SUM(categoryAmount) as DOUBLE) FROM categories WHERE categoryType=:catType")
+    Double getPlannedTotalByType(String catType);
+
     @Query("SELECT categoryName FROM categories WHERE categoryType='Income'")
     List<String> getAllIncomeCategoryNames();
 
@@ -46,4 +50,5 @@ public interface CategoryDAO {
 
     @Query("DELETE FROM categories WHERE categoryName=:catName")
     void deleteCategoryByName(String catName);
+
 }
