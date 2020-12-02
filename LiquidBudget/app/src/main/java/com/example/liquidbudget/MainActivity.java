@@ -27,7 +27,7 @@ public class MainActivity extends AppBaseActivity {
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
         if (account != null) {
             String userName = account.getDisplayName();
-            TextView homepagehello = findViewById(R.id.homepagehello);
+            TextView homepagehello = findViewById(R.id.homepageHello);
             homepagehello.setText(getString(R.string.homepage_hello, userName));
         }
 

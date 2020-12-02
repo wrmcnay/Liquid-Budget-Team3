@@ -122,6 +122,9 @@ public class ViewCategoryActivity extends AppCompatActivity {
             Log.e("ERROR", e.getMessage());
         }
 
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close);
+        setTitle("View Category");
+
 //        deleteCategory.setOnClickListener(new View.OnClickListener(){
 //            private final static String REQUEST_COLOR = "";
 //            @Override
