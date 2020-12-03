@@ -85,8 +85,8 @@ public class AddExpenseActivity extends AppBaseActivity {
         categoryViewModel = new ViewModelProvider(this).get(CategoryViewModel.class);
         try {
             List<String> catList = categoryViewModel.getAllExpenseCategoryNames();
+            categories = new ArrayList<>();
             if (catList.size() > 0) {
-                categories = new ArrayList<>();
                 categories = (ArrayList<String>) catList;
                 //Arrays.sort(categories);
             }
