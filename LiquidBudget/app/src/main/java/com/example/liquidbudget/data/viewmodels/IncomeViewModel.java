@@ -35,7 +35,7 @@ public class IncomeViewModel extends AndroidViewModel {
     }
 
     public Double getSumTotal() throws ExecutionException, InterruptedException{
-        return mRepository.getSumTotal();
+        return mRepository.getSumTotal();//is this the added sum of all incomes?
     }
 
     public void insert(Income income) {
