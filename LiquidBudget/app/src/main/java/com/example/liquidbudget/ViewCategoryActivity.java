@@ -53,7 +53,7 @@ public class ViewCategoryActivity extends AppCompatActivity {
         amountType.setText(amountText);
 
         TextView amountPlanned = (TextView) findViewById(R.id.amount_planned_for_category);
-        amountPlanned.setText("" + categoryAmount);
+        amountPlanned.setText(String.format(("%.2f"), categoryAmount));
 
         Button editCategory = (Button) findViewById(R.id.editCategory);
 
@@ -74,10 +74,10 @@ public class ViewCategoryActivity extends AppCompatActivity {
                 amount = 0.0;
             }
             TextView totalAmount = (TextView) findViewById(R.id.total_amount_for_category);
-            if(amount == 0.0) {
-                totalAmount.setText("0");
+            if(amount == null) {
+                totalAmount.setText("0.00");
             } else {
-                totalAmount.setText("" + amount);
+                totalAmount.setText(String.format(("%.2f"), amount));
             }
         } catch(Exception e){
             Log.e("ERROR", e.getMessage());
