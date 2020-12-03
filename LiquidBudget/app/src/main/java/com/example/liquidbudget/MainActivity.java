@@ -47,7 +47,7 @@ public class MainActivity extends AppBaseActivity {
         Double runningExpense;
 
         try{
-            totalIncomeTextView.setText("0");
+            totalIncomeTextView.setText("0.00");
             totalIncome = categoryViewModel.getPlannedTotalByType("Income");
             totalIncome = round(totalIncome, 2);
 
@@ -59,7 +59,7 @@ public class MainActivity extends AppBaseActivity {
         }
 
         try{
-            totalExpenseTextView.setText("0");
+            totalExpenseTextView.setText("0.00");
             totalExpense = categoryViewModel.getPlannedTotalByType("Expense");
             totalExpense  = round(totalExpense, 2);
             if(totalExpense != 0){
@@ -70,7 +70,7 @@ public class MainActivity extends AppBaseActivity {
         }
 
         try{
-            runningIncomeTextView.setText("0");
+            runningIncomeTextView.setText("0.00");
             runningIncome = incomeViewModel.getSumTotal();
             runningIncome = round(runningIncome, 2);
             if(runningIncome != 0){
@@ -81,7 +81,7 @@ public class MainActivity extends AppBaseActivity {
         }
 
         try{
-            runningExpenseTextView.setText("0");
+            runningExpenseTextView.setText("0.00");
             runningExpense = expenseViewModel.getSumTotal();
             runningExpense = round(runningExpense, 2);
             if(runningExpense != 0){
