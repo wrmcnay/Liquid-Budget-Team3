@@ -25,14 +25,14 @@
         android:title="@string/categories"/>
 
     <item
-        android:id="@+id/nav_incExp"
-        android:icon="@drawable/ic_menu_addincexp"
-        android:title="Expenses"/>
-
-    <item
         android:id="@+id/nav_incomes"
         android:icon="@drawable/ic_menu_income"
         android:title="Incomes"/>
+
+    <item
+        android:id="@+id/nav_incExp"
+        android:icon="@drawable/ic_menu_expense"
+        android:title="Expenses"/>
 
     <item
         android:id="@+id/nav_settings"
