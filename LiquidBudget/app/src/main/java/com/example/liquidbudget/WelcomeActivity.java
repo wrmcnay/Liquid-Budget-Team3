@@ -70,10 +70,10 @@ public class WelcomeActivity extends AppCompatActivity {
                 if (!userAccountViewModel.getUserByGoogleId(account.getId())){
                     UserAccount newUser = new UserAccount(account.getDisplayName(), account.getEmail(), account.getId());
                     userAccountViewModel.insert(newUser);
-                    Intent intent = new Intent(this, Budget.class);
+                    Intent intent = new Intent(this, MainActivity.class);
                     startActivity(intent);
                 } else {
-                    Intent intent = new Intent(this, SpendingSavingPage.class);
+                    Intent intent = new Intent(this, MainActivity.class);
                     startActivity(intent);
                 }
             } catch (Exception e) {
