@@ -9,20 +9,20 @@
         android:icon="@drawable/ic_menu_home"
         android:title="@string/home"/>
 
-    <item
+    <!--<item
         android:id="@+id/nav_budget"
         android:icon="@drawable/ic_menu_spending"
-        android:title="@string/budget"/>
-
-    <item
-        android:id="@+id/nav_analysis"
-        android:icon="@drawable/nav_pie_chart"
-        android:title="@string/analysis"/>
+        android:title="@string/budget"/>-->
 
     <item
         android:id="@+id/nav_category"
         android:icon="@drawable/ic_menu_category"
         android:title="@string/categories"/>
+
+    <item
+        android:id="@+id/nav_analysis"
+        android:icon="@drawable/nav_pie_chart"
+        android:title="Analysis"/>
 
     <item
         android:id="@+id/nav_incomes"

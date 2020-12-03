@@ -19,8 +19,7 @@ import com.example.liquidbudget.ExpenseDisplayActivity;
 import com.example.liquidbudget.IncomeDisplayActivity;
 import com.example.liquidbudget.MainActivity;
 import com.example.liquidbudget.R;
-import com.example.liquidbudget.SpendingSavingPage;
-import com.example.liquidbudget.SwipingGraphsTesting.GraphActivity;
+import com.example.liquidbudget.GraphicalAnalysis.GraphActivity;
 import com.example.liquidbudget.budget.Budget;
 import com.example.liquidbudget.settings.SettingsActivity;
 import com.google.android.material.navigation.NavigationView;
@@ -116,13 +115,12 @@ public abstract class AppBaseActivity extends AppCompatActivity implements MenuI
                 startActivity(homeIntent);
                 finish();
                 break;
-            case R.id.nav_budget:
-                //Intent budgetIntent = new Intent(this, SpendingSavingPage.class);
-                Intent budgetIntent = new Intent(this, Budget.class);
-                startActivity(budgetIntent);
-                if(!(this instanceof MainActivity))
-                    finish();
-                break;
+            //case R.id.nav_budget:
+                //Intent budgetIntent = new Intent(this, Budget.class);
+                //startActivity(budgetIntent);
+                //if(!(this instanceof MainActivity))
+                    //finish();
+                //break;
             case R.id.nav_analysis:
                 Intent analysisIntent = new Intent(this, GraphActivity.class);
                 startActivity(analysisIntent);
@@ -153,12 +151,6 @@ public abstract class AppBaseActivity extends AppCompatActivity implements MenuI
                 if(!(this instanceof MainActivity))
                     finish();
                 break;
-            //case R.id.nav_graphs:
-            //    Intent graphsIntent = new Intent(this, GraphActivity.class);
-            //    startActivity(graphsIntent);
-             //   if(!(this instanceof MainActivity))
-             //       finish();
-             //   break;
         }
         mDrawerLayout.closeDrawers();
         return false;

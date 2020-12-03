@@ -1,4 +1,4 @@
-package com.example.liquidbudget.SwipingGraphsTesting;
+package com.example.liquidbudget.GraphicalAnalysis;
 
 import android.os.Bundle;
 
