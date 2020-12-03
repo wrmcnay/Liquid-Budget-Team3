@@ -113,7 +113,7 @@ public class ExpenseDisplayActivity extends AppBaseActivity {
             Toast.makeText(this, "Expense Added!", Toast.LENGTH_SHORT).show();
             }
         else if(resultCode == RESULT_OK && requestCode == UPDATE_EXPENSE_ACTIVITY_REQUEST_CODE && data != null) {
-            String updateName = data.getStringExtra(AddExpenseActivity.EXTRA_EXP_CAT_NAME);
+            String updateName = data.getStringExtra(AddExpenseActivity.EXTRA_EXP_NAME);
             String updateCategory = data.getStringExtra(AddExpenseActivity.EXTRA_EXP_CAT_NAME);
             double updateAmount = data.getDoubleExtra(AddExpenseActivity.EXTRA_EXP_AMOUNT, 0);
             String updateDate = data.getStringExtra(AddExpenseActivity.EXTRA_EXP_DATE);

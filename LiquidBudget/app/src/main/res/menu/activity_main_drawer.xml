@@ -39,9 +39,4 @@
         android:icon="@drawable/ic_menu_settings"
         android:title="@string/settings"/>
 
-    <item
-        android:id="@+id/nav_graphs"
-        android:icon="@drawable/ic_menu_category"
-        android:title="Graphs Testing"/>
-
 </menu>

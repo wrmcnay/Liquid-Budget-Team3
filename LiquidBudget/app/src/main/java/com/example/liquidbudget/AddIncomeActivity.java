@@ -20,6 +20,7 @@ import com.example.liquidbudget.data.viewmodels.CategoryViewModel;
 import com.example.liquidbudget.ui.main.AppBaseActivity;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
@@ -40,14 +41,15 @@ public class AddIncomeActivity extends AppBaseActivity {
     public static final String EXTRA_UPDATE_INCOME_ID = "com.example.liquidbudget.EXTRA_UPDATE_INC_ID";
 
     private EditText editIncName;
-    private EditText editIncCat;
     private EditText editIncAmount;
     private EditText editIncDate;
 
     private CategoryViewModel categoryViewModel;
-    private String[] categories = {"default"};
+    private ArrayList<String> categories;
 
     final Calendar myIncCalendar = Calendar.getInstance();
+    Bundle extras;
+    Spinner categorySpinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,9 +57,9 @@ public class AddIncomeActivity extends AppBaseActivity {
         setContentView(R.layout.activity_add_income);
 
         editIncName = findViewById(R.id.inc_name_edit_text);
-        editIncCat = findViewById(R.id.inc_cat_edit_text);
         editIncAmount = findViewById(R.id.inc_amount_edit_text);
         editIncDate = findViewById(R.id.inc_date_edit_text);
+        categorySpinner = findViewById(R.id.category_spinner_income);
 
         DatePickerDialog.OnDateSetListener datePickerInc = new DatePickerDialog.OnDateSetListener() {
             @Override
@@ -78,58 +80,26 @@ public class AddIncomeActivity extends AppBaseActivity {
 
         editIncAmount.setFilters(new InputFilter[]{ new DecimalDigitsInputFilter(9, 2)});
 
-        final Bundle extras = getIntent().getExtras();
-
-        if (extras != null) {
-            String incomeName = extras.getString(EXTRA_DATA_UPDATE_INCOME_NAME, "");
-            String categoryName = extras.getString(EXTRA_DATA_UPDATE_INCOME_CATEGORY, "");
-            double amount = extras.getDouble(EXTRA_DATA_UPDATE_INCOME_AMOUNT, 0);
-            String date = extras.getString(EXTRA_DATA_UPDATE_INCOME_DATE, "");
-            if (!incomeName.isEmpty()) {
-                editIncName.setText(incomeName);
-                editIncName.setSelection(incomeName.length());
-                editIncName.requestFocus();
-            }
-            if (!categoryName.isEmpty()) {
-                editIncCat.setText(categoryName);
-                editIncCat.setSelection(categoryName.length());
-                editIncCat.requestFocus();
-            }
-            if (amount != 0.0) {
-                editIncAmount.setText(String.valueOf(amount));
-                editIncAmount.setSelection(String.valueOf(amount).length());
-                editIncAmount.requestFocus();
-            }
-            if (!date.isEmpty()) {
-                editIncDate.setText(date);
-                editIncDate.setSelection(date.length());
-                editIncDate.requestFocus();
-            }
-        }
-
         categoryViewModel = new ViewModelProvider(this).get(CategoryViewModel.class);
         try {
             List<String> catList = categoryViewModel.getAllIncomeCategoryNames();
-            catList.add(0, "");
+            categories = new ArrayList<>();
             if (catList.size() > 0) {
-                categories = new String[catList.size()];
-                categories = catList.toArray(categories);
+                categories = (ArrayList<String>) catList;
             }
         } catch(Exception e){
             Log.e("ERROR", e.getMessage());
         }
 
-        Spinner categorySpinner = (Spinner) findViewById(R.id.category_spinner_income);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(AddIncomeActivity.this,
                 android.R.layout.simple_spinner_item, categories);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         categorySpinner.setAdapter(adapter);
-        categorySpinner.setSelection(adapter.getPosition(editIncCat.getText().toString()));
 
         categorySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                editIncCat.setText(categorySpinner.getSelectedItem().toString());
+                //Things can be done here if needed
             }
 
             @Override
@@ -137,6 +107,8 @@ public class AddIncomeActivity extends AppBaseActivity {
 
             }
         });
+
+        tryDataPopulation();
 
         final Button button = findViewById(R.id.inc_button_save);
 
@@ -146,7 +118,7 @@ public class AddIncomeActivity extends AppBaseActivity {
                 if (TextUtils.isEmpty(editIncName.getText())) {
                     setResult(RESULT_CANCELED, updateIntent);
                 }
-                if (TextUtils.isEmpty(editIncCat.getText())) {
+               if (TextUtils.isEmpty(categorySpinner.getSelectedItem().toString())) {
                     setResult(RESULT_CANCELED, updateIntent);
                 }
                 if (TextUtils.isEmpty(editIncAmount.getText())) {
@@ -156,7 +128,7 @@ public class AddIncomeActivity extends AppBaseActivity {
                     setResult(RESULT_CANCELED, updateIntent);
                 } else {
                     String incName = editIncName.getText().toString();
-                    String catName = editIncCat.getText().toString();
+                    String catName = categorySpinner.getSelectedItem().toString();
                     double amount = Double.parseDouble(editIncAmount.getText().toString());
                     String date = editIncDate.getText().toString();
 
@@ -178,6 +150,34 @@ public class AddIncomeActivity extends AppBaseActivity {
 
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close);
         setTitle("Add Income");
+    }
+
+    private void tryDataPopulation(){
+        extras = getIntent().getExtras();
+        if (extras != null) {
+            String incomeName = extras.getString(EXTRA_DATA_UPDATE_INCOME_NAME, "");
+            String categoryName = extras.getString(EXTRA_DATA_UPDATE_INCOME_CATEGORY, "");
+            double amount = extras.getDouble(EXTRA_DATA_UPDATE_INCOME_AMOUNT, 0);
+            String date = extras.getString(EXTRA_DATA_UPDATE_INCOME_DATE, "");
+            if (!incomeName.isEmpty()) {
+                editIncName.setText(incomeName);
+                editIncName.setSelection(incomeName.length());
+                editIncName.requestFocus();
+            }
+            if (!categoryName.isEmpty()) {
+                categorySpinner.setSelection(categories.indexOf(categoryName));
+            }
+            if (amount != 0.0) {
+                editIncAmount.setText(String.valueOf(amount));
+                editIncAmount.setSelection(String.valueOf(amount).length());
+                editIncAmount.requestFocus();
+            }
+            if (!date.isEmpty()) {
+                editIncDate.setText(date);
+                editIncDate.setSelection(date.length());
+                editIncDate.requestFocus();
+            }
+        }
     }
 
     private void updateLabel() {
