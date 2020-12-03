@@ -168,7 +168,7 @@ public class AddIncomeActivity extends AppBaseActivity {
                 categorySpinner.setSelection(categories.indexOf(categoryName));
             }
             if (amount != 0.0) {
-                editIncAmount.setText(String.valueOf(amount));
+                editIncAmount.setText(String.format(("%.2f"), amount));
                 editIncAmount.setSelection(String.valueOf(amount).length());
                 editIncAmount.requestFocus();
             }
