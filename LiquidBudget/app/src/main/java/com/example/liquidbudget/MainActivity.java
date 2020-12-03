@@ -49,9 +49,9 @@ public class MainActivity extends AppBaseActivity {
         try{
             totalIncomeTextView.setText("0");
             totalIncome = categoryViewModel.getPlannedTotalByType("Income");
-            totalIncome = round(totalIncome, 2);
 
-            if(totalIncome != 0){
+            if(totalIncome != null){
+                totalIncome = round(totalIncome, 2);
                 totalIncomeTextView.setText(String.format(("%.2f"), totalIncome));
             }
         } catch(Exception e){
@@ -61,8 +61,8 @@ public class MainActivity extends AppBaseActivity {
         try{
             totalExpenseTextView.setText("0");
             totalExpense = categoryViewModel.getPlannedTotalByType("Expense");
-            totalExpense  = round(totalExpense, 2);
-            if(totalExpense != 0){
+            if(totalExpense != null){
+                totalExpense  = round(totalExpense, 2);
                 totalExpenseTextView.setText(String.format(("%.2f"), totalExpense));
             }
         } catch(Exception e){
@@ -72,8 +72,8 @@ public class MainActivity extends AppBaseActivity {
         try{
             runningIncomeTextView.setText("0");
             runningIncome = incomeViewModel.getSumTotal();
-            runningIncome = round(runningIncome, 2);
-            if(runningIncome != 0){
+            if(runningIncome != null){
+                runningIncome = round(runningIncome, 2);
                 runningIncomeTextView.setText(String.format(("%.2f"), runningIncome));
             }
         } catch(Exception e){
@@ -83,10 +83,11 @@ public class MainActivity extends AppBaseActivity {
         try{
             runningExpenseTextView.setText("0");
             runningExpense = expenseViewModel.getSumTotal();
-            runningExpense = round(runningExpense, 2);
-            if(runningExpense != 0){
+
+            if(runningExpense != null) {
+                runningExpense = round(runningExpense, 2);
                 runningExpenseTextView.setText(String.format(("%.2f"), runningExpense));
-            }
+           }
         } catch(Exception e){
             Log.e("ERROR", e.getMessage());
         }
