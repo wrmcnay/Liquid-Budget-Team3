@@ -124,7 +124,7 @@ public abstract class AppBaseActivity extends AppCompatActivity implements MenuI
                     finish();
                 break;
             case R.id.nav_analysis:
-                Intent analysisIntent = new Intent(this, SpendingSavingPage.class);
+                Intent analysisIntent = new Intent(this, GraphActivity.class);
                 startActivity(analysisIntent);
                 if(!(this instanceof MainActivity))
                     finish();
@@ -153,12 +153,12 @@ public abstract class AppBaseActivity extends AppCompatActivity implements MenuI
                 if(!(this instanceof MainActivity))
                     finish();
                 break;
-            case R.id.nav_graphs:
-                Intent graphsIntent = new Intent(this, GraphActivity.class);
-                startActivity(graphsIntent);
-                if(!(this instanceof MainActivity))
-                    finish();
-                break;
+            //case R.id.nav_graphs:
+            //    Intent graphsIntent = new Intent(this, GraphActivity.class);
+            //    startActivity(graphsIntent);
+             //   if(!(this instanceof MainActivity))
+             //       finish();
+             //   break;
         }
         mDrawerLayout.closeDrawers();
         return false;

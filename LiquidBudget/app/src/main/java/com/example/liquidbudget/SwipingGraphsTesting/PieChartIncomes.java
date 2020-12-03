@@ -127,8 +127,8 @@ public class PieChartIncomes extends SimpleFragment {
         colors.add(Color.rgb(135, 190, 177));
         colors.add(Color.rgb(116, 159, 214));
         colors.add(Color.rgb(206, 139, 134));
-        colors.add(Color.rgb(185, 225, 213));
-        colors.add(Color.rgb(235, 140, 157));
+        colors.add(Color.rgb(165, 225, 173));
+        colors.add(Color.rgb(205, 140, 197));
         colors.add(Color.rgb(110, 150, 125));
 
         for (int c : ColorTemplate.VORDIPLOM_COLORS)
