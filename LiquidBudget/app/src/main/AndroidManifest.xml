@@ -17,7 +17,8 @@
         <activity android:name=".settings.BankingActivity" />
         <activity android:name=".settings.NotificationsActivity" />
         <activity android:name=".settings.AccountActivity" />
-        <activity android:name=".settings.SettingsActivity" />
+        <activity android:name=".settings.SettingsActivity"
+            android:label="Settings"/>
         <activity android:name=".AddExpenseActivity" />
         <activity android:name=".budget.Budget" />
         <activity
