@@ -47,17 +47,14 @@ public class SettingsActivity extends AppBaseActivity {
                 .requestEmail()
                 .build();
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
-
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
 
         Zendesk.INSTANCE.init(this, "https://liquidbudge.zendesk.com",
                 "50ab7f8eda98e07ab9e83c06d976bcd470ea5ab2128fcec6",
                 "mobile_sdk_client_91f28b51f26c0aac5e49");
 
-        if(account != null) {
-            Identity identity = new JwtIdentity(account.getId());
-            Zendesk.INSTANCE.setIdentity(identity);
-        }
+        Identity identity = new AnonymousIdentity();
+        Zendesk.INSTANCE.setIdentity(identity);
 
         Support.INSTANCE.init(Zendesk.INSTANCE);
 
