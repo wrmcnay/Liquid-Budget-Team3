@@ -18,6 +18,8 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.liquidbudget.data.viewmodels.CategoryViewModel;
 import com.example.liquidbudget.ui.main.AppBaseActivity;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -46,6 +48,8 @@ public class AddExpenseActivity extends AppBaseActivity {
     private EditText editExpDate;
     private Spinner categorySpinner;
 
+    private String googleID;
+
     private CategoryViewModel categoryViewModel;
     private ArrayList<String> categories;
 
@@ -56,6 +60,10 @@ public class AddExpenseActivity extends AppBaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_expense);
+
+        GoogleSignInAccount googleAccount = GoogleSignIn.getLastSignedInAccount(this);
+        if(googleAccount != null)
+            googleID = googleAccount.getId();
 
         editExpName = findViewById(R.id.exp_name_edit_text);
         editExpAmount = findViewById(R.id.exp_amount_edit_text);
@@ -83,15 +91,17 @@ public class AddExpenseActivity extends AppBaseActivity {
 
 
         categoryViewModel = new ViewModelProvider(this).get(CategoryViewModel.class);
-        try {
-            List<String> catList = categoryViewModel.getAllExpenseCategoryNames();
-            categories = new ArrayList<>();
-            if (catList.size() > 0) {
-                categories = (ArrayList<String>) catList;
-                //Arrays.sort(categories);
+        if(googleAccount != null) {
+            try {
+                List<String> catList = categoryViewModel.getAllExpenseCategoryNamesByGoogleId(googleID);
+                categories = new ArrayList<>();
+                if (catList.size() > 0) {
+                    categories = (ArrayList<String>) catList;
+                    //Arrays.sort(categories);
+                }
+            } catch (Exception e) {
+                Log.e("ERROR", e.getMessage());
             }
-        } catch (Exception e) {
-            Log.e("ERROR", e.getMessage());
         }
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(AddExpenseActivity.this, android.R.layout.simple_spinner_item, categories);

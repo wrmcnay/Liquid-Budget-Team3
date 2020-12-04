@@ -48,7 +48,7 @@ public class MainActivity extends AppBaseActivity {
 
         try{
             totalIncomeTextView.setText("0.00");
-            totalIncome = categoryViewModel.getPlannedTotalByType("Income");
+            totalIncome = categoryViewModel.getPlannedTotalByType("Income", account.getId());
 
             if(totalIncome != null){
                 totalIncome = round(totalIncome, 2);
@@ -60,7 +60,7 @@ public class MainActivity extends AppBaseActivity {
 
         try{
             totalExpenseTextView.setText("0.00");
-            totalExpense = categoryViewModel.getPlannedTotalByType("Expense");
+            totalExpense = categoryViewModel.getPlannedTotalByType("Expense", account.getId());
             if(totalExpense != null){
                 totalExpense  = round(totalExpense, 2);
                 totalExpenseTextView.setText(String.format(("%.2f"), totalExpense));

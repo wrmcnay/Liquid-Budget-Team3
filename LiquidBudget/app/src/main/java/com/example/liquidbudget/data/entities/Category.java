@@ -26,21 +26,26 @@ public class Category {
     @ColumnInfo(name="categoryColor")
     private String categoryColor;
 
+    @ColumnInfo(name="googleID")
+    private String googleID;
 
-    public Category(String categoryName, Double categoryAmount, String categoryType, String categoryColor){
+
+    public Category(String categoryName, Double categoryAmount, String categoryType, String categoryColor, String googleID){
         this.categoryName = categoryName;
         this.categoryType = categoryType;
         this.categoryAmount = categoryAmount;
         this.categoryColor = categoryColor;
+        this.googleID = googleID;
     }
 
     @Ignore
-    public Category(int categoryID, String categoryName,  Double categoryAmount, String categoryType, String categoryColor){
+    public Category(int categoryID, String categoryName,  Double categoryAmount, String categoryType, String categoryColor, String googleID){
         this.categoryID = categoryID;
         this.categoryName = categoryName;
         this.categoryType = categoryType;
         this.categoryAmount = categoryAmount;
         this.categoryColor = categoryColor;
+        this.googleID = googleID;
     }
 
     public int getCategoryID() {
@@ -74,6 +79,14 @@ public class Category {
     public Double getCategoryAmount(){return categoryAmount; }
 
     public void setCategoryAmount(Double categoryAmount){ this.categoryAmount = categoryAmount;}
+
+    public String getGoogleID() {
+        return googleID;
+    }
+
+    public void setGoogleID(String googleID) {
+        this.categoryID = categoryID;
+    }
 
     @Override
     public String toString() {

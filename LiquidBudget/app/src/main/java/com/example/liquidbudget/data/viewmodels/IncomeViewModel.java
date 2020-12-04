@@ -30,12 +30,12 @@ public class IncomeViewModel extends AndroidViewModel {
         return mRepository.getAllIncomesByGoogleId(gid);
     }
 
-    public LiveData<List<Income>> getIncomesByCategory(String catName) throws ExecutionException, InterruptedException{
-        return mRepository.getIncomesByCategory(catName);
+    public LiveData<List<Income>> getIncomesByCategory(String catName, String gid) throws ExecutionException, InterruptedException{
+        return mRepository.getIncomesByCategory(catName, gid);
     }
 
-    public Double getSumByCategory(String catName) throws ExecutionException, InterruptedException{
-        return mRepository.getSumByCategory(catName);
+    public Double getSumByCategory(String catName, String gid) throws ExecutionException, InterruptedException{
+        return mRepository.getSumByCategory(catName, gid);
     }
 
     public Double getSumTotal() throws ExecutionException, InterruptedException{

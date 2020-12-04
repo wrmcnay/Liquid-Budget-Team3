@@ -50,11 +50,11 @@ public class ExpenseRepository {
         });
     }
 
-    public LiveData<List<Expense>> getExpensesByCategory(String catName) throws ExecutionException, InterruptedException{
+    public LiveData<List<Expense>> getExpensesByCategory(String catName, String gid) throws ExecutionException, InterruptedException{
         Callable<LiveData<List<Expense>>> callable = new Callable<LiveData<List<Expense>>>(){
             @Override
             public LiveData<List<Expense>> call() throws Exception{
-                return expenseDAO.getExpensesByCategory(catName);
+                return expenseDAO.getExpensesByCategory(catName, gid);
             }
         };
         Future<LiveData<List<Expense>>> future = Executors.newSingleThreadExecutor().submit(callable);
@@ -76,11 +76,11 @@ public class ExpenseRepository {
         return future.get();
     }
 
-    public Double getSumByCategory(String catName) throws ExecutionException, InterruptedException{
+    public Double getSumByCategory(String catName, String gid) throws ExecutionException, InterruptedException{
         Callable<Double> callable = new Callable<Double>(){
             @Override
             public Double call() throws Exception{
-                return expenseDAO.getSumByCategory(catName);
+                return expenseDAO.getSumByCategory(catName, gid);
             }
         };
         Future<Double> future = Executors.newSingleThreadExecutor().submit(callable);

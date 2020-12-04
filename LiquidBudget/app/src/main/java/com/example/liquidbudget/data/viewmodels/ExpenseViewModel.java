@@ -30,12 +30,12 @@ public class ExpenseViewModel extends AndroidViewModel {
         return eRepository.getAllExpensesByGoogleId(gid);
     }
 
-    public LiveData<List<Expense>> getExpensesByCategory(String catName) throws ExecutionException, InterruptedException{
-        return eRepository.getExpensesByCategory(catName);
+    public LiveData<List<Expense>> getExpensesByCategory(String catName, String gid) throws ExecutionException, InterruptedException{
+        return eRepository.getExpensesByCategory(catName, gid);
     }
 
-    public Double getSumByCategory(String catName) throws ExecutionException, InterruptedException{
-        return eRepository.getSumByCategory(catName);
+    public Double getSumByCategory(String catName, String gid) throws ExecutionException, InterruptedException{
+        return eRepository.getSumByCategory(catName, gid);
     }
 
     public Double getSumTotal() throws ExecutionException, InterruptedException{

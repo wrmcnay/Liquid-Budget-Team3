@@ -17,9 +17,12 @@ import com.example.liquidbudget.data.entities.Category;
 import com.example.liquidbudget.data.viewmodels.CategoryViewModel;
 import com.example.liquidbudget.ui.DataAdapters.CategoryAdapter;
 import com.example.liquidbudget.ui.main.AppBaseActivity;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 public class CategoryActivity extends AppBaseActivity {
     public static final String CATEGORY_NAME = "com.example.liquidbudget.CATEGORY_NAME";
@@ -29,6 +32,7 @@ public class CategoryActivity extends AppBaseActivity {
     private String newCatName = "";
     private String newCatType = "";
     private Double newCatAmount = 0.0;
+    private String googleID;
 
 
     @Override
@@ -44,14 +48,26 @@ public class CategoryActivity extends AppBaseActivity {
         CategoryAdapter adapter = new CategoryAdapter();
         recyclerView.setAdapter(adapter);
 
+        GoogleSignInAccount googleAccount = GoogleSignIn.getLastSignedInAccount(this);
+        if(googleAccount != null)
+            googleID = googleAccount.getId();
+
         //Database
         categoryViewModel = new ViewModelProvider(this).get(CategoryViewModel.class);
-        categoryViewModel.getAllCategories().observe(this, new Observer<List<Category>>() {
-            @Override
-            public void onChanged(List<Category> categoryList) {
-                adapter.setCategories(categoryList);
+        if(googleAccount != null) {
+            try {
+                categoryViewModel.getAllCategoriesByGoogleId(googleID).observe(this, new Observer<List<Category>>() {
+                    @Override
+                    public void onChanged(List<Category> categoryList) {
+                        adapter.setCategories(categoryList);
+                    }
+                });
+            } catch (ExecutionException e) {
+                e.printStackTrace();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
-        });
+        }
 
         ItemTouchHelper helper = new ItemTouchHelper(
                 new ItemTouchHelper.SimpleCallback(0,
@@ -92,6 +108,7 @@ public class CategoryActivity extends AppBaseActivity {
                 viewActivity.putExtra("CategoryName", catName);
                 viewActivity.putExtra("CategoryType", catType);
                 viewActivity.putExtra("CategoryAmount", catAmount);
+                viewActivity.putExtra("googleid", googleID);
                 startActivity(viewActivity);
             }
         });
@@ -129,7 +146,7 @@ public class CategoryActivity extends AppBaseActivity {
                 newCatType = data.getStringExtra("Type");
                 newCatAmount = data.getDoubleExtra("Amount", 0.0);
 
-                Category category = new Category(newCatName, newCatAmount, newCatType, " ");
+                Category category = new Category(newCatName, newCatAmount, newCatType, " ", googleID);
                 categoryViewModel.insertCategory(category);
                 Toast.makeText(CategoryActivity.this, "Category Created", Toast.LENGTH_SHORT).show();
             } else {

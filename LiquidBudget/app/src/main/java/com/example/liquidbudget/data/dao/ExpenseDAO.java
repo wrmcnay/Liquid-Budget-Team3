@@ -35,11 +35,11 @@ public interface ExpenseDAO {
     @Query("DELETE FROM expenses")
     void deleteAllExpenses();
 
-    @Query("SELECT * FROM expenses WHERE categoryName=:catName")
-    LiveData<List<Expense>> getExpensesByCategory(String catName);
+    @Query("SELECT * FROM expenses WHERE categoryName=:catName AND googleID=:googleID")
+    LiveData<List<Expense>> getExpensesByCategory(String catName, String googleID);
 
-    @Query("SELECT CAST(SUM(amount) as DOUBLE) FROM expenses WHERE categoryName=:catName")
-    Double getSumByCategory(String catName);
+    @Query("SELECT CAST(SUM(amount) as DOUBLE) FROM expenses WHERE categoryName=:catName AND googleID=:googleID")
+    Double getSumByCategory(String catName, String googleID);
 
     @Query("SELECT CAST(SUM(amount) as DOUBLE) FROM expenses")
     Double getSumTotal();

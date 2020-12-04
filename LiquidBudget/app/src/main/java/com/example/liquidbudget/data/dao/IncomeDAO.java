@@ -26,11 +26,11 @@ public interface IncomeDAO {
     @Query("SELECT amount FROM incomes WHERE incomeID=:incID")
     LiveData<List<Double>> getAmountByIncID(int incID);
 
-    @Query("SELECT * from incomes WHERE categoryName=:catName")
-    LiveData<List<Income>> getIncomesByCategory(String catName);
+    @Query("SELECT * from incomes WHERE categoryName=:catName AND googleID=:googleID")
+    LiveData<List<Income>> getIncomesByCategory(String catName, String googleID);
 
-    @Query("SELECT CAST(SUM(amount) as DOUBLE) FROM incomes WHERE categoryName=:catName")
-    Double getSumByCategory(String catName);
+    @Query("SELECT CAST(SUM(amount) as DOUBLE) FROM incomes WHERE categoryName=:catName AND googleID=:googleID")
+    Double getSumByCategory(String catName, String googleID);
 
     @Query("SELECT CAST(SUM(amount) as DOUBLE) FROM incomes")
     Double getSumTotal();

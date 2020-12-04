@@ -18,6 +18,8 @@ import com.example.liquidbudget.data.viewmodels.ExpenseViewModel;
 import com.example.liquidbudget.data.viewmodels.IncomeViewModel;
 import com.example.liquidbudget.ui.DataAdapters.ExpenseAdapter;
 import com.example.liquidbudget.ui.DataAdapters.IncomeAdapter;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 
 import java.util.List;
 
@@ -27,13 +29,20 @@ public class ViewCategoryActivity extends AppCompatActivity {
     private IncomeViewModel incomeViewModel;
     private CategoryViewModel categoryViewModel;
 
+    private String googleID;
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.category_view);
 
+        GoogleSignInAccount googleAccount = GoogleSignIn.getLastSignedInAccount(this);
+        if (googleAccount != null)
+            googleID = googleAccount.getId();
+
         String categoryName = getIntent().getStringExtra("CategoryName");
         String categoryType = getIntent().getStringExtra("CategoryType");
         Double categoryAmount = getIntent().getDoubleExtra("CategoryAmount", 0.0);
+        String googleID = getIntent().getStringExtra("googleid");
 
         String amountText = "None";
         if (categoryType != null && !categoryType.isEmpty()) {
@@ -64,24 +73,27 @@ public class ViewCategoryActivity extends AppCompatActivity {
 //        expenseList = expenseViewModel.getExpensesByCategory(categoryName);
 //        incomeList = incomeViewModel.getIncomesByCategory(categoryName);
 
-        try{
-            Double amount;
-            if (categoryType.equals("Income")){
-                amount = incomeViewModel.getSumByCategory(categoryName);
-            } else if (categoryType.equals("Expense")){
-                amount = expenseViewModel.getSumByCategory(categoryName);
-            } else {
-                amount = 0.0;
+        if (googleAccount != null) {
+            try {
+                Double amount;
+                if (categoryType.equals("Income")) {
+                    amount = incomeViewModel.getSumByCategory(categoryName, googleID);
+                } else if (categoryType.equals("Expense")) {
+                    amount = expenseViewModel.getSumByCategory(categoryName, googleID);
+                } else {
+                    amount = 0.0;
+                }
+                TextView totalAmount = (TextView) findViewById(R.id.total_amount_for_category);
+                if (amount == null) {
+                    totalAmount.setText("0.00");
+                } else {
+                    totalAmount.setText(String.format(("%.2f"), amount));
+                }
+            } catch (Exception e) {
+                Log.e("ERROR", e.getMessage());
             }
-            TextView totalAmount = (TextView) findViewById(R.id.total_amount_for_category);
-            if(amount == null) {
-                totalAmount.setText("0.00");
-            } else {
-                totalAmount.setText(String.format(("%.2f"), amount));
-            }
-        } catch(Exception e){
-            Log.e("ERROR", e.getMessage());
         }
+
 
         RecyclerView incomeRecyclerView = findViewById(R.id.incomeView);
         incomeRecyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -92,7 +104,7 @@ public class ViewCategoryActivity extends AppCompatActivity {
 
         incomeViewModel = new ViewModelProvider(this).get(IncomeViewModel.class);
         try {
-            incomeViewModel.getIncomesByCategory(categoryName).observe(this, new Observer<List<Income>>() {
+            incomeViewModel.getIncomesByCategory(categoryName, googleID).observe(this, new Observer<List<Income>>() {
                 @Override
                 public void onChanged(List<Income> incomesList) {
                     iAdapter.setIncomes(incomesList);
@@ -112,7 +124,7 @@ public class ViewCategoryActivity extends AppCompatActivity {
 
         expenseViewModel = new ViewModelProvider(this).get(ExpenseViewModel.class);
         try{
-            expenseViewModel.getExpensesByCategory(categoryName).observe(this, new Observer<List<Expense>>() {
+            expenseViewModel.getExpensesByCategory(categoryName, googleID).observe(this, new Observer<List<Expense>>() {
                 @Override
                 public void onChanged(List<Expense> expensesList) {
                     eAdapter.setExpenses(expensesList);

@@ -74,11 +74,11 @@ public class IncomeRepository {
         return amountByIncID;
     }
 
-    public Double getSumByCategory(String catName) throws ExecutionException, InterruptedException{
+    public Double getSumByCategory(String catName, String gid) throws ExecutionException, InterruptedException{
         Callable<Double> callable = new Callable<Double>(){
             @Override
             public Double call() throws Exception{
-                return incomeDAO.getSumByCategory(catName);
+                return incomeDAO.getSumByCategory(catName, gid);
             }
         };
         Future<Double> future = Executors.newSingleThreadExecutor().submit(callable);
@@ -107,11 +107,11 @@ public class IncomeRepository {
         return future.get();
     }
 
-    public LiveData<List<Income>> getIncomesByCategory(String catName) throws ExecutionException, InterruptedException{
+    public LiveData<List<Income>> getIncomesByCategory(String catName, String gid) throws ExecutionException, InterruptedException{
         Callable<LiveData<List<Income>>> callable = new Callable<LiveData<List<Income>>>(){
             @Override
             public LiveData<List<Income>> call() throws Exception{
-                return incomeDAO.getIncomesByCategory(catName);
+                return incomeDAO.getIncomesByCategory(catName, gid);
             }
         };
         Future<LiveData<List<Income>>> future = Executors.newSingleThreadExecutor().submit(callable);

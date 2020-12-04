@@ -23,18 +23,29 @@ public interface CategoryDAO {
     @Query("SELECT * FROM categories")
     LiveData<List<Category>> getAllCategories();
 
+    @Query("SELECT * FROM categories WHERE googleID=:googleID")
+    LiveData<List<Category>> getAllCategoriesByGoogleId(String googleID);
+
     @Query("SELECT categoryName FROM categories")
     List<String> getAllCategoryNames();
 
+    @Query("SELECT categoryName FROM categories WHERE googleID=:googleID")
+    List<String> getAllCategoryNamesByGoogleId(String googleID);
 
-    @Query("SELECT CAST(SUM(categoryAmount) as DOUBLE) FROM categories WHERE categoryType=:catType")
-    Double getPlannedTotalByType(String catType);
+    @Query("SELECT CAST(SUM(categoryAmount) as DOUBLE) FROM categories WHERE categoryType=:catType AND googleID=:googleID")
+    Double getPlannedTotalByType(String catType, String googleID);
 
     @Query("SELECT categoryName FROM categories WHERE categoryType='Income'")
     List<String> getAllIncomeCategoryNames();
 
+    @Query("SELECT categoryName FROM categories WHERE categoryType='Income' AND googleID=:googleID")
+    List<String> getAllIncomeCategoryNamesByGoogleId(String googleID);
+
     @Query("SELECT categoryName FROM categories WHERE categoryType='Expense'")
     List<String> getAllExpenseCategoryNames();
+
+    @Query("SELECT categoryName FROM categories WHERE categoryType='Expense' AND googleID=:googleID")
+    List<String> getAllExpenseCategoryNamesByGoogleId(String googleID);
 
     @Insert
     void insertCategory(Category... categories);

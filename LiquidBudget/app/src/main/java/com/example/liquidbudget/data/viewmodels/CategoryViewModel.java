@@ -26,20 +26,36 @@ public class CategoryViewModel extends AndroidViewModel {
         return cAllCategories;
     }
 
+    public LiveData<List<Category>> getAllCategoriesByGoogleId(String gid) throws ExecutionException, InterruptedException {
+        return cRepository.getAllCategoriesByGoogleId(gid);
+    }
+
     public List<String> getAllCategoryNames() throws ExecutionException, InterruptedException{
         return cRepository.getAllCategoryNames();
     }
 
-    public Double getPlannedTotalByType(String catType) throws ExecutionException, InterruptedException {
-        return cRepository.getPlannedTotalByType(catType);
+    public List<String> getAllCategoryNamesByGoogleId(String gid) throws ExecutionException, InterruptedException{
+        return cRepository.getAllCategoryNamesByGoogleID(gid);
+    }
+
+    public Double getPlannedTotalByType(String catType, String gid) throws ExecutionException, InterruptedException {
+        return cRepository.getPlannedTotalByType(catType, gid);
     }
 
     public List<String> getAllIncomeCategoryNames() throws ExecutionException, InterruptedException{
         return cRepository.getAllIncomeCategoryNames();
     }
 
+    public List<String> getAllIncomeCategoryNamesByGoogleId(String gid) throws ExecutionException, InterruptedException{
+        return cRepository.getAllIncomeCategoryNamesByGoogleId(gid);
+    }
+
     public List<String> getAllExpenseCategoryNames() throws ExecutionException, InterruptedException{
         return cRepository.getAllExpenseCategoryNames();
+    }
+
+    public List<String> getAllExpenseCategoryNamesByGoogleId(String gid) throws ExecutionException, InterruptedException{
+        return cRepository.getAllExpenseCategoryNamesByGoogleId(gid);
     }
 
     public void insertCategory(Category category) {

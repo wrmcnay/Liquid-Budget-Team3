@@ -14,7 +14,7 @@ import java.util.concurrent.Executors;
 
 import static com.example.liquidbudget.data.database.CategoryDatabase.DATABASE_VERSION;
 
-@Database(entities = Category.class,version = DATABASE_VERSION)
+@Database(entities = Category.class,version = 6)
 public abstract class CategoryDatabase extends RoomDatabase {
 
     public static final int DATABASE_VERSION = 5;

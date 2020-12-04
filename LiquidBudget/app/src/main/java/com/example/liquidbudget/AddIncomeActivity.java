@@ -18,6 +18,8 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.liquidbudget.data.viewmodels.CategoryViewModel;
 import com.example.liquidbudget.ui.main.AppBaseActivity;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -44,6 +46,8 @@ public class AddIncomeActivity extends AppBaseActivity {
     private EditText editIncAmount;
     private EditText editIncDate;
 
+    private String googleID;
+
     private CategoryViewModel categoryViewModel;
     private ArrayList<String> categories;
 
@@ -55,6 +59,10 @@ public class AddIncomeActivity extends AppBaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_income);
+
+        GoogleSignInAccount googleAccount = GoogleSignIn.getLastSignedInAccount(this);
+        if(googleAccount != null)
+            googleID = googleAccount.getId();
 
         editIncName = findViewById(R.id.inc_name_edit_text);
         editIncAmount = findViewById(R.id.inc_amount_edit_text);
@@ -81,14 +89,16 @@ public class AddIncomeActivity extends AppBaseActivity {
         editIncAmount.setFilters(new InputFilter[]{ new DecimalDigitsInputFilter(9, 2)});
 
         categoryViewModel = new ViewModelProvider(this).get(CategoryViewModel.class);
-        try {
-            List<String> catList = categoryViewModel.getAllIncomeCategoryNames();
-            categories = new ArrayList<>();
-            if (catList.size() > 0) {
-                categories = (ArrayList<String>) catList;
+        if(googleAccount != null) {
+            try {
+                List<String> catList = categoryViewModel.getAllIncomeCategoryNamesByGoogleId(googleID);
+                categories = new ArrayList<>();
+                if (catList.size() > 0) {
+                    categories = (ArrayList<String>) catList;
+                }
+            } catch (Exception e) {
+                Log.e("ERROR", e.getMessage());
             }
-        } catch(Exception e){
-            Log.e("ERROR", e.getMessage());
         }
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(AddIncomeActivity.this,
