@@ -29,6 +29,9 @@ public interface ExpenseDAO {
     @Query("SELECT * FROM expenses")
     LiveData<List<Expense>> getAllExpenses();
 
+    @Query("SELECT * FROM expenses WHERE googleID=:googleID")
+    LiveData<List<Expense>> getAllExpensesByGoogleId(String googleID);
+
     @Query("DELETE FROM expenses")
     void deleteAllExpenses();
 
@@ -40,4 +43,7 @@ public interface ExpenseDAO {
 
     @Query("SELECT CAST(SUM(amount) as DOUBLE) FROM expenses")
     Double getSumTotal();
+
+    @Query("SELECT CAST(SUM(amount) as DOUBLE) FROM expenses WHERE googleID=:googleID")
+    Double getSumTotalForGoogleID(String googleID);
 }

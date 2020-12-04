@@ -18,20 +18,24 @@ public class GraphActivity extends AppBaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_graphs_analysis);
+        //setContentView(R.layout.activity_graphs_analysis);
 
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
         if (account != null) {
+            setContentView(R.layout.activity_graphs_analysis);
             String userName = account.getDisplayName();
             TextView homepagehello = findViewById(R.id.usersbudget);
             homepagehello.setText(getString(R.string.users_budget, userName));
+
+            ViewPager pager = findViewById(R.id.pager);
+            pager.setOffscreenPageLimit(4);
+
+            PageAdapter a = new PageAdapter(getSupportFragmentManager());
+            pager.setAdapter(a);
         }
-
-        ViewPager pager = findViewById(R.id.pager);
-        pager.setOffscreenPageLimit(4);
-
-        PageAdapter a = new PageAdapter(getSupportFragmentManager());
-        pager.setAdapter(a);
+        else {
+            setContentView(R.layout.activity_graphs_not_signed_in);
+        }
 
     }
 

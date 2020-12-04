@@ -29,9 +29,12 @@ import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.formatter.DefaultAxisValueFormatter;
 import com.github.mikephil.charting.utils.ColorTemplate;
 import com.github.mikephil.charting.utils.MPPointF;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 public class PieChartExpenses extends SimpleFragment {
 
@@ -43,6 +46,7 @@ public class PieChartExpenses extends SimpleFragment {
     PieDataSet dataSet;
     ArrayList<Integer> colors;
     PieData pieData;
+    GoogleSignInAccount account;
 
     @NonNull
     public static Fragment newInstance() {
@@ -54,11 +58,19 @@ public class PieChartExpenses extends SimpleFragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_pie_chart_expenses, container, false);
 
+        account = GoogleSignIn.getLastSignedInAccount(getContext());
+
         chart = v.findViewById(R.id.pieChart1);
         chart.getDescription().setEnabled(false);
 
         formatChart();
-        populateData();
+        try {
+            populateData();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
         return v;
     }
@@ -70,49 +82,51 @@ public class PieChartExpenses extends SimpleFragment {
         return s;
     }
 
-    private void populateData() {
+    private void populateData() throws ExecutionException, InterruptedException {
         entries = new ArrayList<>();
         expenseViewModel = new ViewModelProvider(this).get(ExpenseViewModel.class);
-        expenseViewModel.getAllExpenses().observe(getViewLifecycleOwner(), new Observer<List<Expense>>() {
-            @Override
-            public void onChanged(List<Expense> expenseList) {
-                entries.clear();
-                double am;
-                String name;
-                for (Expense exp : expenseList) {
-                    am = exp.getAmount();
-                    name = exp.getExpenseName();
-                    entries.add(new PieEntry((float) am, name));
+        if(account != null) {
+            expenseViewModel.getAllExpensesByGoogleID(account.getId()).observe(getViewLifecycleOwner(), new Observer<List<Expense>>() {
+                @Override
+                public void onChanged(List<Expense> expenseList) {
+                    entries.clear();
+                    double am;
+                    String name;
+                    for (Expense exp : expenseList) {
+                        am = exp.getAmount();
+                        name = exp.getExpenseName();
+                        entries.add(new PieEntry((float) am, name));
+                    }
+
+                    dataSet = new PieDataSet(entries, "");
+                    dataSet.setDrawIcons(true);
+
+                    dataSet.setSliceSpace(3f);
+                    dataSet.setIconsOffset(new MPPointF(0, 40));
+                    dataSet.setSelectionShift(50f);
+
+                    setColors();
+                    dataSet.setColors(colors);
+
+                    pieData = new PieData(dataSet);
+                    pieData.setValueFormatter(new DefaultAxisValueFormatter(2));
+                    pieData.setValueTextSize(22f);
+                    pieData.setDrawValues(true);
+                    pieData.setValueTextColor(Color.BLACK);
+
+                    chart.setData(pieData);
+
+                    dataSet.setDrawIcons(false);
+
+                    dataSet.setSliceSpace(5f);
+                    dataSet.setIconsOffset(new MPPointF(0, 0));
+                    dataSet.setSelectionShift(10f);
+
+                    chart.invalidate();
+
                 }
-
-                dataSet = new PieDataSet(entries, "");
-                dataSet.setDrawIcons(true);
-
-                dataSet.setSliceSpace(3f);
-                dataSet.setIconsOffset(new MPPointF(0, 40));
-                dataSet.setSelectionShift(50f);
-
-                setColors();
-                dataSet.setColors(colors);
-
-                pieData = new PieData(dataSet);
-                pieData.setValueFormatter(new DefaultAxisValueFormatter(2));
-                pieData.setValueTextSize(22f);
-                pieData.setDrawValues(true);
-                pieData.setValueTextColor(Color.BLACK);
-
-                chart.setData(pieData);
-
-                dataSet.setDrawIcons(false);
-
-                dataSet.setSliceSpace(5f);
-                dataSet.setIconsOffset(new MPPointF(0, 0));
-                dataSet.setSelectionShift(10f);
-
-                chart.invalidate();
-
-            }
-        });
+            });
+        }
     }
 
     private void setColors() {

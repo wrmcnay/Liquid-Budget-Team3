@@ -16,15 +16,19 @@ import com.example.liquidbudget.data.entities.Expense;
 import com.example.liquidbudget.data.viewmodels.ExpenseViewModel;
 import com.example.liquidbudget.ui.DataAdapters.ExpenseAdapter;
 import com.example.liquidbudget.ui.main.AppBaseActivity;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 public class ExpenseDisplayActivity extends AppBaseActivity {
 
     private static final int MY_REQUEST_CODE = 1;
     private static final int UPDATE_EXPENSE_ACTIVITY_REQUEST_CODE = 2;
     private ExpenseViewModel expenseViewModel;
+    private String googleID;
 
     public static final String EXTRA_DATA_UPDATE_EXPENSE_NAME = "extra_expense_name_to_update";
     public static final String EXTRA_DATA_UPDATE_EXPENSE_CATEGORY = "extra_expense_category_to_update";
@@ -36,6 +40,10 @@ public class ExpenseDisplayActivity extends AppBaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_expense_display);
+
+        GoogleSignInAccount googleAccount = GoogleSignIn.getLastSignedInAccount(this);
+        if(googleAccount != null)
+            googleID = googleAccount.getId();
 
         FloatingActionButton addExpenseBtn = (FloatingActionButton) findViewById(R.id.add_expense_button);
         addExpenseBtn.setOnClickListener(new View.OnClickListener(){
@@ -55,12 +63,20 @@ public class ExpenseDisplayActivity extends AppBaseActivity {
         recyclerView.setAdapter(adapter);
 
         expenseViewModel = new ViewModelProvider(this).get(ExpenseViewModel.class);
-        expenseViewModel.getAllExpenses().observe(this, new Observer<List<Expense>>() {
-            @Override
-            public void onChanged(List<Expense> expensesList) {
-                adapter.setExpenses(expensesList);
+        if(googleAccount != null) {
+            try {
+                expenseViewModel.getAllExpensesByGoogleID(googleID).observe(this, new Observer<List<Expense>>() {
+                    @Override
+                    public void onChanged(List<Expense> expensesList) {
+                        adapter.setExpenses(expensesList);
+                    }
+                });
+            } catch (ExecutionException e) {
+                e.printStackTrace();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
-        });
+        }
 
         ItemTouchHelper helper = new ItemTouchHelper(
                 new ItemTouchHelper.SimpleCallback(0,
@@ -108,7 +124,7 @@ public class ExpenseDisplayActivity extends AppBaseActivity {
             double amount = data.getDoubleExtra(AddExpenseActivity.EXTRA_EXP_AMOUNT, 0);
             String date = data.getStringExtra(AddExpenseActivity.EXTRA_EXP_DATE);
 
-            Expense expense = new Expense(expenseName, categoryName, amount, date);
+            Expense expense = new Expense(expenseName, categoryName, amount, date, googleID);
             expenseViewModel.insert(expense);
             Toast.makeText(this, "Expense Added!", Toast.LENGTH_SHORT).show();
             }
@@ -121,7 +137,7 @@ public class ExpenseDisplayActivity extends AppBaseActivity {
             int id = data.getIntExtra(AddExpenseActivity.EXTRA_UPDATE_EXPENSE_ID, -1);
 
             if(id != -1) {
-                expenseViewModel.updateExpense(new Expense(id, updateName, updateCategory, updateAmount, updateDate));
+                expenseViewModel.updateExpense(new Expense(id, updateName, updateCategory, updateAmount, updateDate, googleID));
             }
             else {
                 Toast.makeText(this, "Expense not able to update", Toast.LENGTH_SHORT).show();
@@ -139,6 +155,7 @@ public class ExpenseDisplayActivity extends AppBaseActivity {
         intent.putExtra(EXTRA_DATA_UPDATE_EXPENSE_AMOUNT, expense.getAmount());
         intent.putExtra(EXTRA_DATA_UPDATE_EXPENSE_DATE, expense.getDate());
         intent.putExtra(EXTRA_DATA_UPDATE_EXPENSE_ID, expense.getExpenseID());
+        intent.putExtra("googleid", expense.getGoogleID());
         startActivityForResult(intent, UPDATE_EXPENSE_ACTIVITY_REQUEST_CODE);
     }
 }

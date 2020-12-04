@@ -82,7 +82,7 @@ public class MainActivity extends AppBaseActivity {
 
         try{
             runningExpenseTextView.setText("0.00");
-            runningExpense = expenseViewModel.getSumTotal();
+            runningExpense = expenseViewModel.getSumTotalForGoogleID(account.getId());
 
             if(runningExpense != null) {
                 runningExpense = round(runningExpense, 2);

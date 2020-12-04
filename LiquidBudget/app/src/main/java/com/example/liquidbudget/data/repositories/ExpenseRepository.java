@@ -65,6 +65,17 @@ public class ExpenseRepository {
         return allExpenses;
     }
 
+    public LiveData<List<Expense>> getAllExpensesByGoogleId(String gid) throws ExecutionException, InterruptedException {
+        Callable<LiveData<List<Expense>>> callable = new Callable<LiveData<List<Expense>>>(){
+            @Override
+            public LiveData<List<Expense>> call() throws Exception{
+                return expenseDAO.getAllExpensesByGoogleId(gid);
+            }
+        };
+        Future<LiveData<List<Expense>>> future = Executors.newSingleThreadExecutor().submit(callable);
+        return future.get();
+    }
+
     public Double getSumByCategory(String catName) throws ExecutionException, InterruptedException{
         Callable<Double> callable = new Callable<Double>(){
             @Override
@@ -81,6 +92,17 @@ public class ExpenseRepository {
             @Override
             public Double call() throws Exception{
                 return expenseDAO.getSumTotal();
+            }
+        };
+        Future<Double> future = Executors.newSingleThreadExecutor().submit(callable);
+        return future.get();
+    }
+
+    public Double getSumTotalForGoogleID(String gid) throws ExecutionException, InterruptedException{
+        Callable<Double> callable = new Callable<Double>(){
+            @Override
+            public Double call() throws Exception{
+                return expenseDAO.getSumTotalForGoogleID(gid);
             }
         };
         Future<Double> future = Executors.newSingleThreadExecutor().submit(callable);

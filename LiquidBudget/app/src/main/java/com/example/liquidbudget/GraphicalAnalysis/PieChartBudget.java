@@ -31,6 +31,8 @@ import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 import com.github.mikephil.charting.utils.ColorTemplate;
 import com.github.mikephil.charting.utils.MPPointF;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
@@ -44,6 +46,7 @@ public class PieChartBudget extends SimpleFragment implements OnChartValueSelect
     PieDataSet dataSet;
     ArrayList<Integer> colors;
     PieData pieData;
+    GoogleSignInAccount account;
 
     @NonNull
     public static Fragment newInstance() {
@@ -57,6 +60,8 @@ public class PieChartBudget extends SimpleFragment implements OnChartValueSelect
 
         chart = v.findViewById(R.id.pieChart1);
         chart.getDescription().setEnabled(false);
+
+        account = GoogleSignIn.getLastSignedInAccount(getContext());
 
         formatChart();
         try {
@@ -81,37 +86,39 @@ public class PieChartBudget extends SimpleFragment implements OnChartValueSelect
 
     private void populateData() throws ExecutionException, InterruptedException {
         entries = new ArrayList<>();
-        incomeViewModel = new ViewModelProvider(this).get(IncomeViewModel.class);
-        double totalIncome = incomeViewModel.getSumTotal();
-        entries.add(new PieEntry((float) totalIncome, "Total Monthly Incomes"));
-        expenseViewModel = new ViewModelProvider(this).get(ExpenseViewModel.class);
-        double totalExpense = expenseViewModel.getSumTotal();
-        entries.add(new PieEntry((float) totalExpense, "Total Monthly Expenses"));
-        dataSet = new PieDataSet(entries, "");
-        dataSet.setDrawIcons(true);
+        if(account != null) {
+            incomeViewModel = new ViewModelProvider(this).get(IncomeViewModel.class);
+            double totalIncome = incomeViewModel.getSumTotalForGoogleID(account.getId());
+            entries.add(new PieEntry((float) totalIncome, "Total Monthly Incomes"));
+            expenseViewModel = new ViewModelProvider(this).get(ExpenseViewModel.class);
+            double totalExpense = expenseViewModel.getSumTotalForGoogleID(account.getId());
+            entries.add(new PieEntry((float) totalExpense, "Total Monthly Expenses"));
+            dataSet = new PieDataSet(entries, "");
+            dataSet.setDrawIcons(true);
 
-        dataSet.setSliceSpace(3f);
-        dataSet.setIconsOffset(new MPPointF(0, 40));
-        dataSet.setSelectionShift(5f);
+            dataSet.setSliceSpace(3f);
+            dataSet.setIconsOffset(new MPPointF(0, 40));
+            dataSet.setSelectionShift(5f);
 
-        setColors();
-        dataSet.setColors(colors);
+            setColors();
+            dataSet.setColors(colors);
 
-        pieData = new PieData(dataSet);
-        pieData.setValueFormatter(new DefaultAxisValueFormatter(2));
-        pieData.setValueTextSize(22f);
-        pieData.setDrawValues(true);
-        pieData.setValueTextColor(Color.BLACK);
+            pieData = new PieData(dataSet);
+            pieData.setValueFormatter(new DefaultAxisValueFormatter(2));
+            pieData.setValueTextSize(22f);
+            pieData.setDrawValues(true);
+            pieData.setValueTextColor(Color.BLACK);
 
-        chart.setData(pieData);
+            chart.setData(pieData);
 
-        dataSet.setDrawIcons(true);
+            dataSet.setDrawIcons(true);
 
-        dataSet.setSliceSpace(5f);
-        dataSet.setIconsOffset(new MPPointF(0, 40));
-        dataSet.setSelectionShift(10f);
+            dataSet.setSliceSpace(5f);
+            dataSet.setIconsOffset(new MPPointF(0, 40));
+            dataSet.setSelectionShift(10f);
 
-        chart.invalidate();
+            chart.invalidate();
+        }
 
     }
 

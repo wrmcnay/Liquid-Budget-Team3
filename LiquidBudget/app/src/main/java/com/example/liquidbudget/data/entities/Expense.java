@@ -48,39 +48,46 @@ public class Expense {
     @ColumnInfo(name = "userID")
     private int userID;
 
-    public Expense(String expenseName, String categoryName, double amount) {
+    @ColumnInfo(name = "googleID")
+    private String googleID;
+
+    public Expense(String expenseName, String categoryName, double amount, String googleID) {
         this.expenseName = expenseName;
         this.categoryName = categoryName;
         this.amount = amount;
+        this.googleID = googleID;
     }
 
     @Ignore
-    public Expense(String expenseName, String categoryName, double amount, String date) {
+    public Expense(String expenseName, String categoryName, double amount, String date, String googleID) {
         this.expenseName = expenseName;
         this.categoryName = categoryName;
         this.amount = amount;
         this.date = date;
+        this.googleID = googleID;
     }
 
     @Ignore
-    public Expense(int expenseID, String expenseName, String categoryName, double amount, String date) {
+    public Expense(int expenseID, String expenseName, String categoryName, double amount, String date, String googleID) {
         this.expenseID = expenseID;
         this.expenseName = expenseName;
         this.categoryName = categoryName;
         this.amount = amount;
         this.date = date;
+        this.googleID = googleID;
     }
 
     @Ignore
-    public Expense(int expenseID, String expenseName, String categoryName, double amount) {
+    public Expense(int expenseID, String expenseName, String categoryName, double amount, String googleID) {
         this.expenseID = expenseID;
         this.expenseName = expenseName;
         this.categoryName = categoryName;
         this.amount = amount;
+        this.googleID = googleID;
     }
 
     @Ignore
-    public Expense(int categoryID, String expenseName, String categoryName, double amount, boolean recurringBool, int numberOf, int period, boolean stable, String date, int userID) {
+    public Expense(int categoryID, String expenseName, String categoryName, double amount, boolean recurringBool, int numberOf, int period, boolean stable, String date, int userID, String googleID) {
         this.categoryID = categoryID;
         this.expenseName = expenseName;
         this.categoryName = categoryName;
@@ -91,6 +98,7 @@ public class Expense {
         this.stable = stable;
         this.date = date;
         this.userID = userID;
+        this.googleID = googleID;
     }
 
     public int getExpenseID() {
@@ -179,6 +187,14 @@ public class Expense {
 
     public void setUserID(int userID) {
         this.userID = userID;
+    }
+
+    public String getGoogleID() {
+        return googleID;
+    }
+
+    public void setGoogleID(String userID) {
+        this.googleID = googleID;
     }
 
     @Override
