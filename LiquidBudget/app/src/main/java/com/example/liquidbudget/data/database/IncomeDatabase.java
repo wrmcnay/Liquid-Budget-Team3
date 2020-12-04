@@ -15,7 +15,7 @@ import java.util.concurrent.Executors;
 
 import static com.example.liquidbudget.data.database.CategoryDatabase.DATABASE_VERSION;
 
-@Database(entities = Income.class, version = 3, exportSchema = false)
+@Database(entities = Income.class, version = 5, exportSchema = false)
 @TypeConverters({Converters.class})
 public abstract class IncomeDatabase extends RoomDatabase {
     public static final int DATABASE_VERSION = 5;

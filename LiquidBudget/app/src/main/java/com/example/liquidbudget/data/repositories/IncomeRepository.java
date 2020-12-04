@@ -56,6 +56,17 @@ public class IncomeRepository {
         return allIncomes;
     }
 
+    public LiveData<List<Income>> getAllIncomesByGoogleId(String gid) throws ExecutionException, InterruptedException {
+        Callable<LiveData<List<Income>>> callable = new Callable<LiveData<List<Income>>>(){
+            @Override
+            public LiveData<List<Income>> call() throws Exception{
+                return incomeDAO.getAllIncomesByGoogleId(gid);
+            }
+        };
+        Future<LiveData<List<Income>>> future = Executors.newSingleThreadExecutor().submit(callable);
+        return future.get();
+    }
+
     public LiveData<List<Double>> getAmountByIncID(int incID) {
         IncomeDatabase.databaseWriteExecutor.execute(() -> {
             amountByIncID = incomeDAO.getAmountByIncID(incID);
@@ -79,6 +90,17 @@ public class IncomeRepository {
             @Override
             public Double call() throws Exception{
                 return incomeDAO.getSumTotal();
+            }
+        };
+        Future<Double> future = Executors.newSingleThreadExecutor().submit(callable);
+        return future.get();
+    }
+
+    public Double getSumTotalForGoogleID(String gid) throws ExecutionException, InterruptedException{
+        Callable<Double> callable = new Callable<Double>(){
+            @Override
+            public Double call() throws Exception{
+                return incomeDAO.getSumTotalForGoogleID(gid);
             }
         };
         Future<Double> future = Executors.newSingleThreadExecutor().submit(callable);

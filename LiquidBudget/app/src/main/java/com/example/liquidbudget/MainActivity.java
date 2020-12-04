@@ -71,7 +71,7 @@ public class MainActivity extends AppBaseActivity {
 
         try{
             runningIncomeTextView.setText("0.00");
-            runningIncome = incomeViewModel.getSumTotal();
+            runningIncome = incomeViewModel.getSumTotalForGoogleID(account.getId());
             if(runningIncome != null){
                 runningIncome = round(runningIncome, 2);
                 runningIncomeTextView.setText(String.format(("%.2f"), runningIncome));
