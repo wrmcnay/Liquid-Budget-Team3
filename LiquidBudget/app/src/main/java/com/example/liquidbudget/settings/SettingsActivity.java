@@ -20,6 +20,7 @@ import com.google.android.gms.tasks.Task;
 
 import zendesk.core.AnonymousIdentity;
 import zendesk.core.Identity;
+import zendesk.core.JwtIdentity;
 import zendesk.core.Zendesk;
 import zendesk.support.Support;
 import zendesk.support.guide.HelpCenterActivity;
@@ -47,11 +48,13 @@ public class SettingsActivity extends AppBaseActivity {
                 .build();
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
+        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
+
         Zendesk.INSTANCE.init(this, "https://liquidbudge.zendesk.com",
                 "50ab7f8eda98e07ab9e83c06d976bcd470ea5ab2128fcec6",
                 "mobile_sdk_client_91f28b51f26c0aac5e49");
 
-        Identity identity = new AnonymousIdentity();
+        Identity identity = new JwtIdentity(account.getId());
         Zendesk.INSTANCE.setIdentity(identity);
 
         Support.INSTANCE.init(Zendesk.INSTANCE);
@@ -107,7 +110,6 @@ public class SettingsActivity extends AppBaseActivity {
             }
         });
 
-        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
         if (account != null) {
             String userEmail = account.getEmail();
             TextView email = findViewById(R.id.emailEditText);

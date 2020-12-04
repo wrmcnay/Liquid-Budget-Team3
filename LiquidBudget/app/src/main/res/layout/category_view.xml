@@ -8,8 +8,8 @@
 
     <TextView
         android:id="@+id/ehistory"
-        android:layout_width="196dp"
-        android:layout_height="32dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="Expense History"
         android:textColor="@color/colorAccentDark"
@@ -21,10 +21,9 @@
 
     <TextView
         android:id="@+id/amount_planned_for_category"
-        android:layout_width="125dp"
-        android:layout_height="27dp"
+        android:layout_height="wrap_content"
+        android:layout_width="200dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="84dp"
         android:text="0"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -32,42 +31,42 @@
 
     <TextView
         android:id="@+id/amountPlanned"
-        android:layout_width="125dp"
-        android:layout_height="27dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="84dp"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="10dp"
         android:fontFamily="@font/assistant"
         android:text="Amount Planned"
-        android:textSize="24sp"
         android:textColor="@color/colorAccentDark"
+        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/category_display" />
 
     <TextView
         android:id="@+id/amountType"
-        android:layout_width="125dp"
-        android:layout_height="27dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="52dp"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="32dp"
         android:fontFamily="@font/assistant"
         android:text="Amount"
-        android:textSize="24sp"
         android:textColor="@color/colorAccentDark"
+        android:textSize="24sp"
         app:layout_constraintEnd_toStartOf="@+id/amountPlanned"
-        app:layout_constraintHorizontal_bias="0.896"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/category_display" />
 
     <TextView
         android:id="@+id/total_amount_for_category"
-        android:layout_width="125dp"
-        android:layout_height="27dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="52dp"
         android:text="0"
         android:textSize="24sp"
-        app:layout_constraintEnd_toStartOf="@+id/amountPlanned"
-        app:layout_constraintHorizontal_bias="0.896"
+        app:layout_constraintEnd_toStartOf="@+id/amount_planned_for_category"
+        app:layout_constraintHorizontal_bias="0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/amountType" />
 
@@ -78,7 +77,7 @@
         android:fontFamily="@font/assistant_semibold"
         android:text="CategoryName"
         android:textColor="@color/colorAccentDark"
-        android:textSize="24sp"
+        android:textSize="28sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.136"
@@ -100,8 +99,8 @@
 
     <TextView
         android:id="@+id/iHistory"
-        android:layout_width="177dp"
-        android:layout_height="30dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="28dp"
         android:text="Income History"
         android:textColor="@color/colorAccentDark"
@@ -115,20 +114,21 @@
         android:id="@+id/incomeView"
         android:layout_width="353dp"
         android:layout_height="135dp"
+        android:layout_marginLeft="4dp"
         android:layout_marginTop="4dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.354"
+        app:layout_constraintHorizontal_bias="0.4"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/iHistory" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/expenseView"
-        android:layout_width="349dp"
+        android:layout_width="353dp"
         android:layout_height="135dp"
         android:layout_marginBottom="88dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.274"
+        app:layout_constraintHorizontal_bias="0.4"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ehistory"
         app:layout_constraintVertical_bias="0.0" />

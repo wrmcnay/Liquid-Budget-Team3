@@ -30,17 +30,11 @@
         android:hint="@string/IncomeName"
         android:inputType="text" />
 
-    <EditText
-        android:id="@+id/inc_cat_edit_text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/category"
-        android:inputType="text" />
-
     <Spinner
         android:id="@+id/category_spinner_income"
         android:layout_width="208dp"
-        android:layout_height="45dp" />
+        android:layout_height="45dp"
+        android:layout_gravity="left"/>
 
     <EditText
         android:id="@+id/inc_amount_edit_text"

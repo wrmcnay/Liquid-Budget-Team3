@@ -20,6 +20,8 @@ import com.example.liquidbudget.data.viewmodels.CategoryViewModel;
 import com.example.liquidbudget.ui.main.AppBaseActivity;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
@@ -40,14 +42,15 @@ public class AddExpenseActivity extends AppBaseActivity {
     public static final String EXTRA_UPDATE_EXPENSE_ID = "com.example.liquidbudget.EXTRA_UPDATE_EXP_ID";
 
     private EditText editExpName;
-    private EditText editExpCat;
     private EditText editExpAmount;
     private EditText editExpDate;
+    private Spinner categorySpinner;
 
     private CategoryViewModel categoryViewModel;
-    private String[] categories = {"default"};
+    private ArrayList<String> categories;
 
     final Calendar myExpCalendar = Calendar.getInstance();
+    Bundle extras;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,9 +58,9 @@ public class AddExpenseActivity extends AppBaseActivity {
         setContentView(R.layout.activity_add_expense);
 
         editExpName = findViewById(R.id.exp_name_edit_text);
-        editExpCat = findViewById(R.id.exp_cat_edit_text);
         editExpAmount = findViewById(R.id.exp_amount_edit_text);
         editExpDate = findViewById(R.id.exp_date_edit_text);
+        categorySpinner = findViewById(R.id.category_spinner_expense);
 
         DatePickerDialog.OnDateSetListener datePickerExp = new DatePickerDialog.OnDateSetListener() {
             @Override
@@ -78,58 +81,27 @@ public class AddExpenseActivity extends AppBaseActivity {
 
         editExpAmount.setFilters(new InputFilter[]{ new DecimalDigitsInputFilter(9, 2)});
 
-        final Bundle extras = getIntent().getExtras();
-
-        if (extras != null) {
-            String expenseName = extras.getString(EXTRA_DATA_UPDATE_EXPENSE_NAME, "");
-            String categoryName = extras.getString(EXTRA_DATA_UPDATE_EXPENSE_CATEGORY, "");
-            double amount = extras.getDouble(EXTRA_DATA_UPDATE_EXPENSE_AMOUNT, 0);
-            String date = extras.getString(EXTRA_DATA_UPDATE_EXPENSE_DATE, "");
-            if (!expenseName.isEmpty()) {
-                editExpName.setText(expenseName);
-                editExpName.setSelection(expenseName.length());
-                editExpName.requestFocus();
-            }
-            if (!categoryName.isEmpty()) {
-                editExpCat.setText(categoryName);
-                editExpCat.setSelection(categoryName.length());
-                editExpCat.requestFocus();
-            }
-            if (amount != 0.0) {
-                editExpAmount.setText(String.valueOf(amount));
-                editExpAmount.setSelection(String.valueOf(amount).length());
-                editExpAmount.requestFocus();
-            }
-            if (!date.isEmpty()) {
-                editExpDate.setText(date);
-                editExpDate.setSelection(date.length());
-                editExpDate.requestFocus();
-            }
-        }
 
         categoryViewModel = new ViewModelProvider(this).get(CategoryViewModel.class);
         try {
             List<String> catList = categoryViewModel.getAllExpenseCategoryNames();
-            catList.add(0, "");
+            categories = new ArrayList<>();
             if (catList.size() > 0) {
-                categories = new String[catList.size()];
-                categories = catList.toArray(categories);
+                categories = (ArrayList<String>) catList;
+                //Arrays.sort(categories);
             }
         } catch (Exception e) {
             Log.e("ERROR", e.getMessage());
         }
 
-        Spinner categorySpinner = (Spinner) findViewById(R.id.category_spinner_expense);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(AddExpenseActivity.this,
-                android.R.layout.simple_spinner_item, categories);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(AddExpenseActivity.this, android.R.layout.simple_spinner_item, categories);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         categorySpinner.setAdapter(adapter);
-        categorySpinner.setSelection(adapter.getPosition(editExpCat.getText().toString()));
 
         categorySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                editExpCat.setText(categorySpinner.getSelectedItem().toString());
+                //Things can be done here if needed
             }
 
             @Override
@@ -137,6 +109,8 @@ public class AddExpenseActivity extends AppBaseActivity {
 
             }
         });
+
+        tryDataPopulation();
 
         final Button button = findViewById(R.id.exp_button_save);
 
@@ -146,7 +120,7 @@ public class AddExpenseActivity extends AppBaseActivity {
                 if (TextUtils.isEmpty(editExpName.getText())) {
                     setResult(RESULT_CANCELED, updateIntent);
                 }
-                if (TextUtils.isEmpty(editExpCat.getText())) {
+                if (TextUtils.isEmpty(categorySpinner.getSelectedItem().toString())) {
                     setResult(RESULT_CANCELED, updateIntent);
                 }
                 if (TextUtils.isEmpty(editExpAmount.getText())) {
@@ -156,7 +130,7 @@ public class AddExpenseActivity extends AppBaseActivity {
                     setResult(RESULT_CANCELED, updateIntent);
                 }else {
                     String expName = editExpName.getText().toString();
-                    String catName = editExpCat.getText().toString();
+                    String catName = categorySpinner.getSelectedItem().toString();
                     double amount = Double.parseDouble(editExpAmount.getText().toString());
                     String date = editExpDate.getText().toString();
 
@@ -178,6 +152,36 @@ public class AddExpenseActivity extends AppBaseActivity {
 
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close);
         setTitle("Add Expense");
+    }
+
+    private void tryDataPopulation(){
+        extras = getIntent().getExtras();
+
+        if (extras != null) {
+            String expenseName = extras.getString(EXTRA_DATA_UPDATE_EXPENSE_NAME, "");
+            String categoryName = extras.getString(EXTRA_DATA_UPDATE_EXPENSE_CATEGORY, "");
+            double amount = extras.getDouble(EXTRA_DATA_UPDATE_EXPENSE_AMOUNT, 0);
+            String date = extras.getString(EXTRA_DATA_UPDATE_EXPENSE_DATE, "");
+            if (!expenseName.isEmpty()) {
+                editExpName.setText(expenseName);
+                editExpName.setSelection(expenseName.length());
+                editExpName.requestFocus();
+            }
+            if (!categoryName.isEmpty()) {
+                categorySpinner.setSelection(categories.indexOf(categoryName));
+                categorySpinner.requestFocus();
+            }
+            if (amount != 0.0) {
+                editExpAmount.setText(String.valueOf(amount));
+                editExpAmount.setSelection(String.valueOf(amount).length());
+                editExpAmount.requestFocus();
+            }
+            if (!date.isEmpty()) {
+                editExpDate.setText(date);
+                editExpDate.setSelection(date.length());
+                editExpDate.requestFocus();
+            }
+        }
     }
 
     private void updateLabel() {

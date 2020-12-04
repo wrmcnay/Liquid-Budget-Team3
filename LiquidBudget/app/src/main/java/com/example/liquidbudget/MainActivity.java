@@ -47,46 +47,47 @@ public class MainActivity extends AppBaseActivity {
         Double runningExpense;
 
         try{
-            totalIncomeTextView.setText("0");
+            totalIncomeTextView.setText("0.00");
             totalIncome = categoryViewModel.getPlannedTotalByType("Income");
-            totalIncome = round(totalIncome, 2);
 
-            if(totalIncome != 0){
-                totalIncomeTextView.setText(""+totalIncome);
+            if(totalIncome != null){
+                totalIncome = round(totalIncome, 2);
+                totalIncomeTextView.setText(String.format(("%.2f"), totalIncome));
             }
         } catch(Exception e){
             Log.e("ERROR", e.getMessage());
         }
 
         try{
-            totalExpenseTextView.setText("0");
+            totalExpenseTextView.setText("0.00");
             totalExpense = categoryViewModel.getPlannedTotalByType("Expense");
-            totalExpense  = round(totalExpense, 2);
-            if(totalExpense != 0){
-                totalExpenseTextView.setText(""+totalExpense);
+            if(totalExpense != null){
+                totalExpense  = round(totalExpense, 2);
+                totalExpenseTextView.setText(String.format(("%.2f"), totalExpense));
             }
         } catch(Exception e){
             Log.e("ERROR", e.getMessage());
         }
 
         try{
-            runningIncomeTextView.setText("0");
+            runningIncomeTextView.setText("0.00");
             runningIncome = incomeViewModel.getSumTotal();
-            runningIncome = round(runningIncome, 2);
-            if(runningIncome != 0){
-                runningIncomeTextView.setText(""+runningIncome);
+            if(runningIncome != null){
+                runningIncome = round(runningIncome, 2);
+                runningIncomeTextView.setText(String.format(("%.2f"), runningIncome));
             }
         } catch(Exception e){
             Log.e("ERROR", e.getMessage());
         }
 
         try{
-            runningExpenseTextView.setText("0");
+            runningExpenseTextView.setText("0.00");
             runningExpense = expenseViewModel.getSumTotal();
-            runningExpense = round(runningExpense, 2);
-            if(runningExpense != 0){
-                runningExpenseTextView.setText(""+runningExpense);
-            }
+
+            if(runningExpense != null) {
+                runningExpense = round(runningExpense, 2);
+                runningExpenseTextView.setText(String.format(("%.2f"), runningExpense));
+           }
         } catch(Exception e){
             Log.e("ERROR", e.getMessage());
         }

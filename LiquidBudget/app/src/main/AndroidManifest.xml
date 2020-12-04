@@ -2,8 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.liquidbudget">
 
-
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -19,7 +17,8 @@
         <activity android:name=".settings.BankingActivity" />
         <activity android:name=".settings.NotificationsActivity" />
         <activity android:name=".settings.AccountActivity" />
-        <activity android:name=".settings.SettingsActivity" />
+        <activity android:name=".settings.SettingsActivity"
+            android:label="Settings"/>
         <activity android:name=".AddExpenseActivity" />
         <activity android:name=".budget.Budget" />
         <activity
@@ -85,7 +84,8 @@
             android:parentActivityName=".AddIncomeActivity"/>
         <activity android:name=".IncomeDisplayActivity"
             android:launchMode="singleTop"/>
-        <activity android:name=".SwipingGraphsTesting.GraphActivity"/>
+        <activity android:name=".GraphicalAnalysis.GraphActivity"
+            android:label="Analysis"/>
 
         <meta-data
             android:name="preloaded_fonts"

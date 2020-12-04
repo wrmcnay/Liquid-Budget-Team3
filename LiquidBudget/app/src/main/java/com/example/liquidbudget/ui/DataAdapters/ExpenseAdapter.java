@@ -30,9 +30,12 @@ public class ExpenseAdapter extends RecyclerView.Adapter<ExpenseAdapter.ExpenseH
     @Override
     public void onBindViewHolder(@NonNull ExpenseHolder holder, int position) {
         Expense currentExpense = expenses.get(position);
+        double amount = currentExpense.getAmount();
         holder.textViewExpName.setText(currentExpense.getExpenseName());
         holder.textViewCatName.setText(currentExpense.getCategoryName());
-        holder.textViewAmount.setText(String.valueOf(currentExpense.getAmount()));
+        if(amount != 0) {
+            holder.textViewAmount.setText(String.format(("%.2f"), currentExpense.getAmount()));
+        }
         holder.textViewDate.setText(currentExpense.getDate());
     }
 

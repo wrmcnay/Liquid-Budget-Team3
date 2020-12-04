@@ -1,8 +1,7 @@
-package com.example.liquidbudget.SwipingGraphsTesting;
+package com.example.liquidbudget.GraphicalAnalysis;
 
 import android.os.Bundle;
-import android.view.MenuItem;
-import android.view.WindowManager;
+import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -11,16 +10,25 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.example.liquidbudget.R;
 import com.example.liquidbudget.ui.main.AppBaseActivity;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 
 public class GraphActivity extends AppBaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_graphs_testing);
+        setContentView(R.layout.activity_graphs_analysis);
+
+        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
+        if (account != null) {
+            String userName = account.getDisplayName();
+            TextView homepagehello = findViewById(R.id.usersbudget);
+            homepagehello.setText(getString(R.string.users_budget, userName));
+        }
 
         ViewPager pager = findViewById(R.id.pager);
-        pager.setOffscreenPageLimit(3);
+        pager.setOffscreenPageLimit(4);
 
         PageAdapter a = new PageAdapter(getSupportFragmentManager());
         pager.setAdapter(a);
@@ -39,12 +47,15 @@ public class GraphActivity extends AppBaseActivity {
 
             switch (pos) {
                 case 0:
-                    f = PieChartCategories.newInstance();
+                    f = PieChartIncVsExpense.newInstance();
                     break;
                 case 1:
-                    f = PieChartExpenses.newInstance();
+                    f = PieChartCategories.newInstance();
                     break;
                 case 2:
+                    f = PieChartExpenses.newInstance();
+                    break;
+                case 3:
                     f = PieChartIncomes.newInstance();
                     break;
             }
@@ -54,7 +65,7 @@ public class GraphActivity extends AppBaseActivity {
 
         @Override
         public int getCount() {
-            return 3;
+            return 4;
         }
     }
 }

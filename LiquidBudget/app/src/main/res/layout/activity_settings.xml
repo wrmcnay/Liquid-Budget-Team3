@@ -7,13 +7,13 @@
     android:orientation="vertical"
     tools:context=".settings.SettingsActivity">
 
-    <androidx.appcompat.widget.Toolbar
+    <!--<androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:title="Settings"
         app:titleTextColor="@android:color/white"
         android:background="@color/colorPrimary">
-    </androidx.appcompat.widget.Toolbar>
+    </androidx.appcompat.widget.Toolbar>-->
 
     <ScrollView
         android:layout_width="match_parent"
