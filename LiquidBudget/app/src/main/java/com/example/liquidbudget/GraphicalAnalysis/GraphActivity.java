@@ -47,7 +47,7 @@ public class GraphActivity extends AppBaseActivity {
 
             switch (pos) {
                 case 0:
-                    f = PieChartIncVsExpense.newInstance();
+                    f = PieChartBudget.newInstance();
                     break;
                 case 1:
                     f = PieChartCategories.newInstance();
