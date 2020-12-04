@@ -1,5 +1,7 @@
 package com.example.liquidbudget.GraphicalAnalysis;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -16,6 +18,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.example.liquidbudget.R;
 import com.example.liquidbudget.data.entities.Expense;
@@ -34,12 +37,14 @@ import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 import com.github.mikephil.charting.utils.ColorTemplate;
 import com.github.mikephil.charting.utils.MPPointF;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
-public class PieChartBudget extends SimpleFragment implements OnChartValueSelectedListener {
+public class PieChartIncVsExpense extends SimpleFragment implements OnChartValueSelectedListener {
 
     private ExpenseViewModel expenseViewModel;
     private IncomeViewModel incomeViewModel;
@@ -51,7 +56,7 @@ public class PieChartBudget extends SimpleFragment implements OnChartValueSelect
 
     @NonNull
     public static Fragment newInstance() {
-        return new PieChartBudget();
+        return new PieChartIncVsExpense();
     }
 
 
@@ -63,11 +68,7 @@ public class PieChartBudget extends SimpleFragment implements OnChartValueSelect
         chart.getDescription().setEnabled(false);
 
         formatChart();
-        try {
-            populateData();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        populateData();
 
         chart.setOnChartValueSelectedListener(this);
 
@@ -83,46 +84,10 @@ public class PieChartBudget extends SimpleFragment implements OnChartValueSelect
         return s;
     }
 
-    private void populateData() throws ExecutionException, InterruptedException {
+    private void populateData() {
         entries = new ArrayList<>();
         incomeViewModel = new ViewModelProvider(this).get(IncomeViewModel.class);
-        double totalIncome = incomeViewModel.getSumTotal();
-        entries.add(new PieEntry((float) totalIncome, "Total Monthly Incomes"));
-        expenseViewModel = new ViewModelProvider(this).get(ExpenseViewModel.class);
-        double totalExpense = expenseViewModel.getSumTotal();
-        entries.add(new PieEntry((float) totalExpense, "Total Monthly Expenses"));
-        dataSet = new PieDataSet(entries, "");
-        dataSet.setDrawIcons(true);
-
-        dataSet.setSliceSpace(3f);
-        dataSet.setIconsOffset(new MPPointF(0, 40));
-        dataSet.setSelectionShift(5f);
-
-        setColors();
-        dataSet.setColors(colors);
-
-        pieData = new PieData(dataSet);
-        pieData.setValueFormatter(new DefaultAxisValueFormatter(2));
-        pieData.setValueTextSize(22f);
-        pieData.setDrawValues(true);
-        pieData.setValueTextColor(Color.BLACK);
-
-        chart.setData(pieData);
-
-        dataSet.setDrawIcons(true);
-
-        dataSet.setSliceSpace(5f);
-        dataSet.setIconsOffset(new MPPointF(0, 40));
-        dataSet.setSelectionShift(10f);
-
-        chart.invalidate();
-
-    }
-
-    /*private void populateData() {
-        entries = new ArrayList<>();
-        incomeViewModel = new ViewModelProvider(this).get(IncomeViewModel.class);
-        incomeViewModel.getAllIncomes().observe(this, new Observer<List<Income>>() {
+        incomeViewModel.getAllIncomes().observe(getViewLifecycleOwner(), new Observer<List<Income>>() {
             @Override
             public void onChanged(List<Income> incomesList) { // when a new income is added
 
@@ -149,7 +114,7 @@ public class PieChartBudget extends SimpleFragment implements OnChartValueSelect
 
                 pieData = new PieData(dataSet);
                 pieData.setValueFormatter(new DefaultAxisValueFormatter(2));
-                pieData.setValueTextSize(11f);
+                pieData.setValueTextSize(22f);
                 pieData.setDrawValues(true);
                 pieData.setValueTextColor(Color.BLACK);
 
@@ -159,14 +124,14 @@ public class PieChartBudget extends SimpleFragment implements OnChartValueSelect
 
                 dataSet.setSliceSpace(5f);
                 dataSet.setIconsOffset(new MPPointF(0, 40));
-                dataSet.setSelectionShift(5f);
+                dataSet.setSelectionShift(10f);
 
                 chart.invalidate();
 
             }
         });
         expenseViewModel = new ViewModelProvider(this).get(ExpenseViewModel.class);
-        expenseViewModel.getAllExpenses().observe(this, new Observer<List<Expense>>() {
+        expenseViewModel.getAllExpenses().observe(getViewLifecycleOwner(), new Observer<List<Expense>>() {
             @Override
             public void onChanged(List<Expense> expenseList) { // when a new income is added
 
@@ -181,6 +146,7 @@ public class PieChartBudget extends SimpleFragment implements OnChartValueSelect
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
+
                 dataSet = new PieDataSet(entries, "");
                 dataSet.setDrawIcons(true);
 
@@ -193,7 +159,7 @@ public class PieChartBudget extends SimpleFragment implements OnChartValueSelect
 
                 pieData = new PieData(dataSet);
                 pieData.setValueFormatter(new DefaultAxisValueFormatter(2));
-                pieData.setValueTextSize(11f);
+                pieData.setValueTextSize(22f);
                 pieData.setDrawValues(true);
                 pieData.setValueTextColor(Color.BLACK);
 
@@ -203,7 +169,7 @@ public class PieChartBudget extends SimpleFragment implements OnChartValueSelect
 
                 dataSet.setSliceSpace(5f);
                 dataSet.setIconsOffset(new MPPointF(0, 40));
-                dataSet.setSelectionShift(5f);
+                dataSet.setSelectionShift(10f);
 
                 chart.invalidate();
 
@@ -211,14 +177,11 @@ public class PieChartBudget extends SimpleFragment implements OnChartValueSelect
         });
     }
 
-     */
-
-
     private void setColors() {
         colors = new ArrayList<>();
 
-        colors.add(Color.rgb(165, 225, 173));
         colors.add(Color.rgb(206, 139, 134));
+        colors.add(Color.rgb(165, 225, 173));
         colors.add(Color.rgb(135, 190, 177));
         colors.add(Color.rgb(116, 159, 214));
         colors.add(Color.rgb(205, 140, 197));
