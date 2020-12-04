@@ -2,6 +2,7 @@ package com.example.liquidbudget;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -55,6 +56,9 @@ public class ViewCategoryActivity extends AppCompatActivity {
             amountText = "No Type";
         }
 
+        TextView iHistory = (TextView) findViewById(R.id.iHistory);
+        TextView eHistory = (TextView) findViewById(R.id.ehistory);
+
         TextView displayName = (TextView) findViewById(R.id.category_display);
         displayName.setText(categoryName);
 
@@ -102,19 +106,6 @@ public class ViewCategoryActivity extends AppCompatActivity {
         IncomeAdapter iAdapter = new IncomeAdapter();
         incomeRecyclerView.setAdapter(iAdapter);
 
-        incomeViewModel = new ViewModelProvider(this).get(IncomeViewModel.class);
-        try {
-            incomeViewModel.getIncomesByCategory(categoryName, googleID).observe(this, new Observer<List<Income>>() {
-                @Override
-                public void onChanged(List<Income> incomesList) {
-                    iAdapter.setIncomes(incomesList);
-                }
-            });
-        } catch(Exception e){
-            Log.e("ERROR", e.getMessage());
-        }
-
-
         RecyclerView expenseRecyclerView = findViewById(R.id.expenseView);
         expenseRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         expenseRecyclerView.setHasFixedSize(false);
@@ -122,16 +113,35 @@ public class ViewCategoryActivity extends AppCompatActivity {
         ExpenseAdapter eAdapter = new ExpenseAdapter();
         expenseRecyclerView.setAdapter(eAdapter);
 
-        expenseViewModel = new ViewModelProvider(this).get(ExpenseViewModel.class);
-        try{
-            expenseViewModel.getExpensesByCategory(categoryName, googleID).observe(this, new Observer<List<Expense>>() {
-                @Override
-                public void onChanged(List<Expense> expensesList) {
-                    eAdapter.setExpenses(expensesList);
-                }
-            });
-        } catch(Exception e){
-            Log.e("ERROR", e.getMessage());
+        if (categoryType.equals("Income")) {
+            incomeViewModel = new ViewModelProvider(this).get(IncomeViewModel.class);
+            try {
+                incomeViewModel.getIncomesByCategory(categoryName, googleID).observe(this, new Observer<List<Income>>() {
+                    @Override
+                    public void onChanged(List<Income> incomesList) {
+                        iAdapter.setIncomes(incomesList);
+                    }
+                });
+            } catch(Exception e){
+                Log.e("ERROR", e.getMessage());
+            }
+            eHistory.setVisibility(View.GONE);
+            incomeRecyclerView.setVisibility(View.GONE);
+
+        } else if (categoryType.equals("Expense")) {
+            expenseViewModel = new ViewModelProvider(this).get(ExpenseViewModel.class);
+            try{
+                expenseViewModel.getExpensesByCategory(categoryName, googleID).observe(this, new Observer<List<Expense>>() {
+                    @Override
+                    public void onChanged(List<Expense> expensesList) {
+                        eAdapter.setExpenses(expensesList);
+                    }
+                });
+            } catch(Exception e){
+                Log.e("ERROR", e.getMessage());
+            }
+            iHistory.setVisibility(View.GONE);
+            incomeRecyclerView.setVisibility(View.GONE);
         }
 
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close);
