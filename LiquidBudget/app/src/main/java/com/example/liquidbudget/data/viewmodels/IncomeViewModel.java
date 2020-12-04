@@ -26,6 +26,10 @@ public class IncomeViewModel extends AndroidViewModel {
         return mAllIncomes;
     }
 
+    public LiveData<List<Income>> getAllIncomesByGoogleId(String gid) throws ExecutionException, InterruptedException {
+        return mRepository.getAllIncomesByGoogleId(gid);
+    }
+
     public LiveData<List<Income>> getIncomesByCategory(String catName) throws ExecutionException, InterruptedException{
         return mRepository.getIncomesByCategory(catName);
     }
@@ -36,6 +40,10 @@ public class IncomeViewModel extends AndroidViewModel {
 
     public Double getSumTotal() throws ExecutionException, InterruptedException{
         return mRepository.getSumTotal();//is this the added sum of all incomes?
+    }
+
+    public Double getSumTotalForGoogleID(String gid) throws ExecutionException, InterruptedException{
+        return mRepository.getSumTotalForGoogleID(gid);//is this the added sum of all incomes?
     }
 
     public void insert(Income income) {

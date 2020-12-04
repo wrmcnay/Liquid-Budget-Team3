@@ -45,40 +45,47 @@ public class Income {
     @ColumnInfo(name = "userID")
     private int userID;
 
-    public Income(String incomeName, String categoryName, double amount) {
+    @ColumnInfo(name = "googleID")
+    private String googleID;
+
+    public Income(String incomeName, String categoryName, double amount, String googleID) {
         this.incomeName = incomeName;
         this.categoryName = categoryName;
         this.amount = amount;
+        this.googleID = googleID;
     }
 
     @Ignore
-    public Income(String incomeName, String categoryName, double amount, String date) {
+    public Income(String incomeName, String categoryName, double amount, String date, String googleID) {
         this.incomeID = incomeID;
         this.incomeName = incomeName;
         this.categoryName = categoryName;
         this.amount = amount;
         this.date = date;
+        this.googleID = googleID;
     }
 
     @Ignore
-    public Income(int incomeID, String incomeName, String categoryName, double amount, String date) {
+    public Income(int incomeID, String incomeName, String categoryName, double amount, String date, String googleID) {
         this.incomeID = incomeID;
         this.incomeName = incomeName;
         this.categoryName = categoryName;
         this.amount = amount;
         this.date = date;
+        this.googleID = googleID;
     }
 
     @Ignore
-    public Income(int incomeID, String incomeName, String categoryName, double amount) {
+    public Income(int incomeID, String incomeName, String categoryName, double amount, String googleID) {
         this.incomeID = incomeID;
         this.incomeName = incomeName;
         this.categoryName = categoryName;
         this.amount = amount;
+        this.googleID = googleID;
     }
 
     @Ignore
-    public Income(int incomeID, int categoryID, String incomeName, String categoryName, double amount, boolean recurring, int numberOf, int period, boolean stable, String date, int userID) {
+    public Income(int incomeID, int categoryID, String incomeName, String categoryName, double amount, boolean recurring, int numberOf, int period, boolean stable, String date, int userID, String googleID) {
         this.incomeID = incomeID;
         this.categoryID = categoryID;
         this.incomeName = incomeName;
@@ -90,6 +97,7 @@ public class Income {
         this.stable = stable;
         this.date = date;
         this.userID = userID;
+        this.googleID = googleID;
     }
 
     public int getIncomeID() { return incomeID; }
@@ -135,6 +143,10 @@ public class Income {
     public int getUserID() { return userID; }
 
     public void setUserID(int userID) { this.userID = userID; }
+
+    public String getGoogleID() { return googleID; }
+
+    public void setGoogleID(String googleID) { this.googleID = googleID; }
 
     @Override
     public String toString() {

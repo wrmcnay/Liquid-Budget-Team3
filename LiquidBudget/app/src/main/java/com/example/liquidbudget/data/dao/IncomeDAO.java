@@ -20,6 +20,9 @@ public interface IncomeDAO {
     @Query("SELECT * FROM incomes")
     LiveData<List<Income>> getAllIncomes();
 
+    @Query("SELECT * FROM incomes WHERE googleID=:googleID")
+    LiveData<List<Income>> getAllIncomesByGoogleId(String googleID);
+
     @Query("SELECT amount FROM incomes WHERE incomeID=:incID")
     LiveData<List<Double>> getAmountByIncID(int incID);
 
@@ -31,6 +34,9 @@ public interface IncomeDAO {
 
     @Query("SELECT CAST(SUM(amount) as DOUBLE) FROM incomes")
     Double getSumTotal();
+
+    @Query("SELECT CAST(SUM(amount) as DOUBLE) FROM incomes WHERE googleID=:googleID")
+    Double getSumTotalForGoogleID(String googleID);
 
     @Insert
     void insertIncome(Income... incomes);
