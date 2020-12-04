@@ -34,9 +34,13 @@ import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 import com.github.mikephil.charting.utils.ColorTemplate;
 import com.github.mikephil.charting.utils.MPPointF;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 
 public class PieChartCategories extends SimpleFragment implements OnChartValueSelectedListener {
@@ -49,6 +53,7 @@ public class PieChartCategories extends SimpleFragment implements OnChartValueSe
     PieDataSet dataSet;
     ArrayList<Integer> colors;
     PieData pieData;
+    GoogleSignInAccount account;
 
     @NonNull
     public static Fragment newInstance() {
@@ -62,8 +67,14 @@ public class PieChartCategories extends SimpleFragment implements OnChartValueSe
         chart = v.findViewById(R.id.pieChart1);
         chart.getDescription().setEnabled(false);
 
+        account = GoogleSignIn.getLastSignedInAccount(getContext());
+
         formatChart();
-        populateData();
+        try {
+            populateData();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         chart.setOnChartValueSelectedListener(this);
 
@@ -79,51 +90,53 @@ public class PieChartCategories extends SimpleFragment implements OnChartValueSe
         return s;
     }
 
-    private void populateData() {
+    private void populateData() throws ExecutionException, InterruptedException {
         entries = new ArrayList<>();
         categoryViewModel = new ViewModelProvider(this).get(CategoryViewModel.class);
-        categoryViewModel.getAllCategories().observe(getViewLifecycleOwner(), new Observer<List<Category>>() {
-            @Override
-            public void onChanged(List<Category> categoryList) {
-                entries.clear();
-                String name;
-                double amount;
-                for (Category cat : categoryList) {
-                    if(!(cat.getCategoryType()).equals("Income")) {
-                        name = cat.getCategoryName();
-                        amount = cat.getCategoryAmount();
-                        entries.add(new PieEntry((float) amount, name));
+        if(account != null) {
+            categoryViewModel.getAllCategoriesByGoogleId(account.getId()).observe(getViewLifecycleOwner(), new Observer<List<Category>>() {
+                @Override
+                public void onChanged(List<Category> categoryList) {
+                    entries.clear();
+                    String name;
+                    double amount;
+                    for (Category cat : categoryList) {
+                        if (!(cat.getCategoryType()).equals("Income")) {
+                            name = cat.getCategoryName();
+                            amount = cat.getCategoryAmount();
+                            entries.add(new PieEntry((float) amount, name));
+                        }
                     }
+
+                    dataSet = new PieDataSet(entries, "");
+                    dataSet.setDrawIcons(true);
+
+                    dataSet.setSliceSpace(3f);
+                    dataSet.setIconsOffset(new MPPointF(0, 40));
+                    dataSet.setSelectionShift(50f);
+
+                    setColors();
+                    dataSet.setColors(colors);
+
+                    pieData = new PieData(dataSet);
+                    pieData.setValueFormatter(new DefaultAxisValueFormatter(2));
+                    pieData.setValueTextSize(22f);
+                    pieData.setDrawValues(true);
+                    pieData.setValueTextColor(Color.BLACK);
+
+                    chart.setData(pieData);
+
+                    dataSet.setDrawIcons(true);
+
+                    dataSet.setSliceSpace(5f);
+                    dataSet.setIconsOffset(new MPPointF(0, 0));
+                    dataSet.setSelectionShift(10f);
+
+                    chart.invalidate();
+
                 }
-
-                dataSet = new PieDataSet(entries, "");
-                dataSet.setDrawIcons(true);
-
-                dataSet.setSliceSpace(3f);
-                dataSet.setIconsOffset(new MPPointF(0, 40));
-                dataSet.setSelectionShift(50f);
-
-                setColors();
-                dataSet.setColors(colors);
-
-                pieData = new PieData(dataSet);
-                pieData.setValueFormatter(new DefaultAxisValueFormatter(2));
-                pieData.setValueTextSize(22f);
-                pieData.setDrawValues(true);
-                pieData.setValueTextColor(Color.BLACK);
-
-                chart.setData(pieData);
-
-                dataSet.setDrawIcons(true);
-
-                dataSet.setSliceSpace(5f);
-                dataSet.setIconsOffset(new MPPointF(0, 0));
-                dataSet.setSelectionShift(10f);
-
-                chart.invalidate();
-
-            }
-        });
+            });
+        }
     }
 
     private void setColors() {
