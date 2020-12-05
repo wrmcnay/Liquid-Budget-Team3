@@ -35,20 +35,20 @@ public class GraphActivity extends AppBaseActivity {
 
             PageAdapter a = new PageAdapter(getSupportFragmentManager());
             pager.setAdapter(a);
+
+            Button button = findViewById(R.id.graphcurrentstandingbutton);
+            button.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    Intent intent = new Intent(getApplicationContext(), PieChartCurrentStanding.class);
+                    startActivity(intent);
+                    return true;
+                }
+            });
         }
         else {
             setContentView(R.layout.activity_graphs_not_signed_in);
         }
-
-        Button button = findViewById(R.id.secretbutton);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent secretIntent = new Intent(getApplicationContext(), PieChartCurrentStanding.class);
-                startActivity(secretIntent);
-            }
-        });
-
     }
 
     private class PageAdapter extends FragmentPagerAdapter {
