@@ -1,6 +1,9 @@
 package com.example.liquidbudget.GraphicalAnalysis;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
@@ -32,11 +35,20 @@ public class GraphActivity extends AppBaseActivity {
 
             PageAdapter a = new PageAdapter(getSupportFragmentManager());
             pager.setAdapter(a);
+
+            Button button = findViewById(R.id.graphcurrentstandingbutton);
+            button.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    Intent intent = new Intent(getApplicationContext(), PieChartCurrentStanding.class);
+                    startActivity(intent);
+                    return true;
+                }
+            });
         }
         else {
             setContentView(R.layout.activity_graphs_not_signed_in);
         }
-
     }
 
     private class PageAdapter extends FragmentPagerAdapter {

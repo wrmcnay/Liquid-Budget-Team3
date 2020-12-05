@@ -9,12 +9,14 @@ import android.view.View;
 import android.widget.Button;
 
 import com.example.liquidbudget.R;
+import com.example.liquidbudget.ui.main.AppBaseActivity;
 
-public class AccountActivity extends AppCompatActivity {
+public class AccountActivity extends AppBaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setTitle("Account");
         setContentView(R.layout.activity_account);
 
         Button editProfile = (Button) findViewById(R.id.changeAccountInfo);

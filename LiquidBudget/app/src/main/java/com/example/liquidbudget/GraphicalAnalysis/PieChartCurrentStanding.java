@@ -1,18 +1,15 @@
-package com.example.liquidbudget.settings;
-
-import androidx.appcompat.app.AppCompatActivity;
+package com.example.liquidbudget.GraphicalAnalysis;
 
 import android.os.Bundle;
 
 import com.example.liquidbudget.R;
 import com.example.liquidbudget.ui.main.AppBaseActivity;
 
-public class BankingActivity extends AppBaseActivity {
+public class PieChartCurrentStanding extends AppBaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setTitle("Banking");
-        setContentView(R.layout.activity_banking);
+        setContentView(R.layout.activity_graphs_view);
     }
 }
