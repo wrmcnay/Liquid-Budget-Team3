@@ -126,7 +126,7 @@ public class ViewCategoryActivity extends AppCompatActivity {
                 Log.e("ERROR", e.getMessage());
             }
             eHistory.setVisibility(View.GONE);
-            incomeRecyclerView.setVisibility(View.GONE);
+            expenseRecyclerView.setVisibility(View.GONE);
 
         } else if (categoryType.equals("Expense")) {
             expenseViewModel = new ViewModelProvider(this).get(ExpenseViewModel.class);
