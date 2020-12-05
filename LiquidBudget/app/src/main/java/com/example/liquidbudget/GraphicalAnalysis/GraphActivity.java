@@ -1,6 +1,9 @@
 package com.example.liquidbudget.GraphicalAnalysis;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
@@ -36,6 +39,15 @@ public class GraphActivity extends AppBaseActivity {
         else {
             setContentView(R.layout.activity_graphs_not_signed_in);
         }
+
+        Button button = findViewById(R.id.secretbutton);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent secretIntent = new Intent(getApplicationContext(), PieChartCurrentStanding.class);
+                startActivity(secretIntent);
+            }
+        });
 
     }
 

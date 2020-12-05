@@ -80,6 +80,8 @@
             android:parentActivityName=".AddUserActivity"/>
         <activity android:name=".UserDisplayActivity"
             android:launchMode="singleTop"/>
+        <activity android:name=".GraphicalAnalysis.PieChartCurrentStanding"
+            android:launchMode="singleTop"/>
         <activity android:name=".AddIncomeActivity"
             android:parentActivityName=".AddIncomeActivity"/>
         <activity android:name=".IncomeDisplayActivity"
