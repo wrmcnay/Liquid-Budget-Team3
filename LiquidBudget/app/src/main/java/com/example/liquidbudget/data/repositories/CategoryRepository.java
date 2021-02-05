@@ -78,6 +78,18 @@ public class CategoryRepository{
         return future.get();
     }
 
+    public int getNumCategories(String gid) throws ExecutionException, InterruptedException {
+        Callable<Integer> callable = new Callable<Integer>() {
+            @Override
+            public Integer call() throws Exception {
+                return categoryDAO.getNumCategories(gid);
+            }
+        };
+        Future<Integer> future = Executors.newSingleThreadExecutor().submit(callable);
+        return future.get();
+    }
+
+
     public List<String> getAllIncomeCategoryNames() throws ExecutionException, InterruptedException{
         Callable<List<String>> callable = new Callable<List<String>>(){
             @Override

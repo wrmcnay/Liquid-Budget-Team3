@@ -76,6 +76,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".PreloadCategories"
+            android:parentActivityName=".ViewCategoryActivity"/>
         <activity android:name=".AddUserActivity"
             android:parentActivityName=".AddUserActivity"/>
         <activity android:name=".UserDisplayActivity"

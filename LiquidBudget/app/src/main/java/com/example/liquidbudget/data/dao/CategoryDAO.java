@@ -35,6 +35,9 @@ public interface CategoryDAO {
     @Query("SELECT CAST(SUM(categoryAmount) as DOUBLE) FROM categories WHERE categoryType=:catType AND googleID=:googleID")
     Double getPlannedTotalByType(String catType, String googleID);
 
+    @Query("SELECT count(*) FROM categories WHERE googleID=:googleID")
+    Integer getNumCategories(String googleID);
+
     @Query("SELECT categoryName FROM categories WHERE categoryType='Income'")
     List<String> getAllIncomeCategoryNames();
 
