@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/scrollview"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content">
 
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout
     android:id="@+id/spendingSavingLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -30,14 +30,14 @@
         android:layout_marginTop="65dp" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/totalSpendingLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="518dp"
         android:fontFamily="sans-serif-medium"
-        android:text="November Spending"
+        android:text="February Spending"
         android:textSize="25dp" />
 
     <TextView
