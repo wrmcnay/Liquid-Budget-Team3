@@ -69,6 +69,10 @@ public class Budget extends AppBaseActivity implements OnChartValueSelectedListe
 
         chart.setOnChartValueSelectedListener(this);
         chart.invalidate();
+
+
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close);
+        setTitle("Budget");
     }
 
     private SpannableString generateCenterSpannableText() {
