@@ -100,11 +100,13 @@ public class Budget extends AppBaseActivity implements OnChartValueSelectedListe
             public void onChanged(List<Income> incomesList) { // when a new income is added
 
                 try {
-                    double am = incomeViewModel.getSumTotal();
+                    Double am = incomeViewModel.getSumTotal();
                     String name;
                     //for (Income inc : incomesList) { // each income on list
                     name = "Total Monthly Incomes";
-                    entries.add(new PieEntry((float) am, name)); //create an new entry on the pie chart
+                    if(am != null) {
+                        entries.add(new PieEntry((float)(double) am, name)); //create an new entry on the pie chart
+                    }
                 } catch (ExecutionException e) {
                     e.printStackTrace();
                 } catch (InterruptedException e) {
@@ -144,11 +146,13 @@ public class Budget extends AppBaseActivity implements OnChartValueSelectedListe
             public void onChanged(List<Expense> expenseList) { // when a new income is added
 
                 try {
-                    double am = expenseViewModel.getSumTotal();
+                    Double am = expenseViewModel.getSumTotal();
                     String name;
 
                     name = "Total Monthy Expenses";
-                    entries.add(new PieEntry((float) am, name)); //create an new entry on the pie chart
+                    if (am != null) {
+                        entries.add(new PieEntry((float)(double) am, name)); //create an new entry on the pie chart
+                    }
                 } catch (ExecutionException e) {
                     e.printStackTrace();
                 } catch (InterruptedException e) {
@@ -246,4 +250,13 @@ public class Budget extends AppBaseActivity implements OnChartValueSelectedListe
         chart.setEntryLabelTextSize(16f);
         chart.setDrawEntryLabels(true);
     }
+
+
+
+
+
+
+
+
+
 }
