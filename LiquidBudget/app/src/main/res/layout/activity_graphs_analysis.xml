@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#E9E0F8"
+    android:background="@color/colorPrimaryLight"
     android:orientation="vertical"
     tools:context=".GraphicalAnalysis.GraphActivity">
 
