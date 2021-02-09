@@ -1,0 +1,9 @@
+
+X
+java:S18749"<Remove this use of "FragmentPagerAdapter"; it is deprecated.(‘í›\8’œÄã.
+Y	java:S110"=This class has 10 parents which is greater than 5 authorized.(¹­“”8’œÄã.
+t	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(äşÏúÿÿÿÿ
+J
+java:S1604("(Make this anonymous inner class a lambda(íèÌˆúÿÿÿÿ8’œÄã.
+W	java:S125"<This block of commented-out lines of code should be removed.(œî=8’œÄã.
+C	java:S131@""Add a default case to this switch.(à¶Âıÿÿÿÿ8’œÄã.

@@ -17,7 +17,7 @@ import static com.example.liquidbudget.data.database.UserAccountDatabase.DATABAS
 
 @Database(entities = {UserAccount.class, Category.class},version = DATABASE_VERSION)
 public abstract class UserAccountDatabase extends RoomDatabase {
-    public static final int DATABASE_VERSION = 6;
+    public static final int DATABASE_VERSION = 7;
     public static final String DATABASE_NAME = "User-Database";
 
     public abstract UserAccountDAO userAccountDAO();

@@ -20,10 +20,12 @@ public class TutorialDialogue extends DialogFragment {
 
     TutorialDialogListener listener;
 
+    public void setBody(String s){ body = s; }
+
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setMessage(R.string.first_alert)
+        builder.setMessage(body)
             .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
@@ -33,7 +35,7 @@ public class TutorialDialogue extends DialogFragment {
             .setNegativeButton("NO", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    //NO
+                    listener.onDialogNegativeClick(TutorialDialogue.this);
                 }
             });
         return builder.create();

@@ -1,0 +1,8 @@
+
+V	java:S110"<This class has 9 parents which is greater than 5 authorized.(…ıÀûÿÿÿÿ
+J
+java:S1481"-Remove this unused "textView" local variable.(Ì‹îó8€°¡÷.
+_
+java:S1128"BRemove this unused import 'android.view.animation.AnimationUtils'.(µ¬8€°¡÷.
+Y
+java:S1854"<Remove this useless assignment to local variable "textView".(Ì‹îó8€°¡÷.

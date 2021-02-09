@@ -31,4 +31,8 @@ public class UserAccountViewModel extends AndroidViewModel {
     public Boolean getUserByGoogleId(String gid) throws ExecutionException, InterruptedException {
         return mRepository.getUserByGoogleId(gid);
     }
+
+    public Boolean getTutorialCompletion(String gid) throws ExecutionException, InterruptedException {
+        return mRepository.getTutorialCompletion(gid);
+    }
 }

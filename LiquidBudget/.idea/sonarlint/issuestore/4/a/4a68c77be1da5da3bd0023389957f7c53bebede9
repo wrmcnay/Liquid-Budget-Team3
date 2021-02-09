@@ -1,0 +1,18 @@
+
+C
+java:S1604J"(Make this anonymous inner class a lambda(Öíô¼şÿÿÿÿ
+R	java:S110""=This class has 10 parents which is greater than 5 authorized.(¾‹™Œ
+{
+java:S1450/"`Remove the "categoryViewModel" field and declare it as a local variable in the relevant methods.(‘ª—æøÿÿÿÿ
+o
+java:S2293^"YReplace the type specification in this constructor call with the diamond operator ("<>").(…ÃŞ»
+Y
+java:S1155W">Use isEmpty() to check whether the collection is empty or not.(ÌÀ ÿÿÿÿÿ
+œ
+java:S1186j"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(¹Æº×şÿÿÿÿ
+C
+java:S1604s"(Make this anonymous inner class a lambda(Êœüûÿÿÿÿ
+C
+java:S1604@"(Make this anonymous inner class a lambda(©ö¿Íıÿÿÿÿ
+m
+java:S37767"RRefactor this method to reduce its Cognitive Complexity from 19 to the 15 allowed.(¨Œşÿÿÿÿ

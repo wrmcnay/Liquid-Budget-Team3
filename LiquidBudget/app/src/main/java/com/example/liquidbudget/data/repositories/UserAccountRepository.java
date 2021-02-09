@@ -63,4 +63,15 @@ public class UserAccountRepository {
         Future<Boolean> future = Executors.newSingleThreadExecutor().submit(callable);
         return future.get();
     }
+
+    public Boolean getTutorialCompletion(String gid) throws ExecutionException, InterruptedException {
+        Callable<Boolean> callable = new Callable<Boolean>(){
+            @Override
+            public Boolean call() throws Exception {
+                return userAccountDAO.getTutorialCompletion(gid);
+            }
+        };
+        Future<Boolean> future = Executors.newSingleThreadExecutor().submit(callable);
+        return future.get();
+    }
 }

@@ -18,6 +18,7 @@ public class AddUserActivity extends AppCompatActivity {
     public static final String EXTRA_USERNAME = "com.example.liquidbudget.EXTRA_USERNAME";
     public static final String EXTRA_EMAIL = "com.example.liquidbudget.EXTRA_EMAIL";
     public static final String EXTRA_NAME = "com.example.liquidbudget.EXTRA_NAME";
+    public static final String EXTRA_TUTCOMPLETE = "com.example.liquidbudget.EXTRA_TUTCOMPLETE";
 
     private EditText UsernameEditText;
     private EditText EmailEditText;
@@ -51,6 +52,7 @@ public class AddUserActivity extends AppCompatActivity {
         data.putExtra(EXTRA_USERNAME, username);
         data.putExtra(EXTRA_EMAIL, email);
         data.putExtra(EXTRA_NAME, name);
+        data.putExtra(EXTRA_TUTCOMPLETE, false);
 
         setResult(RESULT_OK, data);
         finish();

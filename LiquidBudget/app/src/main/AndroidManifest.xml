@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.liquidbudget">
 
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,7 +10,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
+        <activity
+            android:name=".TutorialWelcome"
+            android:label="@string/title_activity_tutorial_welcome"
+            android:theme="@style/Theme.AppCompat.NoActionBar"></activity>
 
         <activity android:name=".ExpenseDisplayActivity" />
         <activity android:name=".settings.InviteActivity" />
@@ -17,8 +21,9 @@
         <activity android:name=".settings.BankingActivity" />
         <activity android:name=".settings.NotificationsActivity" />
         <activity android:name=".settings.AccountActivity" />
-        <activity android:name=".settings.SettingsActivity"
-            android:label="Settings"/>
+        <activity
+            android:name=".settings.SettingsActivity"
+            android:label="Settings" />
         <activity android:name=".AddExpenseActivity" />
         <activity android:name=".budget.Budget" />
         <activity
@@ -26,6 +31,7 @@
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name=".MainActivity" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
@@ -76,23 +82,28 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".AddUserActivity"
-            android:parentActivityName=".AddUserActivity"/>
-        <activity android:name=".UserDisplayActivity"
-            android:launchMode="singleTop"/>
-        <activity android:name=".GraphicalAnalysis.PieChartCurrentStanding"
-            android:launchMode="singleTop"/>
-        <activity android:name=".AddIncomeActivity"
-            android:parentActivityName=".AddIncomeActivity"/>
-        <activity android:name=".IncomeDisplayActivity"
-            android:launchMode="singleTop"/>
-        <activity android:name=".GraphicalAnalysis.GraphActivity"
-            android:label="Analysis"/>
+        <activity
+            android:name=".AddUserActivity"
+            android:parentActivityName=".AddUserActivity" />
+        <activity
+            android:name=".UserDisplayActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".GraphicalAnalysis.PieChartCurrentStanding"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".AddIncomeActivity"
+            android:parentActivityName=".AddIncomeActivity" />
+        <activity
+            android:name=".IncomeDisplayActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".GraphicalAnalysis.GraphActivity"
+            android:label="Analysis" />
 
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
-
     </application>
 
 </manifest>

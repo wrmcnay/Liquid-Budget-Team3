@@ -13,20 +13,24 @@ import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.example.liquidbudget.data.entities.UserAccount;
 import com.example.liquidbudget.data.viewmodels.CategoryViewModel;
 import com.example.liquidbudget.data.viewmodels.ExpenseViewModel;
 import com.example.liquidbudget.data.viewmodels.IncomeViewModel;
+import com.example.liquidbudget.data.viewmodels.UserAccountViewModel;
 import com.example.liquidbudget.ui.main.AppBaseActivity;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 
+import java.util.concurrent.ExecutionException;
+
 import static androidx.fragment.app.FragmentTransaction.TRANSIT_NONE;
 
 public class MainActivity extends AppBaseActivity implements TutorialDialogue.TutorialDialogListener {
-
     private ExpenseViewModel expenseViewModel;
     private IncomeViewModel incomeViewModel;
     private CategoryViewModel categoryViewModel;
+    TutorialDialogue d;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,10 +103,27 @@ public class MainActivity extends AppBaseActivity implements TutorialDialogue.Tu
         } catch(Exception e){
             Log.e("ERROR", e.getMessage());
         }
-        TutorialDialogue d = new TutorialDialogue();
-        d.setCancelable(false);
-        d.show(getSupportFragmentManager(), "TutorialDialogFragment");
+        try {
+            tutorialProgressCheck();
+        } catch (ExecutionException e) {
+            Log.d("ERROR", e.getLocalizedMessage());
+        } catch (InterruptedException e) {
+            Log.d("ERROR", e.getLocalizedMessage());
+        }
+    }
 
+    private void tutorialProgressCheck() throws ExecutionException, InterruptedException {
+        UserAccountViewModel userAccountViewModel = new ViewModelProvider(this).get(UserAccountViewModel.class);
+        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
+        if(userAccountViewModel.getTutorialCompletion(account.getId())){
+            Log.d("DEBUG", "TUTORIAL COMPLETE");
+        } else {
+            Log.d("DEBUG", "TUT INCOMPLETE");
+            d = new TutorialDialogue();
+            d.setBody(getResources().getString(R.string.Tutorial_Intro));
+            d.setCancelable(false);
+            d.show(getSupportFragmentManager(), "TutorialDialogFragment");
+        }
     }
 
 
@@ -118,7 +139,9 @@ public class MainActivity extends AppBaseActivity implements TutorialDialogue.Tu
 
     @Override
     public void onDialogPositiveClick(DialogFragment dialog) {
-        Log.d("POSITIVE", "CLICK");
+        dialog.dismiss();
+        d.setBody("hello world");
+        d.show(getSupportFragmentManager(), "TutorialDialogFragment");
     }
 
     @Override
@@ -126,4 +149,5 @@ public class MainActivity extends AppBaseActivity implements TutorialDialogue.Tu
 
     }
 }
+
 
