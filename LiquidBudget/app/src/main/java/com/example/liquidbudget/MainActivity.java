@@ -1,10 +1,16 @@
 package com.example.liquidbudget;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.os.Bundle;
 import android.text.InputFilter;
 import android.util.Log;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.liquidbudget.data.viewmodels.CategoryViewModel;
@@ -14,7 +20,9 @@ import com.example.liquidbudget.ui.main.AppBaseActivity;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 
-public class MainActivity extends AppBaseActivity {
+import static androidx.fragment.app.FragmentTransaction.TRANSIT_NONE;
+
+public class MainActivity extends AppBaseActivity implements TutorialDialogue.TutorialDialogListener {
 
     private ExpenseViewModel expenseViewModel;
     private IncomeViewModel incomeViewModel;
@@ -91,8 +99,13 @@ public class MainActivity extends AppBaseActivity {
         } catch(Exception e){
             Log.e("ERROR", e.getMessage());
         }
+        TutorialDialogue d = new TutorialDialogue();
+        d.setCancelable(false);
+        d.show(getSupportFragmentManager(), "TutorialDialogFragment");
 
     }
+
+
 
     public static double round(double value, int places) {
         if (places < 0) throw new IllegalArgumentException();
@@ -102,4 +115,15 @@ public class MainActivity extends AppBaseActivity {
         long tmp = Math.round(value);
         return (double) tmp / factor;
     }
+
+    @Override
+    public void onDialogPositiveClick(DialogFragment dialog) {
+        Log.d("POSITIVE", "CLICK");
+    }
+
+    @Override
+    public void onDialogNegativeClick(DialogFragment dialog) {
+
+    }
 }
+

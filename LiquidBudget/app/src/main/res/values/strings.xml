@@ -76,4 +76,5 @@
     <string name="SignOut">Sign Out</string>
     <string name="dash">-</string>
     <string name="users_budget">%s"'s Budget"</string>
+    <string name="first_alert">My First Dialog</string>
 </resources>
