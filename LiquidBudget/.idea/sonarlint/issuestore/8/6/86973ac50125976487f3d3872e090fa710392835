@@ -1,0 +1,14 @@
+
+d
+java:S2142ã"FEither re-interrupt this method or rethrow the "InterruptedException".(ä ¹€8Üš¨Òø.
+¤
+java:S1186é"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(ÛË³–þÿÿÿÿ8Ó»™Òø.
+R	java:S110("=This class has 10 parents which is greater than 5 authorized.(ñ¡–‹
+t
+java:S1450*"^Remove the "incomeViewModel" field and declare it as a local variable in the relevant methods.(óØä©
+C
+java:S1604k"(Make this anonymous inner class a lambda(Å‡Æûþÿÿÿÿ
+—
+java:S1186d"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(÷”Öš
+c
+java:S2147ã"ECombine this catch with the one at line 225, which has the same body.(ä ¹€8Üš¨Òø.

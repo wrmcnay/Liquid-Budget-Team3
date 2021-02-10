@@ -65,7 +65,7 @@ public class UserDisplayActivity extends AppBaseActivity {
             String name = data.getStringExtra(AddUserActivity.EXTRA_NAME);
             Boolean tutComplete = data.getBooleanExtra(AddUserActivity.EXTRA_TUTCOMPLETE, false);
 
-            UserAccount user = new UserAccount(username, name, email, tutComplete);
+            UserAccount user = new UserAccount(username, name, email, 0);
             userAccountViewModel.insert(user);
             Toast.makeText(this,"User Added!", Toast.LENGTH_SHORT).show();
         } else {

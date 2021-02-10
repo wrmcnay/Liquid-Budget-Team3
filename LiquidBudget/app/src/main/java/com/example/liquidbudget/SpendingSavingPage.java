@@ -2,6 +2,7 @@ package com.example.liquidbudget;
 
 import com.example.liquidbudget.data.entities.Income;
 import com.example.liquidbudget.data.viewmodels.IncomeViewModel;
+import com.example.liquidbudget.data.viewmodels.UserAccountViewModel;
 import com.example.liquidbudget.ui.main.AppBaseActivity;
 
 import android.graphics.Color;
@@ -13,6 +14,7 @@ import android.text.style.StyleSpan;
 import android.util.Log;
 import android.widget.TextView;
 
+import androidx.fragment.app.DialogFragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -33,8 +35,9 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
-public class SpendingSavingPage extends AppBaseActivity implements OnChartValueSelectedListener {
+public class SpendingSavingPage extends AppBaseActivity implements OnChartValueSelectedListener, TutorialDialogue.TutorialDialogListener {
 
     private IncomeViewModel incomeViewModel;
     private PieChart chart;
@@ -42,6 +45,7 @@ public class SpendingSavingPage extends AppBaseActivity implements OnChartValueS
     PieDataSet dataSet;
     ArrayList<Integer> colors;
     PieData pieData;
+    TutorialDialogue d;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +66,18 @@ public class SpendingSavingPage extends AppBaseActivity implements OnChartValueS
 
         chart.setOnChartValueSelectedListener(this);
         chart.invalidate();
+
+    }
+
+    public void launchTutorialDialog() {
+        d = new TutorialDialogue();
+        d.setCurrentLayout(R.layout.tut4);
+        d.setPositiveButtonText("OK");
+        d.setNegativeButtonText("QUIT");
+        d.show(getSupportFragmentManager(), "TutorialDialogFragment");
+        UserAccountViewModel userAccountViewModel = new ViewModelProvider(this).get(UserAccountViewModel.class);
+        GoogleSignInAccount googleAccount = GoogleSignIn.getLastSignedInAccount(this);
+        userAccountViewModel.setTutorialState(googleAccount.getId(), 4);
     }
 
     private SpannableString generateCenterSpannableText() {
@@ -191,6 +207,31 @@ public class SpendingSavingPage extends AppBaseActivity implements OnChartValueS
         chart.setEntryLabelColor(Color.BLACK);
         chart.setEntryLabelTextSize(16f);
         chart.setDrawEntryLabels(true);
+    }
+
+    @Override
+    public void onDialogPositiveClick(DialogFragment dialog) {
+        UserAccountViewModel userAccountViewModel = new ViewModelProvider(this).get(UserAccountViewModel.class);
+        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
+        try {
+            if(userAccountViewModel.getTutorialState(account.getId()) == 4){
+                d.dismiss();
+                d.setCurrentLayout(R.layout.tut7);
+                d.setPositiveButtonText("OK");
+                d.setNegativeButtonText("QUIT");
+                d.show(getSupportFragmentManager(), "TutorialDialogFragment");
+                userAccountViewModel.setTutorialState(account.getId(), 5);
+            }
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void onDialogNegativeClick(DialogFragment dialog) {
+
     }
 }
 

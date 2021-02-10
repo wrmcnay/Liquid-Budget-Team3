@@ -64,14 +64,20 @@ public class UserAccountRepository {
         return future.get();
     }
 
-    public Boolean getTutorialCompletion(String gid) throws ExecutionException, InterruptedException {
-        Callable<Boolean> callable = new Callable<Boolean>(){
+    public int getTutorialState(String gid) throws ExecutionException, InterruptedException {
+        Callable<Integer> callable = new Callable<Integer>(){
             @Override
-            public Boolean call() throws Exception {
-                return userAccountDAO.getTutorialCompletion(gid);
+            public Integer call() throws Exception {
+                return userAccountDAO.getTutorialState(gid);
             }
         };
-        Future<Boolean> future = Executors.newSingleThreadExecutor().submit(callable);
+        Future<Integer> future = Executors.newSingleThreadExecutor().submit(callable);
         return future.get();
+    }
+
+    public void setTutorialState(String gid, int state){
+        UserAccountDatabase.databaseWriteExecutor.execute(() -> {
+            userAccountDAO.setTutorialState(gid, state);
+        });
     }
 }

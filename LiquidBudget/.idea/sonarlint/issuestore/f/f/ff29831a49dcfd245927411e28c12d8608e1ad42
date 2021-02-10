@@ -1,13 +1,13 @@
 
-y
-java:S1450"^Remove the "navigation_view" field and declare it as a local variable in the relevant methods.(Óóûÿÿÿÿ
-t	java:S116"ZRename this field "navigation_view" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Óóûÿÿÿÿ
-O
-java:S1874*"9Remove this use of "setDrawerListener"; it is deprecated.(îÓ“ş
-n	java:S116"TRename this field "view_stub" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(û´é•ûÿÿÿÿ
-X	java:S125w"<This block of commented-out lines of code should be removed.(£ãçà8â³ô×â.
-V	java:S110"<This class has 9 parents which is greater than 5 authorized.(ğæäüÿÿÿÿ
-<	java:S131o""Add a default case to this switch.(Ò“ÿšùÿÿÿÿ
 o
 java:S1450 "YRemove the "drawerMenu" field and declare it as a local variable in the relevant methods.(Š­ñä
 ]	java:S125q"<This block of commented-out lines of code should be removed.(Ì–áîıÿÿÿÿ8á³ô×â.
+n	java:S116"TRename this field "view_stub" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(û´é•ûÿÿÿÿ
+X	java:S125w"<This block of commented-out lines of code should be removed.(£ãçà8â³ô×â.
+y
+java:S1450"^Remove the "navigation_view" field and declare it as a local variable in the relevant methods.(Óóûÿÿÿÿ
+t	java:S116"ZRename this field "navigation_view" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Óóûÿÿÿÿ
+V	java:S110"<This class has 9 parents which is greater than 5 authorized.(ğæäüÿÿÿÿ
+O
+java:S1874*"9Remove this use of "setDrawerListener"; it is deprecated.(îÓ“ş
+<	java:S131o""Add a default case to this switch.(Ò“ÿšùÿÿÿÿ

@@ -2,13 +2,20 @@ package com.example.liquidbudget;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.text.InputFilter;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
@@ -31,6 +38,7 @@ public class MainActivity extends AppBaseActivity implements TutorialDialogue.Tu
     private IncomeViewModel incomeViewModel;
     private CategoryViewModel categoryViewModel;
     TutorialDialogue d;
+    Integer tutorialState = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -115,18 +123,32 @@ public class MainActivity extends AppBaseActivity implements TutorialDialogue.Tu
     private void tutorialProgressCheck() throws ExecutionException, InterruptedException {
         UserAccountViewModel userAccountViewModel = new ViewModelProvider(this).get(UserAccountViewModel.class);
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
-        if(userAccountViewModel.getTutorialCompletion(account.getId())){
+        if(userAccountViewModel.getTutorialState(account.getId()) != 0){
             Log.d("DEBUG", "TUTORIAL COMPLETE");
         } else {
             Log.d("DEBUG", "TUT INCOMPLETE");
             d = new TutorialDialogue();
-            d.setBody(getResources().getString(R.string.Tutorial_Intro));
+            d.setCurrentLayout(R.layout.dialog_layout);
             d.setCancelable(false);
             d.show(getSupportFragmentManager(), "TutorialDialogFragment");
+            tutorialState = 1;
         }
     }
 
-
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(tutorialState == 2){
+            d.setCurrentLayout(R.layout.tut3);
+            d.setPositiveButtonText("OK");
+            d.setNegativeButtonText("QUIT");
+            d.show(getSupportFragmentManager(), "TutorialDialogFragment");
+            tutorialState = 3;
+            UserAccountViewModel userAccountViewModel = new ViewModelProvider(this).get(UserAccountViewModel.class);
+            GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
+            userAccountViewModel.setTutorialState(account.getId(), 1);
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
     public static double round(double value, int places) {
         if (places < 0) throw new IllegalArgumentException();
@@ -139,9 +161,14 @@ public class MainActivity extends AppBaseActivity implements TutorialDialogue.Tu
 
     @Override
     public void onDialogPositiveClick(DialogFragment dialog) {
-        dialog.dismiss();
-        d.setBody("hello world");
-        d.show(getSupportFragmentManager(), "TutorialDialogFragment");
+        if(tutorialState == 1) {
+            d.dismiss();
+            d.setCurrentLayout(R.layout.tut2);
+            d.setPositiveButtonText("OK");
+            d.setNegativeButtonText("QUIT");
+            d.show(getSupportFragmentManager(), "TutorialDialogFragment");
+            tutorialState = 2;
+        }
     }
 
     @Override

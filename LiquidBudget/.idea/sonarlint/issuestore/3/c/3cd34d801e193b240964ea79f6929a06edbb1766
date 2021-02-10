@@ -1,9 +1,21 @@
 
+a
+java:S2147G"DCombine this catch with the one at line 69, which has the same body.(ä ¹€8›¬ËÒø.
+Y	java:S110"=This class has 10 parents which is greater than 5 authorized.(Î ”Ó8’œÄã.
 X
-java:S18749"<Remove this use of "FragmentPagerAdapter"; it is deprecated.(‘í›\8’œÄã.
-Y	java:S110"=This class has 10 parents which is greater than 5 authorized.(¹­“”8’œÄã.
+java:S1874O"<Remove this use of "FragmentPagerAdapter"; it is deprecated.(‘í›\8’œÄã.
 t	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(äşÏúÿÿÿÿ
+g
+java:S2259?"EA "NullPointerException" could be thrown; "account" is nullable here.(­ô²ûÿÿÿÿ8›¬ËÒø.
+c
+java:S2147‡"ECombine this catch with the one at line 133, which has the same body.(ä ¹€8»³ÍÒø.
 J
-java:S1604("(Make this anonymous inner class a lambda(íèÌˆúÿÿÿÿ8’œÄã.
-W	java:S125"<This block of commented-out lines of code should be removed.(œî=8’œÄã.
-C	java:S131@""Add a default case to this switch.(à¶Âıÿÿÿÿ8’œÄã.
+java:S16040"(Make this anonymous inner class a lambda(íèÌˆúÿÿÿÿ8’œÄã.
+C	java:S131V""Add a default case to this switch.(à¶Âıÿÿÿÿ8’œÄã.
+c
+java:S2142G"FEither re-interrupt this method or rethrow the "InterruptedException".(ä ¹€8›¬ËÒø.
+¤
+java:S1186"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(ÛË³–şÿÿÿÿ8»³ÍÒø.
+W	java:S125 "<This block of commented-out lines of code should be removed.(œî=8’œÄã.
+d
+java:S2142‡"FEither re-interrupt this method or rethrow the "InterruptedException".(ä ¹€8»³ÍÒø.

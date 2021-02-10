@@ -35,6 +35,9 @@ public interface UserAccountDAO {
     @Query("DELETE FROM users")
     void deleteAllUsers();
 
-    @Query("SELECT tutorialCompleted FROM users WHERE googleId == :gid")
-    Boolean getTutorialCompletion(String gid);
+    @Query("SELECT tutorialState FROM users WHERE googleId == :gid")
+    int getTutorialState(String gid);
+
+    @Query("UPDATE users SET tutorialState=:state WHERE googleId == :gid")
+    void setTutorialState(String gid, int state);
 }

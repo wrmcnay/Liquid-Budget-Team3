@@ -49,3 +49,11 @@ Gapp/src/main/java/com/example/liquidbudget/data/dao/UserAccountDAO.java,a\9\a9
 app/build.gradle,f\4\f4a01d6a4fcb971362ec00a83903fd3902f52164
 o
 ?app/src/main/java/com/example/liquidbudget/TutorialWelcome.java,d\f\df83b8d0f190951d8d860859225b55dc5a6a9574
+y
+Iapp/src/main/java/com/example/liquidbudget/data/entities/UserAccount.java,7\0\70aa918e02074685b35d9d3a97d7a20d9996cd77
+p
+@app/src/main/java/com/example/liquidbudget/TutorialDialogue.java,0\f\0faa34318e33948a0977b8a93a32c0b12eb9b477
+p
+@app/src/main/java/com/example/liquidbudget/CategoryActivity.java,f\2\f25b206dd895deabfffa682cbd6679405267804d
+r
+Bapp/src/main/java/com/example/liquidbudget/SpendingSavingPage.java,8\6\86973ac50125976487f3d3872e090fa710392835
