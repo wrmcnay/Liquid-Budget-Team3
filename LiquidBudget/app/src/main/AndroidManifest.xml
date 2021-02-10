@@ -82,24 +82,20 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".AddUserActivity"
-            android:parentActivityName=".AddUserActivity" />
-        <activity
-            android:name=".UserDisplayActivity"
-            android:launchMode="singleTop" />
-        <activity
-            android:name=".GraphicalAnalysis.PieChartCurrentStanding"
-            android:launchMode="singleTop" />
-        <activity
-            android:name=".AddIncomeActivity"
-            android:parentActivityName=".AddIncomeActivity" />
-        <activity
-            android:name=".IncomeDisplayActivity"
-            android:launchMode="singleTop" />
-        <activity
-            android:name=".GraphicalAnalysis.GraphActivity"
-            android:label="Analysis" />
+        <activity android:name=".PreloadCategories"
+            android:parentActivityName=".ViewCategoryActivity"/>
+        <activity android:name=".AddUserActivity"
+            android:parentActivityName=".AddUserActivity"/>
+        <activity android:name=".UserDisplayActivity"
+            android:launchMode="singleTop"/>
+        <activity android:name=".GraphicalAnalysis.PieChartCurrentStanding"
+            android:launchMode="singleTop"/>
+        <activity android:name=".AddIncomeActivity"
+            android:parentActivityName=".AddIncomeActivity"/>
+        <activity android:name=".IncomeDisplayActivity"
+            android:launchMode="singleTop"/>
+        <activity android:name=".GraphicalAnalysis.GraphActivity"
+            android:label="Analysis"/>
 
         <meta-data
             android:name="preloaded_fonts"

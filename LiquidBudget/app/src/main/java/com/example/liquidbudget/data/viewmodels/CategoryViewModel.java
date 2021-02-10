@@ -42,6 +42,10 @@ public class CategoryViewModel extends AndroidViewModel {
         return cRepository.getPlannedTotalByType(catType, gid);
     }
 
+    public Integer getNumCategories(String gid)throws ExecutionException, InterruptedException {
+        return cRepository.getNumCategories(gid);
+    }
+
     public List<String> getAllIncomeCategoryNames() throws ExecutionException, InterruptedException{
         return cRepository.getAllIncomeCategoryNames();
     }

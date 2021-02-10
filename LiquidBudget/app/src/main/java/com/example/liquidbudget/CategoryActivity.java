@@ -37,7 +37,7 @@ public class CategoryActivity extends AppBaseActivity implements TutorialDialogu
     private Double newCatAmount = 0.0;
     private String googleID;
     TutorialDialogue d;
-
+    private Integer numCategories = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -116,24 +116,28 @@ public class CategoryActivity extends AppBaseActivity implements TutorialDialogu
                 startActivity(viewActivity);
             }
         });
-//        recyclerView.setClickable(true);
-//        recyclerView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
-//                Intent viewActivity = new Intent(CategoryActivity.this, ViewCategoryActivity.class);
-//                String catName = arg0.getItemAtPosition(position).toString();
-//                viewActivity.putExtra("CategoryName", catName);
-//                startActivity(viewActivity);
-//            }
-//        });
+
+        try{
+            numCategories = categoryViewModel.getNumCategories(googleID);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         FloatingActionButton goToAddCategory = findViewById(R.id.goToAddCategory);
         goToAddCategory.setOnClickListener(new View.OnClickListener(){
             private final static String REQUEST_COLOR = "";
             @Override
             public void onClick(View view){
-                Intent startIntent = new Intent(getApplicationContext(), AddCategoryActivity.class);
-                startActivityForResult(startIntent, MY_REQUEST_CODE);
+                if(numCategories==0){
+                    Intent startIntent = new Intent(getApplicationContext(), PreloadCategories.class);
+                    startActivity(startIntent);
+                } else {
+                    Intent startIntent = new Intent(getApplicationContext(), AddCategoryActivity.class);
+                    startActivityForResult(startIntent, MY_REQUEST_CODE);
+                }
+//
+//                Intent startIntent = new Intent(getApplicationContext(), PreloadCategories.class);
+//                startActivity(startIntent);
             }
         });
 
