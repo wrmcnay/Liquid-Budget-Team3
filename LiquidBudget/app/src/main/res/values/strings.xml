@@ -54,6 +54,8 @@
     <string name="analysis">Analysis</string>
     <string name="categories">Categories</string>
     <string name="addingCategory">Let\'s create a new category:</string>
+    <string name="quote1">wHy iS tHErE nO buTtOns doWn heRe???</string>
+    <string name="quote2">hOw dO i gEt  OuT oF tHE tuToRIal???</string>
     <string name="catName">Category Name</string>
     <string name="type">Type</string>
     <string name="expAmount">Expected amount per month:</string>
