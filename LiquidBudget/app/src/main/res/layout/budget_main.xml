@@ -37,7 +37,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="518dp"
         android:fontFamily="sans-serif-medium"
-        android:text="February Spending"
+        android:text="March Spending"
         android:textSize="25dp" />
 
     <TextView
@@ -49,7 +49,14 @@
         android:gravity="center_horizontal"
         android:textSize="25dp" />
 
-
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/lstCategories"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="518dp"
+        tools:listitem="@layout/category" />
 
 
 </RelativeLayout>
