@@ -128,7 +128,7 @@ public class MainActivity extends AppBaseActivity implements TutorialDialogue.Tu
         } else {
             Log.d("DEBUG", "TUT INCOMPLETE");
             d = new TutorialDialogue();
-            d.setCurrentLayout(R.layout.dialog_layout);
+            d.setCurrentLayout(R.layout.tut1);
             d.setCancelable(false);
             d.show(getSupportFragmentManager(), "TutorialDialogFragment");
             tutorialState = 1;
@@ -173,7 +173,9 @@ public class MainActivity extends AppBaseActivity implements TutorialDialogue.Tu
 
     @Override
     public void onDialogNegativeClick(DialogFragment dialog) {
-
+        UserAccountViewModel userAccountViewModel = new ViewModelProvider(this).get(UserAccountViewModel.class);
+        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
+        userAccountViewModel.setTutorialState(account.getId(), 10);
     }
 }
 

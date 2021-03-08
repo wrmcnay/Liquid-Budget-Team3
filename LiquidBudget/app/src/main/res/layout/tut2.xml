@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_margin="15dp"
-        android:text="Lets start with our Navigation Bar. Tap the drawer icon to pull it out."
+        android:text="Lets start with our Navigation Bar. Tap the drawer icon on the top left of the app to pull it out."
         android:textAlignment="center"
         android:textColor="#295927"
         android:textSize="16dp"
