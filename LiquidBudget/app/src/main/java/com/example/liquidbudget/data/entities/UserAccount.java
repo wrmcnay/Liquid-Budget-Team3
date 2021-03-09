@@ -24,11 +24,15 @@ public class UserAccount {
     @ColumnInfo(name="tutorialState")
     private int tutorialState;
 
-    public UserAccount(String name, String email, String googleId, int tutorialState) {
+    @ColumnInfo(name="receiveWeeklyNotifs")
+    private boolean receiveWeeklyNotifs;
+
+    public UserAccount(String name, String email, String googleId, int tutorialState, boolean receiveWeeklyNotifs) {
         this.name = name;
         this.email = email;
         this.googleId = googleId;
         this.tutorialState = tutorialState;
+        this.receiveWeeklyNotifs = receiveWeeklyNotifs;
     }
 
     public long getUserID() {
@@ -64,6 +68,10 @@ public class UserAccount {
     }
 
     public int getTutorialState() { return tutorialState; }
+
+    public boolean getReceiveWeeklyNotifs() { return receiveWeeklyNotifs; }
+
+    public void setReceiveWeeklyNotifs(boolean state) { receiveWeeklyNotifs = state; }
 
     @Override
     public String toString() {

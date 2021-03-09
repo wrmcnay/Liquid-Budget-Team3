@@ -11,7 +11,6 @@ import com.example.liquidbudget.data.database.UserAccountDatabase;
 import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
@@ -80,4 +79,22 @@ public class UserAccountRepository {
             userAccountDAO.setTutorialState(gid, state);
         });
     }
+
+    public Boolean getReceiveWeeklyNotifs(String gid) throws ExecutionException, InterruptedException {
+        Callable<Boolean> callable = new Callable<Boolean>(){
+            @Override
+            public Boolean call() throws Exception {
+                return userAccountDAO.getReceiveWeeklyNotifs(gid);
+            }
+        };
+        Future<Boolean> future = Executors.newSingleThreadExecutor().submit(callable);
+        return future.get();
+    }
+
+    public void setReceiveWeeklyNotifs(String gid, boolean state){
+        UserAccountDatabase.databaseWriteExecutor.execute(() -> {
+            userAccountDAO.setReceiveWeeklyNotifs(gid, state);
+        });
+    }
+
 }
