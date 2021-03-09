@@ -130,6 +130,11 @@ public abstract class AppNavigationActivity extends AppCompatActivity implements
                 if(!(this instanceof MainActivity))
                     finish();
                 break;
+                Intent transactionsIntent = new Intent(this, IncomeDisplayActivity.class);
+                startActivity(transactionsIntent);
+                if(!(this instanceof MainActivity))
+                    finish();
+                break;
         }
         return false;
     }

@@ -22,4 +22,8 @@
         <item name="android:colorAccent">#295927</item>
     </style>
 
+    <style name="noAnimTheme" parent="android:Theme">
+        <item name="android:windowAnimationStyle">@null</item>
+    </style>
+
 </resources>

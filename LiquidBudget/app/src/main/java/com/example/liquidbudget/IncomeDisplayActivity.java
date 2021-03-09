@@ -8,8 +8,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.liquidbudget.data.entities.Income;
@@ -44,6 +46,25 @@ public class IncomeDisplayActivity extends AppBaseActivity {
         GoogleSignInAccount googleAccount = GoogleSignIn.getLastSignedInAccount(this);
         if(googleAccount != null)
             googleID = googleAccount.getId();
+
+        Button incomesButton = (Button) findViewById(R.id.incomes_button);
+        Button expensesButton = (Button) findViewById(R.id.expenses_button);
+
+        incomesButton.setVisibility(View.VISIBLE);
+        incomesButton.setBackgroundColor(Color.TRANSPARENT);
+        expensesButton.setVisibility(View.VISIBLE);
+        expensesButton.setBackgroundColor(Color.TRANSPARENT);
+
+        incomesButton.setClickable(false);
+
+        expensesButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent expensesPage = new Intent(IncomeDisplayActivity.this, ExpenseDisplayActivity.class);
+                startActivity(expensesPage);
+                overridePendingTransition(0,0);
+            }
+        });
 
         FloatingActionButton addIncomeBtn = findViewById(R.id.add_income_button);
         addIncomeBtn.setOnClickListener(new View.OnClickListener() {
