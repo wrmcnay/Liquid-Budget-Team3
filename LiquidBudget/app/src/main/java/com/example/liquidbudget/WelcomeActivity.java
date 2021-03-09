@@ -1,9 +1,11 @@
 package com.example.liquidbudget;
 
+import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 
 import androidx.annotation.NonNull;
@@ -35,7 +37,9 @@ public class WelcomeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().requestFeature(Window.FEATURE_ACTIVITY_TRANSITIONS);
         setContentView(R.layout.welcome);
+
 
         // Configure sign-in to request the user's ID, email address, and basic
         // profile. ID and basic profile are included in DEFAULT_SIGN_IN.
@@ -68,7 +72,8 @@ public class WelcomeActivity extends AppCompatActivity {
             UserAccountViewModel userAccountViewModel = new ViewModelProvider(this).get(UserAccountViewModel.class);
             try {
                 if (!userAccountViewModel.getUserByGoogleId(account.getId())){
-                    UserAccount newUser = new UserAccount(account.getDisplayName(), account.getEmail(), account.getId());
+                    //brand new user
+                    UserAccount newUser = new UserAccount(account.getDisplayName(), account.getEmail(), account.getId(), 0);
                     userAccountViewModel.insert(newUser);
                     Intent intent = new Intent(this, MainActivity.class);
                     startActivity(intent);

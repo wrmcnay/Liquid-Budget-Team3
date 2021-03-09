@@ -63,4 +63,21 @@ public class UserAccountRepository {
         Future<Boolean> future = Executors.newSingleThreadExecutor().submit(callable);
         return future.get();
     }
+
+    public int getTutorialState(String gid) throws ExecutionException, InterruptedException {
+        Callable<Integer> callable = new Callable<Integer>(){
+            @Override
+            public Integer call() throws Exception {
+                return userAccountDAO.getTutorialState(gid);
+            }
+        };
+        Future<Integer> future = Executors.newSingleThreadExecutor().submit(callable);
+        return future.get();
+    }
+
+    public void setTutorialState(String gid, int state){
+        UserAccountDatabase.databaseWriteExecutor.execute(() -> {
+            userAccountDAO.setTutorialState(gid, state);
+        });
+    }
 }

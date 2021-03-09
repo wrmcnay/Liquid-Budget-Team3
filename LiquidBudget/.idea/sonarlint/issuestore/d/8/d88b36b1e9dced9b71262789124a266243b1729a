@@ -1,14 +1,12 @@
 
-Q	java:S110"=This class has 10 parents which is greater than 5 authorized.(¨ŒÜN
-`
-java:S1128"JRemove this unused import 'com.example.liquidbudget.data.entities.Income'.(… 
-C
-java:S1604&"(Make this anonymous inner class a lambda(Äáìºüÿÿÿÿ
-?
-java:S1659F"*Declare "categoryName" on a separate line.(í³Ïm
-P
-java:S1068"5Remove this unused "expenseRepository" private field.(èÛ³úüÿÿÿÿ
->
-java:S16047"(Make this anonymous inner class a lambda(«é³™
-L
-java:S1481E"*Remove this unused "expID" local variable.(¤Óã©ûÿÿÿÿ8İºô‘à.
+E
+java:S16041"(Make this anonymous inner class a lambda(‹Ì¸á8Ç‘œÄã.
+c
+java:S2142L"FEither re-interrupt this method or rethrow the "InterruptedException".(ä ¹€8Ç‘œÄã.
+J
+java:S1604D"(Make this anonymous inner class a lambda(éîéãıÿÿÿÿ8Ç‘œÄã.
+X	java:S110"=This class has 10 parents which is greater than 5 authorized.(¨ŒÜN8Ç‘œÄã.
+a
+java:S2147L"DCombine this catch with the one at line 74, which has the same body.(ä ¹€8Ç‘œÄã.
+E
+java:S1604j"(Make this anonymous inner class a lambda(æÈ€À8Ç‘œÄã.

@@ -3,10 +3,12 @@ package com.example.liquidbudget;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+import androidx.fragment.app.DialogFragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.ItemTouchHelper;
@@ -15,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.liquidbudget.data.entities.Category;
 import com.example.liquidbudget.data.viewmodels.CategoryViewModel;
+import com.example.liquidbudget.data.viewmodels.UserAccountViewModel;
 import com.example.liquidbudget.ui.DataAdapters.CategoryAdapter;
 import com.example.liquidbudget.ui.main.AppBaseActivity;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -24,7 +27,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
-public class CategoryActivity extends AppBaseActivity {
+public class CategoryActivity extends AppBaseActivity implements TutorialDialogue.TutorialDialogListener {
     public static final String CATEGORY_NAME = "com.example.liquidbudget.CATEGORY_NAME";
 
     private CategoryViewModel categoryViewModel;
@@ -33,6 +36,7 @@ public class CategoryActivity extends AppBaseActivity {
     private String newCatType = "";
     private Double newCatAmount = 0.0;
     private String googleID;
+    TutorialDialogue d;
     private Integer numCategories = 0;
 
     @Override
@@ -139,6 +143,17 @@ public class CategoryActivity extends AppBaseActivity {
 
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close);
         setTitle("Categories");
+
+        UserAccountViewModel userAccountViewModel = new ViewModelProvider(this).get(UserAccountViewModel.class);
+        try {
+            if(userAccountViewModel.getTutorialState(googleAccount.getId()) == 1) {
+                launchTutorialDialog();
+            }
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -159,4 +174,54 @@ public class CategoryActivity extends AppBaseActivity {
         }
     }
 
+    public void launchTutorialDialog() {
+        d = new TutorialDialogue();
+        d.setCurrentLayout(R.layout.tut4);
+        d.setPositiveButtonText("OK");
+        d.setNegativeButtonText("QUIT");
+        d.show(getSupportFragmentManager(), "TutorialDialogFragment");
+        UserAccountViewModel userAccountViewModel = new ViewModelProvider(this).get(UserAccountViewModel.class);
+        GoogleSignInAccount googleAccount = GoogleSignIn.getLastSignedInAccount(this);
+        userAccountViewModel.setTutorialState(googleAccount.getId(), 2);
+
+    }
+
+    @Override
+    public void onDialogPositiveClick(DialogFragment dialog) {
+
+    }
+
+    @Override
+    public void onDialogNegativeClick(DialogFragment dialog) {
+
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        UserAccountViewModel userAccountViewModel = new ViewModelProvider(this).get(UserAccountViewModel.class);
+        GoogleSignInAccount googleAccount = GoogleSignIn.getLastSignedInAccount(this);
+        try {
+            if(userAccountViewModel.getTutorialState(googleID) == 2){
+                try {
+                    if(userAccountViewModel.getTutorialState(googleAccount.getId()) == 2){
+                        d.setCurrentLayout(R.layout.tut5);
+                        d.setPositiveButtonText("OK");
+                        d.setNegativeButtonText("QUIT");
+                        d.show(getSupportFragmentManager(), "TutorialDialogFragment");
+                        userAccountViewModel.setTutorialState(googleAccount.getId(), 3);
+                    }
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
 }

@@ -78,4 +78,10 @@
     <string name="SignOut">Sign Out</string>
     <string name="dash">-</string>
     <string name="users_budget">%s"'s Budget"</string>
+    <string name="first_alert">My First Dialog</string>
+    <string name="title_activity_tutorial_welcome">TutorialWelcome</string>
+    <string name="welcome_text">WELCOME</string>
+    <string name="app_description">LiquidBudget is a budgeting app designed for users with fluid finances.</string>
+    <string name="get_started">Lets get started.</string>
+    <string name="Tutorial_Intro">Welcome to LiquidBudget. Our database shows that you have not completed our tutorial. Would you like to complete it now? </string>
 </resources>

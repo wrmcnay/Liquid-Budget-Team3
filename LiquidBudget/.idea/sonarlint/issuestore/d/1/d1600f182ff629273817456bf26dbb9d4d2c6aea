@@ -1,0 +1,16 @@
+
+_
+java:S1128"CRemove this unused import 'com.example.liquidbudget.budget.Budget'.(•¥³K8©Ü‘Çø.
+]	java:S110"<This class has 9 parents which is greater than 5 authorized.(°ïÇåüÿÿÿÿ8©Ü‘Çø.
+U
+java:S1128"8Remove this unused import 'androidx.annotation.NonNull'.(ˆÛúÜ8©Ü‘Çø.
+Z
+java:S1128"8Remove this unused import 'androidx.lifecycle.LiveData'.(ß„ÝÞþÿÿÿÿ8©Ü‘Çø.
+Z
+java:S1128"8Remove this unused import 'android.app.ActivityOptions'.(þ­¡½ùÿÿÿÿ8©Ü‘Çø.
+`
+java:S1128">Remove this unused import 'androidx.lifecycle.LifecycleOwner'.(žØƒ»ýÿÿÿÿ8©Ü‘Çø.
+Z
+java:S1128"8Remove this unused import 'androidx.lifecycle.Observer'.(ÒÁˆÉþÿÿÿÿ8©Ü‘Çø.
+L
+java:S5411J"*Use the primitive boolean expression here.(×ÏµËúÿÿÿÿ8©Ü‘Çø.

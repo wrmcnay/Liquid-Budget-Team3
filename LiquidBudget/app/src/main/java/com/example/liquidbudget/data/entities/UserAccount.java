@@ -21,10 +21,14 @@ public class UserAccount {
     @ColumnInfo(name="googleId")
     public String googleId;
 
-    public UserAccount(String name, String email, String googleId) {
+    @ColumnInfo(name="tutorialState")
+    private int tutorialState;
+
+    public UserAccount(String name, String email, String googleId, int tutorialState) {
         this.name = name;
         this.email = email;
         this.googleId = googleId;
+        this.tutorialState = tutorialState;
     }
 
     public long getUserID() {
@@ -54,6 +58,12 @@ public class UserAccount {
     public String getGoogleId() { return googleId; }
 
     public void setGoogleId(String gId) { this.googleId = gId; }
+
+    public void setTutorialState(int state){
+        tutorialState = state;
+    }
+
+    public int getTutorialState() { return tutorialState; }
 
     @Override
     public String toString() {

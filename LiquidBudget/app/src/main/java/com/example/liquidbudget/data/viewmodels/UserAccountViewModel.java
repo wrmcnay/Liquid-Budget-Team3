@@ -5,6 +5,7 @@ import android.app.Application;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
+import com.example.liquidbudget.data.database.UserAccountDatabase;
 import com.example.liquidbudget.data.entities.UserAccount;
 import com.example.liquidbudget.data.repositories.UserAccountRepository;
 
@@ -31,4 +32,12 @@ public class UserAccountViewModel extends AndroidViewModel {
     public Boolean getUserByGoogleId(String gid) throws ExecutionException, InterruptedException {
         return mRepository.getUserByGoogleId(gid);
     }
+
+    public int getTutorialState(String gid) throws ExecutionException, InterruptedException {
+        return mRepository.getTutorialState(gid);
+    }
+    public void setTutorialState(String gid, int state){
+        mRepository.setTutorialState(gid, state);
+    }
+
 }

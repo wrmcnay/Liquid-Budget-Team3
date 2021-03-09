@@ -1,16 +1,13 @@
 
-V	java:S110"<This class has 9 parents which is greater than 5 authorized.(ğæäüÿÿÿÿ
-_
-java:S1128"IRemove this unused import 'com.example.liquidbudget.UserDisplayActivity'.(ãœŠØ
-^
-java:S1128"HRemove this unused import 'com.example.liquidbudget.AddExpenseActivity'.(ó™ÆØ
 o
-java:S1450""YRemove the "drawerMenu" field and declare it as a local variable in the relevant methods.(Š­ñä
+java:S1450 "YRemove the "drawerMenu" field and declare it as a local variable in the relevant methods.(Š­ñä
+]	java:S125q"<This block of commented-out lines of code should be removed.(Ì–áîıÿÿÿÿ8á³ô×â.
+n	java:S116"TRename this field "view_stub" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(û´é•ûÿÿÿÿ
+X	java:S125w"<This block of commented-out lines of code should be removed.(£ãçà8â³ô×â.
 y
-java:S1450"^Remove the "navigation_view" field and declare it as a local variable in the relevant methods.(Óóûÿÿÿÿ
-n	java:S116"TRename this field "view_stub" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(û´é•ûÿÿÿÿ
-t	java:S116"ZRename this field "navigation_view" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Óóûÿÿÿÿ
+java:S1450"^Remove the "navigation_view" field and declare it as a local variable in the relevant methods.(Óóûÿÿÿÿ
+t	java:S116"ZRename this field "navigation_view" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Óóûÿÿÿÿ
+V	java:S110"<This class has 9 parents which is greater than 5 authorized.(ğæäüÿÿÿÿ
 O
-java:S1874,"9Remove this use of "setDrawerListener"; it is deprecated.(îÓ“ş
-<	java:S131q""Add a default case to this switch.(Ò“ÿšùÿÿÿÿ
-P	java:S125x"<This block of commented-out lines of code should be removed.(¨“s
+java:S1874*"9Remove this use of "setDrawerListener"; it is deprecated.(îÓ“ş
+<	java:S131o""Add a default case to this switch.(Ò“ÿšùÿÿÿÿ
