@@ -112,7 +112,8 @@ public class MainActivity extends AppBaseActivity implements TutorialDialogue.Tu
             Log.e("ERROR", e.getMessage());
         }
         try {
-            tutorialProgressCheck();
+            if(account != null)
+             tutorialProgressCheck();
         } catch (ExecutionException e) {
             Log.d("ERROR", e.getLocalizedMessage());
         } catch (InterruptedException e) {
