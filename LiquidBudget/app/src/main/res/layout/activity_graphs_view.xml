@@ -17,7 +17,60 @@
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.49"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.47"
         app:srcCompat="@mipmap/ic_channel_foreground" />
+
+    <TextView
+        android:id="@+id/textView14"
+        android:layout_width="369dp"
+        android:layout_height="128dp"
+        android:layout_marginBottom="4dp"
+        android:fontFamily="casual"
+        android:text="@string/quote1"
+        android:textAlignment="center"
+        android:textColor="@color/redLight"
+        android:textSize="30dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.666"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/textView15"
+        android:layout_width="191dp"
+        android:layout_height="58dp"
+        android:layout_marginBottom="16dp"
+        android:text="↘"
+        android:textAlignment="center"
+        android:textSize="50dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.287"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/textView16"
+        android:layout_width="387dp"
+        android:layout_height="83dp"
+        android:layout_marginBottom="572dp"
+        android:fontFamily="casual"
+        android:fromDegrees="0"
+        android:text="@string/quote2"
+        android:textAlignment="center"
+        android:textColor="@color/redLight"
+        android:textSize="30dp"
+        android:toDegrees="-35"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="MissingConstraints" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

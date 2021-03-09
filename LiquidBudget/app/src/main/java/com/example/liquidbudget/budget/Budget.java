@@ -1,12 +1,20 @@
 package com.example.liquidbudget.budget;
 
+import com.example.liquidbudget.AddCategoryActivity;
+import com.example.liquidbudget.CategoryActivity;
+import com.example.liquidbudget.PreloadCategories;
 import com.example.liquidbudget.R;
+import com.example.liquidbudget.ViewCategoryActivity;
+import com.example.liquidbudget.data.entities.Category;
 import com.example.liquidbudget.data.entities.Expense;
 import com.example.liquidbudget.data.entities.Income;
+import com.example.liquidbudget.data.viewmodels.CategoryViewModel;
 import com.example.liquidbudget.data.viewmodels.ExpenseViewModel;
 import com.example.liquidbudget.data.viewmodels.IncomeViewModel;
+import com.example.liquidbudget.ui.DataAdapters.CategoryAdapter;
 import com.example.liquidbudget.ui.main.AppBaseActivity;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -14,11 +22,16 @@ import android.text.SpannableString;
 import android.text.style.RelativeSizeSpan;
 import android.text.style.StyleSpan;
 import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.ItemTouchHelper;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.PieChart;
@@ -34,6 +47,7 @@ import com.github.mikephil.charting.utils.ColorTemplate;
 import com.github.mikephil.charting.utils.MPPointF;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,6 +62,11 @@ public class Budget extends AppBaseActivity implements OnChartValueSelectedListe
     PieDataSet dataSet;
     ArrayList<Integer> colors;
     PieData pieData;
+
+    private CategoryViewModel categoryViewModel;
+    private final static int MY_REQUEST_CODE= 1;
+    private String googleID;
+    private Integer numCategories = 0;
 
 
     @Override
@@ -69,6 +88,89 @@ public class Budget extends AppBaseActivity implements OnChartValueSelectedListe
 
         chart.setOnChartValueSelectedListener(this);
         chart.invalidate();
+
+
+        //category list
+
+        // init view
+        RecyclerView recyclerView = findViewById(R.id.lstCategories);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setHasFixedSize(false);
+
+        com.example.liquidbudget.ui.DataAdapters.CategoryAdapter adapter = new com.example.liquidbudget.ui.DataAdapters.CategoryAdapter();
+        recyclerView.setAdapter(adapter);
+
+        GoogleSignInAccount googleAccount = GoogleSignIn.getLastSignedInAccount(this);
+        if(googleAccount != null)
+            googleID = googleAccount.getId();
+
+        //Database
+        categoryViewModel = new ViewModelProvider(this).get(CategoryViewModel.class);
+        if(googleAccount != null) {
+            try {
+                categoryViewModel.getAllCategoriesByGoogleId(googleID).observe(this, new Observer<List<Category>>() {
+                    @Override
+                    public void onChanged(List<Category> categoryList) {
+                        adapter.setCategories(categoryList);
+                    }
+                });
+            } catch (ExecutionException e) {
+                e.printStackTrace();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+
+        ItemTouchHelper helper = new ItemTouchHelper(
+                new ItemTouchHelper.SimpleCallback(0,
+                        ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+                    @Override
+                    public boolean onMove(RecyclerView recyclerView,
+                                          RecyclerView.ViewHolder viewHolder,
+                                          RecyclerView.ViewHolder target) {
+                        return false;
+                    }
+
+                    @Override
+                    public void onSwiped(RecyclerView.ViewHolder viewHolder,
+                                         int direction) {
+                        int position = viewHolder.getAdapterPosition();
+                        Category myCategory = adapter.getCategoryAtPosition(position);
+                        Toast.makeText(Budget.this, "Deleting " +
+                                myCategory.getCategoryName(), Toast.LENGTH_LONG).show();
+
+                        // Delete the income
+                        categoryViewModel.deleteCategory(myCategory);
+                    }
+                });
+
+        helper.attachToRecyclerView(recyclerView);
+
+        adapter.setOnItemClickListener(new CategoryAdapter.ClickListener() {
+            @Override
+            public void onItemClick(View v, int position) {
+                Category category = adapter.getCategoryAtPosition(position);
+//                launchUpdateCategoryActivity(category);
+
+                Intent viewActivity = new Intent(Budget.this, ViewCategoryActivity.class);
+                String catName = category.getCategoryName();
+                String catType = category.getCategoryType();
+                Double catAmount = category.getCategoryAmount();
+
+                viewActivity.putExtra("CategoryName", catName);
+                viewActivity.putExtra("CategoryType", catType);
+                viewActivity.putExtra("CategoryAmount", catAmount);
+                viewActivity.putExtra("googleid", googleID);
+                startActivity(viewActivity);
+            }
+        });
+
+        try{
+            numCategories = categoryViewModel.getNumCategories(googleID);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
 
 
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close);
