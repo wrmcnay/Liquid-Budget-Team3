@@ -50,10 +50,10 @@ public class ExpenseDisplayActivity extends AppBaseActivity {
         Button incomesButton = (Button) findViewById(R.id.incomes_button);
         Button expensesButton = (Button) findViewById(R.id.expenses_button);
 
-        incomesButton.setVisibility(View.VISIBLE);
-        incomesButton.setBackgroundColor(Color.TRANSPARENT);
-        expensesButton.setVisibility(View.VISIBLE);
-        expensesButton.setBackgroundColor(Color.TRANSPARENT);
+        //incomesButton.setVisibility(View.VISIBLE);
+        //incomesButton.setBackgroundColor(Color.TRANSPARENT);
+        //expensesButton.setVisibility(View.VISIBLE);
+        //expensesButton.setBackgroundColor(Color.TRANSPARENT);
 
         expensesButton.setClickable(false);
 
