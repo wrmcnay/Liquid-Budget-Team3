@@ -133,7 +133,7 @@ public class IncomeDisplayActivity extends AppBaseActivity {
         });
 
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close);
-        setTitle("Incomes");
+        setTitle("Transactions");
     }
 
     @Override

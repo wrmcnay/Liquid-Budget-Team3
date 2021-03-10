@@ -140,7 +140,7 @@ public abstract class AppBaseActivity extends AppNavigationActivity implements M
                 if(!(this instanceof MainActivity))
                     finish();
                 break;
-            case R.id.nav_incExp:
+            /*case R.id.nav_incExp:
                 Intent addIncExpIntent = new Intent(this, ExpenseDisplayActivity.class);
                 startActivity(addIncExpIntent);
                 if(!(this instanceof MainActivity))
@@ -151,7 +151,7 @@ public abstract class AppBaseActivity extends AppNavigationActivity implements M
                 startActivity(incomesIntent);
                 if(!(this instanceof MainActivity))
                     finish();
-                break;
+                break;*/
             case R.id.nav_transactions:
                 Intent transactionsIntent = new Intent(this, IncomeDisplayActivity.class);
                 startActivity(transactionsIntent);

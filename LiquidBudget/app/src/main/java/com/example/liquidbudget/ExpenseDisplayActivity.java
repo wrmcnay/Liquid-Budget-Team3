@@ -133,7 +133,7 @@ public class ExpenseDisplayActivity extends AppBaseActivity {
         });
 
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close);
-        setTitle("Expenses");
+        setTitle("Transactions");
     }
 
     @Override
