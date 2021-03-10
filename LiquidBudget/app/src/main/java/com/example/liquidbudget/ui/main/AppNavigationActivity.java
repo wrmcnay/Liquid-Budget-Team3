@@ -13,7 +13,6 @@ import android.widget.FrameLayout;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.liquidbudget.CategoryActivity;
-import com.example.liquidbudget.ExpenseDisplayActivity;
 import com.example.liquidbudget.GraphicalAnalysis.GraphActivity;
 import com.example.liquidbudget.IncomeDisplayActivity;
 import com.example.liquidbudget.MainActivity;
