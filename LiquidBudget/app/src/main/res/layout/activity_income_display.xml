@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,21 +8,106 @@
     android:background="@color/colorPrimaryLight"
     tools:context=".IncomeDisplayActivity">
 
+    <TextView
+        android:id="@+id/incomes"
+        android:layout_width="185dp"
+        android:layout_height="33dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="624dp"
+        android:gravity="center"
+        android:text="Incomes"
+        android:textSize="26dp"
+        android:textColor="@color/greenDark"
+        android:fontFamily="@font/assistant_semibold"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/expenses"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/incomes_button"
+        android:layout_width="165dp"
+        android:layout_height="39dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="18dp"
+        android:layout_marginBottom="624dp"
+        android:background="@drawable/transactions_button"
+        android:clickable="true"
+        android:onClick="setContentView"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/expenses"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="OnClick" />
+
+    <TextView
+        android:id="@+id/expenses"
+        android:layout_width="185dp"
+        android:layout_height="33dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="624dp"
+        android:gravity="center"
+        android:text="Expenses"
+        android:textSize="26dp"
+        android:textColor="@color/redDark"
+        android:fontFamily="@font/assistant_semibold"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/incomes"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/expenses_button"
+        android:layout_width="165dp"
+        android:layout_height="39dp"
+        android:layout_marginTop="18dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="624dp"
+        android:background="@color/zs_color_transparent"
+        android:clickable="true"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/incomes"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/Income_Recycler_View"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="396dp"
+        android:layout_height="619dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/incomes"
+        app:layout_constraintVertical_bias="0.0"
         tools:listitem="@layout/incomes" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/add_income_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
         android:layout_gravity="bottom|end"
-        android:layout_marginRight="32dp"
-        android:layout_marginBottom="64dp"
+        android:layout_marginStart="336dp"
+        android:layout_marginEnd="12dp"
+        android:contentDescription="add"
         android:src="@drawable/ic_add"
         app:backgroundTint="@color/colorAccent"
-        android:contentDescription="add" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.9"
+        tools:ignore="MissingConstraints" />
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+    <!-- </LinearLayout>
+</LinearLayout>-->
+</androidx.constraintlayout.widget.ConstraintLayout>

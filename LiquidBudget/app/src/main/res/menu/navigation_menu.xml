@@ -17,13 +17,8 @@
         android:title="@string/categories"/>
 
     <item
-        android:id="@+id/nav_incomes"
+        android:id="@+id/nav_transactions"
         android:icon="@drawable/ic_menu_income"
-        android:title="Incomes"/>
-
-    <item
-        android:id="@+id/nav_incExp"
-        android:icon="@drawable/ic_menu_expense"
-        android:title="Expenses"/>
+        android:title="Transactions"/>
 
 </menu>

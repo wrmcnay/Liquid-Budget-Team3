@@ -39,7 +39,7 @@ public class GraphActivity extends AppBaseActivity implements TutorialDialogue.T
             homepagehello.setText(getString(R.string.users_budget, userName));
 
             ViewPager pager = findViewById(R.id.pager);
-            pager.setOffscreenPageLimit(4);
+            pager.setOffscreenPageLimit(3);
 
             PageAdapter a = new PageAdapter(getSupportFragmentManager());
             pager.setAdapter(a);
@@ -85,15 +85,12 @@ public class GraphActivity extends AppBaseActivity implements TutorialDialogue.T
 
             switch (pos) {
                 case 0:
-                    f = PieChartBudget.newInstance();
-                    break;
-                case 1:
                     f = PieChartCategories.newInstance();
                     break;
-                case 2:
+                case 1:
                     f = PieChartExpenses.newInstance();
                     break;
-                case 3:
+                case 2:
                     f = PieChartIncomes.newInstance();
                     break;
             }
@@ -103,7 +100,7 @@ public class GraphActivity extends AppBaseActivity implements TutorialDialogue.T
 
         @Override
         public int getCount() {
-            return 4;
+            return 3;
         }
     }
     public void launchTutorialDialog() {

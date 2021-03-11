@@ -13,7 +13,6 @@ import android.widget.FrameLayout;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.liquidbudget.CategoryActivity;
-import com.example.liquidbudget.ExpenseDisplayActivity;
 import com.example.liquidbudget.GraphicalAnalysis.GraphActivity;
 import com.example.liquidbudget.IncomeDisplayActivity;
 import com.example.liquidbudget.MainActivity;
@@ -118,7 +117,7 @@ public abstract class AppNavigationActivity extends AppCompatActivity implements
                 if(!(this instanceof MainActivity))
                     finish();
                 break;
-            case R.id.nav_incExp:
+            /*case R.id.nav_incExp:
                 Intent addIncExpIntent = new Intent(this, ExpenseDisplayActivity.class);
                 startActivity(addIncExpIntent);
                 if(!(this instanceof MainActivity))
@@ -127,6 +126,12 @@ public abstract class AppNavigationActivity extends AppCompatActivity implements
             case R.id.nav_incomes:
                 Intent incomesIntent = new Intent(this, IncomeDisplayActivity.class);
                 startActivity(incomesIntent);
+                if(!(this instanceof MainActivity))
+                    finish();
+               break;*/
+            case R.id.nav_transactions:
+                Intent transactionsIntent = new Intent(this, IncomeDisplayActivity.class);
+                startActivity(transactionsIntent);
                 if(!(this instanceof MainActivity))
                     finish();
                 break;

@@ -2,6 +2,7 @@ package com.example.liquidbudget;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.InputFilter;
 import android.text.TextUtils;
@@ -63,6 +64,8 @@ public class AddIncomeActivity extends AppBaseActivity {
         GoogleSignInAccount googleAccount = GoogleSignIn.getLastSignedInAccount(this);
         if(googleAccount != null)
             googleID = googleAccount.getId();
+
+
 
         editIncName = findViewById(R.id.inc_name_edit_text);
         editIncAmount = findViewById(R.id.inc_amount_edit_text);
