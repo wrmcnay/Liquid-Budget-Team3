@@ -96,6 +96,8 @@
             android:launchMode="singleTop"/>
         <activity android:name=".GraphicalAnalysis.GraphActivity"
             android:label="Analysis"/>
+        <activity android:name=".ExtendedEducationActivity"
+            android:label="Extended Education"/>
 
         <meta-data
             android:name="preloaded_fonts"
