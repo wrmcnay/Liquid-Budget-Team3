@@ -96,6 +96,9 @@
             android:launchMode="singleTop"/>
         <activity android:name=".GraphicalAnalysis.GraphActivity"
             android:label="Analysis"/>
+        <activity android:name=".TransactionsActivity"
+            android:launchMode="singleTop"
+            android:theme="@style/noAnimTheme"/>
         <activity android:name=".ExtendedEducationActivity"
             android:label="Extended Education"/>
 

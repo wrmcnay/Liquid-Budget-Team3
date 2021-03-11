@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/colorPrimaryLight"
-    android:orientation="vertical"
-    tools:context=".GraphicalAnalysis.GraphActivity">
+    android:id="@+id/scrollview"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -28,13 +26,13 @@
 
         <androidx.viewpager.widget.ViewPager
             android:id="@+id/pager"
-            android:layout_width="match_parent"
-            android:layout_height="550dp"
-            app:layout_constraintBottom_toTopOf="@id/textView42"
+            android:layout_width="393dp"
+            android:layout_height="478dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/usersbudget"
-            app:layout_constraintVertical_bias="0.47000003">
+            app:layout_constraintTop_toTopOf="parent">
 
         </androidx.viewpager.widget.ViewPager>
 
@@ -44,15 +42,16 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
+            android:layout_marginTop="8dp"
             android:fontFamily="sans-serif-medium"
             android:gravity="center_horizontal"
-            android:text="February"
-            android:textSize="30dp"
+            android:text="March"
+            android:textColor="@color/black"
+            android:textSize="36dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.93" />
+            app:layout_constraintTop_toBottomOf="@id/pager" />
 
         <Button
             android:id="@+id/graphcurrentstandingbutton"
@@ -68,4 +67,4 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-</RelativeLayout>
+</ScrollView>

@@ -204,6 +204,7 @@ public class CategoryActivity extends AppBaseActivity implements TutorialDialogu
             if(userAccountViewModel.getTutorialState(googleID) == 2){
                 try {
                     if(userAccountViewModel.getTutorialState(googleAccount.getId()) == 2){
+                        d = new TutorialDialogue();
                         d.setCurrentLayout(R.layout.tut5);
                         d.setPositiveButtonText("OK");
                         d.setNegativeButtonText("QUIT");
