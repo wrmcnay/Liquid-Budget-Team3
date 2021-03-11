@@ -11,16 +11,16 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.liquidbudget.ui.main.AppBaseActivity;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 
 import java.util.Calendar;
 
-public class ExtendedEducationActivity extends AppCompatActivity {
+public class ExtendedEducationActivity extends AppBaseActivity {
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getWindow().requestFeature(Window.FEATURE_ACTIVITY_TRANSITIONS);
         setContentView(R.layout.activity_extended_education);
 
 
