@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.liquidbudget.CategoryActivity;
 import com.example.liquidbudget.ExpenseDisplayActivity;
+import com.example.liquidbudget.ExtendedEducationActivity;
 import com.example.liquidbudget.GraphicalAnalysis.GraphActivity;
 import com.example.liquidbudget.IncomeDisplayActivity;
 import com.example.liquidbudget.MainActivity;
@@ -121,6 +122,12 @@ public abstract class AppNavigationActivity extends AppCompatActivity implements
             case R.id.nav_incExp:
                 Intent addIncExpIntent = new Intent(this, ExpenseDisplayActivity.class);
                 startActivity(addIncExpIntent);
+                if(!(this instanceof MainActivity))
+                    finish();
+                break;
+            case R.id.nav_extEd:
+                Intent extendedEducationIntent = new Intent (this, ExtendedEducationActivity.class);
+                startActivity(extendedEducationIntent);
                 if(!(this instanceof MainActivity))
                     finish();
                 break;
