@@ -54,6 +54,10 @@ public class ExpenseViewModel extends AndroidViewModel {
         eRepository.update(expense);
     }
 
+    public void updateCategoryName(String oldName, String newName){
+        eRepository.updateCategoryName(oldName, newName);
+    }
+
     public Double getSumTotalForGoogleID(String gid) throws ExecutionException, InterruptedException{
         return eRepository.getSumTotalForGoogleID(gid);//is this the added sum of all incomes?
     }

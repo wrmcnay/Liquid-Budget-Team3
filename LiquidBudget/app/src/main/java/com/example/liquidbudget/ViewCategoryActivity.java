@@ -182,6 +182,11 @@ public class ViewCategoryActivity extends AppCompatActivity {
                 newCatAmount = data.getDoubleExtra("Amount", categoryAmount);
                 Category category = new Category(categoryId, newCatName, newCatAmount, categoryType, " ", googleID);
                 categoryViewModel.updateCategory(category);
+                if(categoryType.equals("Income")){
+                    incomeViewModel.updateCategoryName(categoryName, newCatName);
+                } else if (categoryType.equals("Expense")){
+                    incomeViewModel.updateCategoryName(categoryName, newCatName);
+                }
                 finish();
                 Toast.makeText(ViewCategoryActivity.this, "Category Edited", Toast.LENGTH_SHORT).show();
             } else {

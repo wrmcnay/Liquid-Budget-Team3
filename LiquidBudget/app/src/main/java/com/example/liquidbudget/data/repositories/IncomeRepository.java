@@ -40,6 +40,12 @@ public class IncomeRepository {
         });
     }
 
+    public void updateCategoryName(String newName, String oldName) {
+        IncomeDatabase.databaseWriteExecutor.execute(() -> {
+            incomeDAO.updateCategoryName(newName, oldName);
+        });
+    }
+
     public void deleteIncome(Income income) {
         IncomeDatabase.databaseWriteExecutor.execute(() -> {
             incomeDAO.deleteIncome(income);
