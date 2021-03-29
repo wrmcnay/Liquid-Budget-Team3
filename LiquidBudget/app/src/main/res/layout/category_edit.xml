@@ -23,47 +23,12 @@
         android:textSize="24sp" />
 
     <EditText
-        android:id="@+id/add_categoryName"
+        android:id="@+id/edit_categoryName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="@string/catName"
         android:inputType="textPersonName" />
-
-    <TextView
-        android:id="@+id/textView3"
-        style="@style/Base.Widget.MaterialComponents.TextView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/assistant"
-        android:layout_marginTop="30dp"
-        android:text="@string/type"
-        android:textColor="@color/colorAccentDark" />
-
-    <RadioGroup
-        android:id="@+id/add_CategoryType"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <RadioButton
-            android:id="@+id/incomeRadio"
-            android:layout_width="159dp"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/assistant"
-            android:text="@string/income"
-            android:textColor="@color/colorAccentDark"
-            android:textSize="18sp" />
-
-        <RadioButton
-            android:id="@+id/expenseRadio"
-            android:layout_width="160dp"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/assistant"
-            android:text="@string/expense"
-            android:textColor="@color/colorAccentDark"
-            android:textSize="18sp" />
-    </RadioGroup>
 
     <TextView
         android:id="@+id/textView15"
@@ -77,7 +42,7 @@
         android:textColor="@color/colorAccentDark" />
 
     <EditText
-        android:id="@+id/add_categoryAmount"
+        android:id="@+id/edit_categoryAmount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -86,7 +51,7 @@
         android:inputType="numberDecimal" />
 
     <Button
-        android:id="@+id/addCategoryFinish"
+        android:id="@+id/editCategoryFinish"
         android:layout_width="wrap_content"
         android:layout_height="36dp"
         android:backgroundTint="@color/colorAccentDark"

@@ -105,10 +105,12 @@ public class CategoryActivity extends AppBaseActivity implements TutorialDialogu
 //                launchUpdateCategoryActivity(category);
 
                 Intent viewActivity = new Intent(CategoryActivity.this, ViewCategoryActivity.class);
+                int catId = category.getCategoryID();
                 String catName = category.getCategoryName();
                 String catType = category.getCategoryType();
                 Double catAmount = category.getCategoryAmount();
 
+                viewActivity.putExtra("CategoryId", catId);
                 viewActivity.putExtra("CategoryName", catName);
                 viewActivity.putExtra("CategoryType", catType);
                 viewActivity.putExtra("CategoryAmount", catAmount);

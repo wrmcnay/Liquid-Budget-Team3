@@ -134,6 +134,7 @@ public class CategoryRepository{
         return future.get();
     }
 
+
     public void insertCategory(Category... categories) {
         CategoryDatabase.databaseWriteExecutor.execute(() -> {
             categoryDAO.insertCategory(categories);

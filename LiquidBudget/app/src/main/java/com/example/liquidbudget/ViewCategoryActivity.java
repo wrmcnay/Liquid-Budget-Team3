@@ -1,17 +1,22 @@
 package com.example.liquidbudget;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.liquidbudget.data.entities.Category;
 import com.example.liquidbudget.data.entities.Expense;
 import com.example.liquidbudget.data.entities.Income;
 import com.example.liquidbudget.data.viewmodels.CategoryViewModel;
@@ -30,7 +35,16 @@ public class ViewCategoryActivity extends AppCompatActivity {
     private IncomeViewModel incomeViewModel;
     private CategoryViewModel categoryViewModel;
 
+    private final static int MY_REQUEST_CODE= 1;
+    private int categoryId;
+    private String categoryType;
+    private String categoryName;
+    private double categoryAmount;
     private String googleID;
+
+    private String newCatName = "";
+    private Double newCatAmount = 0.0;
+    private String newCatColor = " ";
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,10 +54,11 @@ public class ViewCategoryActivity extends AppCompatActivity {
         if (googleAccount != null)
             googleID = googleAccount.getId();
 
-        String categoryName = getIntent().getStringExtra("CategoryName");
-        String categoryType = getIntent().getStringExtra("CategoryType");
-        Double categoryAmount = getIntent().getDoubleExtra("CategoryAmount", 0.0);
-        String googleID = getIntent().getStringExtra("googleid");
+        categoryId = getIntent().getIntExtra("CategoryId", -1);
+        categoryName = getIntent().getStringExtra("CategoryName");
+        categoryType = getIntent().getStringExtra("CategoryType");
+        categoryAmount = getIntent().getDoubleExtra("CategoryAmount", 0.0);
+        googleID = getIntent().getStringExtra("googleid");
 
         String amountText = "None";
         if (categoryType != null && !categoryType.isEmpty()) {
@@ -69,13 +84,22 @@ public class ViewCategoryActivity extends AppCompatActivity {
         amountPlanned.setText(String.format(("%.2f"), categoryAmount));
 
         Button editCategory = (Button) findViewById(R.id.editCategory);
+        editCategory.setOnClickListener(new View.OnClickListener(){
+            private final static String REQUEST_COLOR = "";
+            public void onClick(View v) {
+                Intent editCategory = new Intent(ViewCategoryActivity.this, EditCategoryActivity.class);
+                String catName = categoryName;
+                Double catAmount = categoryAmount;
+
+                editCategory.putExtra("CategoryName", catName);
+                editCategory.putExtra("CategoryAmount", catAmount);
+                startActivityForResult(editCategory, MY_REQUEST_CODE);
+            }
+        });
 
         expenseViewModel = new ViewModelProvider(this).get(ExpenseViewModel.class);
         incomeViewModel = new ViewModelProvider(this).get(IncomeViewModel.class);
         categoryViewModel = new ViewModelProvider(this).get(CategoryViewModel.class);
-
-//        expenseList = expenseViewModel.getExpensesByCategory(categoryName);
-//        incomeList = incomeViewModel.getIncomesByCategory(categoryName);
 
         if (googleAccount != null) {
             try {
@@ -147,19 +171,25 @@ public class ViewCategoryActivity extends AppCompatActivity {
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close);
         setTitle("View Category");
 
-//        deleteCategory.setOnClickListener(new View.OnClickListener(){
-//            private final static String REQUEST_COLOR = "";
-//            @Override
-//            public void onClick(View view){
-//                Flowable<Category> categoryFlowable = categoryRepository.getCategoryByName(categoryName);
-//                Iterable<Category> categoryIteratable = categoryFlowable.blockingIterable();
-//                Iterator<Category> categoryIterator = categoryIteratable.iterator();
-//                while(categoryIterator.hasNext()){
-//                    categoryRepository.deleteCategory(categoryIterator.next());
-//                }
-//                finish();
-//            }
-//        });
-
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data){
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode == Activity.RESULT_OK && requestCode==MY_REQUEST_CODE){
+            if(data != null){
+                newCatName = data.getStringExtra("Name");
+                newCatAmount = data.getDoubleExtra("Amount", categoryAmount);
+                Category category = new Category(categoryId, newCatName, newCatAmount, categoryType, " ", googleID);
+                categoryViewModel.updateCategory(category);
+                finish();
+                Toast.makeText(ViewCategoryActivity.this, "Category Edited", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(ViewCategoryActivity.this, "Problem with categoryID", Toast.LENGTH_SHORT).show();
+            }
+        } else {
+            Toast.makeText(ViewCategoryActivity.this, "Category could not be edited", Toast.LENGTH_SHORT).show();
+        }
+    }
+
 }
