@@ -26,12 +26,14 @@ public class Receiver extends BroadcastReceiver {
     }
 
     public void showNotification(Context context) {
+        String message = "Great job keeping up with your budget this week. Tap to make sure everything is up to date.";
         Intent intent = new Intent(context, MainActivity.class);
         PendingIntent pi = PendingIntent.getActivity(context, 0, intent, 0);
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context, "0")
                 .setSmallIcon(R.drawable.push_icon)
                 .setContentTitle("LiquidBudget")
-                .setContentText("You are doing great")
+                .setStyle(new NotificationCompat.BigTextStyle().bigText(message))
+                .setContentText(message)
                 .setPriority(NotificationCompat.PRIORITY_MAX);
         mBuilder.setContentIntent(pi);
         mBuilder.setDefaults(Notification.DEFAULT_SOUND);

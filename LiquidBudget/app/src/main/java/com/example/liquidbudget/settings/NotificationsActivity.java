@@ -39,6 +39,8 @@ public class NotificationsActivity extends AppBaseActivity {
         weeklyPushNotifs.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                NotifsDialogue notifsDialogue = new NotifsDialogue();
+                notifsDialogue.show(getSupportFragmentManager(), "Notification Settings");
                 setWeeklyNotifsSwitch(weeklyPushNotifs.isChecked());
                 configureWeeklyNotifs(weeklyPushNotifs.isChecked());
             }
