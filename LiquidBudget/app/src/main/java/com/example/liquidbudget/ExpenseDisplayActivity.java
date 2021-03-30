@@ -1,6 +1,7 @@
 package com.example.liquidbudget;
 
 import androidx.annotation.Nullable;
+import androidx.fragment.app.DialogFragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.ItemTouchHelper;
@@ -29,7 +30,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
-public class ExpenseDisplayActivity extends AppBaseActivity {
+public class ExpenseDisplayActivity extends AppBaseActivity implements ExpenseWarning.ExpenseWarningListener {
     private IncomeViewModel incomeViewModel;
 
     private static final int MY_REQUEST_CODE = 1;
@@ -112,29 +113,6 @@ public class ExpenseDisplayActivity extends AppBaseActivity {
             }
         }
 
-        try{
-            runningIncomeTextView.setText("0.00");
-            runningIncome = incomeViewModel.getSumTotalForGoogleID(googleID);
-            if(runningIncome != null){
-                runningIncome = round(runningIncome, 2);
-                runningIncomeTextView.setText(String.format(("%.2f"), runningIncome));
-            }
-        } catch(Exception e){
-            Log.e("ERROR", e.getMessage());
-        }
-
-        try{
-            runningExpenseTextView.setText("0.00");
-            runningExpense = expenseViewModel.getSumTotalForGoogleID(googleID);
-
-            if(runningExpense != null) {
-                runningExpense = round(runningExpense, 2);
-                runningExpenseTextView.setText(String.format(("%.2f"), runningExpense));
-            }
-        } catch(Exception e){
-            Log.e("ERROR", e.getMessage());
-        }
-
         ItemTouchHelper helper = new ItemTouchHelper(
                 new ItemTouchHelper.SimpleCallback(0,
                         ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
@@ -190,14 +168,33 @@ public class ExpenseDisplayActivity extends AppBaseActivity {
             double amount = data.getDoubleExtra(AddExpenseActivity.EXTRA_EXP_AMOUNT, 0);
             String date = data.getStringExtra(AddExpenseActivity.EXTRA_EXP_DATE);
 
+            try{
+                runningIncome = incomeViewModel.getSumTotalForGoogleID(googleID);
+                if(runningIncome != null){
+                    runningIncome = round(runningIncome, 2);
+                }
+            } catch(Exception e){
+                Log.e("ERROR", e.getMessage());
+            }
+
+            try{
+                runningExpense = expenseViewModel.getSumTotalForGoogleID(googleID);
+
+                if(runningExpense != null) {
+                    runningExpense = round(runningExpense, 2);
+                }
+            } catch(Exception e){
+                Log.e("ERROR", e.getMessage());
+            }
+
             Expense expense = new Expense(expenseName, categoryName, amount, date, googleID);
             expenseViewModel.insert(expense);
             if(runningExpense + amount > runningIncome) {
                 // Display warning here
-                TutorialDialogue d = new TutorialDialogue();
-                d.setCurrentLayout(R.layout.tut1);
+                ExpenseWarning d = new ExpenseWarning();
+                d.setCurrentLayout(R.layout.expensewarning);
                 d.setCancelable(false);
-                d.show(getSupportFragmentManager(), "TutorialDialogFragment");
+                d.show(getSupportFragmentManager(), "ExpenseWarningDialogue");
             }
             Toast.makeText(this, "Expense Added!", Toast.LENGTH_SHORT).show();
             }
@@ -230,5 +227,15 @@ public class ExpenseDisplayActivity extends AppBaseActivity {
         intent.putExtra(EXTRA_DATA_UPDATE_EXPENSE_ID, expense.getExpenseID());
         intent.putExtra("googleid", expense.getGoogleID());
         startActivityForResult(intent, UPDATE_EXPENSE_ACTIVITY_REQUEST_CODE);
+    }
+
+    @Override
+    public void onDialogPositiveClick(DialogFragment dialog) {
+
+    }
+
+    @Override
+    public void onDialogNegativeClick(DialogFragment dialog) {
+
     }
 }
