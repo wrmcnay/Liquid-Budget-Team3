@@ -10,12 +10,16 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.liquidbudget.data.entities.Expense;
 import com.example.liquidbudget.data.viewmodels.ExpenseViewModel;
+import com.example.liquidbudget.data.viewmodels.IncomeViewModel;
+import com.example.liquidbudget.data.viewmodels.UserAccountViewModel;
 import com.example.liquidbudget.ui.DataAdapters.ExpenseAdapter;
 import com.example.liquidbudget.ui.main.AppBaseActivity;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -26,6 +30,7 @@ import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 public class ExpenseDisplayActivity extends AppBaseActivity {
+    private IncomeViewModel incomeViewModel;
 
     private static final int MY_REQUEST_CODE = 1;
     private static final int UPDATE_EXPENSE_ACTIVITY_REQUEST_CODE = 2;
@@ -37,6 +42,9 @@ public class ExpenseDisplayActivity extends AppBaseActivity {
     public static final String EXTRA_DATA_UPDATE_EXPENSE_AMOUNT = "extra_expense_amount_to_update";
     public static final String EXTRA_DATA_UPDATE_EXPENSE_DATE = "extra_expense_date_to_update";
     public static final String EXTRA_DATA_UPDATE_EXPENSE_ID = "extra_data_exp_id";
+
+    private Double runningIncome;
+    private Double runningExpense;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,6 +92,11 @@ public class ExpenseDisplayActivity extends AppBaseActivity {
         recyclerView.setAdapter(adapter);
 
         expenseViewModel = new ViewModelProvider(this).get(ExpenseViewModel.class);
+        incomeViewModel = new ViewModelProvider(this).get(IncomeViewModel.class);
+
+        TextView runningIncomeTextView = findViewById(R.id.running_income);
+        TextView runningExpenseTextView = findViewById(R.id.running_expense);
+
         if(googleAccount != null) {
             try {
                 expenseViewModel.getAllExpensesByGoogleID(googleID).observe(this, new Observer<List<Expense>>() {
@@ -97,6 +110,29 @@ public class ExpenseDisplayActivity extends AppBaseActivity {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+        }
+
+        try{
+            runningIncomeTextView.setText("0.00");
+            runningIncome = incomeViewModel.getSumTotalForGoogleID(googleID);
+            if(runningIncome != null){
+                runningIncome = round(runningIncome, 2);
+                runningIncomeTextView.setText(String.format(("%.2f"), runningIncome));
+            }
+        } catch(Exception e){
+            Log.e("ERROR", e.getMessage());
+        }
+
+        try{
+            runningExpenseTextView.setText("0.00");
+            runningExpense = expenseViewModel.getSumTotalForGoogleID(googleID);
+
+            if(runningExpense != null) {
+                runningExpense = round(runningExpense, 2);
+                runningExpenseTextView.setText(String.format(("%.2f"), runningExpense));
+            }
+        } catch(Exception e){
+            Log.e("ERROR", e.getMessage());
         }
 
         ItemTouchHelper helper = new ItemTouchHelper(
@@ -136,6 +172,15 @@ public class ExpenseDisplayActivity extends AppBaseActivity {
         setTitle("Transactions");
     }
 
+    public static double round(double value, int places) {
+        if (places < 0) throw new IllegalArgumentException();
+
+        long factor = (long) Math.pow(10, places);
+        value = value * factor;
+        long tmp = Math.round(value);
+        return (double) tmp / factor;
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -147,6 +192,13 @@ public class ExpenseDisplayActivity extends AppBaseActivity {
 
             Expense expense = new Expense(expenseName, categoryName, amount, date, googleID);
             expenseViewModel.insert(expense);
+            if(runningExpense + amount > runningIncome) {
+                // Display warning here
+                TutorialDialogue d = new TutorialDialogue();
+                d.setCurrentLayout(R.layout.tut1);
+                d.setCancelable(false);
+                d.show(getSupportFragmentManager(), "TutorialDialogFragment");
+            }
             Toast.makeText(this, "Expense Added!", Toast.LENGTH_SHORT).show();
             }
         else if(resultCode == RESULT_OK && requestCode == UPDATE_EXPENSE_ACTIVITY_REQUEST_CODE && data != null) {
