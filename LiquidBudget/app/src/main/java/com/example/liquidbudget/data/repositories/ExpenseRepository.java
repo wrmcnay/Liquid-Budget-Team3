@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData;
 
 import com.example.liquidbudget.data.dao.ExpenseDAO;
 import com.example.liquidbudget.data.database.ExpenseDatabase;
+import com.example.liquidbudget.data.database.IncomeDatabase;
 import com.example.liquidbudget.data.entities.Expense;
 
 import java.util.List;
@@ -29,6 +30,12 @@ public class ExpenseRepository {
     public void insert(final Expense expense) {
         ExpenseDatabase.databaseWriteExecutor.execute(() -> {
             expenseDAO.insertExpense(expense);
+        });
+    }
+
+    public void updateCategoryName(String newName, String oldName) {
+        ExpenseDatabase.databaseWriteExecutor.execute(() -> {
+            expenseDAO.updateCategoryName(newName, oldName);
         });
     }
 

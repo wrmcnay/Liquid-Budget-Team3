@@ -26,10 +26,10 @@ public class AddCategoryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.category_add);
 
-        Button createCategory = (Button)findViewById(R.id.createCategory);
-        editCategoryName = findViewById(R.id.edit_categoryName);
-        editCategoryAmount = findViewById(R.id.edit_categoryAmount);
-        editCategoryType = findViewById(R.id.edit_CategoryType);
+        Button createCategory = (Button)findViewById(R.id.addCategoryFinish);
+        editCategoryName = findViewById(R.id.add_categoryName);
+        editCategoryAmount = findViewById(R.id.add_categoryAmount);
+        editCategoryType = findViewById(R.id.add_CategoryType);
 
         editCategoryType.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener(){
             @Override
