@@ -8,35 +8,75 @@
     android:gravity="center_horizontal">
 
     <TextView
-        android:id="@+id/planned_expenses_header"
-        android:layout_width="108dp"
-        android:layout_height="79dp"
-        android:layout_marginStart="70dp"
-        android:layout_marginTop="92dp"
-        android:layout_marginEnd="60dp"
+        android:id="@+id/homepageHello"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:gravity="center_horizontal"
         android:fontFamily="@font/assistant_semibold"
-        android:text="Planned Expenses"
-        android:textAlignment="center"
-        android:textColor="@color/black"
+        android:text="@string/homepage_hello"
+        android:textColor="@color/colorPrimaryDark"
         android:textSize="25sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.306"
-        app:layout_constraintStart_toEndOf="@+id/planned_income_header"
-        app:layout_constraintTop_toBottomOf="@+id/homepageHello" />
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/text_date_display"/>
+
+    <TextView
+        android:id="@+id/text_date_display"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/assistant_semibold"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="25sp"
+        app:layout_constraintBottom_toTopOf="@+id/this_month"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/homepageHello"
+        app:layout_constraintVertical_bias="0.735" />
+
+    <TextView
+        android:id="@+id/this_month"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:fontFamily="@font/assistant_semibold"
+        android:text="This Month:"
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_date_display" />
 
     <TextView
         android:id="@+id/planned_income_header"
-        android:layout_width="108dp"
-        android:layout_height="79dp"
-        android:layout_marginStart="60dp"
-        android:layout_marginTop="92dp"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:fontFamily="@font/assistant_semibold"
         android:text="Planned Income"
         android:textAlignment="center"
         android:textColor="@color/black"
-        android:textSize="25sp"
+        android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/homepageHello" />
+        app:layout_constraintTop_toBottomOf="@+id/this_month" />
+
+    <TextView
+        android:id="@+id/planned_expenses_header"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/assistant_semibold"
+        android:text="Planned Expenses"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.306"
+        app:layout_constraintStart_toEndOf="@+id/planned_income_header"
+        app:layout_constraintTop_toBottomOf="@+id/this_month" />
 
     <TextView
         android:id="@+id/running_income"
@@ -68,17 +108,31 @@
 
     <TextView
         android:id="@+id/income_so_far_header"
-        android:layout_width="108dp"
-        android:layout_height="79dp"
-        android:layout_marginStart="60dp"
-        android:layout_marginTop="40dp"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:fontFamily="@font/assistant_semibold"
         android:text="Income so Far"
         android:textAlignment="center"
         android:textColor="@color/black"
-        android:textSize="25sp"
+        android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/planned_income_total" />
+
+    <TextView
+        android:id="@+id/expenses_so_far_header"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:fontFamily="@font/assistant_semibold"
+        android:text="Expenses so Far"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/income_so_far_header"
+        app:layout_constraintTop_toBottomOf="@+id/planned_expense_total" />
 
     <TextView
         android:id="@+id/planned_expense_total"
@@ -111,44 +165,41 @@
         tools:layout_editor_absoluteX="84dp" />
 
     <TextView
-        android:id="@+id/expenses_so_far_header"
-        android:layout_width="108dp"
-        android:layout_height="79dp"
+        android:id="@+id/cash_left1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
-        android:layout_marginEnd="60dp"
         android:fontFamily="@font/assistant_semibold"
-        android:text="Expenses so Far"
-        android:textAlignment="center"
         android:textColor="@color/black"
-        android:textSize="25sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/planned_expense_total" />
-
-    <TextView
-        android:id="@+id/homepageHello"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:fontFamily="@font/assistant_semibold"
-        android:text="@string/homepage_hello"
-        android:textColor="@color/colorPrimaryDark"
-        android:textSize="28sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/this_month"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:fontFamily="@font/assistant_semibold"
-        android:text="This Month:"
-        android:textColor="@color/black"
-        android:textSize="30sp"
+        android:textSize="24sp"
+        android:text="You have"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/homepageHello" />
+        app:layout_constraintTop_toBottomOf="@+id/running_income" />
+
+    <TextView
+        android:id="@+id/cash_left2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:fontFamily="@font/assistant_semibold"
+        android:textColor="@color/greenDark"
+        android:textSize="50sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cash_left1" />
+
+    <TextView
+        android:id="@+id/cash_left3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:fontFamily="@font/assistant_semibold"
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        android:text="left to spend this month."
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cash_left2" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
