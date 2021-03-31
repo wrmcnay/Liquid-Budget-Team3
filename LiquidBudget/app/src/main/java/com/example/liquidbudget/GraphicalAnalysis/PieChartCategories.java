@@ -1,6 +1,7 @@
 package com.example.liquidbudget.GraphicalAnalysis;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Build;
@@ -19,10 +20,15 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.PopupWindow;
 
+import com.example.liquidbudget.CategoryActivity;
 import com.example.liquidbudget.R;
+import com.example.liquidbudget.ViewCategoryActivity;
 import com.example.liquidbudget.data.entities.Category;
 import com.example.liquidbudget.data.viewmodels.CategoryViewModel;
+import com.example.liquidbudget.data.viewmodels.IncomeViewModel;
+import com.example.liquidbudget.ui.DataAdapters.CategoryAdapter;
 import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.data.Entry;
@@ -43,7 +49,7 @@ import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 
-public class PieChartCategories extends SimpleFragment implements OnChartValueSelectedListener {
+public class PieChartCategories extends SimpleFragment { //implements OnChartValueSelectedListener {
 
     private Context context;
 
@@ -54,6 +60,14 @@ public class PieChartCategories extends SimpleFragment implements OnChartValueSe
     ArrayList<Integer> colors;
     PieData pieData;
     GoogleSignInAccount account;
+
+    int categoryId;
+    String categoryType;
+    Double categoryAmount;
+
+    Intent categoryIntent;
+
+    PopupWindow popUp;
 
     @NonNull
     public static Fragment newInstance() {
@@ -69,6 +83,8 @@ public class PieChartCategories extends SimpleFragment implements OnChartValueSe
 
         account = GoogleSignIn.getLastSignedInAccount(getContext());
 
+        categoryIntent = new Intent(getContext(), ViewCategoryActivity.class);
+
         formatChart();
         try {
             populateData();
@@ -76,12 +92,62 @@ public class PieChartCategories extends SimpleFragment implements OnChartValueSe
             e.printStackTrace();
         }
 
-        chart.setOnChartValueSelectedListener(this);
+        //chart.setOnTouchListener(null);
+
+        categoryViewModel = new ViewModelProvider(this).get(CategoryViewModel.class);
+
+        chart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
+            @Override
+            public void onValueSelected(Entry e, Highlight h) {
+
+                PieEntry pe = (PieEntry) e;
+                String categoryName = pe.getLabel();
+
+                try {
+                    categoryViewModel.getAllCategoriesByGoogleId(account.getId()).observe(getViewLifecycleOwner(), new Observer<List<Category>>() {
+                        @Override
+                        public void onChanged(List<Category> categories) {
+
+                            for (Category cat : categories) {
+                                if(!(cat.getCategoryType().equals("Income"))) {
+                                    if (cat.getCategoryName().equals(categoryName)) {
+                                        categoryId = cat.getCategoryID();
+                                        categoryType = cat.getCategoryType();
+                                        categoryAmount = cat.getCategoryAmount();
+
+                                        categoryIntent.putExtra("CategoryId", categoryId);
+                                        categoryIntent.putExtra("CategoryName", categoryName);
+                                        categoryIntent.putExtra("CategoryType", categoryType);
+                                        categoryIntent.putExtra("CategoryAmount", categoryAmount);
+                                        categoryIntent.putExtra("googleid", account.getId());
+                                        startActivity(categoryIntent);
+                                    }
+                                }
+                            }
+                        }
+                    });
+
+                } catch (ExecutionException executionException) {
+                    executionException.printStackTrace();
+                } catch (InterruptedException interruptedException) {
+                    interruptedException.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onNothingSelected() {
+
+            }
+        });
 
         chart.invalidate();
 
+        //popUp = new PopupWindow(this);
+
         return v;
     }
+
+
 
     private SpannableString generateCenterSpannableText() {
         SpannableString s = new SpannableString("CATEGORIES");
@@ -93,7 +159,7 @@ public class PieChartCategories extends SimpleFragment implements OnChartValueSe
     private void populateData() throws ExecutionException, InterruptedException {
         entries = new ArrayList<>();
         categoryViewModel = new ViewModelProvider(this).get(CategoryViewModel.class);
-        if(account != null) {
+        if (account != null) {
             categoryViewModel.getAllCategoriesByGoogleId(account.getId()).observe(getViewLifecycleOwner(), new Observer<List<Category>>() {
                 @Override
                 public void onChanged(List<Category> categoryList) {
@@ -178,6 +244,7 @@ public class PieChartCategories extends SimpleFragment implements OnChartValueSe
         chart.setHoleColor(0xE9E0F8);
 
         chart.setClickable(true);
+        chart.setTouchEnabled(true);
 
         chart.setTransparentCircleColor(Color.LTGRAY);
         chart.setTransparentCircleAlpha(110);
@@ -191,7 +258,7 @@ public class PieChartCategories extends SimpleFragment implements OnChartValueSe
 
         chart.setRotationAngle(0);
         // enable rotation of the chart by touch
-        chart.setRotationEnabled(true);
+        chart.setRotationEnabled(false);
         chart.setHighlightPerTapEnabled(true);
 
         chart.animateY(1800, Easing.EaseInOutQuad);
@@ -220,17 +287,43 @@ public class PieChartCategories extends SimpleFragment implements OnChartValueSe
         chart.setDrawEntryLabels(true);
     }
 
-    public void onValueSelected(Entry e, Highlight h) {
+    /*public void onValueSelected(Entry e, Highlight h) {
+        PieEntry pe = (PieEntry) e;
+        String categoryName = pe.getLabel();
 
-        if (e == null)
-            return;
-        Log.i("VAL SELECTED",
-                "Value: " + e.getY() + ", index: " + h.getX()
-                        + ", DataSet index: " + h.getDataSetIndex());
+        try {
+            categoryViewModel.getAllCategoriesByGoogleId(account.getId()).observe(getViewLifecycleOwner(), new Observer<List<Category>>() {
+                @Override
+                public void onChanged(List<Category> categories) {
+
+                    for (Category cat : categories) {
+                        if (cat.getCategoryName().equals(categoryName)) {
+                            categoryId = cat.getCategoryID();
+                            categoryAmount = cat.getCategoryAmount();
+                            categoryType = cat.getCategoryType();
+                        }
+                    }
+                }
+            });
+
+        } catch (ExecutionException executionException) {
+            executionException.printStackTrace();
+        } catch (InterruptedException interruptedException) {
+            interruptedException.printStackTrace();
+        }
+
+        categoryIntent.putExtra("CategoryId", categoryId);
+        categoryIntent.putExtra("CategoryName", categoryName);
+        categoryIntent.putExtra("CategoryType", categoryType);
+        categoryIntent.putExtra("CategoryAmount", categoryAmount);
+        categoryIntent.putExtra("googleid", account.getId());
+        startActivity(categoryIntent);
     }
 
     @Override
     public void onNothingSelected() {
 
     }
+
+     */
 }
