@@ -1,6 +1,7 @@
 package com.example.liquidbudget.GraphicalAnalysis;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -17,16 +18,24 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.liquidbudget.AddExpenseActivity;
+import com.example.liquidbudget.ExpenseDisplayActivity;
 import com.example.liquidbudget.R;
+import com.example.liquidbudget.ViewCategoryActivity;
+import com.example.liquidbudget.data.entities.Category;
 import com.example.liquidbudget.data.entities.Expense;
+import com.example.liquidbudget.data.viewmodels.CategoryViewModel;
 import com.example.liquidbudget.data.viewmodels.ExpenseViewModel;
 import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Legend;
+import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.formatter.DefaultAxisValueFormatter;
+import com.github.mikephil.charting.highlight.Highlight;
+import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 import com.github.mikephil.charting.utils.ColorTemplate;
 import com.github.mikephil.charting.utils.MPPointF;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -35,6 +44,12 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
+
+import static com.example.liquidbudget.ExpenseDisplayActivity.EXTRA_DATA_UPDATE_EXPENSE_AMOUNT;
+import static com.example.liquidbudget.ExpenseDisplayActivity.EXTRA_DATA_UPDATE_EXPENSE_CATEGORY;
+import static com.example.liquidbudget.ExpenseDisplayActivity.EXTRA_DATA_UPDATE_EXPENSE_ID;
+import static com.example.liquidbudget.ExpenseDisplayActivity.EXTRA_DATA_UPDATE_EXPENSE_NAME;
+import static com.example.liquidbudget.ExpenseDisplayActivity.EXTRA_DATA_UPDATE_EXPENSE_DATE;
 
 public class PieChartExpenses extends SimpleFragment {
 
@@ -47,6 +62,14 @@ public class PieChartExpenses extends SimpleFragment {
     ArrayList<Integer> colors;
     PieData pieData;
     GoogleSignInAccount account;
+
+    Intent expenseIntent;
+    int expId;
+    String expName;
+    String catName;
+    Double expAmount;
+    String expDate;
+
 
     @NonNull
     public static Fragment newInstance() {
@@ -63,6 +86,8 @@ public class PieChartExpenses extends SimpleFragment {
         chart = v.findViewById(R.id.pieChart1);
         chart.getDescription().setEnabled(false);
 
+        expenseIntent = new Intent(getContext(), AddExpenseActivity.class);
+
         formatChart();
         try {
             populateData();
@@ -71,6 +96,54 @@ public class PieChartExpenses extends SimpleFragment {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+
+        expenseViewModel = new ViewModelProvider(this).get(ExpenseViewModel.class);
+
+        chart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
+            @Override
+            public void onValueSelected(Entry e, Highlight h) {
+
+                PieEntry pe = (PieEntry) e;
+                String expenseName = pe.getLabel();
+
+                try {
+                    expenseViewModel.getAllExpensesByGoogleID(account.getId()).observe(getViewLifecycleOwner(), new Observer<List<Expense>>() {
+                        @Override
+                        public void onChanged(List<Expense> expenses) {
+
+                            for (Expense exp : expenses) {
+                                if (exp.getExpenseName().equals(expenseName)) {
+                                    expId = exp.getExpenseID();
+                                    expName = exp.getExpenseName();
+                                    catName = exp.getCategoryName();
+                                    expAmount = exp.getAmount();
+                                    expDate = exp.getDate();
+
+                                    expenseIntent.putExtra(EXTRA_DATA_UPDATE_EXPENSE_NAME, expName);
+                                    expenseIntent.putExtra(EXTRA_DATA_UPDATE_EXPENSE_CATEGORY, catName);
+                                    expenseIntent.putExtra(EXTRA_DATA_UPDATE_EXPENSE_AMOUNT, expAmount);
+                                    expenseIntent.putExtra(EXTRA_DATA_UPDATE_EXPENSE_DATE, expDate);
+                                    expenseIntent.putExtra(EXTRA_DATA_UPDATE_EXPENSE_ID, expId);
+                                    expenseIntent.putExtra("googleid", account.getId());
+                                    startActivity(expenseIntent);
+                                }
+                            }
+                        }
+                    });
+                } catch (ExecutionException executionException) {
+                    executionException.printStackTrace();
+                } catch (InterruptedException interruptedException) {
+                    interruptedException.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onNothingSelected() {
+
+            }
+        });
+
+        chart.invalidate();
 
         return v;
     }
@@ -85,7 +158,7 @@ public class PieChartExpenses extends SimpleFragment {
     private void populateData() throws ExecutionException, InterruptedException {
         entries = new ArrayList<>();
         expenseViewModel = new ViewModelProvider(this).get(ExpenseViewModel.class);
-        if(account != null) {
+        if (account != null) {
             expenseViewModel.getAllExpensesByGoogleID(account.getId()).observe(getViewLifecycleOwner(), new Observer<List<Expense>>() {
                 @Override
                 public void onChanged(List<Expense> expenseList) {
@@ -175,6 +248,8 @@ public class PieChartExpenses extends SimpleFragment {
 
         chart.setCenterTextColor(Color.GRAY);
 
+        chart.setCenterTextColor(Color.GRAY);
+
         chart.setDrawCenterText(true);
 
         chart.setRotationAngle(0);
@@ -184,21 +259,8 @@ public class PieChartExpenses extends SimpleFragment {
 
         chart.animateY(1800, Easing.EaseInOutQuad);
 
-        Legend l = chart.getLegend();
-        l.setVerticalAlignment(Legend.LegendVerticalAlignment.TOP);
-        l.setHorizontalAlignment(Legend.LegendHorizontalAlignment.CENTER);
-        l.setOrientation(Legend.LegendOrientation.HORIZONTAL);
-        l.setForm(Legend.LegendForm.CIRCLE);
-        l.setDrawInside(true);
-        l.setFormSize(15);
-        l.setFormToTextSpace(5);
-        l.setTextSize(20);
-        l.setXEntrySpace(28f);
-        l.setYEntrySpace(0f);
-        l.setYOffset(40f);
-        l.setWordWrapEnabled(true);
-
         chart.getLegend().setEnabled(false);
+
 
         // entry label styling
         chart.setEntryLabelColor(Color.BLACK);
