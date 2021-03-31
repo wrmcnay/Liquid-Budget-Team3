@@ -2,8 +2,10 @@ package com.example.liquidbudget.settings;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -16,10 +18,13 @@ import androidx.appcompat.app.AppCompatDialogFragment;
 
 import com.example.liquidbudget.R;
 
+import java.util.Calendar;
+
 public class NotifsDialogue extends AppCompatDialogFragment {
 
     Spinner frequency;
     TimePicker timePicker;
+    private NotifsDialogueListener listener;
 
     @NonNull
     @Override
@@ -32,13 +37,23 @@ public class NotifsDialogue extends AppCompatDialogFragment {
                 .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        //Cancel logic
+                        listener.cancelDialogue();
                     }
                 })
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        //Confirm logic
+                        Calendar cal = Calendar.getInstance();
+                        cal.set(Calendar.HOUR_OF_DAY, timePicker.getHour());
+                        cal.set(Calendar.MINUTE, timePicker.getMinute());
+                        cal.set(Calendar.SECOND, 0);
+                        cal.set(Calendar.MILLISECOND, 0);
+                        long timeSet = cal.getTimeInMillis();
+                        if(frequency.getSelectedItem().toString().toLowerCase().equals("week")) {
+                            listener.setNotifSettings(timeSet, 7);
+                        } else {
+                            listener.setNotifSettings(timeSet, 1);
+                        }
                     }
                 });
 
@@ -47,8 +62,25 @@ public class NotifsDialogue extends AppCompatDialogFragment {
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(), R.array.notif_frequency, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         frequency.setAdapter(adapter);
+        timePicker = view.findViewById(R.id.timePicker1);
 
         return builder.create();
+    }
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        try {
+            listener =  (NotifsDialogueListener) context;
+        } catch (ClassCastException e) {
+            Log.d("ClassCastException", e.getMessage());
+        }
+
+    }
+
+    public interface NotifsDialogueListener {
+        void cancelDialogue();
+        void setNotifSettings(long time, int frequency);
     }
 
 

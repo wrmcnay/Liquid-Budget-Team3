@@ -19,7 +19,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 
 import java.util.concurrent.ExecutionException;
 
-public class NotificationsActivity extends AppBaseActivity {
+public class NotificationsActivity extends AppBaseActivity implements NotifsDialogue.NotifsDialogueListener {
     SwitchCompat weeklyPushNotifs;
 
     @Override
@@ -39,10 +39,12 @@ public class NotificationsActivity extends AppBaseActivity {
         weeklyPushNotifs.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                NotifsDialogue notifsDialogue = new NotifsDialogue();
-                notifsDialogue.show(getSupportFragmentManager(), "Notification Settings");
-                setWeeklyNotifsSwitch(weeklyPushNotifs.isChecked());
-                configureWeeklyNotifs(weeklyPushNotifs.isChecked());
+                if(weeklyPushNotifs.isChecked()) {
+                    NotifsDialogue notifsDialogue = new NotifsDialogue();
+                    notifsDialogue.show(getSupportFragmentManager(), "Notification Settings");
+                } else {
+                    //TODO: Disable notifications
+                }
             }
         });
     }
@@ -72,5 +74,18 @@ public class NotificationsActivity extends AppBaseActivity {
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
         UserAccountViewModel userAccountViewModel = new ViewModelProvider(this).get(UserAccountViewModel.class);
         userAccountViewModel.setReceiveWeeklyNotifs(account.getId(), isChecked);
+    }
+
+    @Override
+    public void cancelDialogue() {
+        weeklyPushNotifs.setChecked(false);
+    }
+
+    @Override
+    public void setNotifSettings(long timeSet, int frequency) {
+        Intent intent = new Intent(NotificationsActivity.this, Receiver.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(NotificationsActivity.this, 0, intent, 0);
+        AlarmManager am = (AlarmManager)getSystemService(ALARM_SERVICE);
+        am.setRepeating(am.RTC_WAKEUP, timeSet, am.INTERVAL_DAY*frequency, pendingIntent);
     }
 }
