@@ -22,6 +22,8 @@ import android.text.SpannableString;
 import android.text.style.RelativeSizeSpan;
 import android.text.style.StyleSpan;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -47,6 +49,7 @@ import com.github.mikephil.charting.utils.ColorTemplate;
 import com.github.mikephil.charting.utils.MPPointF;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
@@ -67,12 +70,17 @@ public class Budget extends AppBaseActivity implements OnChartValueSelectedListe
     private final static int MY_REQUEST_CODE= 1;
     private String googleID;
     private Integer numCategories = 0;
+    private BottomNavigationView bottomNavigationView;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.budget_main);
+        bottomNavigationView = findViewById(R.id.bottomNavigationView);
+        Menu menu = bottomNavigationView.getMenu();
+        MenuItem item = menu.getItem(1);
+        item.setChecked(true);
 
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
         if (account != null) {

@@ -10,6 +10,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -20,6 +22,7 @@ import com.example.liquidbudget.ui.DataAdapters.ExpenseAdapter;
 import com.example.liquidbudget.ui.main.AppBaseActivity;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
@@ -31,6 +34,7 @@ public class ExpenseDisplayActivity extends AppBaseActivity {
     private static final int UPDATE_EXPENSE_ACTIVITY_REQUEST_CODE = 2;
     private ExpenseViewModel expenseViewModel;
     private String googleID;
+    private BottomNavigationView bottomNavigationView;
 
     public static final String EXTRA_DATA_UPDATE_EXPENSE_NAME = "extra_expense_name_to_update";
     public static final String EXTRA_DATA_UPDATE_EXPENSE_CATEGORY = "extra_expense_category_to_update";
@@ -42,6 +46,10 @@ public class ExpenseDisplayActivity extends AppBaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_expense_display);
+        bottomNavigationView = findViewById(R.id.bottomNavigationView);
+        Menu menu = bottomNavigationView.getMenu();
+        MenuItem item = menu.getItem(3);
+        item.setChecked(true);
 
         GoogleSignInAccount googleAccount = GoogleSignIn.getLastSignedInAccount(this);
         if(googleAccount != null)
