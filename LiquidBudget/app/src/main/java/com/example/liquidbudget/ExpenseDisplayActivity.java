@@ -11,12 +11,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-<<<<<<< HEAD
 import android.util.Log;
-=======
 import android.view.Menu;
 import android.view.MenuItem;
->>>>>>> 6b91a25c527abd4901604fe9ad0aefd3dac223d5
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
