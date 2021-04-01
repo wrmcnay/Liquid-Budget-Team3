@@ -3,6 +3,7 @@ package com.example.liquidbudget;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.InputFilter;
 import android.util.Log;
@@ -29,6 +30,8 @@ import com.example.liquidbudget.ui.main.AppBaseActivity;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.concurrent.ExecutionException;
 
 import static androidx.fragment.app.FragmentTransaction.TRANSIT_NONE;
@@ -39,6 +42,10 @@ public class MainActivity extends AppBaseActivity implements TutorialDialogue.Tu
     private CategoryViewModel categoryViewModel;
     TutorialDialogue d;
     Integer tutorialState = 0;
+    private TextView dateTimeDisplay;
+    private Calendar calendar;
+    private SimpleDateFormat dateFormat;
+    private String date;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +59,12 @@ public class MainActivity extends AppBaseActivity implements TutorialDialogue.Tu
             homepagehello.setText(getString(R.string.homepage_hello, userName));
         }
 
+        dateTimeDisplay = (TextView)findViewById(R.id.text_date_display);
+        calendar = Calendar.getInstance();
+        dateFormat = new SimpleDateFormat("EEE, MMM d");
+        date = dateFormat.format(calendar.getTime());
+        dateTimeDisplay.setText(getString(R.string.homepage_date, date));
+
         expenseViewModel = new ViewModelProvider(this).get(ExpenseViewModel.class);
         incomeViewModel = new ViewModelProvider(this).get(IncomeViewModel.class);
         categoryViewModel = new ViewModelProvider(this).get(CategoryViewModel.class);
@@ -60,11 +73,15 @@ public class MainActivity extends AppBaseActivity implements TutorialDialogue.Tu
         TextView totalExpenseTextView = findViewById(R.id.planned_expense_total);
         TextView runningIncomeTextView = findViewById(R.id.running_income);
         TextView runningExpenseTextView = findViewById(R.id.running_expense);
+        TextView cashLeftTextView1 = findViewById(R.id.cash_left1);
+        TextView cashLeftTextView = findViewById(R.id.cash_left2);
+        TextView cashLeftTextView3 = findViewById(R.id.cash_left3);
 
         Double totalIncome;
-        Double totalExpense;
+        Double totalExpense = null;
         Double runningIncome;
-        Double runningExpense;
+        Double runningExpense =null;
+        Double cashLeft;
 
         try{
             totalIncomeTextView.setText("0.00");
@@ -108,6 +125,25 @@ public class MainActivity extends AppBaseActivity implements TutorialDialogue.Tu
                 runningExpense = round(runningExpense, 2);
                 runningExpenseTextView.setText(String.format(("%.2f"), runningExpense));
            }
+        } catch(Exception e){
+            Log.e("ERROR", e.getMessage());
+        }
+        try{
+            cashLeftTextView.setText("0.00");
+
+            if(totalExpense != null && runningExpense != null) {
+                cashLeft = totalExpense - runningExpense;
+
+                if (cashLeft<0){ //if negative, change message and make red
+                    cashLeftTextView1.setText("You've spent");
+                    cashLeftTextView.setTextColor(Color.parseColor("#951313"));
+                    cashLeftTextView3.setText("more than planned this month.");
+                    cashLeft = -cashLeft;
+                }
+
+                cashLeft = round(cashLeft, 2);
+                cashLeftTextView.setText(String.format(("%.2f"), cashLeft));
+            }
         } catch(Exception e){
             Log.e("ERROR", e.getMessage());
         }

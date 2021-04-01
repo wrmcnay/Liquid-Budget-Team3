@@ -40,4 +40,12 @@ public class UserAccountViewModel extends AndroidViewModel {
         mRepository.setTutorialState(gid, state);
     }
 
+    public Boolean getReceiveWeeklyNotifs(String gid) throws ExecutionException, InterruptedException {
+        return mRepository.getReceiveWeeklyNotifs(gid);
+    }
+
+    public void setReceiveWeeklyNotifs(String gid, boolean state){
+        mRepository.setReceiveWeeklyNotifs(gid, state);
+    }
+
 }
