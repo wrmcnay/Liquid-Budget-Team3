@@ -54,11 +54,13 @@ public class ViewCategoryActivity extends AppCompatActivity {
         if (googleAccount != null)
             googleID = googleAccount.getId();
 
-        categoryId = getIntent().getIntExtra("CategoryId", -1);
-        categoryName = getIntent().getStringExtra("CategoryName");
-        categoryType = getIntent().getStringExtra("CategoryType");
-        categoryAmount = getIntent().getDoubleExtra("CategoryAmount", 0.0);
-        googleID = getIntent().getStringExtra("googleid");
+        Intent intent = getIntent();
+
+        categoryId = intent.getIntExtra("CategoryId", -1);
+        categoryName = intent.getStringExtra("CategoryName");
+        categoryType = intent.getStringExtra("CategoryType");
+        categoryAmount = intent.getDoubleExtra("CategoryAmount", 0.0);
+        googleID = intent.getStringExtra("googleid");
 
         String amountText = "None";
         if (categoryType != null && !categoryType.isEmpty()) {
@@ -171,6 +173,24 @@ public class ViewCategoryActivity extends AppCompatActivity {
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close);
         setTitle("View Category");
 
+        iAdapter.setOnItemClickListener(new IncomeAdapter.ClickListener() {
+            @Override
+            public void onItemClick(View v, int position) {
+                Income income = iAdapter.getIncomeAtPosition(position);
+                //TODO We could add interaction here but the income/expense update needs to resolve to their respect activities
+            }
+        });
+
+        eAdapter.setOnItemClickListener(new ExpenseAdapter.ClickListener() {
+            @Override
+            public void onItemClick(View v, int position) {
+                Expense expense = eAdapter.getExpenseAtPosition(position);
+                //TODO We could add interaction here but the income/expense update needs to resolve to their respect activities
+            }
+        });
+        
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close);
+        setTitle("Transactions");
     }
 
     @Override
