@@ -1,5 +1,6 @@
 package com.example.liquidbudget.ui.main;
 
+import android.app.ActivityOptions;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -86,34 +87,35 @@ public abstract class AppNavigationActivity extends AppCompatActivity implements
     @Override
     public boolean onMenuItemClick(MenuItem item) {
         int id = item.getItemId();
+        ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(this);
         switch (id) {
             case R.id.nav_home:
 //                Intent homeIntent = new Intent(this, SpendingSavingPage.class);
                 Intent homeIntent = new Intent(this, MainActivity.class);
-                startActivity(homeIntent);
+                startActivity(homeIntent, options.toBundle());
                 finish();
                 break;
             case R.id.nav_budget:
                 Intent budgetIntent = new Intent(this, Budget.class);
-                startActivity(budgetIntent);
+                startActivity(budgetIntent, options.toBundle());
                 if(!(this instanceof MainActivity))
                     finish();
                 break;
             case R.id.nav_analysis:
                 Intent analysisIntent = new Intent(this, GraphActivity.class);
-                startActivity(analysisIntent);
+                startActivity(analysisIntent, options.toBundle());
                 if(!(this instanceof MainActivity))
                     finish();
                 break;
             case R.id.nav_category:
                 Intent catIntent = new Intent(this, CategoryActivity.class);
-                startActivity(catIntent);
+                startActivity(catIntent, options.toBundle());
                 if(!(this instanceof MainActivity))
                     finish();
                 break;
             case R.id.nav_settings:
                 Intent settingIntent = new Intent(this, SettingsActivity.class);
-                startActivity(settingIntent);
+                startActivity(settingIntent, options.toBundle());
                 if(!(this instanceof MainActivity))
                     finish();
                 break;
@@ -131,7 +133,7 @@ public abstract class AppNavigationActivity extends AppCompatActivity implements
                break;*/
             case R.id.nav_transactions:
                 Intent transactionsIntent = new Intent(this, IncomeDisplayActivity.class);
-                startActivity(transactionsIntent);
+                startActivity(transactionsIntent, options.toBundle());
                 if(!(this instanceof MainActivity))
                     finish();
                 break;
