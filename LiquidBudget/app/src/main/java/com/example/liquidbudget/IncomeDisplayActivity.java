@@ -92,6 +92,12 @@ public class IncomeDisplayActivity extends AppBaseActivity {
         IncomeAdapter adapter = new IncomeAdapter();
         recyclerView.setAdapter(adapter);
 
+        //Reverse display order
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        linearLayoutManager.setReverseLayout(true);
+        linearLayoutManager.setStackFromEnd(true);
+        recyclerView.setLayoutManager(linearLayoutManager);
+
         incomeViewModel = new ViewModelProvider(this).get(IncomeViewModel.class);
         if(googleAccount != null) {
             try {
