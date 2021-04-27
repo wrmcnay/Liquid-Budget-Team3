@@ -3,6 +3,7 @@ package com.example.liquidbudget;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
@@ -22,6 +23,7 @@ import com.example.liquidbudget.ui.DataAdapters.CategoryAdapter;
 import com.example.liquidbudget.ui.main.AppBaseActivity;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
@@ -38,11 +40,16 @@ public class CategoryActivity extends AppBaseActivity implements TutorialDialogu
     private String googleID;
     TutorialDialogue d;
     private Integer numCategories = 0;
+    private BottomNavigationView bottomNavigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.category_main);
+        bottomNavigationView = findViewById(R.id.bottomNavigationView);
+        Menu menu = bottomNavigationView.getMenu();
+        MenuItem item = menu.getItem(2);
+        item.setChecked(true);
 
         // init view
         RecyclerView recyclerView = findViewById(R.id.lstCategories);
@@ -105,10 +112,12 @@ public class CategoryActivity extends AppBaseActivity implements TutorialDialogu
 //                launchUpdateCategoryActivity(category);
 
                 Intent viewActivity = new Intent(CategoryActivity.this, ViewCategoryActivity.class);
+                int catId = category.getCategoryID();
                 String catName = category.getCategoryName();
                 String catType = category.getCategoryType();
                 Double catAmount = category.getCategoryAmount();
 
+                viewActivity.putExtra("CategoryId", catId);
                 viewActivity.putExtra("CategoryName", catName);
                 viewActivity.putExtra("CategoryType", catType);
                 viewActivity.putExtra("CategoryAmount", catAmount);

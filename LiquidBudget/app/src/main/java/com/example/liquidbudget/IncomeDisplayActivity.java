@@ -10,6 +10,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -20,6 +22,7 @@ import com.example.liquidbudget.ui.DataAdapters.IncomeAdapter;
 import com.example.liquidbudget.ui.main.AppBaseActivity;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
@@ -31,6 +34,7 @@ public class IncomeDisplayActivity extends AppBaseActivity {
     private static final int UPDATE_INCOME_ACTIVITY_REQUEST_CODE = 2;
     private IncomeViewModel incomeViewModel;
     private String googleID;
+    private BottomNavigationView bottomNavigationView;
 
     public static final String EXTRA_DATA_UPDATE_INCOME_NAME = "extra_income_name_to_update";
     public static final String EXTRA_DATA_UPDATE_INCOME_CATEGORY = "extra_income_category_to_update";
@@ -42,6 +46,11 @@ public class IncomeDisplayActivity extends AppBaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_income_display);
+        bottomNavigationView = findViewById(R.id.bottomNavigationView);
+        Menu menu = bottomNavigationView.getMenu();
+        MenuItem item = menu.getItem(3);
+        item.setChecked(true);
+
 
         GoogleSignInAccount googleAccount = GoogleSignIn.getLastSignedInAccount(this);
         if(googleAccount != null)
@@ -82,6 +91,12 @@ public class IncomeDisplayActivity extends AppBaseActivity {
 
         IncomeAdapter adapter = new IncomeAdapter();
         recyclerView.setAdapter(adapter);
+
+        //Reverse display order
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        linearLayoutManager.setReverseLayout(true);
+        linearLayoutManager.setStackFromEnd(true);
+        recyclerView.setLayoutManager(linearLayoutManager);
 
         incomeViewModel = new ViewModelProvider(this).get(IncomeViewModel.class);
         if(googleAccount != null) {

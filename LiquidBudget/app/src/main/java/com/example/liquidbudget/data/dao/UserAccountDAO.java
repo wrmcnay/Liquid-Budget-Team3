@@ -40,4 +40,10 @@ public interface UserAccountDAO {
 
     @Query("UPDATE users SET tutorialState=:state WHERE googleId == :gid")
     void setTutorialState(String gid, int state);
+
+    @Query("SELECT receiveWeeklyNotifs FROM users WHERE googleId == :gid")
+    boolean getReceiveWeeklyNotifs(String gid);
+
+    @Query("UPDATE users SET receiveWeeklyNotifs=:state WHERE googleId == :gid")
+    void setReceiveWeeklyNotifs(String gid, boolean state);
 }

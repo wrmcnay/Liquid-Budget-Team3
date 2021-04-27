@@ -3,6 +3,7 @@ package com.example.liquidbudget.GraphicalAnalysis;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -17,16 +18,23 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.liquidbudget.AddExpenseActivity;
+import com.example.liquidbudget.AddIncomeActivity;
 import com.example.liquidbudget.R;
+import com.example.liquidbudget.data.entities.Expense;
 import com.example.liquidbudget.data.entities.Income;
+import com.example.liquidbudget.data.viewmodels.ExpenseViewModel;
 import com.example.liquidbudget.data.viewmodels.IncomeViewModel;
 import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Legend;
+import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.formatter.DefaultAxisValueFormatter;
+import com.github.mikephil.charting.highlight.Highlight;
+import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 import com.github.mikephil.charting.utils.ColorTemplate;
 import com.github.mikephil.charting.utils.MPPointF;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -35,6 +43,12 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
+
+import static com.example.liquidbudget.IncomeDisplayActivity.EXTRA_DATA_UPDATE_INCOME_AMOUNT;
+import static com.example.liquidbudget.IncomeDisplayActivity.EXTRA_DATA_UPDATE_INCOME_CATEGORY;
+import static com.example.liquidbudget.IncomeDisplayActivity.EXTRA_DATA_UPDATE_INCOME_ID;
+import static com.example.liquidbudget.IncomeDisplayActivity.EXTRA_DATA_UPDATE_INCOME_NAME;
+import static com.example.liquidbudget.IncomeDisplayActivity.EXTRA_DATA_UPDATE_INCOME_DATE;
 
 public class PieChartIncomes extends SimpleFragment {
 
@@ -45,6 +59,13 @@ public class PieChartIncomes extends SimpleFragment {
     ArrayList<Integer> colors;
     PieData pieData;
     GoogleSignInAccount account;
+
+    Intent incomeIntent;
+    int incId;
+    String incName;
+    String catName;
+    Double incAmount;
+    String incDate;
 
     @NonNull
     public static Fragment newInstance() {
@@ -60,6 +81,8 @@ public class PieChartIncomes extends SimpleFragment {
         chart = v.findViewById(R.id.pieChart1);
         chart.getDescription().setEnabled(false);
 
+        incomeIntent = new Intent(getContext(), AddIncomeActivity.class);
+
         formatChart();
         try {
             populateData();
@@ -68,6 +91,52 @@ public class PieChartIncomes extends SimpleFragment {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+
+        incomeViewModel = new ViewModelProvider(this).get(IncomeViewModel.class);
+
+        chart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
+            @Override
+            public void onValueSelected(Entry e, Highlight h) {
+
+                PieEntry pe = (PieEntry) e;
+                String incomeName = pe.getLabel();
+
+                try {
+                    incomeViewModel.getAllIncomesByGoogleId(account.getId()).observe(getViewLifecycleOwner(), new Observer<List<Income>>() {
+                        @Override
+                        public void onChanged(List<Income> incomes) {
+
+                            for (Income inc : incomes) {
+                                if (inc.getIncomeName().equals(incomeName)) {
+                                    incId = inc.getIncomeID();
+                                    incName = inc.getIncomeName();
+                                    catName = inc.getCategoryName();
+                                    incAmount = inc.getAmount();
+                                    incDate = inc.getDate();
+
+                                    incomeIntent.putExtra(EXTRA_DATA_UPDATE_INCOME_NAME, incName);
+                                    incomeIntent.putExtra(EXTRA_DATA_UPDATE_INCOME_CATEGORY, catName);
+                                    incomeIntent.putExtra(EXTRA_DATA_UPDATE_INCOME_AMOUNT, incAmount);
+                                    incomeIntent.putExtra(EXTRA_DATA_UPDATE_INCOME_DATE, incDate);
+                                    incomeIntent.putExtra(EXTRA_DATA_UPDATE_INCOME_ID, incId);
+                                    incomeIntent.putExtra("googleid", account.getId());
+                                    startActivity(incomeIntent);
+                                }
+                            }
+                        }
+                    });
+                } catch (ExecutionException executionException) {
+                    executionException.printStackTrace();
+                } catch (InterruptedException interruptedException) {
+                    interruptedException.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onNothingSelected() {
+
+            }
+        });
 
         return v;
     }

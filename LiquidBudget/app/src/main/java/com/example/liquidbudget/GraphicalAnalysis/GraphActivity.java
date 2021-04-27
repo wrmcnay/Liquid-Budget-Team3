@@ -21,10 +21,16 @@ import com.example.liquidbudget.ui.main.AppBaseActivity;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.concurrent.ExecutionException;
 
 public class GraphActivity extends AppBaseActivity implements TutorialDialogue.TutorialDialogListener {
     TutorialDialogue d;
+    private TextView monthDisplay;
+    private Calendar calendar;
+    private SimpleDateFormat dateFormat;
+    private String date;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,8 +41,14 @@ public class GraphActivity extends AppBaseActivity implements TutorialDialogue.T
         if (account != null) {
             setContentView(R.layout.activity_graphs_analysis);
             String userName = account.getDisplayName();
-            TextView homepagehello = findViewById(R.id.usersbudget);
-            homepagehello.setText(getString(R.string.users_budget, userName));
+            TextView budgetanalysis = findViewById(R.id.usersanalysis);
+            budgetanalysis.setText(getString(R.string.users_analysis, userName));
+
+            monthDisplay = (TextView)findViewById(R.id.month_display);
+            calendar = Calendar.getInstance();
+            dateFormat = new SimpleDateFormat("MMMM");
+            date = dateFormat.format(calendar.getTime());
+            monthDisplay.setText(date);
 
             ViewPager pager = findViewById(R.id.pager);
             pager.setOffscreenPageLimit(3);

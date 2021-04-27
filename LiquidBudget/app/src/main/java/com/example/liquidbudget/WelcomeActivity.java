@@ -73,7 +73,7 @@ public class WelcomeActivity extends AppCompatActivity {
             try {
                 if (!userAccountViewModel.getUserByGoogleId(account.getId())){
                     //brand new user
-                    UserAccount newUser = new UserAccount(account.getDisplayName(), account.getEmail(), account.getId(), 0);
+                    UserAccount newUser = new UserAccount(account.getDisplayName(), account.getEmail(), account.getId(), 0, false);
                     userAccountViewModel.insert(newUser);
                     Intent intent = new Intent(this, MainActivity.class);
                     startActivity(intent);

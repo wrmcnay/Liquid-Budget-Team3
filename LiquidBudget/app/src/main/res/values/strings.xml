@@ -4,6 +4,7 @@
     <string name="tab_text_1">Tab 1</string>
     <string name="tab_text_2">Tab 2</string>
     <string name="homepage_hello">Hello %s!</string>
+    <string name="homepage_date">Today is %s.</string>
     <string name="homepage_week_so_far">Your Week So Far:</string>
     <string name="homepage_rec_funds">Recommended Funds Left Today:</string>
     <string name="title_activity_spending_saving_page">SpendingSavingPage</string>
@@ -78,6 +79,7 @@
     <string name="SignOut">Sign Out</string>
     <string name="dash">-</string>
     <string name="users_budget">%s"'s Budget"</string>
+    <string name="users_analysis">%s"'s Financial Analysis"</string>
     <string name="first_alert">My First Dialog</string>
     <string name="title_activity_tutorial_welcome">TutorialWelcome</string>
     <string name="welcome_text">WELCOME</string>

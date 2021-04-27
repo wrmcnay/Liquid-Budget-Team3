@@ -50,6 +50,10 @@ public class IncomeViewModel extends AndroidViewModel {
         mRepository.insert(income);
     }
 
+    public void updateCategoryName(String oldName, String newName){
+        mRepository.updateCategoryName(oldName, newName);
+    }
+
     public void deleteIncome(Income income) {
         mRepository.deleteIncome(income);
     }
