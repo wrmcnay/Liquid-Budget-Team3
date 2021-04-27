@@ -40,7 +40,9 @@ import com.github.mikephil.charting.utils.MPPointF;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
@@ -66,6 +68,10 @@ public class PieChartIncomes extends SimpleFragment {
     String catName;
     Double incAmount;
     String incDate;
+
+    private Calendar calendar;
+    private SimpleDateFormat dateFormat;
+    private String date;
 
     @NonNull
     public static Fragment newInstance() {
@@ -158,10 +164,17 @@ public class PieChartIncomes extends SimpleFragment {
                     entries.clear();
                     double am;
                     String name;
+
+                    calendar = Calendar.getInstance();
+                    dateFormat = new SimpleDateFormat("MM");
+                    date = dateFormat.format(calendar.getTime());
+
                     for (Income inc : incomesList) {
-                        am = inc.getAmount();
-                        name = inc.getIncomeName();
-                        entries.add(new PieEntry((float) am, name));
+                        if (inc.getDate().startsWith(date)) {
+                            am = inc.getAmount();
+                            name = inc.getIncomeName();
+                            entries.add(new PieEntry((float) am, name));
+                        }
                     }
 
                     dataSet = new PieDataSet(entries, "");
