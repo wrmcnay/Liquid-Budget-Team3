@@ -100,6 +100,13 @@ public class ExpenseDisplayActivity extends AppBaseActivity implements ExpenseWa
         ExpenseAdapter adapter = new ExpenseAdapter();
         recyclerView.setAdapter(adapter);
 
+        //Reverse display order
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        linearLayoutManager.setReverseLayout(true);
+        linearLayoutManager.setStackFromEnd(true);
+        recyclerView.setLayoutManager(linearLayoutManager);
+
+
         expenseViewModel = new ViewModelProvider(this).get(ExpenseViewModel.class);
         incomeViewModel = new ViewModelProvider(this).get(IncomeViewModel.class);
 
