@@ -115,4 +115,16 @@ public class ExpenseRepository {
         Future<Double> future = Executors.newSingleThreadExecutor().submit(callable);
         return future.get();
     }
+
+    public Double getMonthSumTotalForGoogleID(String gid, String month) throws ExecutionException, InterruptedException{
+        Callable<Double> callable = new Callable<Double>(){
+            @Override
+            public Double call() throws Exception{
+                return expenseDAO.getMonthSumTotalForGoogleID(gid, month);
+            }
+        };
+        Future<Double> future = Executors.newSingleThreadExecutor().submit(callable);
+        return future.get();
+    }
+
 }

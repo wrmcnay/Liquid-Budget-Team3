@@ -52,7 +52,9 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
@@ -71,6 +73,12 @@ public class Budget extends AppBaseActivity implements OnChartValueSelectedListe
     private String googleID;
     private Integer numCategories = 0;
     private BottomNavigationView bottomNavigationView;
+
+    private Calendar calendar;
+    private SimpleDateFormat monthFormat;
+    private String month;
+    private SimpleDateFormat monthTitleFormat;
+    private String monthTitle;
 
 
     @Override
@@ -186,7 +194,10 @@ public class Budget extends AppBaseActivity implements OnChartValueSelectedListe
     }
 
     private SpannableString generateCenterSpannableText() {
-        SpannableString s = new SpannableString("Budget");//middle of chart
+        calendar = Calendar.getInstance();
+        monthTitleFormat = new SimpleDateFormat("MMMM");
+        monthTitle = monthTitleFormat.format(calendar.getTime());
+        SpannableString s = new SpannableString(monthTitle);//middle of chart
         s.setSpan(new RelativeSizeSpan(1.75f), 0, s.length(), 0);
         s.setSpan(new StyleSpan(Typeface.BOLD), 0, s.length(), 0);
         return s;
@@ -208,16 +219,20 @@ public class Budget extends AppBaseActivity implements OnChartValueSelectedListe
 
     private void populateData() {
         entries = new ArrayList<>();
+        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
+        calendar = Calendar.getInstance();
+        monthFormat = new SimpleDateFormat("MM");
+        month = monthFormat.format(calendar.getTime());
         incomeViewModel = new ViewModelProvider(this).get(IncomeViewModel.class);
         incomeViewModel.getAllIncomes().observe(this, new Observer<List<Income>>() {
             @Override
             public void onChanged(List<Income> incomesList) { // when a new income is added
 
                 try {
-                    Double am = incomeViewModel.getSumTotal();
+                    Double am = incomeViewModel.getMonthSumTotalForGoogleID(account.getId(), month);
                     String name;
                     //for (Income inc : incomesList) { // each income on list
-                    name = "Total Monthly Incomes";
+                    name = "Incomes";
                     if(am != null) {
                         entries.add(new PieEntry((float)(double) am, name)); //create an new entry on the pie chart
                     }
@@ -260,10 +275,10 @@ public class Budget extends AppBaseActivity implements OnChartValueSelectedListe
             public void onChanged(List<Expense> expenseList) { // when a new income is added
 
                 try {
-                    Double am = expenseViewModel.getSumTotal();
+                    Double am = expenseViewModel.getMonthSumTotalForGoogleID(account.getId(), month);
                     String name;
 
-                    name = "Total Monthy Expenses";
+                    name = "Expenses";
                     if (am != null) {
                         entries.add(new PieEntry((float)(double) am, name)); //create an new entry on the pie chart
                     }
@@ -364,13 +379,6 @@ public class Budget extends AppBaseActivity implements OnChartValueSelectedListe
         chart.setEntryLabelTextSize(16f);
         chart.setDrawEntryLabels(true);
     }
-
-
-
-
-
-
-
 
 
 }

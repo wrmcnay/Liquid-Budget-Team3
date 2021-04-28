@@ -113,6 +113,17 @@ public class IncomeRepository {
         return future.get();
     }
 
+    public Double getMonthSumTotalForGoogleID(String gid, String month) throws ExecutionException, InterruptedException{
+        Callable<Double> callable = new Callable<Double>(){
+            @Override
+            public Double call() throws Exception{
+                return incomeDAO.getMonthSumTotalForGoogleID(gid, month);
+            }
+        };
+        Future<Double> future = Executors.newSingleThreadExecutor().submit(callable);
+        return future.get();
+    }
+
     public LiveData<List<Income>> getIncomesByCategory(String catName, String gid) throws ExecutionException, InterruptedException{
         Callable<LiveData<List<Income>>> callable = new Callable<LiveData<List<Income>>>(){
             @Override

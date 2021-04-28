@@ -62,4 +62,8 @@ public class ExpenseViewModel extends AndroidViewModel {
         return eRepository.getSumTotalForGoogleID(gid);//is this the added sum of all incomes?
     }
 
+    public Double getMonthSumTotalForGoogleID(String gid, String month) throws ExecutionException, InterruptedException{
+        return eRepository.getMonthSumTotalForGoogleID(gid, month);//total for given month
+    }
+
 }
