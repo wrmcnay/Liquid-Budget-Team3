@@ -38,6 +38,9 @@ public interface IncomeDAO {
     @Query("SELECT CAST(SUM(amount) as DOUBLE) FROM incomes WHERE googleID=:googleID")
     Double getSumTotalForGoogleID(String googleID);
 
+    @Query("SELECT CAST(SUM(amount) as DOUBLE) FROM incomes WHERE googleID=:googleID AND date LIKE :month || '%'")
+    Double getMonthSumTotalForGoogleID(String googleID, String month);
+
     @Query("UPDATE incomes SET categoryName=:newName WHERE categoryName=:oldName")
     void updateCategoryName(String oldName, String newName);
 

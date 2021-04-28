@@ -46,6 +46,8 @@ public class MainActivity extends AppBaseActivity implements TutorialDialogue.Tu
     private Calendar calendar;
     private SimpleDateFormat dateFormat;
     private String date;
+    private SimpleDateFormat monthFormat;
+    private String month;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -106,9 +108,12 @@ public class MainActivity extends AppBaseActivity implements TutorialDialogue.Tu
             Log.e("ERROR", e.getMessage());
         }
 
+        monthFormat = new SimpleDateFormat("MM");
+        month = monthFormat.format(calendar.getTime());
+
         try{
             runningIncomeTextView.setText("0.00");
-            runningIncome = incomeViewModel.getSumTotalForGoogleID(account.getId());
+            runningIncome = incomeViewModel.getMonthSumTotalForGoogleID(account.getId(), month);
             if(runningIncome != null){
                 runningIncome = round(runningIncome, 2);
                 runningIncomeTextView.setText(String.format(("%.2f"), runningIncome));
@@ -119,7 +124,7 @@ public class MainActivity extends AppBaseActivity implements TutorialDialogue.Tu
 
         try{
             runningExpenseTextView.setText("0.00");
-            runningExpense = expenseViewModel.getSumTotalForGoogleID(account.getId());
+            runningExpense = expenseViewModel.getMonthSumTotalForGoogleID(account.getId(), month);
 
             if(runningExpense != null) {
                 runningExpense = round(runningExpense, 2);

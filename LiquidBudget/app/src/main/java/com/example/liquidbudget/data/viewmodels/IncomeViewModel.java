@@ -46,6 +46,10 @@ public class IncomeViewModel extends AndroidViewModel {
         return mRepository.getSumTotalForGoogleID(gid);//is this the added sum of all incomes?
     }
 
+    public Double getMonthSumTotalForGoogleID(String gid, String month) throws ExecutionException, InterruptedException{
+        return mRepository.getMonthSumTotalForGoogleID(gid, month);//total for given month
+    }
+
     public void insert(Income income) {
         mRepository.insert(income);
     }
