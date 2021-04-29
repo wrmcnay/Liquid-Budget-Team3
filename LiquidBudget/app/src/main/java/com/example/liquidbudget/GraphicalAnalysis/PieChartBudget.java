@@ -103,12 +103,12 @@ public class PieChartBudget extends SimpleFragment implements OnChartValueSelect
         month = monthFormat.format(calendar.getTime());
 
         if(account != null) {
-            incomeViewModel = new ViewModelProvider(this).get(IncomeViewModel.class);
-            double totalIncome = incomeViewModel.getSumTotalForGoogleID(account.getId());
-            entries.add(new PieEntry((float) totalIncome, "Total Monthly Incomes"));
             expenseViewModel = new ViewModelProvider(this).get(ExpenseViewModel.class);
             double totalExpense = expenseViewModel.getSumTotalForGoogleID(account.getId());
-            entries.add(new PieEntry((float) totalExpense, "Total Monthly Expenses"));
+            entries.add(new PieEntry((float) totalExpense, "Money Spent"));
+            incomeViewModel = new ViewModelProvider(this).get(IncomeViewModel.class);
+            double leftToSpend = incomeViewModel.getSumTotalForGoogleID(account.getId()) - totalExpense;
+            entries.add(new PieEntry((float) leftToSpend, "Money Remaining"));
             dataSet = new PieDataSet(entries, "");
             dataSet.setDrawIcons(true);
 
@@ -141,9 +141,9 @@ public class PieChartBudget extends SimpleFragment implements OnChartValueSelect
 
     private void setColors() {
         colors = new ArrayList<>();
-
-        colors.add(Color.rgb(165, 225, 173));
         colors.add(Color.rgb(206, 139, 134));
+        colors.add(Color.rgb(165, 225, 173));
+
 
     }
 

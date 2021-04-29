@@ -240,7 +240,7 @@ public class GraphActivity extends AppBaseActivity implements TutorialDialogue.T
 
         @Override
         public int getCount() {
-            return 5;
+            return 4;
         }
     }
 
