@@ -230,9 +230,6 @@ public class GraphActivity extends AppBaseActivity implements TutorialDialogue.T
                 case 3:
                     f = PieChartIncomes.newInstance();
                     break;
-                case 4:
-                    f = TestBar.newInstance();
-                    break;
             }
 
             return f;
@@ -240,7 +237,7 @@ public class GraphActivity extends AppBaseActivity implements TutorialDialogue.T
 
         @Override
         public int getCount() {
-            return 5;
+            return 4;
         }
     }
 
