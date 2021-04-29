@@ -231,7 +231,7 @@ public class GraphActivity extends AppBaseActivity implements TutorialDialogue.T
                     f = PieChartIncomes.newInstance();
                     break;
                 case 4:
-                    f = BarChartHistory.newInstance();
+                    f = TestBar.newInstance();
                     break;
             }
 
