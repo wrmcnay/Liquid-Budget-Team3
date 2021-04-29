@@ -32,6 +32,7 @@ import com.example.liquidbudget.data.viewmodels.IncomeViewModel;
 import com.example.liquidbudget.data.viewmodels.UserAccountViewModel;
 import com.example.liquidbudget.ui.DataAdapters.CategoryAdapter;
 import com.example.liquidbudget.ui.main.AppBaseActivity;
+import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
@@ -56,6 +57,7 @@ public class GraphActivity extends AppBaseActivity implements TutorialDialogue.T
     private IncomeViewModel incomeViewModel; // to be able to pull from income
     private ExpenseViewModel expenseViewModel; //to be able to pull from expense
     private PieChart chart;
+    private BarChart barChart;
 
 
     private CategoryViewModel categoryViewModel;
@@ -228,6 +230,9 @@ public class GraphActivity extends AppBaseActivity implements TutorialDialogue.T
                 case 3:
                     f = PieChartIncomes.newInstance();
                     break;
+                case 4:
+                    f = BarChartHistory.newInstance();
+                    break;
             }
 
             return f;
@@ -235,7 +240,7 @@ public class GraphActivity extends AppBaseActivity implements TutorialDialogue.T
 
         @Override
         public int getCount() {
-            return 4;
+            return 5;
         }
     }
 
