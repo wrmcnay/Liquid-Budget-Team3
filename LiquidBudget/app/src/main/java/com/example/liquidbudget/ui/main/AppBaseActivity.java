@@ -118,17 +118,18 @@ public abstract class AppBaseActivity extends AppNavigationActivity implements M
                 finish();
                 break;
             case R.id.nav_budget:
-                Intent budgetIntent = new Intent(this, Budget.class);
+                Intent budgetIntent = new Intent(this, GraphActivity.class);
                 startActivity(budgetIntent, options.toBundle());
                 if(!(this instanceof MainActivity))
                     finish();
                 break;
-            case R.id.nav_analysis:
+            /*case R.id.nav_analysis:
                 Intent analysisIntent = new Intent(this, GraphActivity.class);
                 startActivity(analysisIntent, options.toBundle());
                 if(!(this instanceof MainActivity))
                     finish();
                 break;
+                */
             case R.id.nav_category:
                 Intent catIntent = new Intent(this, CategoryActivity.class);
                 startActivity(catIntent, options.toBundle());

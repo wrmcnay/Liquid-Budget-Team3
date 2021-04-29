@@ -34,7 +34,9 @@ import com.github.mikephil.charting.utils.MPPointF;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.concurrent.ExecutionException;
 
 public class PieChartBudget extends SimpleFragment implements OnChartValueSelectedListener {
@@ -47,6 +49,12 @@ public class PieChartBudget extends SimpleFragment implements OnChartValueSelect
     ArrayList<Integer> colors;
     PieData pieData;
     GoogleSignInAccount account;
+
+    private Calendar calendar;
+    private SimpleDateFormat monthFormat;
+    private String month;
+    private SimpleDateFormat monthTitleFormat;
+    private String monthTitle;
 
     @NonNull
     public static Fragment newInstance() {
@@ -78,7 +86,10 @@ public class PieChartBudget extends SimpleFragment implements OnChartValueSelect
     }
 
     private SpannableString generateCenterSpannableText() {
-        SpannableString s = new SpannableString("BUDGET");
+        calendar = Calendar.getInstance();
+        monthTitleFormat = new SimpleDateFormat("MMMM");
+        monthTitle = monthTitleFormat.format(calendar.getTime());
+        SpannableString s = new SpannableString(monthTitle.toString().toUpperCase());//middle of chart
         s.setSpan(new RelativeSizeSpan(1.75f), 0, s.length(), 0);
         s.setSpan(new StyleSpan(Typeface.BOLD), 0, s.length(), 0);
         return s;
@@ -86,6 +97,11 @@ public class PieChartBudget extends SimpleFragment implements OnChartValueSelect
 
     private void populateData() throws ExecutionException, InterruptedException {
         entries = new ArrayList<>();
+
+        calendar = Calendar.getInstance();
+        monthFormat = new SimpleDateFormat("MM");
+        month = monthFormat.format(calendar.getTime());
+
         if(account != null) {
             incomeViewModel = new ViewModelProvider(this).get(IncomeViewModel.class);
             double totalIncome = incomeViewModel.getSumTotalForGoogleID(account.getId());
@@ -105,7 +121,7 @@ public class PieChartBudget extends SimpleFragment implements OnChartValueSelect
 
             pieData = new PieData(dataSet);
             pieData.setValueFormatter(new DefaultAxisValueFormatter(2));
-            pieData.setValueTextSize(22f);
+            pieData.setValueTextSize(15f);
             pieData.setDrawValues(true);
             pieData.setValueTextColor(Color.BLACK);
 
@@ -122,121 +138,12 @@ public class PieChartBudget extends SimpleFragment implements OnChartValueSelect
 
     }
 
-    /*private void populateData() {
-        entries = new ArrayList<>();
-        incomeViewModel = new ViewModelProvider(this).get(IncomeViewModel.class);
-        incomeViewModel.getAllIncomes().observe(this, new Observer<List<Income>>() {
-            @Override
-            public void onChanged(List<Income> incomesList) { // when a new income is added
-
-                try {
-                    double am = incomeViewModel.getSumTotal();
-                    String name;
-                    //for (Income inc : incomesList) { // each income on list
-                    name = "Total Monthly Incomes";
-                    entries.add(new PieEntry((float) am, name)); //create an new entry on the pie chart
-                } catch (ExecutionException e) {
-                    e.printStackTrace();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                dataSet = new PieDataSet(entries, "");
-                dataSet.setDrawIcons(true);
-
-                dataSet.setSliceSpace(3f);
-                dataSet.setIconsOffset(new MPPointF(0, 40));
-                dataSet.setSelectionShift(5f);
-
-                setColors();
-                dataSet.setColors(colors);
-
-                pieData = new PieData(dataSet);
-                pieData.setValueFormatter(new DefaultAxisValueFormatter(2));
-                pieData.setValueTextSize(11f);
-                pieData.setDrawValues(true);
-                pieData.setValueTextColor(Color.BLACK);
-
-                chart.setData(pieData);
-
-                dataSet.setDrawIcons(true);
-
-                dataSet.setSliceSpace(5f);
-                dataSet.setIconsOffset(new MPPointF(0, 40));
-                dataSet.setSelectionShift(5f);
-
-                chart.invalidate();
-
-            }
-        });
-        expenseViewModel = new ViewModelProvider(this).get(ExpenseViewModel.class);
-        expenseViewModel.getAllExpenses().observe(this, new Observer<List<Expense>>() {
-            @Override
-            public void onChanged(List<Expense> expenseList) { // when a new income is added
-
-                try {
-                    double am = expenseViewModel.getSumTotal();
-                    String name;
-
-                    name = "Total Monthy Expenses";
-                    entries.add(new PieEntry((float) am, name)); //create an new entry on the pie chart
-                } catch (ExecutionException e) {
-                    e.printStackTrace();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                dataSet = new PieDataSet(entries, "");
-                dataSet.setDrawIcons(true);
-
-                dataSet.setSliceSpace(3f);
-                dataSet.setIconsOffset(new MPPointF(0, 40));
-                dataSet.setSelectionShift(5f);
-
-                setColors();
-                dataSet.setColors(colors);
-
-                pieData = new PieData(dataSet);
-                pieData.setValueFormatter(new DefaultAxisValueFormatter(2));
-                pieData.setValueTextSize(11f);
-                pieData.setDrawValues(true);
-                pieData.setValueTextColor(Color.BLACK);
-
-                chart.setData(pieData);
-
-                dataSet.setDrawIcons(true);
-
-                dataSet.setSliceSpace(5f);
-                dataSet.setIconsOffset(new MPPointF(0, 40));
-                dataSet.setSelectionShift(5f);
-
-                chart.invalidate();
-
-            }
-        });
-    }
-
-     */
-
 
     private void setColors() {
         colors = new ArrayList<>();
 
         colors.add(Color.rgb(165, 225, 173));
         colors.add(Color.rgb(206, 139, 134));
-        colors.add(Color.rgb(135, 190, 177));
-        colors.add(Color.rgb(116, 159, 214));
-        colors.add(Color.rgb(205, 140, 197));
-        colors.add(Color.rgb(110, 150, 125));
-
-        for (int c : ColorTemplate.VORDIPLOM_COLORS)
-            colors.add(c);
-        for (int c : ColorTemplate.COLORFUL_COLORS)
-            colors.add(c);
-        for (int c : ColorTemplate.LIBERTY_COLORS)
-            colors.add(c);
-        for (int c : ColorTemplate.PASTEL_COLORS)
-            colors.add(c);
-
-        colors.add(ColorTemplate.getHoloBlue());
 
     }
 
@@ -267,24 +174,10 @@ public class PieChartBudget extends SimpleFragment implements OnChartValueSelect
 
         chart.setRotationAngle(0);
         // enable rotation of the chart by touch
-        chart.setRotationEnabled(true);
+        chart.setRotationEnabled(false);
         chart.setHighlightPerTapEnabled(true);
 
         chart.animateY(1800, Easing.EaseInOutQuad);
-
-        Legend l = chart.getLegend();
-        l.setVerticalAlignment(Legend.LegendVerticalAlignment.TOP);
-        l.setHorizontalAlignment(Legend.LegendHorizontalAlignment.CENTER);
-        l.setOrientation(Legend.LegendOrientation.HORIZONTAL);
-        l.setForm(Legend.LegendForm.CIRCLE);
-        l.setDrawInside(true);
-        l.setFormSize(15);
-        l.setFormToTextSpace(5);
-        l.setTextSize(20);
-        l.setXEntrySpace(28f);
-        l.setYEntrySpace(0f);
-        l.setYOffset(40f);
-        l.setWordWrapEnabled(true);
 
         chart.getLegend().setEnabled(false);
 

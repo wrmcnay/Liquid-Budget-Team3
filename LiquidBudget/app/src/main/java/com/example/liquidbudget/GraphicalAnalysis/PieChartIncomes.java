@@ -189,7 +189,7 @@ public class PieChartIncomes extends SimpleFragment {
 
                     pieData = new PieData(dataSet);
                     pieData.setValueFormatter(new DefaultAxisValueFormatter(2));
-                    pieData.setValueTextSize(22f);
+                    pieData.setValueTextSize(15f);
                     pieData.setDrawValues(true);
                     pieData.setValueTextColor(Color.BLACK);
 
@@ -259,24 +259,10 @@ public class PieChartIncomes extends SimpleFragment {
 
         chart.setRotationAngle(0);
         // enable rotation of the chart by touch
-        chart.setRotationEnabled(true);
+        chart.setRotationEnabled(false);
         chart.setHighlightPerTapEnabled(true);
 
         chart.animateY(1800, Easing.EaseInOutQuad);
-
-        Legend l = chart.getLegend();
-        l.setVerticalAlignment(Legend.LegendVerticalAlignment.TOP);
-        l.setHorizontalAlignment(Legend.LegendHorizontalAlignment.CENTER);
-        l.setOrientation(Legend.LegendOrientation.HORIZONTAL);
-        l.setForm(Legend.LegendForm.CIRCLE);
-        l.setDrawInside(true);
-        l.setFormSize(15);
-        l.setFormToTextSpace(5);
-        l.setTextSize(20);
-        l.setXEntrySpace(28f);
-        l.setYEntrySpace(0f);
-        l.setYOffset(40f);
-        l.setWordWrapEnabled(true);
 
         chart.getLegend().setEnabled(false);
 

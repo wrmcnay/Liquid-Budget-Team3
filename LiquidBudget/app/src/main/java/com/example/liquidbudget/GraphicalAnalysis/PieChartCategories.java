@@ -151,7 +151,7 @@ public class PieChartCategories extends SimpleFragment { //implements OnChartVal
 
     private SpannableString generateCenterSpannableText() {
         SpannableString s = new SpannableString("CATEGORIES");
-        s.setSpan(new RelativeSizeSpan(1.65f), 0, s.length(), 0);
+        s.setSpan(new RelativeSizeSpan(1.55f), 0, s.length(), 0);
         s.setSpan(new StyleSpan(Typeface.BOLD), 0, s.length(), 0);
         return s;
     }
@@ -186,7 +186,7 @@ public class PieChartCategories extends SimpleFragment { //implements OnChartVal
 
                     pieData = new PieData(dataSet);
                     pieData.setValueFormatter(new DefaultAxisValueFormatter(2));
-                    pieData.setValueTextSize(22f);
+                    pieData.setValueTextSize(13f);
                     pieData.setDrawValues(true);
                     pieData.setValueTextColor(Color.BLACK);
 
@@ -264,22 +264,6 @@ public class PieChartCategories extends SimpleFragment { //implements OnChartVal
         chart.animateY(1800, Easing.EaseInOutQuad);
 
         chart.getLegend().setEnabled(false);
-
-        /*Legend l = chart.getLegend();
-        l.setVerticalAlignment(Legend.LegendVerticalAlignment.TOP);
-        l.setHorizontalAlignment(Legend.LegendHorizontalAlignment.CENTER);
-        l.setOrientation(Legend.LegendOrientation.HORIZONTAL);
-        l.setForm(Legend.LegendForm.CIRCLE);
-        l.setDrawInside(true);
-        l.setFormSize(15);
-        l.setFormToTextSpace(5);
-        l.setTextSize(20);
-        l.setXEntrySpace(28f);
-        l.setYEntrySpace(0f);
-        l.setYOffset(40f);
-        l.setWordWrapEnabled(true);
-
-         */
 
         // entry label styling
         chart.setEntryLabelColor(Color.BLACK);

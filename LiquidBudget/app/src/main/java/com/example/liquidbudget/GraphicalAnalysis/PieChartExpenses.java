@@ -195,7 +195,7 @@ public class PieChartExpenses extends SimpleFragment {
 
                     pieData = new PieData(dataSet);
                     pieData.setValueFormatter(new DefaultAxisValueFormatter(2));
-                    pieData.setValueTextSize(22f);
+                    pieData.setValueTextSize(15f);
                     pieData.setDrawValues(true);
                     pieData.setValueTextColor(Color.BLACK);
 
@@ -266,7 +266,7 @@ public class PieChartExpenses extends SimpleFragment {
 
         chart.setRotationAngle(0);
         // enable rotation of the chart by touch
-        chart.setRotationEnabled(true);
+        chart.setRotationEnabled(false);
         chart.setHighlightPerTapEnabled(true);
 
         chart.animateY(1800, Easing.EaseInOutQuad);

@@ -43,7 +43,7 @@ public abstract class SimpleFragment extends Fragment {
 
     protected PieData generatePieData() {
 
-        int count = 3;
+        int count = 4;
 
         ArrayList<PieEntry> entries1 = new ArrayList<>();
 
