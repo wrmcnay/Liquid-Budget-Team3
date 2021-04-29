@@ -104,11 +104,15 @@ public class PieChartBudget extends SimpleFragment implements OnChartValueSelect
 
         if(account != null) {
             incomeViewModel = new ViewModelProvider(this).get(IncomeViewModel.class);
-            double totalIncome = incomeViewModel.getSumTotalForGoogleID(account.getId());
-            entries.add(new PieEntry((float) totalIncome, "Total Monthly Incomes"));
+            calendar = Calendar.getInstance();
+            monthFormat = new SimpleDateFormat("MM");
+            month = monthFormat.format(calendar.getTime());
+            double totalIncome = incomeViewModel.getMonthSumTotalForGoogleID(account.getId(), month);
+            entries.add(new PieEntry((float) totalIncome, "Incomes"));
             expenseViewModel = new ViewModelProvider(this).get(ExpenseViewModel.class);
-            double totalExpense = expenseViewModel.getSumTotalForGoogleID(account.getId());
-            entries.add(new PieEntry((float) totalExpense, "Total Monthly Expenses"));
+            double totalExpense = expenseViewModel.getMonthSumTotalForGoogleID(account.getId(), month);
+            entries.add(new PieEntry((float) totalExpense, "Expenses"));
+
             dataSet = new PieDataSet(entries, "");
             dataSet.setDrawIcons(true);
 
