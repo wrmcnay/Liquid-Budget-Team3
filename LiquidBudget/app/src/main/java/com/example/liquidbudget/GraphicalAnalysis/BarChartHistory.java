@@ -96,8 +96,8 @@ public class BarChartHistory extends SimpleFragment {
         theDates.add("July");
         theDates.add("August");
 
-        BarData barData = new BarData((IBarDataSet) theDates, barDataSet);
-        chart.setData(barData);
+        BarData theData = new BarData((IBarDataSet) theDates, barDataSet);
+        chart.setData(theData);
 
     }
 
