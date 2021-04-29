@@ -47,7 +47,7 @@ public class EditCategoryActivity extends AppCompatActivity {
         });
 
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close);
-        setTitle("Add Category");
+        setTitle("Category");
     }
 
 }

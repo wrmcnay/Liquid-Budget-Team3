@@ -161,7 +161,7 @@ public class AddExpenseActivity extends AppBaseActivity {
         });
 
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close);
-        setTitle("Add Expense");
+        setTitle("Expense");
     }
 
     private void tryDataPopulation(){

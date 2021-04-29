@@ -43,8 +43,8 @@
     <string name="share">Share</string>
     <string name="send">Send</string>
     <string name="hello">Hello world!</string>
-    <string name="addingIncome">Let\'s log a new income:</string>
-    <string name="addingExpense">Let\'s log a new expense:</string>
+    <string name="addingIncome">Edit income:</string>
+    <string name="addingExpense">Edit expense:</string>
     <string name="ExpenseName">Expense Name</string>
     <string name="IncomeName">Income Name</string>
     <string name="category">Category</string>
@@ -54,7 +54,7 @@
     <string name="budget">Budget</string>
     <string name="analysis">Analysis</string>
     <string name="categories">Categories</string>
-    <string name="addingCategory">Let\'s create a new category:</string>
+    <string name="addingCategory">Edit category:</string>
     <string name="quote1">wHy iS tHErE nO buTtOns doWn heRe???</string>
     <string name="quote2">hOw dO i gEt  OuT oF tHE tuToRIal???</string>
     <string name="catName">Category Name</string>

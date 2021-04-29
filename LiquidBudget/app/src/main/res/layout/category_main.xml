@@ -19,8 +19,8 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
         android:layout_gravity="bottom|end"
-        android:layout_marginRight="32dp"
-        android:layout_marginBottom="64dp"
+        android:layout_marginRight="6dp"
+        android:layout_marginBottom="70dp"
         android:src="@drawable/ic_add" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
