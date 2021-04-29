@@ -8,12 +8,24 @@
     android:orientation="vertical">
 
     <TextView
+        android:id="@+id/WARNING"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="15dp"
+        android:text= "WARNING!"
+        android:textSize="48sp"
+        android:textColor="@color/redDark"
+        android:textStyle="bold"
+        />
+
+    <TextView
         android:id="@+id/ExpenseWarning"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_margin="15dp"
-        android:text="This expense takes you over your current running income. Be sure that you make enough money to cover your expenses!"
+        android:text="This expense takes you over your current running income. Are you sure you want to continue logging it?"
         android:textAlignment="center"
         android:textColor="#295927"
         android:textSize="16dp"
