@@ -162,7 +162,7 @@ public class AddIncomeActivity extends AppBaseActivity {
         });
 
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close);
-        setTitle("Add Income");
+        setTitle("Income");
     }
 
     private void tryDataPopulation(){
